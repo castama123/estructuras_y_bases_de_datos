@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estructuras y Bases de Datos · Clases semanales</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1>Estructuras y Bases de Datos</h1>
+  <p>Ingeniería de Sistemas · Presentaciones semanales del núcleo, de SQL básico a bases de datos vectoriales para IA.</p>
+</header>
+
+<main>
+  <h2>Semanas del núcleo</h2>
+  <div class="weeks-grid" id="weeksGrid"></div>
+</main>
+
+<footer>
+  Núcleo problémico: Estructuras y Bases de Datos · Ingeniería de Sistemas
+</footer>
+
+<script src="js/weeks-data.js"></script>
+<script>
+  const grid = document.getElementById('weeksGrid');
+  WEEKS.forEach(w => {
+    const a = document.createElement('a');
+    a.className = 'week-card';
+    a.href = `semana.html?n=${w.n}`;
+    a.innerHTML = `
+      <span class="week-tag">Semana ${w.n}</span>
+      <h3>${w.titulo}</h3>
+      <p>${w.resumen}</p>
+    `;
+    grid.appendChild(a);
+  });
+</script>
+
+</body>
+</html>

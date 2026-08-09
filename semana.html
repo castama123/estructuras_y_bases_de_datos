@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana · Estructuras y Bases de Datos</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1 id="pageTitle">Cargando semana…</h1>
+  <p id="pageResumen"></p>
+</header>
+
+<nav class="breadcrumb"><a href="index.html">&larr; Volver a todas las semanas</a></nav>
+
+<main>
+  <div class="week-detail">
+    <h2 id="detailTitulo"></h2>
+    <p class="objetivos" id="detailObjetivos"></p>
+
+    <div class="embed-wrap" id="embedWrap">
+      <div class="embed-placeholder" id="embedPlaceholder">
+        Aún no se ha cargado la presentación de esta semana.<br>
+        Edita <code>js/weeks-data.js</code> con el link de Google Slides/Canva o sube el PDF a <code>presentaciones/</code>.
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" id="downloadBtn" href="#" target="_blank">Descargar presentación</a>
+      <a class="btn btn-secondary" href="index.html">Ver todas las semanas</a>
+    </div>
+
+    <div class="week-nav">
+      <a id="prevWeek" href="#">&larr; Semana anterior</a>
+      <a id="nextWeek" href="#">Semana siguiente &rarr;</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Núcleo problémico: Estructuras y Bases de Datos · Ingeniería de Sistemas
+</footer>
+
+<script src="js/weeks-data.js"></script>
+<script>
+  const params = new URLSearchParams(location.search);
+  const n = parseInt(params.get('n'), 10) || 1;
+  const week = WEEKS.find(w => w.n === n) || WEEKS[0];
+
+  document.getElementById('pageTitle').textContent = `Semana ${week.n}`;
+  document.getElementById('pageResumen').textContent = week.resumen;
+  document.getElementById('detailTitulo').textContent = week.titulo;
+  document.getElementById('detailObjetivos').textContent = week.objetivos;
+
+  const embedWrap = document.getElementById('embedWrap');
+  if (week.embed) {
+    embedWrap.innerHTML = `<iframe src="${week.embed}" allowfullscreen></iframe>`;
+  }
+
+  const downloadBtn = document.getElementById('downloadBtn');
+  downloadBtn.href = week.descarga || '#';
+
+  const prev = WEEKS.find(w => w.n === week.n - 1);
+  const next = WEEKS.find(w => w.n === week.n + 1);
+  const prevEl = document.getElementById('prevWeek');
+  const nextEl = document.getElementById('nextWeek');
+  if (prev) { prevEl.href = `semana.html?n=${prev.n}`; } else { prevEl.style.visibility = 'hidden'; }
+  if (next) { nextEl.href = `semana.html?n=${next.n}`; } else { nextEl.style.visibility = 'hidden'; }
+</script>
+
+</body>
+</html>
