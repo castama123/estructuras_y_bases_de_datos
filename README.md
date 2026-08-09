@@ -1,4 +1,4 @@
-# Estructuras y Bases de Datos — Clases semanales
+# Estructuras y Bases de Datos, Clases semanales
 
 Sitio estático para publicar, semana a semana, las presentaciones del núcleo
 **Estructuras y Bases de Datos** (Ingeniería de Sistemas).

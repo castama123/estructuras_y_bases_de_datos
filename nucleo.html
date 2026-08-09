@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Estructuras y Bases de Datos</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <details class="nav-dropdown">
+        <summary>Semanas</summary>
+        <div class="nav-dropdown-menu" id="navWeeksMenu"></div>
+      </details>
+      <a href="nucleo.html" class="active">Cómo funciona el núcleo</a>
+    </div>
+  </div>
+</nav>
+
 <header class="site-header">
   <h1>¿Cómo funciona el núcleo?</h1>
   <p>Estructuras y Bases de Datos · Guía general de estaciones, actividades y evaluación</p>
@@ -22,8 +36,8 @@
     <p>
       Durante las 8 semanas del núcleo trabajaremos como el equipo de ingeniería de datos de
       <strong>SoundFlow</strong> (y más adelante <strong>SoundFlow-AI</strong>), una plataforma de streaming
-      musical ficticia. Cada semana resolvemos un problema real de esa plataforma &mdash;seguridad de
-      usuarios, catálogo desordenado, búsquedas lentas, recomendaciones con IA&mdash; y con eso construimos,
+      musical ficticia. Cada semana resolvemos un problema real de esa plataforma, seguridad de
+      usuarios, catálogo desordenado, búsquedas lentas, recomendaciones con IA, y con eso construimos,
       paso a paso, una base de datos profesional: desde el modelo relacional básico hasta bases de datos
       vectoriales, transacciones seguras y despliegue en la nube.
     </p>
@@ -35,7 +49,7 @@
 
   <section style="margin-top:2rem;">
     <h2>Las 4 estaciones del viaje</h2>
-    <div class="weeks-grid">
+    <div class="weeks-grid" style="grid-template-columns: repeat(2, minmax(260px, 1fr));">
 
       <div class="week-card" style="cursor:default;">
         <span class="week-tag">Estación 1 · 10%</span>
@@ -82,7 +96,7 @@
     <p class="objetivos">
       La mayoría de los laboratorios técnicos se trabajan <strong>en grupos de 3 a 4 personas</strong>: cada
       integrante desarrolla su propia base de datos o ejercicio, pero <strong>solo un integrante sube la
-      entrega</strong> del equipo. Los <strong>quizzes y algunos foros son individuales</strong> &mdash;cada
+      entrega</strong> del equipo. Los <strong>quizzes y algunos foros son individuales</strong>, cada
       estudiante responde por su cuenta. Las entregas de <strong>Estación</strong> y la <strong>Estación del
       éxito</strong> son siempre grupales.
     </p>
@@ -104,38 +118,151 @@
       </div>
     </div>
     <p class="objetivos" style="margin-top:1rem;">
-      En otras palabras: si una actividad de la semana no tiene rúbrica, tenla lista igual &mdash;es la
+      En otras palabras: si una actividad de la semana no tiene rúbrica, tenla lista igual, es la
       preparación para poder entregar bien cuando llegues a la estación con rúbrica.
     </p>
   </section>
 
   <section class="week-detail" style="margin-top:2rem;">
     <h2>Resumen de ponderación (100%)</h2>
-    <table style="width:100%; border-collapse:collapse; margin-top:1rem; font-size:0.92rem;">
+    <p class="objetivos">
+      Listado completo de las actividades del núcleo, según el documento. Si la actividad tiene
+      <strong>rúbrica</strong> es un <span class="pill-entregable">entregable</span>: se sube y se
+      califica con criterios formales. Si no tiene rúbrica propia, su trabajo <strong>suma en la
+      estación</strong>: se prepara durante la semana y se consolida en la entrega grupal de la
+      estación correspondiente. Todos los quizzes y foros son individuales y calificables.
+    </p>
+    <div style="display:flex; gap:1.2rem; align-items:center; margin:0.8rem 0 1.2rem; font-size:0.85rem; color:var(--text-dim); flex-wrap:wrap;">
+      <span><span class="legend-dot legend-entregable"></span> Entregable de la semana (con rúbrica)</span>
+      <span><span class="legend-dot legend-trabajo"></span> Suma en la estación (sin rúbrica propia)</span>
+      <span><span class="legend-dot legend-estacion"></span> Entrega de estación</span>
+    </div>
+    <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; margin-top:0.5rem; font-size:0.88rem; min-width:640px;">
       <thead>
         <tr style="text-align:left; border-bottom:1px solid var(--border);">
           <th style="padding:0.5rem;">Semana / Estación</th>
-          <th style="padding:0.5rem;">Actividad evaluada</th>
+          <th style="padding:0.5rem;">Actividad</th>
+          <th style="padding:0.5rem;">Individual / Grupal</th>
           <th style="padding:0.5rem;">%</th>
+          <th style="padding:0.5rem;">Estado</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">Semana 1</td><td style="padding:0.5rem;">Foro + CRUD</td><td style="padding:0.5rem;">10%</td></tr>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">Semana 2</td><td style="padding:0.5rem;">Normalización + Quiz Grafos</td><td style="padding:0.5rem;">10%</td></tr>
-        <tr style="border-bottom:1px solid var(--border); background:rgba(99,102,241,0.08);"><td style="padding:0.5rem;"><strong>Estación 1</strong></td><td style="padding:0.5rem;">Primera entrega</td><td style="padding:0.5rem;"><strong>10%</strong></td></tr>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">Semana 3</td><td style="padding:0.5rem;">Quiz Joins + Taller Subconsultas</td><td style="padding:0.5rem;">10%</td></tr>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">Semana 4</td><td style="padding:0.5rem;">Foro Redis</td><td style="padding:0.5rem;">5%</td></tr>
-        <tr style="border-bottom:1px solid var(--border); background:rgba(99,102,241,0.08);"><td style="padding:0.5rem;"><strong>Estación 2</strong></td><td style="padding:0.5rem;">Segunda entrega</td><td style="padding:0.5rem;"><strong>10%</strong></td></tr>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">Semana 6</td><td style="padding:0.5rem;">Laboratorio de sensibilidad IA</td><td style="padding:0.5rem;">10%</td></tr>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">Semana 7</td><td style="padding:0.5rem;">Quiz ACID, SQL Injection y RLS</td><td style="padding:0.5rem;">5%</td></tr>
-        <tr style="border-bottom:1px solid var(--border); background:rgba(99,102,241,0.08);"><td style="padding:0.5rem;"><strong>Estación 3</strong></td><td style="padding:0.5rem;">Tercera entrega</td><td style="padding:0.5rem;"><strong>10%</strong></td></tr>
-        <tr style="background:rgba(34,211,238,0.1);"><td style="padding:0.5rem;"><strong>Semana 8</strong></td><td style="padding:0.5rem;">Estación del éxito · Sustentación</td><td style="padding:0.5rem;"><strong>20%</strong></td></tr>
+        <tr class="row-entregable"><td style="padding:0.5rem;">Semana 1 · Foro</td><td style="padding:0.5rem;">Foro: ¿Sabe Spotify demasiado de nosotros?</td><td style="padding:0.5rem;">Individual</td><td style="padding:0.5rem;">5%</td><td style="padding:0.5rem;">Entregable</td></tr>
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 1 · Actividad 1</td><td style="padding:0.5rem;">Preparando el entorno de trabajo (MySQL Server y Workbench)</td><td style="padding:0.5rem;">Individual</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 1 · Actividad 2</td><td style="padding:0.5rem;">Base de datos para SoundFlow</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+        <tr class="row-entregable"><td style="padding:0.5rem;">Semana 1 · Actividad 3</td><td style="padding:0.5rem;">Operaciones CRUD</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;">5%</td><td style="padding:0.5rem;">Entregable</td></tr>
+
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 2 · Actividad 1</td><td style="padding:0.5rem;">Normalización 1NF, 2NF, 3NF</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+        <tr class="row-entregable"><td style="padding:0.5rem;">Semana 2 · Actividad 2</td><td style="padding:0.5rem;">Estructuras No Lineales (Grafos)</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Entregable</td></tr>
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 2 · Actividad 3</td><td style="padding:0.5rem;">Quiz: Grafos</td><td style="padding:0.5rem;">Individual</td><td style="padding:0.5rem;">5%</td><td style="padding:0.5rem;"></td></tr>
+
+        <tr class="row-estacion"><td style="padding:0.5rem;"><strong>Estación 1</strong></td><td style="padding:0.5rem;"><strong>Primera entrega</strong></td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"><strong>10%</strong></td><td style="padding:0.5rem;">Entregable</td></tr>
+
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 3 · Actividad 1</td><td style="padding:0.5rem;">JOINs y funciones de agregación</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 3 · Actividad 2</td><td style="padding:0.5rem;">Quiz: JOINs y funciones de agregación</td><td style="padding:0.5rem;">Individual</td><td style="padding:0.5rem;">5%</td><td style="padding:0.5rem;"></td></tr>
+        <tr class="row-entregable"><td style="padding:0.5rem;">Semana 3 · Actividad 3</td><td style="padding:0.5rem;">Taller: Subconsultas y lógica anidada</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;">5%</td><td style="padding:0.5rem;">Entregable</td></tr>
+
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 4 · Actividad 1</td><td style="padding:0.5rem;">Arquitectura con logs NoSQL en MongoDB</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+        <tr class="row-entregable"><td style="padding:0.5rem;">Semana 4 · Actividad 2</td><td style="padding:0.5rem;">Foro: Base de Datos Redis</td><td style="padding:0.5rem;">Individual</td><td style="padding:0.5rem;">5%</td><td style="padding:0.5rem;">Entregable</td></tr>
+
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 5 · Actividad 1</td><td style="padding:0.5rem;">Índices B-Trees vs. B+ Trees</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 5 · Actividad 2</td><td style="padding:0.5rem;">Investigación y Auditoría: el problema del N+1</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+
+        <tr class="row-estacion"><td style="padding:0.5rem;"><strong>Estación 2</strong></td><td style="padding:0.5rem;"><strong>Segunda entrega</strong></td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"><strong>10%</strong></td><td style="padding:0.5rem;">Entregable</td></tr>
+
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 6 · Actividad 1</td><td style="padding:0.5rem;">Bases de datos vectoriales Supabase y Embeddings</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+        <tr class="row-entregable"><td style="padding:0.5rem;">Semana 6 · Actividad 2</td><td style="padding:0.5rem;">El laboratorio de sensibilidad IA</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;">10%</td><td style="padding:0.5rem;">Entregable</td></tr>
+
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 7 · Actividad 1</td><td style="padding:0.5rem;">Transacciones ACID, DBaaS y prevención de SQL Injection</td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"></td><td style="padding:0.5rem;">Suma en la estación</td></tr>
+        <tr class="row-trabajo"><td style="padding:0.5rem;">Semana 7 · Actividad 2</td><td style="padding:0.5rem;">Quiz: Transacciones ACID, SQL Injection y RLS</td><td style="padding:0.5rem;">Individual</td><td style="padding:0.5rem;">5%</td><td style="padding:0.5rem;"></td></tr>
+
+        <tr class="row-estacion"><td style="padding:0.5rem;"><strong>Estación 3</strong></td><td style="padding:0.5rem;"><strong>Tercera entrega</strong></td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"><strong>10%</strong></td><td style="padding:0.5rem;">Entregable</td></tr>
+
+        <tr class="row-estacion"><td style="padding:0.5rem;"><strong>Semana 8 · Actividad única</strong></td><td style="padding:0.5rem;"><strong>Estación del éxito: The SoundFlow Chaos Challenge (Sustentación)</strong></td><td style="padding:0.5rem;">Grupal</td><td style="padding:0.5rem;"><strong>20%</strong></td><td style="padding:0.5rem;">Entregable</td></tr>
       </tbody>
     </table>
+    </div>
     <p class="objetivos" style="margin-top:1rem; font-size:0.85rem;">
-      Nota: la Semana 5 no tiene actividad calificada directa &mdash;es una semana de preparación técnica
-      (índices, ORMs, migraciones) que se integra en la Estación 2.
+      Las filas sin porcentaje son laboratorios de preparación: no tienen nota propia, pero su
+      resultado es el insumo que se consolida en la entrega de la estación (con rúbrica) que le sigue.
     </p>
+  </section>
+
+  <section class="week-detail" style="margin-top:2rem;">
+    <h2>Resumen rápido</h2>
+
+    <h3 style="color:var(--text); font-size:1rem; margin-bottom:0.8rem;">Los 3 tipos de bases de datos que dominarás</h3>
+    <div class="weeks-grid" style="grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-top:0;">
+
+      <div class="summary-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="10" x2="9" y2="20"/></svg>
+        </div>
+        <h4>Relacional (SQL)</h4>
+        <p>Para la consistencia y las transacciones financieras (ACID).</p>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c-2 0-3 1-3 3v3c0 1-1 2-2 2 1 0 2 1 2 2v3c0 2 1 3 3 3"/><path d="M16 3c2 0 3 1 3 3v3c0 1 1 2 2 2-1 0-2 1-2 2v3c0 2-1 3-3 3"/></svg>
+        </div>
+        <h4>NoSQL (MongoDB / Redis)</h4>
+        <p>Para la velocidad y el manejo de esquemas flexibles.</p>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><line x1="6.6" y1="7.2" x2="11" y2="16.4"/><line x1="17.4" y1="7.2" x2="13" y2="16.4"/><line x1="7" y1="6" x2="17" y2="6"/></svg>
+        </div>
+        <h4>Vectorial</h4>
+        <p>Preparando a los estudiantes para conectar bases de datos con Inteligencia Artificial.</p>
+      </div>
+
+    </div>
+
+    <div style="margin-top:1.8rem; padding:1.2rem 1.4rem; background:var(--accent-soft); border-radius:10px;">
+      <p style="margin:0 0 0.6rem; color:var(--text);"><strong>Propósito:</strong> transformar al estudiante de un "creador de scripts" a un Arquitecto de Información. Que no solo ejecute sintaxis SQL, sino que entienda cómo los datos se organizan, se aseguran, se optimizan en memoria y escalan en la nube.</p>
+      <p style="margin:0; color:var(--text);"><strong>Metodología:</strong> caso "SoundFlow", una plataforma de streaming global (estilo Spotify). No con ejemplos desconectados de la realidad, sino un caso real que obliga al estudiante a enfrentarse a los mismos retos que viven las grandes empresas de tecnología.</p>
+    </div>
+
+    <h3 style="color:var(--text); font-size:1rem; margin:1.8rem 0 0.8rem;">Temas por estación</h3>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <span class="timeline-badge">1</span>
+        <div>
+          <h4>Estación 1</h4>
+          <p>Repaso de estructuras relacionales (tablas, tipos de datos, PK/FK), operaciones CRUD y algoritmos de búsqueda. Las bases de datos relacionales son un sistema estructurado de almacenamiento de información, donde debe ir un campo, un atributo y una llave primaria o foránea.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-badge">2</span>
+        <div>
+          <h4>Estación 2</h4>
+          <p>Normalización de la base de datos, el tema de integridad de los datos, y bases de datos no relacionales o NoSQL, que manejan grandes volúmenes de información y no deben ser estructurados: no siguen un estilo rígido como tablas y filas, sino diversos modelos de JSON. Pensadas para empresas que registran eventos, logs, comentarios en tiempo real, catálogos y plataformas con millones de operaciones por segundo.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-badge">3</span>
+        <div>
+          <h4>Estación 3</h4>
+          <p>Bases de datos vectoriales y despliegue en la nube. Embeddings: vectores numéricos de alta dimensión que usan algoritmos de aproximación matemática (similitud de coseno) para realizar búsquedas semánticas basadas en el significado o contexto de la información. El mercado actual demanda ingenieros capaces de conectar la infraestructura tradicional con modelos de Inteligencia Artificial generativa.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-badge timeline-badge-final">★</span>
+        <div>
+          <h4>Sustentación</h4>
+          <p>Defensa de la arquitectura completa de SoundFlow. Este temario cierra la brecha entre la academia tradicional y las demandas reales de la industria tecnológica.</p>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <div class="actions" style="margin-top:2rem;">
@@ -147,6 +274,9 @@
 <footer>
   Núcleo problémico: Estructuras y Bases de Datos · Ingeniería de Sistemas
 </footer>
+
+<script src="js/weeks-data.js"></script>
+<script src="js/nav.js"></script>
 
 </body>
 </html>

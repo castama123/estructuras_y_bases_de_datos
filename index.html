@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Estructuras y Bases de Datos</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Inicio</a>
+      <details class="nav-dropdown">
+        <summary>Semanas</summary>
+        <div class="nav-dropdown-menu" id="navWeeksMenu"></div>
+      </details>
+      <a href="nucleo.html">Cómo funciona el núcleo</a>
+    </div>
+  </div>
+</nav>
+
 <header class="site-header">
   <h1>Estructuras y Bases de Datos</h1>
   <p>Ingeniería de Sistemas · Presentaciones semanales del núcleo, de SQL básico a bases de datos vectoriales para IA.</p>
@@ -25,6 +39,7 @@
 </footer>
 
 <script src="js/weeks-data.js"></script>
+<script src="js/nav.js"></script>
 <script>
   const grid = document.getElementById('weeksGrid');
   WEEKS.forEach(w => {

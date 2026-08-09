@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Estructuras y Bases de Datos</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <details class="nav-dropdown">
+        <summary>Semanas</summary>
+        <div class="nav-dropdown-menu" id="navWeeksMenu"></div>
+      </details>
+      <a href="nucleo.html">Cómo funciona el núcleo</a>
+    </div>
+  </div>
+</nav>
+
 <header class="site-header">
   <h1 id="pageTitle">Cargando semana…</h1>
   <p id="pageResumen"></p>
@@ -44,10 +58,13 @@
 </footer>
 
 <script src="js/weeks-data.js"></script>
+<script src="js/nav.js"></script>
 <script>
   const params = new URLSearchParams(location.search);
   const n = parseInt(params.get('n'), 10) || 1;
   const week = WEEKS.find(w => w.n === n) || WEEKS[0];
+  const activeLink = document.querySelector(`#navWeeksMenu a[href="semana.html?n=${week.n}"]`);
+  if (activeLink) activeLink.classList.add('active');
 
   document.getElementById('pageTitle').textContent = `Semana ${week.n}`;
   document.getElementById('pageResumen').textContent = week.resumen;
