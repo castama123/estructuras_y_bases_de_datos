@@ -34,10 +34,17 @@
     <h2 id="detailTitulo"></h2>
     <p class="objetivos" id="detailObjetivos"></p>
 
+    <div class="class-tabs" id="classTabs" style="display:none;">
+      <button type="button" class="class-tab active" data-class="1">Clase 1</button>
+      <button type="button" class="class-tab" data-class="2">Clase 2</button>
+    </div>
+
+    <div id="weekContent"></div>
+    <div id="weekContent2" style="display:none;"></div>
+
     <div class="embed-wrap" id="embedWrap">
       <div class="embed-placeholder" id="embedPlaceholder">
-        Aún no se ha cargado la presentación de esta semana.<br>
-        Edita <code>js/weeks-data.js</code> con el link de Google Slides/Canva o sube el PDF a <code>presentaciones/</code>.
+        Aún no se ha cargado la presentación de esta semana.
       </div>
     </div>
 
@@ -58,6 +65,7 @@
 </footer>
 
 <script src="js/weeks-data.js"></script>
+<script src="js/content/semana-01.js"></script>
 <script src="js/nav.js"></script>
 <script>
   const params = new URLSearchParams(location.search);
@@ -71,13 +79,39 @@
   document.getElementById('detailTitulo').textContent = week.titulo;
   document.getElementById('detailObjetivos').textContent = week.objetivos;
 
+  const weekContentEl = document.getElementById('weekContent');
+  const weekContent2El = document.getElementById('weekContent2');
+  const classTabs = document.getElementById('classTabs');
+
+  const clase1 = window['WEEK_CONTENT_' + week.n + '_1'];
+  const clase2 = window['WEEK_CONTENT_' + week.n + '_2'];
+  let richContent = null;
+
+  if (clase1) {
+    weekContentEl.innerHTML = clase1;
+    richContent = clase1;
+    if (clase2) {
+      weekContent2El.innerHTML = clase2;
+      classTabs.style.display = 'flex';
+    }
+  } else {
+    richContent = window['WEEK_CONTENT_' + week.n];
+    if (richContent) weekContentEl.innerHTML = richContent;
+  }
+
   const embedWrap = document.getElementById('embedWrap');
   if (week.embed) {
     embedWrap.innerHTML = `<iframe src="${week.embed}" allowfullscreen></iframe>`;
+  } else if (richContent) {
+    // Ya hay contenido enriquecido para esta semana: no hace falta el recuadro de
+    // "presentación pendiente".
+    embedWrap.style.display = 'none';
   }
 
+  // El botón de descarga queda oculto en todas las semanas hasta que exista un
+  // PDF real que subir a /presentaciones (cambia esta condición cuando lo subas).
   const downloadBtn = document.getElementById('downloadBtn');
-  downloadBtn.href = week.descarga || '#';
+  downloadBtn.style.display = 'none';
 
   const prev = WEEKS.find(w => w.n === week.n - 1);
   const next = WEEKS.find(w => w.n === week.n + 1);

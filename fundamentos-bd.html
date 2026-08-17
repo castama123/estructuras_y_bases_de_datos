@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundamentos de Bases de Datos · Estructuras y Bases de Datos</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Estructuras y Bases de Datos</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <details class="nav-dropdown">
+        <summary>Semanas</summary>
+        <div class="nav-dropdown-menu" id="navWeeksMenu"></div>
+      </details>
+      <a href="nucleo.html">Cómo funciona el núcleo</a>
+    </div>
+  </div>
+</nav>
+
+<header class="site-header">
+  <h1>Fundamentos de Bases de Datos</h1>
+  <p>Recurso de apoyo para la Semana 1 · Conceptos básicos antes de entrar a SoundFlow</p>
+</header>
+
+<nav class="breadcrumb"><a href="semana.html?n=1">&larr; Volver a la Semana 1</a></nav>
+
+<main>
+
+  <section class="week-detail">
+    <h2>¿Qué es una base de datos?</h2>
+    <p>
+      Una base de datos es un sistema organizado para <strong>guardar información de forma
+      persistente</strong>: sobrevive aunque se apague el computador o se reinicie la
+      aplicación. Se diferencia de una estructura de datos en memoria (como un diccionario o
+      una lista en Python) en que esta última vive solo mientras el programa está corriendo.
+      Un <strong>motor de base de datos</strong> (o DBMS, Database Management System) es el
+      software que administra esa información: la guarda, la organiza, la protege y responde
+      a las consultas que le hacemos.
+    </p>
+  </section>
+
+  <section style="margin-top:2rem;">
+    <h2 style="color:var(--accent); font-size:1.2rem;">Tipos de motores de bases de datos</h2>
+    <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-top:1rem;">
+
+      <div class="concept-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="10" x2="9" y2="20"/></svg>
+        </div>
+        <h4>Relacional (SQL)</h4>
+        <p>Organiza la información en tablas con filas y columnas. Prioriza la consistencia: ideal para dinero, inventarios y cualquier dato que no pueda quedar a medias (MySQL, PostgreSQL).</p>
+      </div>
+
+      <div class="concept-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c-2 0-3 1-3 3v3c0 1-1 2-2 2 1 0 2 1 2 2v3c0 2 1 3 3 3"/><path d="M16 3c2 0 3 1 3 3v3c0 1 1 2 2 2-1 0-2 1-2 2v3c0 2-1 3-3 3"/></svg>
+        </div>
+        <h4>Documental (NoSQL)</h4>
+        <p>Guarda documentos tipo JSON, sin un esquema rígido. Cada registro puede tener campos distintos. Útil para catálogos y perfiles muy variables (MongoDB).</p>
+      </div>
+
+      <div class="concept-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="1"/><rect x="4" y="14" width="16" height="6" rx="1"/><line x1="8" y1="7" x2="8" y2="7"/><line x1="8" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h4>Clave-valor</h4>
+        <p>La forma más simple: cada dato se busca por una llave única. Extremadamente rápida porque vive en memoria RAM. Ideal para caché y sesiones (Redis).</p>
+      </div>
+
+      <div class="concept-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><line x1="6.6" y1="7.2" x2="11" y2="16.4"/><line x1="17.4" y1="7.2" x2="13" y2="16.4"/><line x1="7" y1="6" x2="17" y2="6"/></svg>
+        </div>
+        <h4>Grafos</h4>
+        <p>Modela la información como nodos y relaciones (aristas). Perfecta para redes sociales, recomendaciones y cualquier dato donde lo importante son las conexiones.</p>
+      </div>
+
+      <div class="concept-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg>
+        </div>
+        <h4>Vectorial</h4>
+        <p>Guarda información como vectores numéricos que representan significado. Es la base de la búsqueda semántica y la Inteligencia Artificial generativa.</p>
+      </div>
+
+      <div class="concept-card">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <h4>Columnar</h4>
+        <p>Optimizada para leer millones de filas de pocas columnas a la vez. Se usa en analítica y reportes masivos (BigQuery, Cassandra).</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="week-detail" style="margin-top:2rem;">
+    <h2>SQL vs. NoSQL: ¿cuándo usar cada uno?</h2>
+    <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; margin-top:0.8rem; font-size:0.9rem; min-width:520px;">
+      <thead>
+        <tr style="text-align:left; border-bottom:1px solid var(--border);">
+          <th style="padding:0.5rem;"></th>
+          <th style="padding:0.5rem;">SQL (Relacional)</th>
+          <th style="padding:0.5rem;">NoSQL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem; color:var(--text-dim);">Estructura</td><td style="padding:0.5rem;">Esquema fijo, tablas con filas y columnas</td><td style="padding:0.5rem;">Esquema flexible, documentos o pares clave-valor</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem; color:var(--text-dim);">Prioridad</td><td style="padding:0.5rem;">Consistencia e integridad (ACID)</td><td style="padding:0.5rem;">Velocidad y escalabilidad horizontal</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem; color:var(--text-dim);">Relaciones</td><td style="padding:0.5rem;">Explícitas, con llaves foráneas</td><td style="padding:0.5rem;">Generalmente embebidas dentro del mismo documento</td></tr>
+        <tr><td style="padding:0.5rem; color:var(--text-dim);">Ejemplo de uso</td><td style="padding:0.5rem;">Pagos, facturación, inventarios</td><td style="padding:0.5rem;">Catálogos variables, logs, caché, sesiones</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section style="margin-top:2rem;">
+    <h2 style="color:var(--accent); font-size:1.2rem;">Vocabulario esencial</h2>
+    <div class="numbered-grid" style="margin-top:1rem;">
+      <div class="numbered-card">
+        <div class="num">Tabla</div>
+        <p>Colección de datos organizados en filas y columnas, todos de la misma entidad (por ejemplo, todos los usuarios).</p>
+      </div>
+      <div class="numbered-card">
+        <div class="num">Registro / Fila</div>
+        <p>Una instancia individual dentro de la tabla: un usuario específico, con todos sus datos.</p>
+      </div>
+      <div class="numbered-card">
+        <div class="num">Columna / Atributo</div>
+        <p>Una característica que describe a cada registro, con un tipo de dato definido (texto, número, fecha).</p>
+      </div>
+      <div class="numbered-card">
+        <div class="num">Llave primaria (PK)</div>
+        <p>El identificador único de cada fila. Ninguna otra fila puede tener el mismo valor.</p>
+      </div>
+      <div class="numbered-card">
+        <div class="num">Llave foránea (FK)</div>
+        <p>Un campo que apunta a la PK de otra tabla, creando una relación entre ambas.</p>
+      </div>
+      <div class="numbered-card">
+        <div class="num">Esquema</div>
+        <p>El "plano" que define qué tablas existen, qué columnas tiene cada una y cómo se relacionan.</p>
+      </div>
+      <div class="numbered-card">
+        <div class="num">Índice</div>
+        <p>Una estructura auxiliar que acelera la búsqueda, como el índice de un libro.</p>
+      </div>
+      <div class="numbered-card">
+        <div class="num">Consulta (Query)</div>
+        <p>Una instrucción para pedirle datos al motor: buscar, insertar, modificar o borrar información.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="actions" style="margin-top:2rem;">
+    <a class="btn btn-primary" href="semana.html?n=1">Volver a la Semana 1</a>
+    <a class="btn btn-secondary" href="index.html">Ver todas las semanas</a>
+  </div>
+
+</main>
+
+<footer>
+  Núcleo problémico: Estructuras y Bases de Datos · Ingeniería de Sistemas
+</footer>
+
+<script src="js/weeks-data.js"></script>
+<script src="js/nav.js"></script>
+
+</body>
+</html>
