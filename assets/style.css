@@ -790,6 +790,73 @@ footer {
   box-shadow: inset 0 0 0 2px #4f7876;
 }
 
+#anatomiaDemo .anat-kw,
+#anatomiaDemo .anat-ident,
+#anatomiaDemo .anat-val,
+#anatomiaDemo .anat-semi {
+  border-radius: 4px;
+  padding: 1px 3px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+#anatomiaDemo.hl-palabras .anat-kw {
+  background: rgba(91, 124, 153, 0.22);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+#anatomiaDemo.hl-identificadores .anat-ident {
+  background: rgba(127, 165, 163, 0.25);
+  box-shadow: inset 0 0 0 1px #7fa5a3;
+}
+
+#anatomiaDemo.hl-valores .anat-val {
+  background: rgba(139, 127, 184, 0.22);
+  box-shadow: inset 0 0 0 1px #8b7fb8;
+}
+
+#anatomiaDemo.hl-punto .anat-semi {
+  background: rgba(201, 154, 78, 0.28);
+  box-shadow: inset 0 0 0 1px #c99a4e;
+}
+
+/* ---------- Mini consola SQL con colores, como en el motor de base de datos ---------- */
+.sql-console {
+  background: #1a1f28;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  margin-top: 0.8rem;
+  overflow-x: auto;
+}
+
+.sql-console pre {
+  margin: 0;
+}
+
+.sql-console code {
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: #e6edf3;
+  white-space: pre;
+}
+
+.sql-kw {
+  color: #7fb0e0;
+  font-weight: 600;
+}
+
+.sql-ident {
+  color: #8fd6c4;
+}
+
+.sql-str {
+  color: #d9a8f0;
+}
+
+.sql-num {
+  color: #f0c47e;
+}
+
 /* ---------- Ícono de época en la línea de tiempo ---------- */
 .era-icon {
   width: 40px;

@@ -84,27 +84,31 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Tarjetas Tabla/Campo/Registro/Dato: clic para resaltar esa parte en la
-// tabla de ejemplo (#tablaDemo). Vuelve a hacer clic para quitar el resaltado.
+// Tarjetas con data-highlight: clic para resaltar esa parte en un ejemplo
+// asociado (por defecto #tablaDemo; usa data-highlight-target para apuntar a
+// otro elemento, como #anatomiaDemo). Vuelve a hacer clic para quitar el resaltado.
 document.addEventListener('click', (e) => {
   const card = e.target.closest('.numbered-card[data-highlight]');
   if (!card) return;
 
-  const tabla = document.getElementById('tablaDemo');
-  if (!tabla) return;
+  const targetId = card.dataset.highlightTarget || 'tablaDemo';
+  const demo = document.getElementById(targetId);
+  if (!demo) return;
 
   const target = card.dataset.highlight;
   const wasActive = card.classList.contains('active-highlight');
 
-  // Limpia cualquier resaltado previo (tarjetas y tabla)
+  // Limpia cualquier resaltado previo (tarjetas y demo) dentro de esta misma tarjeta
   card.closest('.numbered-grid').querySelectorAll('.numbered-card').forEach(c => {
     c.classList.remove('active-highlight');
   });
-  tabla.classList.remove('hl-tabla', 'hl-campo', 'hl-registro', 'hl-dato');
+  Array.from(demo.classList).forEach(cls => {
+    if (cls.indexOf('hl-') === 0) demo.classList.remove(cls);
+  });
 
   if (!wasActive) {
     card.classList.add('active-highlight');
-    tabla.classList.add('hl-' + target);
+    demo.classList.add('hl-' + target);
   }
 });
 

@@ -360,6 +360,110 @@ window.WEEK_CONTENT_1_1 = `
       Amazon Web Services. <em>Amazon Aurora vs. DynamoDB</em> ·
       Bancolombia / AWS. <em>Migración del core bancario a la nube</em>.
     </p>
+
+    <h4 style="color:var(--text); font-size:0.95rem; margin:1.6rem 0 0.4rem; text-align:center;">¿Qué tipos de bases de datos se usan más?</h4>
+    <p>
+      Más allá de los casos puntuales de Netflix o Spotify, así se ve el panorama general de la
+      industria hoy, según dos mediciones independientes:
+    </p>
+
+    <div class="content-box">
+      <h4>Por popularidad general (DB-Engines, 2026)</h4>
+      <div style="margin-top:0.8rem;">
+        <div style="display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#c44444; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">Or</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>Oracle</strong><span style="color:var(--text-dim);">1182 pts</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:100%; height:100%; background:#c44444;"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#5b9aa0; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">My</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>MySQL</strong><span style="color:var(--text-dim);">858 pts</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:72.6%; height:100%; background:#5b9aa0;"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#c99a4e; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">MS</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>SQL Server</strong><span style="color:var(--text-dim);">711 pts</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:60.2%; height:100%; background:#c99a4e;"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#5b7c99; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">Pg</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>PostgreSQL</strong><span style="color:var(--text-dim);">680 pts</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:57.5%; height:100%; background:#5b7c99;"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#6f9d7c; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">Mo</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>MongoDB</strong> <span style="font-size:0.72rem; color:var(--text-dim);">(NoSQL #1)</span><span style="color:var(--text-dim);">384 pts</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:32.5%; height:100%; background:#6f9d7c;"></div></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:0.78rem; color:var(--text-dim); margin-top:0.8rem;">Los 4 primeros lugares son motores relacionales. MongoDB, en 5º puesto, es la base NoSQL más usada.</p>
+    </div>
+
+    <div class="content-box" style="margin-top:1rem;">
+      <h4>Por uso real de desarrolladores (Stack Overflow Developer Survey, 2025)</h4>
+      <div style="margin-top:0.8rem;">
+        <div style="display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#5b7c99; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">Pg</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>PostgreSQL</strong><span style="color:var(--text-dim);">55.6%</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:92.7%; height:100%; background:#5b7c99;"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#5b9aa0; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">My</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>MySQL</strong><span style="color:var(--text-dim);">40.5%</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:67.5%; height:100%; background:#5b9aa0;"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#b07fc4; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">Li</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>SQLite</strong><span style="color:var(--text-dim);">32%</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:53.3%; height:100%; background:#b07fc4;"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#6f9d7c; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">Mo</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>MongoDB</strong><span style="color:var(--text-dim);">26%</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:43.3%; height:100%; background:#6f9d7c;"></div></div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.7rem;">
+          <div style="width:34px; height:34px; border-radius:50%; background:#c4767c; color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; font-family:Segoe UI, sans-serif; flex-shrink:0;">Re</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;"><strong>Redis</strong><span style="color:var(--text-dim);">22%</span></div>
+            <div style="background:var(--bg); border-radius:6px; overflow:hidden; height:11px;"><div style="width:36.7%; height:100%; background:#c4767c;"></div></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:0.78rem; color:var(--text-dim); margin-top:0.8rem;">PostgreSQL lleva 3 años consecutivos como la base de datos más usada, más deseada y mejor valorada por los desarrolladores.</p>
+    </div>
+
+    <div class="content-box">
+      <p style="margin:0;">
+        Aunque existan decenas de motores especializados, la gran mayoría de
+        aplicaciones del mundo real todavía se construyen sobre un motor <strong>relacional</strong>
+        (como MySQL o PostgreSQL) para los datos centrales, y se apoyan en NoSQL o caché en memoria
+        (como MongoDB o Redis) solo para los problemas específicos donde el modelo relacional no basta.
+      </p>
+    </div>
+
+    <p style="font-size:0.78rem; color:var(--text-dim); margin-top:0.6rem;">
+      Fuentes: DB-Engines. <em>Ranking de popularidad de sistemas de bases de datos</em> (2026) ·
+      Stack Overflow. <em>Developer Survey</em> (2025), sección Technology.
+    </p>
   </div>
 
   <!-- ===================== 5. INICIANDO CON BASES DE DATOS ===================== -->
@@ -999,10 +1103,61 @@ window.WEEK_CONTENT_1_2 = `
 
   <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">SoundFlow: encriptación, Soft Delete y CRUD</h2>
 
-  <!-- ===================== 1. ENCRIPTACIÓN SHA-256 ===================== -->
+  <!-- ===================== 1. DDL, DML Y DCL ===================== -->
   <div class="activity-section" style="border-top:none; padding-top:0;">
     <div class="activity-section-header">
-      <h3>1. Encriptación: cómo funciona SHA-256</h3>
+      <h3>1. Los 3 lenguajes dentro de SQL: DDL, DML y DCL</h3>
+    </div>
+    <p>
+      "SQL" no es un solo bloque de comandos: se divide en tres sublenguajes según <strong>qué tipo de
+      operación</strong> hacen sobre la base de datos. Ya usaste los dos primeros sin que los nombráramos
+      todavía — hoy les ponemos nombre y entendemos por qué existe la división.
+    </p>
+
+    <div class="concept-grid" style="grid-template-columns: repeat(3, 1fr); margin-top:0.8rem;">
+      <div class="concept-card" style="border:1px solid #5b7c99; border-radius:10px;">
+        <div class="summary-icon" style="background:rgba(91,124,153,0.15); color:#5b7c99;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="10" x2="9" y2="20"/></svg>
+        </div>
+        <h4>DDL</h4>
+        <p style="font-size:0.78rem; color:var(--text-dim); margin:-0.2rem 0 0.5rem;">Data Definition Language</p>
+        <p>Define y modifica la <strong>estructura</strong>: las tablas, sus columnas y sus tipos de dato. Comandos: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>.</p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">Ya lo usaste en la Clase 1, cuando creamos <code>usuarios</code> y <code>pagos_suscripcion</code> con <code>CREATE TABLE</code>.</p>
+      </div>
+      <div class="concept-card" style="border:1px solid #7fa5a3; border-radius:10px;">
+        <div class="summary-icon" style="background:rgba(127,165,163,0.18); color:#7fa5a3;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
+        </div>
+        <h4>DML</h4>
+        <p style="font-size:0.78rem; color:var(--text-dim); margin:-0.2rem 0 0.5rem;">Data Manipulation Language</p>
+        <p>Manipula los <strong>datos</strong> que viven dentro de las tablas ya creadas. Comandos: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> — es decir, CRUD.</p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">Es el tema central de hoy: lo vemos a fondo más abajo, en la sección 3.</p>
+      </div>
+      <div class="concept-card" style="border:1px solid #8b7fb8; border-radius:10px;">
+        <div class="summary-icon" style="background:rgba(139,127,184,0.18); color:#8b7fb8;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        </div>
+        <h4>DCL</h4>
+        <p style="font-size:0.78rem; color:var(--text-dim); margin:-0.2rem 0 0.5rem;">Data Control Language</p>
+        <p>Controla <strong>quién puede hacer qué</strong>: otorga o quita permisos sobre tablas y bases de datos. Comandos: <code>GRANT</code>, <code>REVOKE</code>.</p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">Todavía no lo usamos — lo veremos a fondo en la Semana 7, junto con seguridad y despliegue en la nube.</p>
+      </div>
+    </div>
+
+    <div class="content-box">
+      <p style="margin:0;">
+        Piénsalo como los tres roles de una obra: <strong>DDL</strong> construye el escenario (las tablas),
+        <strong>DML</strong> es la actuación que pasa sobre ese escenario (leer, agregar, cambiar y borrar
+        datos), y <strong>DCL</strong> decide quién tiene permiso de entrar a cada parte del teatro.
+        Los tres son SQL, pero cada uno resuelve un problema distinto.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== 2. ENCRIPTACIÓN SHA-256 ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>2. Encriptación: cómo funciona SHA-256</h3>
     </div>
     <p>
       Cuando Camilo crea su cuenta en SoundFlow y escribe su contraseña, esa contraseña nunca se guarda tal
@@ -1093,7 +1248,7 @@ WHERE email = 'camilo@flow.com'
   <!-- ===================== 2. SOFT DELETE ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>2. Soft Delete: borrar sin borrar</h3>
+      <h3>3. Soft Delete: borrar sin borrar</h3>
     </div>
     <p>
       Cuando un usuario "elimina" su cuenta en SoundFlow, lo intuitivo sería usar <code>DELETE</code> y
@@ -1148,41 +1303,166 @@ UPDATE usuarios SET esta_activo = 1 WHERE id_usuario = 3;</code></pre>
     </div>
   </div>
 
-  <!-- ===================== 3. OPERACIONES CRUD ===================== -->
+  <!-- ===================== 4. EL LENGUAJE SQL ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>3. Operaciones CRUD explicadas</h3>
+      <h3>4. El lenguaje SQL</h3>
+    </div>
+    <p>
+      Antes de escribir más comandos, vale la pena entender qué tipo de lenguaje es SQL y cómo está
+      construida una instrucción, porque eso explica por qué se escribe como se escribe.
+    </p>
+
+    <h4 style="color:var(--text); font-size:0.95rem; margin:1.2rem 0 0.4rem;">SELECT, FROM y WHERE</h4>
+    <p>Estas tres palabras son las más usadas en todo SQL, y cada una responde una pregunta distinta:</p>
+
+    <div class="concept-grid" style="grid-template-columns: repeat(3, 1fr); margin-top:0.6rem;">
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(91,124,153,0.15); color:#5b7c99;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg>
+        </div>
+        <h4>SELECT</h4>
+        <p><strong>¿Qué columnas quiero ver?</strong> Después de <code>SELECT</code> escribes los nombres de las columnas, separadas por comas. <code>*</code> significa "todas".</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(127,165,163,0.18); color:#7fa5a3;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="13" rx="1"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        </div>
+        <h4>FROM</h4>
+        <p><strong>¿De qué tabla vienen esos datos?</strong> Después de <code>FROM</code> va el nombre de la tabla donde SQL debe buscar.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(139,127,184,0.18); color:#8b7fb8;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+        </div>
+        <h4>WHERE</h4>
+        <p><strong>¿Cuáles filas, específicamente?</strong> Después de <code>WHERE</code> va la condición que filtra: solo las filas que la cumplan aparecen en el resultado.</p>
+      </div>
+    </div>
+
+    <div class="content-box">
+      <p style="margin:0;">
+        Juntando las tres: <code>SELECT nombre FROM usuarios WHERE esta_activo = 1;</code> se lee de
+        corrido como una frase: "de la tabla <strong>usuarios</strong>, muéstrame la columna
+        <strong>nombre</strong>, pero solo de las filas donde <strong>esta_activo sea 1</strong>".
+      </p>
+    </div>
+
+    <h4 style="color:var(--text); font-size:0.95rem; margin:1.4rem 0 0.4rem;">Anatomía de una instrucción SQL</h4>
+    <p>Toda instrucción SQL se arma con las mismas piezas básicas. Toca cada tarjeta para resaltar esa pieza en el ejemplo de abajo:</p>
+
+    <div class="content-box" style="margin-top:0.8rem;">
+      <pre style="margin:0; overflow-x:auto;"><code id="anatomiaDemo"><span class="anat-kw">SELECT</span> <span class="anat-ident">nombre</span> <span class="anat-kw">FROM</span> <span class="anat-ident">usuarios</span> <span class="anat-kw">WHERE</span> <span class="anat-ident">esta_activo</span> = <span class="anat-val">1</span><span class="anat-semi">;</span></code></pre>
+    </div>
+
+    <div class="numbered-grid numbered-grid-2col" style="margin-top:0.8rem;">
+      <div class="numbered-card" data-highlight="palabras" data-highlight-target="anatomiaDemo" style="cursor:pointer;">
+        <div class="num" style="color:var(--accent);"><span class="color-dot" style="background:var(--accent);"></span>Palabras clave</div>
+        <p><code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>... Por convención se escriben en MAYÚSCULAS, aunque SQL no distingue mayúsculas de minúsculas en ellas.</p>
+      </div>
+      <div class="numbered-card" data-highlight="identificadores" data-highlight-target="anatomiaDemo" style="cursor:pointer;">
+        <div class="num" style="color:#7fa5a3;"><span class="color-dot" style="background:#7fa5a3;"></span>Identificadores</div>
+        <p>Nombres de tablas y columnas, como <code>usuarios</code> o <code>id_usuario</code>. Por convención se escriben en minúsculas con guiones bajos (<em>snake_case</em>).</p>
+      </div>
+      <div class="numbered-card" data-highlight="valores" data-highlight-target="anatomiaDemo" style="cursor:pointer;">
+        <div class="num" style="color:#8b7fb8;"><span class="color-dot" style="background:#8b7fb8;"></span>Valores</div>
+        <p>Los datos concretos: los textos van entre comillas simples (<code>'Camilo'</code>), los números no (<code>9.99</code>).</p>
+      </div>
+      <div class="numbered-card" data-highlight="punto" data-highlight-target="anatomiaDemo" style="cursor:pointer;">
+        <div class="num" style="color:#c99a4e;"><span class="color-dot" style="background:#c99a4e;"></span>Punto y coma</div>
+        <p>Cada instrucción termina en <code>;</code>. Marca dónde acaba un comando SQL, especialmente cuando escribes varios seguidos.</p>
+      </div>
+    </div>
+
+    <h4 style="color:var(--text); font-size:0.95rem; margin:1.4rem 0 0.4rem;">Comentarios en SQL</h4>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">05_comentarios.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>-- Esto es un comentario de una sola línea
+
+/* Esto es un comentario
+   de varias líneas */
+
+SELECT nombre, email
+FROM usuarios          -- también puedes comentar al final de una línea
+WHERE esta_activo = 1;</code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== 5. OPERACIONES CRUD ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>5. Operaciones CRUD</h3>
     </div>
     <p><strong>CRUD</strong> son las cuatro operaciones básicas que cualquier aplicación hace sobre una base de datos: Crear, Leer, Actualizar y Borrar. Cada una tiene su propio comando SQL:</p>
 
-    <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-top:0.8rem;">
-      <div class="concept-card">
+    <div class="concept-grid" style="grid-template-columns: 1fr; margin-top:0.8rem;">
+      <div class="concept-card" style="border-left:3px solid #5b7c99;">
         <div class="summary-icon" style="background:rgba(91,124,153,0.15); color:#5b7c99;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
         <h4>Create</h4>
-        <p><code>INSERT INTO</code> — agrega una fila nueva. Ej: registrar un usuario nuevo.</p>
+        <p><code>INSERT INTO</code> — agrega una fila nueva.</p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
+          Plantilla: <code>INSERT INTO tabla (columnas) VALUES (valores);</code><br>
+          Después de <code>INSERT INTO</code> va el nombre de la tabla; entre paréntesis, las columnas
+          que vas a llenar; después de <code>VALUES</code>, los valores en el mismo orden.
+        </p>
+        <div class="sql-console">
+          <pre><code><span class="sql-kw">INSERT INTO</span> <span class="sql-ident">usuarios</span> (<span class="sql-ident">nombre</span>, <span class="sql-ident">email</span>)
+<span class="sql-kw">VALUES</span> (<span class="sql-str">'Valentina Gómez'</span>, <span class="sql-str">'valentina@flow.com'</span>);</code></pre>
+        </div>
       </div>
-      <div class="concept-card">
+      <div class="concept-card" style="border-left:3px solid #7fa5a3;">
         <div class="summary-icon" style="background:rgba(127,165,163,0.18); color:#7fa5a3;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
         <h4>Read</h4>
-        <p><code>SELECT</code> — consulta filas existentes. Ej: mostrar el perfil de un usuario.</p>
+        <p><code>SELECT</code> — consulta filas existentes.</p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
+          Plantilla: <code>SELECT columnas FROM tabla WHERE condición;</code><br>
+          Ya vimos esta arriba: qué columnas quieres, de qué tabla, y con qué filtro.
+        </p>
+        <div class="sql-console">
+          <pre><code><span class="sql-kw">SELECT</span> <span class="sql-ident">nombre</span>, <span class="sql-ident">email</span> <span class="sql-kw">FROM</span> <span class="sql-ident">usuarios</span>
+<span class="sql-kw">WHERE</span> <span class="sql-ident">id_usuario</span> = <span class="sql-num">1</span>;</code></pre>
+        </div>
       </div>
-      <div class="concept-card">
+      <div class="concept-card" style="border-left:3px solid #8b7fb8;">
         <div class="summary-icon" style="background:rgba(139,127,184,0.18); color:#8b7fb8;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
         </div>
         <h4>Update</h4>
-        <p><code>UPDATE</code> — modifica una fila existente. Ej: cambiar el email, o hacer Soft Delete.</p>
+        <p><code>UPDATE</code> — modifica una fila existente.</p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
+          Plantilla: <code>UPDATE tabla SET columna = nuevo_valor WHERE condición;</code><br>
+          <code>SET</code> indica qué columna cambia y a qué valor. El <code>WHERE</code> es clave: sin
+          él, se actualizarían <strong>todas</strong> las filas de la tabla.
+        </p>
+        <div class="sql-console">
+          <pre><code><span class="sql-kw">UPDATE</span> <span class="sql-ident">usuarios</span> <span class="sql-kw">SET</span> <span class="sql-ident">esta_activo</span> = <span class="sql-num">0</span>
+<span class="sql-kw">WHERE</span> <span class="sql-ident">id_usuario</span> = <span class="sql-num">1</span>;</code></pre>
+        </div>
       </div>
-      <div class="concept-card">
+      <div class="concept-card" style="border-left:3px solid #c44444;">
         <div class="summary-icon" style="background:rgba(196,68,68,0.12); color:#c44444;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
         </div>
         <h4>Delete</h4>
         <p><code>DELETE</code> — borra una fila. En SoundFlow, casi siempre se reemplaza por Soft Delete.</p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
+          Plantilla: <code>DELETE FROM tabla WHERE condición;</code><br>
+          Igual que en <code>UPDATE</code>, sin <code>WHERE</code> borrarías todas las filas de la tabla.
+        </p>
+        <div class="sql-console">
+          <pre><code><span class="sql-kw">DELETE FROM</span> <span class="sql-ident">usuarios</span>
+<span class="sql-kw">WHERE</span> <span class="sql-ident">id_usuario</span> = <span class="sql-num">5</span>;</code></pre>
+        </div>
       </div>
     </div>
 
@@ -1215,6 +1495,36 @@ UPDATE usuarios SET esta_activo = 1 WHERE id_usuario = 3;</code></pre>
           <button type="button" class="quiz-option" data-correct="false">SELECT</button>
           <button type="button" class="quiz-option" data-correct="true">UPDATE</button>
           <button type="button" class="quiz-option" data-correct="false">INSERT</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>4. ¿Cuál de estos comandos es DDL (Data Definition Language)?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="true">CREATE TABLE</button>
+          <button type="button" class="quiz-option" data-correct="false">INSERT INTO</button>
+          <button type="button" class="quiz-option" data-correct="false">SELECT</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>5. En <code>SELECT nombre FROM usuarios WHERE esta_activo = 1;</code>, ¿qué determina la cláusula <code>WHERE</code>?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Qué columnas se muestran</button>
+          <button type="button" class="quiz-option" data-correct="false">De qué tabla vienen los datos</button>
+          <button type="button" class="quiz-option" data-correct="true">Cuáles filas aparecen en el resultado</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>6. Si ejecutas <code>DELETE FROM usuarios;</code> sin <code>WHERE</code>, ¿qué pasa?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Borra solo la primera fila</button>
+          <button type="button" class="quiz-option" data-correct="true">Borra todas las filas de la tabla</button>
+          <button type="button" class="quiz-option" data-correct="false">Da error de sintaxis</button>
         </div>
         <p class="quiz-feedback"></p>
       </div>
