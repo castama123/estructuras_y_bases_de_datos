@@ -1110,43 +1110,86 @@ window.WEEK_CONTENT_1_2 = `
     </div>
     <p>
       "SQL" no es un solo bloque de comandos: se divide en tres sublenguajes según <strong>qué tipo de
-      operación</strong> hacen sobre la base de datos. Ya usaste los dos primeros sin que los nombráramos
-      todavía — hoy les ponemos nombre y entendemos por qué existe la división.
+      operación</strong> hacen sobre la base de datos.
     </p>
 
-    <div class="concept-grid" style="grid-template-columns: repeat(3, 1fr); margin-top:0.8rem;">
-      <div class="concept-card" style="border:1px solid #5b7c99; border-radius:10px;">
+    <div class="concept-grid" style="grid-template-columns: 1fr; margin-top:0.8rem;">
+      <div class="concept-card" style="border:1px solid #5b7c99; border-left:4px solid #5b7c99; border-radius:10px;">
         <div class="summary-icon" style="background:rgba(91,124,153,0.15); color:#5b7c99;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="10" x2="9" y2="20"/></svg>
         </div>
         <h4>DDL</h4>
         <p style="font-size:0.78rem; color:var(--text-dim); margin:-0.2rem 0 0.5rem;">Data Definition Language</p>
-        <p>Define y modifica la <strong>estructura</strong>: las tablas, sus columnas y sus tipos de dato. Comandos: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>.</p>
-        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">Ya lo usaste en la Clase 1, cuando creamos <code>usuarios</code> y <code>pagos_suscripcion</code> con <code>CREATE TABLE</code>.</p>
+        <p>
+          Define la <strong>estructura</strong> de la base de datos: qué tablas existen, qué columnas
+          tiene cada una, de qué tipo de dato es cada columna, y qué restricciones aplican (PK, FK,
+          <code>NOT NULL</code>...). No toca los datos que hay adentro: si borras una tabla, se va con
+          todo lo que contenía.
+        </p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
+          <strong>Comandos:</strong> <code>CREATE</code> (crea tablas o bases de datos nuevas),
+          <code>ALTER</code> (les agrega o quita columnas), <code>DROP</code> (las elimina por completo).
+        </p>
+        <div class="sql-console">
+          <pre><code><span class="sql-kw">CREATE TABLE</span> <span class="sql-ident">usuarios</span> (
+  <span class="sql-ident">id_usuario</span> INT <span class="sql-kw">PRIMARY KEY</span>,
+  <span class="sql-ident">nombre</span> VARCHAR(<span class="sql-num">100</span>)
+);</code></pre>
+        </div>
       </div>
-      <div class="concept-card" style="border:1px solid #7fa5a3; border-radius:10px;">
+      <div class="concept-card" style="border:1px solid #7fa5a3; border-left:4px solid #7fa5a3; border-radius:10px;">
         <div class="summary-icon" style="background:rgba(127,165,163,0.18); color:#7fa5a3;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
         </div>
         <h4>DML</h4>
         <p style="font-size:0.78rem; color:var(--text-dim); margin:-0.2rem 0 0.5rem;">Data Manipulation Language</p>
-        <p>Manipula los <strong>datos</strong> que viven dentro de las tablas ya creadas. Comandos: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> — es decir, CRUD.</p>
-        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">Es el tema central de hoy: lo vemos a fondo más abajo, en la sección 3.</p>
+        <p>
+          Manipula los <strong>datos</strong> que viven dentro de las tablas que el DDL ya creó: agregar
+          filas nuevas, consultarlas, cambiarlas o borrarlas. No cambia la estructura — la tabla sigue
+          teniendo las mismas columnas antes y después.
+        </p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;"><strong>Comandos (el famoso CRUD):</strong></p>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem;">
+          <span style="display:flex; align-items:center; gap:0.4rem; background:rgba(91,124,153,0.12); border:1px solid #5b7c99; border-radius:20px; padding:0.3rem 0.7rem; font-size:0.78rem;">
+            <code style="color:#5b7c99; font-weight:700;">INSERT</code> → Create
+          </span>
+          <span style="display:flex; align-items:center; gap:0.4rem; background:rgba(127,165,163,0.15); border:1px solid #7fa5a3; border-radius:20px; padding:0.3rem 0.7rem; font-size:0.78rem;">
+            <code style="color:#5f8582; font-weight:700;">SELECT</code> → Read
+          </span>
+          <span style="display:flex; align-items:center; gap:0.4rem; background:rgba(139,127,184,0.12); border:1px solid #8b7fb8; border-radius:20px; padding:0.3rem 0.7rem; font-size:0.78rem;">
+            <code style="color:#8b7fb8; font-weight:700;">UPDATE</code> → Update
+          </span>
+          <span style="display:flex; align-items:center; gap:0.4rem; background:rgba(196,68,68,0.1); border:1px solid #c44444; border-radius:20px; padding:0.3rem 0.7rem; font-size:0.78rem;">
+            <code style="color:#c44444; font-weight:700;">DELETE</code> → Delete
+          </span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.7rem;">Es el tema central de hoy: lo vemos a fondo más abajo, en la sección de Operaciones CRUD.</p>
       </div>
-      <div class="concept-card" style="border:1px solid #8b7fb8; border-radius:10px;">
+      <div class="concept-card" style="border:1px solid #8b7fb8; border-left:4px solid #8b7fb8; border-radius:10px;">
         <div class="summary-icon" style="background:rgba(139,127,184,0.18); color:#8b7fb8;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
         </div>
         <h4>DCL</h4>
         <p style="font-size:0.78rem; color:var(--text-dim); margin:-0.2rem 0 0.5rem;">Data Control Language</p>
-        <p>Controla <strong>quién puede hacer qué</strong>: otorga o quita permisos sobre tablas y bases de datos. Comandos: <code>GRANT</code>, <code>REVOKE</code>.</p>
+        <p>
+          Controla <strong>quién puede hacer qué</strong> dentro de la base de datos: no crea tablas ni
+          toca datos, solo otorga o quita permisos a los usuarios que se conectan al servidor (por
+          ejemplo, que un analista solo pueda leer, sin poder borrar nada).
+        </p>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
+          <strong>Comandos:</strong> <code>GRANT</code> (otorga un permiso), <code>REVOKE</code> (se lo quita).
+        </p>
         <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">Todavía no lo usamos — lo veremos a fondo en la Semana 7, junto con seguridad y despliegue en la nube.</p>
+        <div class="sql-console">
+          <pre><code><span class="sql-kw">GRANT SELECT</span> ON <span class="sql-ident">soundflow.*</span> <span class="sql-kw">TO</span> <span class="sql-str">'analista'@'%'</span>;
+<span class="sql-kw">REVOKE SELECT</span> ON <span class="sql-ident">soundflow.*</span> <span class="sql-kw">FROM</span> <span class="sql-str">'analista'@'%'</span>;</code></pre>
+        </div>
       </div>
     </div>
 
     <div class="content-box">
       <p style="margin:0;">
-        Piénsalo como los tres roles de una obra: <strong>DDL</strong> construye el escenario (las tablas),
+        <strong>Analogía:</strong> los tres son como los tres roles de una obra de teatro. <strong>DDL</strong> construye el escenario (las tablas),
         <strong>DML</strong> es la actuación que pasa sobre ese escenario (leer, agregar, cambiar y borrar
         datos), y <strong>DCL</strong> decide quién tiene permiso de entrar a cada parte del teatro.
         Los tres son SQL, pero cada uno resuelve un problema distinto.
@@ -1172,7 +1215,11 @@ window.WEEK_CONTENT_1_2 = `
       </div>
       <div class="numbered-card">
         <div class="num" style="color:#7fa5a3;">2. Es determinista</div>
-        <p>La misma contraseña siempre produce exactamente el mismo hash — por eso sirve para comparar sin guardar el original.</p>
+        <p>
+          La misma contraseña siempre produce exactamente el mismo hash, sin nada aleatorio de por medio.
+          Por eso SoundFlow nunca guarda tu contraseña real: solo vuelve a calcular el hash cada vez que
+          inicias sesión y lo compara con el guardado.
+        </p>
       </div>
       <div class="numbered-card">
         <div class="num" style="color:#8b7fb8;">3. Efecto avalancha</div>
@@ -1278,8 +1325,7 @@ WHERE email = 'camilo@flow.com'
       <p>
         Recuerda que <code>pagos_suscripcion</code> tiene una FK hacia <code>usuarios</code> con
         <code>ON DELETE RESTRICT</code>. Si intentas un <code>DELETE</code> físico sobre un usuario con
-        pagos registrados, MySQL <strong>bloquea la operación</strong> — y eso es justo lo que queremos:
-        proteger la contabilidad. El Soft Delete logra el mismo resultado para el usuario final (su cuenta
+        pagos registrados, MySQL <strong>bloquea la operación</strong>, protegiendo la contabilidad. El Soft Delete logra el mismo resultado para el usuario final (su cuenta
         deja de estar activa) sin arriesgar la integridad de los datos financieros ni el historial.
       </p>
     </div>
@@ -1306,7 +1352,7 @@ UPDATE usuarios SET esta_activo = 1 WHERE id_usuario = 3;</code></pre>
   <!-- ===================== 4. EL LENGUAJE SQL ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>4. El lenguaje SQL</h3>
+      <h3>4. Instrucciones SQL</h3>
     </div>
     <p>
       Antes de escribir más comandos, vale la pena entender qué tipo de lenguaje es SQL y cómo está
@@ -1417,6 +1463,17 @@ WHERE esta_activo = 1;</code></pre>
           <pre><code><span class="sql-kw">INSERT INTO</span> <span class="sql-ident">usuarios</span> (<span class="sql-ident">nombre</span>, <span class="sql-ident">email</span>)
 <span class="sql-kw">VALUES</span> (<span class="sql-str">'Valentina Gómez'</span>, <span class="sql-str">'valentina@flow.com'</span>);</code></pre>
         </div>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.8rem;">
+          ¿Vas a insertar <strong>varios registros de una vez</strong>? No hace falta repetir
+          <code>INSERT INTO</code> por cada uno: se agrupan los valores de cada fila entre paréntesis,
+          separados por comas, en una sola instrucción.
+        </p>
+        <div class="sql-console">
+          <pre><code><span class="sql-kw">INSERT INTO</span> <span class="sql-ident">usuarios</span> (<span class="sql-ident">nombre</span>, <span class="sql-ident">email</span>) <span class="sql-kw">VALUES</span>
+  (<span class="sql-str">'Camilo Restrepo'</span>, <span class="sql-str">'camilo@flow.com'</span>),
+  (<span class="sql-str">'Santiago Marin'</span>, <span class="sql-str">'santiago@flow.com'</span>),
+  (<span class="sql-str">'Valentina Gómez'</span>, <span class="sql-str">'valentina@flow.com'</span>);</code></pre>
+        </div>
       </div>
       <div class="concept-card" style="border-left:3px solid #7fa5a3;">
         <div class="summary-icon" style="background:rgba(127,165,163,0.18); color:#7fa5a3;">
@@ -1463,6 +1520,70 @@ WHERE esta_activo = 1;</code></pre>
           <pre><code><span class="sql-kw">DELETE FROM</span> <span class="sql-ident">usuarios</span>
 <span class="sql-kw">WHERE</span> <span class="sql-ident">id_usuario</span> = <span class="sql-num">5</span>;</code></pre>
         </div>
+      </div>
+    </div>
+
+    <h4 style="color:var(--text); font-size:0.95rem; margin:1.6rem 0 0.4rem; text-align:center;">El modelo entidad-relación (E-R)</h4>
+    <p>
+      En la Clase 1 dibujamos varias veces la misma idea: tablas conectadas con líneas y números. Eso
+      tiene nombre propio: <strong>modelo entidad-relación</strong>, una forma gráfica de representar las
+      tablas (entidades), sus columnas (atributos) y cómo se conectan entre sí (relaciones), antes o
+      después de crear la base de datos de verdad.
+    </p>
+
+    <div class="content-box" style="margin-top:0.8rem;">
+      <p style="margin:0;">
+        La notación es siempre la misma: cada <strong>rectángulo</strong> es una tabla, la fila de
+        encabezado lleva su nombre, adentro van sus columnas (marcando cuál es la 🔑 <strong>PK</strong> y
+        cuáles son <strong>FK</strong>), y las <strong>líneas con <code>1</code> y <code>N</code></strong>
+        en cada extremo indican el tipo de relación.
+      </p>
+      <svg viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="max-width:520px; width:100%; height:auto; display:block; margin:1.2rem auto 0;">
+        <rect x="10" y="20" width="180" height="90" rx="8" fill="#ffffff" stroke="#5b7c99" stroke-width="1.5"/>
+        <rect x="10" y="20" width="180" height="34" rx="8" fill="#5b7c99"/>
+        <rect x="10" y="44" width="180" height="10" fill="#5b7c99"/>
+        <text x="22" y="42" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700">usuarios</text>
+        <text x="22" y="74" font-family="Segoe UI, sans-serif" font-size="11" fill="#a83a3a">🔑</text>
+        <text x="38" y="74" font-family="Consolas, monospace" font-size="11" fill="#a83a3a" font-weight="700">PK  id_usuario</text>
+        <text x="22" y="94" font-family="Consolas, monospace" font-size="11" fill="#33404f">nombre</text>
+
+        <rect x="330" y="10" width="180" height="110" rx="8" fill="#ffffff" stroke="#8b7fb8" stroke-width="1.5"/>
+        <rect x="330" y="10" width="180" height="34" rx="8" fill="#8b7fb8"/>
+        <rect x="330" y="34" width="180" height="10" fill="#8b7fb8"/>
+        <text x="336" y="32" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700">pagos_suscripcion</text>
+        <text x="336" y="64" font-family="Segoe UI, sans-serif" font-size="11" fill="#a83a3a">🔑</text>
+        <text x="352" y="64" font-family="Consolas, monospace" font-size="10.5" fill="#a83a3a" font-weight="700">PK  id_pago</text>
+        <text x="342" y="84" font-family="Consolas, monospace" font-size="10.5" fill="#5b7c99" font-weight="700">FK  usuario_id</text>
+        <text x="342" y="104" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">monto</text>
+
+        <line x1="190" y1="65" x2="330" y2="65" stroke="#5b7c99" stroke-width="2"/>
+        <circle cx="190" cy="65" r="4" fill="#5b7c99"/>
+        <circle cx="330" cy="65" r="4" fill="#5b7c99"/>
+        <text x="205" y="57" font-family="Consolas, monospace" font-size="12" fill="#5b7c99" font-weight="700">1</text>
+        <text x="315" y="57" font-family="Consolas, monospace" font-size="12" fill="#5b7c99" font-weight="700">N</text>
+      </svg>
+      <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.5rem;">
+        1 <code>usuario</code> puede tener N <code>pagos_suscripcion</code> — el mismo diagrama que ya
+        conoces, ahora con su nombre técnico.
+      </p>
+    </div>
+
+    <p style="margin-top:1rem;">
+      MySQL Workbench tiene una pestaña dedicada para esto (<strong>EER Diagram</strong>, de "Extended
+      Entity-Relationship"):
+    </p>
+
+    <div class="concept-grid" style="grid-template-columns: 1fr; margin-top:0.8rem;">
+      <div class="concept-card" style="border:1px solid #7fa5a3; border-radius:10px;">
+        <div class="summary-icon" style="background:rgba(127,165,163,0.18); color:#7fa5a3;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0115-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 01-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+        </div>
+        <h4 style="color:#5f8582;">Ingeniería inversa</h4>
+        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
+          Menú <code>Database → Reverse Engineer</code>, eliges tu conexión y el esquema
+          (<code>soundflow</code>), y Workbench genera el diagrama automáticamente con las PK, FK y
+          relaciones ya dibujadas.
+        </p>
       </div>
     </div>
 
