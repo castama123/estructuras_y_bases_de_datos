@@ -586,6 +586,68 @@ footer {
   white-space: pre;
 }
 
+/* ---------- Tablas de resultado: qué devuelve cada query ---------- */
+.query-result-block {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.query-result-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.query-result-caption {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent-2);
+  padding: 0.35rem 0.8rem;
+}
+
+.query-result-item table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 0.78rem;
+}
+
+.query-result-item th,
+.query-result-item td {
+  padding: 0.32rem 0.8rem;
+  text-align: left;
+}
+
+.query-result-item thead th {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+
+.query-result-item td.rnull {
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.query-result-item .single-value {
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 0.6rem 0.8rem;
+}
+
+.query-result-note {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin: 0.4rem 0.8rem 0.5rem;
+}
+
 /* ---------- Contenido de semana: cajas y conceptos ---------- */
 .content-box {
   background: var(--bg-card);

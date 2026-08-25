@@ -470,13 +470,22 @@ SELECT DISTINCT genero FROM tbl_canciones;
 SELECT DISTINCT id_album, genero FROM tbl_canciones WHERE id_album = 1;</code></pre>
     </div>
 
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        <strong>Ojo con esto:</strong> si pones <code>DISTINCT</code> sobre dos columnas, SQL no las trata
-        por separado, busca <strong>combinaciones</strong> únicas de ambas. El álbum 1 ("Grandes Éxitos", de
-        Gloria Estefan) tiene tres canciones, pero dos son "Pop" y una es "Salsa", así que
-        <code>DISTINCT id_album, genero</code> lo muestra dos veces: (1, Pop) y (1, Salsa).
-      </p>
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: SELECT DISTINCT genero</div>
+        <table><thead><tr><th>genero</th></tr></thead><tbody>
+          <tr><td>Pop</td></tr>
+          <tr><td>Salsa</td></tr>
+          <tr><td>Rock</td></tr>
+        </tbody></table>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: SELECT DISTINCT id_album, genero WHERE id_album = 1</div>
+        <table><thead><tr><th>id_album</th><th>genero</th></tr></thead><tbody>
+          <tr><td>1</td><td>Pop</td></tr>
+          <tr><td>1</td><td>Salsa</td></tr>
+        </tbody></table>
+      </div>
     </div>
   </div>
 
@@ -495,9 +504,28 @@ SELECT DISTINCT id_album, genero FROM tbl_canciones WHERE id_album = 1;</code></
       <pre><code><span class="sql-kw">SELECT</span> titulo, reproducciones <span class="sql-kw">FROM</span> <span class="sql-ident">tbl_canciones</span>
 <span class="sql-kw">ORDER BY</span> <span class="sql-ident">reproducciones</span> <span class="sql-kw">DESC</span>;</code></pre>
     </div>
+
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado</div>
+        <table><thead><tr><th>titulo</th><th>reproducciones</th></tr></thead><tbody>
+          <tr><td>Rayando el Sol</td><td>21000000</td></tr>
+          <tr><td>Tres Deseos</td><td>15200000</td></tr>
+          <tr><td>La Negra Tiene Tumbao</td><td>12300000</td></tr>
+          <tr><td>La Vida Es un Carnaval</td><td>8900000</td></tr>
+          <tr><td>De Música Ligera</td><td>5400000</td></tr>
+          <tr><td>Cuando Pase el Temblor</td><td>4100000</td></tr>
+          <tr><td>Mi Tierra</td><td>3200000</td></tr>
+          <tr><td>Oye Mi Amor</td><td>980000</td></tr>
+          <tr><td>Persiana Americana</td><td class="rnull">NULL</td></tr>
+          <tr><td>Mi Buen Amor</td><td class="rnull">NULL</td></tr>
+        </tbody></table>
+      </div>
+    </div>
     <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.5rem;">
       Esto trae primero "Rayando el Sol" (21.000.000), luego "Tres Deseos" (15.200.000), y así
-      sucesivamente de mayor a menor.
+      sucesivamente de mayor a menor. Los dos <code>NULL</code> quedan al final porque, en
+      <code>DESC</code>, MySQL los trata como "los más pequeños".
     </p>
 
     <div class="numbered-grid" style="margin-top:0.8rem;">
@@ -565,6 +593,35 @@ WHERE reproducciones IS NULL;
 -- Lo contrario: solo las que sí tienen dato
 SELECT titulo FROM tbl_canciones
 WHERE reproducciones IS NOT NULL;</code></pre>
+    </div>
+
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: Pop con más de 10 millones</div>
+        <table><thead><tr><th>titulo</th></tr></thead><tbody>
+          <tr><td>Tres Deseos</td></tr>
+        </tbody></table>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: reproducciones IS NULL</div>
+        <table><thead><tr><th>titulo</th><th>genero</th></tr></thead><tbody>
+          <tr><td>Persiana Americana</td><td>Rock</td></tr>
+          <tr><td>Mi Buen Amor</td><td>Pop</td></tr>
+        </tbody></table>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: reproducciones IS NOT NULL</div>
+        <table><thead><tr><th>titulo</th></tr></thead><tbody>
+          <tr><td>Tres Deseos</td></tr>
+          <tr><td>La Vida Es un Carnaval</td></tr>
+          <tr><td>Mi Tierra</td></tr>
+          <tr><td>De Música Ligera</td></tr>
+          <tr><td>Rayando el Sol</td></tr>
+          <tr><td>La Negra Tiene Tumbao</td></tr>
+          <tr><td>Oye Mi Amor</td></tr>
+          <tr><td>Cuando Pase el Temblor</td></tr>
+        </tbody></table>
+      </div>
     </div>
   </div>
 
@@ -641,6 +698,35 @@ WHERE genero = 'Pop' OR genero = 'Rock' OR genero = 'Salsa';
 SELECT titulo, duracion_seg FROM tbl_canciones
 WHERE duracion_seg BETWEEN 200 AND 230;</code></pre>
     </div>
+
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: IN ('Pop', 'Rock', 'Salsa') (igual con OR)</div>
+        <table><thead><tr><th>titulo</th><th>genero</th></tr></thead><tbody>
+          <tr><td>Tres Deseos</td><td>Pop</td></tr>
+          <tr><td>La Vida Es un Carnaval</td><td>Salsa</td></tr>
+          <tr><td>Mi Tierra</td><td>Salsa</td></tr>
+          <tr><td>De Música Ligera</td><td>Rock</td></tr>
+          <tr><td>Rayando el Sol</td><td>Rock</td></tr>
+          <tr><td>La Negra Tiene Tumbao</td><td>Salsa</td></tr>
+          <tr><td>Persiana Americana</td><td>Rock</td></tr>
+          <tr><td>Mi Buen Amor</td><td>Pop</td></tr>
+          <tr><td>Oye Mi Amor</td><td>Rock</td></tr>
+          <tr><td>Cuando Pase el Temblor</td><td>Rock</td></tr>
+        </tbody></table>
+        <p class="query-result-note">Trae las 10 filas porque en esta muestra no hay géneros fuera de Pop, Rock y Salsa.</p>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: BETWEEN 200 AND 230</div>
+        <table><thead><tr><th>titulo</th><th>duracion_seg</th></tr></thead><tbody>
+          <tr><td>Tres Deseos</td><td>210</td></tr>
+          <tr><td>Rayando el Sol</td><td>205</td></tr>
+          <tr><td>Mi Buen Amor</td><td>205</td></tr>
+          <tr><td>Oye Mi Amor</td><td>215</td></tr>
+          <tr><td>Cuando Pase el Temblor</td><td>230</td></tr>
+        </tbody></table>
+      </div>
+    </div>
   </div>
 
   <!-- ===================== 5. LIMIT ===================== -->
@@ -667,6 +753,17 @@ WHERE duracion_seg BETWEEN 200 AND 230;</code></pre>
 SELECT titulo, reproducciones FROM tbl_canciones
 ORDER BY reproducciones DESC
 LIMIT 3;</code></pre>
+    </div>
+
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado</div>
+        <table><thead><tr><th>titulo</th><th>reproducciones</th></tr></thead><tbody>
+          <tr><td>Rayando el Sol</td><td>21000000</td></tr>
+          <tr><td>Tres Deseos</td><td>15200000</td></tr>
+          <tr><td>La Negra Tiene Tumbao</td><td>12300000</td></tr>
+        </tbody></table>
+      </div>
     </div>
 
     <h4 style="color:var(--text); font-size:0.95rem; margin:1.4rem 0 0.4rem;">LIMIT con offset: paginar resultados</h4>
@@ -706,6 +803,17 @@ LIMIT 3, 3;
 SELECT titulo, reproducciones FROM tbl_canciones
 ORDER BY reproducciones DESC
 LIMIT 3 OFFSET 3;</code></pre>
+    </div>
+
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: LIMIT 3, 3 (igual con LIMIT 3 OFFSET 3)</div>
+        <table><thead><tr><th>titulo</th><th>reproducciones</th></tr></thead><tbody>
+          <tr><td>La Vida Es un Carnaval</td><td>8900000</td></tr>
+          <tr><td>De Música Ligera</td><td>5400000</td></tr>
+          <tr><td>Cuando Pase el Temblor</td><td>4100000</td></tr>
+        </tbody></table>
+      </div>
     </div>
   </div>
 
@@ -762,6 +870,33 @@ SELECT SUM(reproducciones), AVG(reproducciones) FROM tbl_canciones;
 SELECT MIN(reproducciones), MAX(reproducciones) FROM tbl_canciones;</code></pre>
     </div>
 
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: COUNT(*)</div>
+        <div class="single-value">10</div>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: COUNT(reproducciones)</div>
+        <div class="single-value">8</div>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: COUNT(DISTINCT id_album)</div>
+        <div class="single-value">4</div>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: SUM() y AVG()</div>
+        <table><thead><tr><th>SUM(reproducciones)</th><th>AVG(reproducciones)</th></tr></thead><tbody>
+          <tr><td>71080000</td><td>8885000</td></tr>
+        </tbody></table>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: MIN() y MAX()</div>
+        <table><thead><tr><th>MIN(reproducciones)</th><th>MAX(reproducciones)</th></tr></thead><tbody>
+          <tr><td>980000</td><td>21000000</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
         <strong>Importante: agrupar con GROUP BY:</strong> las funciones de agregación se vuelven aún más
@@ -772,6 +907,16 @@ SELECT MIN(reproducciones), MAX(reproducciones) FROM tbl_canciones;</code></pre>
         <pre><code><span class="sql-kw">SELECT</span> genero, <span class="sql-kw">COUNT</span>(*) <span class="sql-kw">AS</span> total
 <span class="sql-kw">FROM</span> <span class="sql-ident">tbl_canciones</span>
 <span class="sql-kw">GROUP BY</span> <span class="sql-ident">genero</span>;</code></pre>
+      </div>
+      <div class="query-result-block" style="margin-top:0.6rem;">
+        <div class="query-result-item">
+          <div class="query-result-caption">Resultado</div>
+          <table><thead><tr><th>genero</th><th>total</th></tr></thead><tbody>
+            <tr><td>Pop</td><td>2</td></tr>
+            <tr><td>Salsa</td><td>3</td></tr>
+            <tr><td>Rock</td><td>5</td></tr>
+          </tbody></table>
+        </div>
       </div>
       <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.5rem;">
         Esto devuelve una fila por género con su conteo: Pop 2, Salsa 3, Rock 5.
@@ -815,6 +960,40 @@ FROM tbl_canciones AS c
 WHERE c.genero = 'Pop';</code></pre>
     </div>
 
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: alias de columna</div>
+        <table><thead><tr><th>cancion</th><th>total_reproducciones</th></tr></thead><tbody>
+          <tr><td>Tres Deseos</td><td>15200000</td></tr>
+          <tr><td>La Vida Es un Carnaval</td><td>8900000</td></tr>
+          <tr><td>Mi Tierra</td><td>3200000</td></tr>
+          <tr><td>De Música Ligera</td><td>5400000</td></tr>
+          <tr><td>Rayando el Sol</td><td>21000000</td></tr>
+          <tr><td>La Negra Tiene Tumbao</td><td>12300000</td></tr>
+          <tr><td>Persiana Americana</td><td class="rnull">NULL</td></tr>
+          <tr><td>Mi Buen Amor</td><td class="rnull">NULL</td></tr>
+          <tr><td>Oye Mi Amor</td><td>980000</td></tr>
+          <tr><td>Cuando Pase el Temblor</td><td>4100000</td></tr>
+        </tbody></table>
+        <p class="query-result-note">Las columnas ya no se llaman "titulo" y "reproducciones": se llaman "cancion" y "total_reproducciones".</p>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: alias sobre COUNT(*)</div>
+        <table><thead><tr><th>genero</th><th>cantidad</th></tr></thead><tbody>
+          <tr><td>Pop</td><td>2</td></tr>
+          <tr><td>Salsa</td><td>3</td></tr>
+          <tr><td>Rock</td><td>5</td></tr>
+        </tbody></table>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: alias de tabla (c.titulo, c.genero)</div>
+        <table><thead><tr><th>titulo</th><th>genero</th></tr></thead><tbody>
+          <tr><td>Tres Deseos</td><td>Pop</td></tr>
+          <tr><td>Mi Buen Amor</td><td>Pop</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
         El alias de tabla (<code>tbl_canciones AS c</code>) no parece necesario todavía porque solo hay
@@ -850,6 +1029,39 @@ FROM tbl_canciones;
 -- Combinando varias columnas y texto fijo
 SELECT CONCAT(titulo, ' (', genero, ', ', duracion_seg, ' seg)') AS ficha
 FROM tbl_canciones;</code></pre>
+    </div>
+
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: cancion_genero</div>
+        <table><thead><tr><th>cancion_genero</th></tr></thead><tbody>
+          <tr><td>Tres Deseos - Pop</td></tr>
+          <tr><td>La Vida Es un Carnaval - Salsa</td></tr>
+          <tr><td>Mi Tierra - Salsa</td></tr>
+          <tr><td>De Música Ligera - Rock</td></tr>
+          <tr><td>Rayando el Sol - Rock</td></tr>
+          <tr><td>La Negra Tiene Tumbao - Salsa</td></tr>
+          <tr><td>Persiana Americana - Rock</td></tr>
+          <tr><td>Mi Buen Amor - Pop</td></tr>
+          <tr><td>Oye Mi Amor - Rock</td></tr>
+          <tr><td>Cuando Pase el Temblor - Rock</td></tr>
+        </tbody></table>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: ficha</div>
+        <table><thead><tr><th>ficha</th></tr></thead><tbody>
+          <tr><td>Tres Deseos (Pop, 210 seg)</td></tr>
+          <tr><td>La Vida Es un Carnaval (Salsa, 245 seg)</td></tr>
+          <tr><td>Mi Tierra (Salsa, 198 seg)</td></tr>
+          <tr><td>De Música Ligera (Rock, 260 seg)</td></tr>
+          <tr><td>Rayando el Sol (Rock, 205 seg)</td></tr>
+          <tr><td>La Negra Tiene Tumbao (Salsa, 240 seg)</td></tr>
+          <tr><td>Persiana Americana (Rock, 190 seg)</td></tr>
+          <tr><td>Mi Buen Amor (Pop, 205 seg)</td></tr>
+          <tr><td>Oye Mi Amor (Rock, 215 seg)</td></tr>
+          <tr><td>Cuando Pase el Temblor (Rock, 230 seg)</td></tr>
+        </tbody></table>
+      </div>
     </div>
 
     <div class="content-box" style="margin-top:0.8rem;">
@@ -892,6 +1104,23 @@ SELECT id_album, COUNT(*) AS total_canciones, AVG(reproducciones) AS promedio_re
 FROM tbl_canciones
 GROUP BY id_album
 HAVING AVG(reproducciones) > 10000000;</code></pre>
+    </div>
+
+    <div class="query-result-block">
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: géneros con 3 o más canciones</div>
+        <table><thead><tr><th>genero</th><th>total</th></tr></thead><tbody>
+          <tr><td>Salsa</td><td>3</td></tr>
+          <tr><td>Rock</td><td>5</td></tr>
+        </tbody></table>
+      </div>
+      <div class="query-result-item">
+        <div class="query-result-caption">Resultado: álbumes con promedio mayor a 10 millones</div>
+        <table><thead><tr><th>id_album</th><th>total_canciones</th><th>promedio_reproducciones</th></tr></thead><tbody>
+          <tr><td>2</td><td>2</td><td>10600000</td></tr>
+          <tr><td>4</td><td>2</td><td>10990000</td></tr>
+        </tbody></table>
+      </div>
     </div>
 
     <div class="content-box" style="margin-top:0.8rem;">
