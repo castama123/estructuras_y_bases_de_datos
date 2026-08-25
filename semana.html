@@ -66,6 +66,7 @@
 
 <script src="js/weeks-data.js"></script>
 <script src="js/content/semana-01.js"></script>
+<script src="js/content/semana-02.js"></script>
 <script src="js/nav.js"></script>
 <script>
   const params = new URLSearchParams(location.search);
@@ -93,6 +94,17 @@
     if (clase2) {
       weekContent2El.innerHTML = clase2;
       classTabs.style.display = 'flex';
+
+      // Recordar qué clase estaba abierta para esta semana, para que un refresh
+      // no la regrese siempre a la Clase 1.
+      const savedTab = localStorage.getItem('classTab_semana' + week.n);
+      if (savedTab === '2') {
+        classTabs.querySelectorAll('.class-tab').forEach(t => {
+          t.classList.toggle('active', t.dataset.class === '2');
+        });
+        weekContentEl.style.display = 'none';
+        weekContent2El.style.display = '';
+      }
     }
   } else {
     richContent = window['WEEK_CONTENT_' + week.n];

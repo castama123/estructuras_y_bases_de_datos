@@ -18,12 +18,12 @@ const WEEKS = [
   },
   {
     n: 2,
-    titulo: "Consultas complejas y algoritmos de búsqueda",
-    resumen: "Consultas SQL avanzadas y cómo la búsqueda binaria/lineal afecta el rendimiento.",
-    objetivos: "Construir consultas complejas (JOINs, subconsultas) y analizar su relación con algoritmos de búsqueda.",
+    titulo: "Consultas SQL avanzadas y normalización",
+    resumen: "DISTINCT, ORDER BY, operadores, LIKE, IN, BETWEEN, LIMIT y funciones de agregación; normalización y estructuras no lineales.",
+    objetivos: "Refinar consultas SQL con filtros, patrones y funciones de agregación, como base para normalización y modelado con grafos.",
     embed: "",
     descarga: "presentaciones/semana-02.pdf",
-    disponible: false
+    disponible: true
   },
   {
     n: 3,

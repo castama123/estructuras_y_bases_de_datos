@@ -127,4 +127,9 @@ document.addEventListener('click', (e) => {
   const clase2El = document.getElementById('weekContent2');
   if (clase1El) clase1El.style.display = cls === '1' ? '' : 'none';
   if (clase2El) clase2El.style.display = cls === '2' ? '' : 'none';
+
+  // Guarda qué clase quedó abierta en esta semana, para restaurarla si se recarga la página.
+  const params = new URLSearchParams(location.search);
+  const weekN = parseInt(params.get('n'), 10) || 1;
+  localStorage.setItem('classTab_semana' + weekN, cls);
 });
