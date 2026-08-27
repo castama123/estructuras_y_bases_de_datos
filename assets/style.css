@@ -919,6 +919,67 @@ footer {
   color: #f0c47e;
 }
 
+/* ---------- Simulador de recorrido de árbol (sección Árboles, Semana 2) ---------- */
+.tree-traversal-btn {
+  cursor: pointer;
+}
+
+.tree-traversal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tree-nodo circle {
+  transition: fill 0.25s ease, fill-opacity 0.25s ease;
+}
+
+.tree-nodo-visitado circle {
+  fill: var(--accent);
+  fill-opacity: 0.18;
+}
+
+.tree-nodo-visitando circle {
+  fill: #c44444;
+  fill-opacity: 0.55;
+  stroke: #c44444;
+}
+
+/* Misma animación, pero para nodos dibujados como <rect> (arreglos: cada casilla es
+   un rectángulo, no un círculo, así que reusa el mismo motor de nav.js). */
+.tree-nodo rect {
+  transition: fill 0.25s ease, fill-opacity 0.25s ease, stroke 0.25s ease;
+}
+
+.tree-nodo-visitado rect {
+  fill: var(--accent);
+  fill-opacity: 0.18;
+}
+
+.tree-nodo-visitando rect {
+  fill: #c44444;
+  fill-opacity: 0.55;
+  stroke: #c44444;
+}
+
+/* ---------- Colores de sintaxis para bloques de código JS (.code-block) ---------- */
+.code-kw {
+  color: #7fb0e0;
+  font-weight: 600;
+}
+
+.code-str {
+  color: #d9a8f0;
+}
+
+.code-com {
+  color: #7a8595;
+  font-style: italic;
+}
+
+.code-fn {
+  color: #8fd6c4;
+}
+
 /* ---------- Ícono de época en la línea de tiempo ---------- */
 .era-icon {
   width: 40px;

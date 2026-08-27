@@ -112,6 +112,56 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Simulador de recorrido (árboles y grafos, Semana 2): anima, paso a paso y en
+// tiempo real, el orden en que un recorrido (BFS, DFS, etc.) visita cada nodo.
+// El botón que dispara la animación trae su propia secuencia en el atributo
+// data-orden (ids de nodo separados por coma), así el mismo código sirve para
+// cualquier diagrama que use la clase .tree-demo / .tree-nodo.
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.tree-traversal-btn');
+  if (!btn || btn.disabled) return;
+
+  const demo = btn.closest('.tree-demo');
+  if (!demo) return;
+
+  const secuencia = (btn.dataset.orden || '').split(',').map(s => s.trim()).filter(Boolean);
+  if (!secuencia.length) return;
+
+  const botones = demo.querySelectorAll('.tree-traversal-btn');
+  const estado = demo.querySelector('.tree-demo-status');
+  const nodos = demo.querySelectorAll('.tree-nodo');
+
+  // Limpia cualquier resaltado de un recorrido anterior antes de empezar uno nuevo.
+  nodos.forEach(g => {
+    g.classList.remove('tree-nodo-visitando', 'tree-nodo-visitado');
+  });
+
+  botones.forEach(b => { b.disabled = true; });
+
+  const paso = 750; // milisegundos entre cada nodo visitado
+  secuencia.forEach((idNodo, i) => {
+    setTimeout(() => {
+      const nodoActivo = demo.querySelector(`.tree-nodo[data-nodo="${idNodo}"]`);
+      // El nodo anterior pasa de "visitando" a "visitado" (queda marcado, más tenue).
+      nodos.forEach(g => { g.classList.remove('tree-nodo-visitando'); });
+      if (nodoActivo) {
+        nodoActivo.classList.add('tree-nodo-visitando', 'tree-nodo-visitado');
+      }
+      if (estado && nodoActivo) {
+        estado.textContent = `Paso ${i + 1} de ${secuencia.length}: visitando "${nodoActivo.dataset.nombre}"`;
+      }
+
+      if (i === secuencia.length - 1) {
+        setTimeout(() => {
+          nodos.forEach(g => { g.classList.remove('tree-nodo-visitando'); });
+          if (estado) estado.textContent = 'Recorrido completo. Elige otro recorrido para comparar el orden.';
+          botones.forEach(b => { b.disabled = false; });
+        }, paso);
+      }
+    }, i * paso);
+  });
+});
+
 // Pestañas "Clase 1" / "Clase 2" dentro de una semana con varias clases.
 document.addEventListener('click', (e) => {
   const tab = e.target.closest('.class-tab');
