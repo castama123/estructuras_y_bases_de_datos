@@ -14,7 +14,9 @@
     } else {
       const span = document.createElement('span');
       span.className = 'nav-week-disabled';
-      span.textContent = `Semana ${w.n}: ${w.titulo} (en construcción)`;
+      span.textContent = w.titulo
+        ? `Semana ${w.n}: ${w.titulo} (en construcción)`
+        : `Semana ${w.n} (en construcción)`;
       menu.appendChild(span);
     }
   });
@@ -177,6 +179,13 @@ document.addEventListener('click', (e) => {
   const clase2El = document.getElementById('weekContent2');
   if (clase1El) clase1El.style.display = cls === '1' ? '' : 'none';
   if (clase2El) clase2El.style.display = cls === '2' ? '' : 'none';
+
+  // Si la semana tiene título distinto por clase, actualízalo al cambiar de pestaña.
+  const detailTituloEl = document.getElementById('detailTitulo');
+  if (detailTituloEl && window.currentWeek) {
+    const w = window.currentWeek;
+    detailTituloEl.textContent = (cls === '2' ? w.tituloClase2 : w.tituloClase1) || w.titulo;
+  }
 
   // Guarda qué clase quedó abierta en esta semana, para restaurarla si se recarga la página.
   const params = new URLSearchParams(location.search);

@@ -67,17 +67,18 @@
 <script src="js/weeks-data.js"></script>
 <script src="js/content/semana-01.js"></script>
 <script src="js/content/semana-02.js"></script>
+<script src="js/content/semana-03.js"></script>
 <script src="js/nav.js"></script>
 <script>
   const params = new URLSearchParams(location.search);
   const n = parseInt(params.get('n'), 10) || 1;
   const week = WEEKS.find(w => w.n === n) || WEEKS[0];
+  window.currentWeek = week; // nav.js lo usa para actualizar el título al cambiar de pestaña
   const activeLink = document.querySelector(`#navWeeksMenu a[href="semana.html?n=${week.n}"]`);
   if (activeLink) activeLink.classList.add('active');
 
   document.getElementById('pageTitle').textContent = `Semana ${week.n}`;
   document.getElementById('pageResumen').textContent = week.resumen;
-  document.getElementById('detailTitulo').textContent = week.titulo;
   document.getElementById('detailObjetivos').textContent = week.objetivos;
 
   const weekContentEl = document.getElementById('weekContent');
@@ -85,8 +86,14 @@
   const classTabs = document.getElementById('classTabs');
 
   const clase1 = window['WEEK_CONTENT_' + week.n + '_1'];
-  const clase2 = window['WEEK_CONTENT_' + week.n + '_2'];
+  // La Clase 2 se puede bloquear por semana con "disponibleClase2: false" en weeks-data.js,
+  // por ejemplo mientras todavía se está revisando antes de publicarla a los estudiantes.
+  const clase2 = week.disponibleClase2 === false ? null : window['WEEK_CONTENT_' + week.n + '_2'];
   let richContent = null;
+
+  // Si la semana tiene título distinto por clase, usa el de la clase activa;
+  // si no, cae de vuelta al título general de la semana.
+  document.getElementById('detailTitulo').textContent = week.tituloClase1 || week.titulo;
 
   if (clase1) {
     weekContentEl.innerHTML = clase1;
@@ -104,6 +111,7 @@
         });
         weekContentEl.style.display = 'none';
         weekContent2El.style.display = '';
+        document.getElementById('detailTitulo').textContent = week.tituloClase2 || week.titulo;
       }
     }
   } else {

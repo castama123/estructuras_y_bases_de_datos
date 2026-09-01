@@ -66,8 +66,8 @@
       </div>
       <span class="week-tag" style="color:${style.color};">Semana ${w.n}</span>
       ${disponible ? '' : '<span class="week-badge-construccion">En construcción</span>'}
-      <h3>${w.titulo}</h3>
-      <p>${w.resumen}</p>
+      ${w.titulo ? `<h3>${w.titulo}</h3>` : ''}
+      ${w.resumen ? `<p>${w.resumen}</p>` : ''}
     `;
     a.style.borderTop = `3px solid ${style.color}`;
     grid.appendChild(a);

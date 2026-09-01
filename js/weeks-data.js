@@ -19,6 +19,8 @@ const WEEKS = [
   {
     n: 2,
     titulo: "Consultas SQL avanzadas y normalización",
+    tituloClase1: "Consultas SQL avanzadas y normalización",
+    tituloClase2: "Estructuras de datos lineales y no lineales",
     resumen: "DISTINCT, ORDER BY, operadores, LIKE, IN, BETWEEN, LIMIT y funciones de agregación; normalización y estructuras no lineales.",
     objetivos: "Refinar consultas SQL con filtros, patrones y funciones de agregación, como base para normalización y modelado con grafos.",
     embed: "",
@@ -27,54 +29,59 @@ const WEEKS = [
   },
   {
     n: 3,
-    titulo: "Normalización y modelado de grafos",
-    resumen: "1FN, 2FN, 3FN y modelado de relaciones, alineado con Habeas Data.",
-    objetivos: "Aplicar las tres formas normales y diseñar un esquema seguro y sin redundancia.",
+    titulo: "Joins, vistas, procedimientos, triggers, transacciones y despliegue",
+    tituloClase1: "Joins, UNION, subconsultas, índices, vistas, procedimientos y triggers",
+    tituloClase2: "Conexión segura, SQL injection, transacciones y despliegue",
+    resumen: "INNER, LEFT, RIGHT, FULL OUTER, CROSS y SELF JOIN, UNION, subconsultas, índices, vistas, procedimientos y triggers; luego conexión desde Python, SQL injection, transacciones, despliegue y diseño de BD.",
+    objetivos: "Combinar múltiples tablas con distintos tipos de JOIN y UNION, usar subconsultas e índices, empaquetar lógica con vistas, procedimientos y triggers, y llevar una aplicación a producción de forma segura.",
     embed: "",
     descarga: "presentaciones/semana-03.pdf",
-    disponible: false
+    disponible: true,
+    // Bloquea la Clase 2 en el sitio (pestaña oculta) mientras se termina de revisar.
+    // Cámbialo a true cuando esté lista para publicarse a los estudiantes.
+    disponibleClase2: false
   },
   {
     n: 4,
-    titulo: "Persistencia políglota: NoSQL",
-    resumen: "MongoDB/Redis y estructuras jerárquicas como árboles y listas enlazadas.",
-    objetivos: "Comparar modelos relacionales y NoSQL, e identificar cuándo usar cada uno.",
+    titulo: "",
+    resumen: "",
+    objetivos: "",
     embed: "",
     descarga: "presentaciones/semana-04.pdf",
     disponible: false
   },
   {
     n: 5,
-    titulo: "Índices, ORMs y migraciones",
-    resumen: "B-Trees y B+ Trees para índices, ORMs y migraciones controladas.",
-    objetivos: "Optimizar consultas con índices y gestionar la evolución del esquema con migraciones.",
+    titulo: "",
+    resumen: "",
+    objetivos: "",
     embed: "",
     descarga: "presentaciones/semana-05.pdf",
     disponible: false
   },
   {
     n: 6,
-    titulo: "Bases de datos vectoriales y embeddings",
-    resumen: "La estructura detrás de la IA moderna y los sistemas de recomendación.",
-    objetivos: "Comprender embeddings y su uso en búsquedas semánticas y RAG.",
+    titulo: "",
+    resumen: "",
+    objetivos: "",
     embed: "",
     descarga: "presentaciones/semana-06.pdf",
     disponible: false
   },
   {
     n: 7,
-    titulo: "Transacciones ACID, seguridad y despliegue en la nube",
-    resumen: "Concurrencia con colas y pilas, prevención de ataques y DBaaS.",
-    objetivos: "Garantizar integridad transaccional y desplegar de forma segura en la nube.",
+    titulo: "",
+    resumen: "",
+    objetivos: "",
     embed: "",
     descarga: "presentaciones/semana-07.pdf",
     disponible: false
   },
   {
     n: 8,
-    titulo: "Proyecto final: consolidación",
-    resumen: "Sustentación del sistema integrando estructuras, bases de datos y seguridad.",
-    objetivos: "Presentar y defender la arquitectura de datos elegida para el proyecto de aplicación.",
+    titulo: "",
+    resumen: "",
+    objetivos: "",
     embed: "",
     descarga: "presentaciones/semana-08.pdf",
     disponible: false
