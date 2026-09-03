@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Respuestas - Semana 2, Clase 1</title>
+<style>
+  body { background:#1b1f27; color:#e6e6e6; font-family:'Segoe UI', sans-serif; max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; line-height:1.5; }
+  h1 { color:#fff; border-bottom:2px solid #3d5a70; padding-bottom:0.5rem; }
+  h2 { color:#7fa5a3; margin-top:2.5rem; border-left:4px solid #7fa5a3; padding-left:0.6rem; }
+  h3 { color:#c99a4e; margin-top:1.8rem; }
+  .pregunta { font-weight:700; color:#fff; margin-top:1.4rem; }
+  .sql { background:#11151b; border:1px solid #333; border-radius:6px; padding:0.8rem 1rem; font-family:Consolas, monospace; font-size:0.85rem; color:#d4d4d4; white-space:pre-wrap; margin:0.5rem 0; }
+  .resultado { color:#a3d9a5; font-family:Consolas, monospace; font-size:0.82rem; margin:0.3rem 0; }
+  .explicacion { color:#b8bcc4; font-size:0.9rem; margin-top:0.3rem; }
+  .nota { color:#888; font-size:0.8rem; font-style:italic; }
+</style>
+</head>
+<body>
+
+<h1>Respuestas: Semana 2, Clase 1 (SoundFlow)</h1>
+<p class="nota">Documento de uso personal, no forma parte de la página web del curso.</p>
+
+<h2>Práctica: escribe tus propias consultas</h2>
+
+<h3>Fáciles</h3>
+
+<p class="pregunta">1. Título y género de todas las canciones, ordenadas alfabéticamente por título.</p>
+<div class="sql">SELECT titulo, genero
+FROM tbl_canciones
+ORDER BY titulo ASC;</div>
+<p class="resultado">Cuando Pase el Temblor (Rock), De Música Ligera (Rock), La Negra Tiene Tumbao (Salsa), La Vida Es un Carnaval (Salsa), Mi Buen Amor (Pop), Mi Tierra (Salsa), Oye Mi Amor (Rock), Persiana Americana (Rock), Rayando el Sol (Rock), Tres Deseos (Pop).</p>
+<p class="explicacion">ORDER BY titulo ASC ordena de la A a la Z por el texto de la columna titulo.</p>
+
+<p class="pregunta">2. Géneros distintos que maneja SoundFlow.</p>
+<div class="sql">SELECT DISTINCT genero
+FROM tbl_canciones;</div>
+<p class="resultado">Pop, Salsa, Rock (3 filas).</p>
+<p class="explicacion">DISTINCT elimina los valores repetidos de genero, aunque 10 canciones los usen.</p>
+
+<p class="pregunta">3. Canciones que todavía no tienen dato de reproducciones.</p>
+<div class="sql">SELECT titulo, genero
+FROM tbl_canciones
+WHERE reproducciones IS NULL;</div>
+<p class="resultado">Persiana Americana (Rock), Mi Buen Amor (Pop). 2 filas.</p>
+<p class="explicacion">reproducciones = NULL nunca funciona, porque NULL es "desconocido"; hay que usar IS NULL.</p>
+
+<p class="pregunta">4. Total de canciones en tbl_canciones.</p>
+<div class="sql">SELECT COUNT(*)
+FROM tbl_canciones;</div>
+<p class="resultado">10.</p>
+<p class="explicacion">COUNT(*) cuenta todas las filas, sin importar si tienen columnas en NULL.</p>
+
+<p class="pregunta">5. Las 5 canciones más escuchadas, de mayor a menor reproducciones.</p>
+<div class="sql">SELECT titulo, reproducciones
+FROM tbl_canciones
+ORDER BY reproducciones DESC
+LIMIT 5;</div>
+<p class="resultado">Rayando el Sol (21.0M), Tres Deseos (15.2M), La Negra Tiene Tumbao (12.3M), La Vida Es un Carnaval (8.9M), De Música Ligera (5.4M).</p>
+<p class="explicacion">ORDER BY ... DESC pone primero el valor más alto; LIMIT 5 corta el resultado a las primeras 5 filas.</p>
+
+<h3>Mediana complejidad</h3>
+
+<p class="pregunta">6. Título y género de canciones cuyo título contenga "Amor".</p>
+<div class="sql">SELECT titulo, genero
+FROM tbl_canciones
+WHERE titulo LIKE '%Amor%';</div>
+<p class="resultado">Mi Buen Amor (Pop), Oye Mi Amor (Rock). 2 filas.</p>
+<p class="explicacion">Los % son comodines: aceptan cualquier texto antes y después de "Amor" dentro del título.</p>
+
+<p class="pregunta">7. Columna "ficha" con título y género juntos, separados por un guion.</p>
+<div class="sql">SELECT CONCAT(titulo, ' - ', genero) AS ficha
+FROM tbl_canciones;</div>
+<p class="resultado">Ej: "Tres Deseos - Pop", "La Vida Es un Carnaval - Salsa", etc. (10 filas).</p>
+<p class="explicacion">CONCAT une texto y columnas en un solo valor; el AS le pone el nombre "ficha" al resultado.</p>
+
+<p class="pregunta">8. Canciones por género, solo los géneros con más de 2 canciones.</p>
+<div class="sql">SELECT genero, COUNT(*) AS total
+FROM tbl_canciones
+GROUP BY genero
+HAVING COUNT(*) > 2;</div>
+<p class="resultado">Salsa = 3, Rock = 5. (Pop queda fuera porque solo tiene 2, y la condición pide más de 2).</p>
+<p class="explicacion">GROUP BY arma un grupo por género y cuenta; HAVING filtra los grupos según ese conteo.</p>
+
+<p class="pregunta">9. Promedio de reproducciones por álbum, solo álbumes con promedio mayor a 8 millones.</p>
+<div class="sql">SELECT id_album, AVG(reproducciones) AS promedio
+FROM tbl_canciones
+GROUP BY id_album
+HAVING AVG(reproducciones) > 8000000;</div>
+<p class="resultado">Álbum 1 (9.2M), álbum 2 (10.6M), álbum 4 (10.99M). El álbum 3 (4.75M) queda fuera.</p>
+<p class="explicacion">AVG ignora los NULL al calcular; HAVING revisa ese promedio ya calculado por grupo.</p>
+
+<p class="pregunta">10. Canciones "Pop" o "Rock" con duración entre 200 y 250 segundos, de mayor a menor duración.</p>
+<div class="sql">SELECT titulo, genero, duracion_seg
+FROM tbl_canciones
+WHERE genero IN ('Pop', 'Rock')
+  AND duracion_seg BETWEEN 200 AND 250
+ORDER BY duracion_seg DESC;</div>
+<p class="resultado">Cuando Pase el Temblor (Rock, 230), Oye Mi Amor (Rock, 215), Tres Deseos (Pop, 210), Rayando el Sol (Rock, 205), Mi Buen Amor (Pop, 205). 5 filas.</p>
+<p class="explicacion">IN reemplaza varios OR seguidos; BETWEEN incluye los dos extremos (200 y 250 sí cuentan).</p>
+
+<p class="pregunta">11. Top 3 de canciones "Pop" o "Salsa", con al menos 5 millones de reproducciones, de la más a la menos escuchada, con alias legibles.</p>
+<div class="sql">SELECT
+  titulo AS cancion,
+  genero,
+  reproducciones AS total_reproducciones
+FROM tbl_canciones
+WHERE genero IN ('Pop', 'Salsa')
+  AND reproducciones IS NOT NULL
+  AND reproducciones >= 5000000
+ORDER BY reproducciones DESC
+LIMIT 3;</div>
+<p class="resultado">Tres Deseos (Pop, 15.2M), La Negra Tiene Tumbao (Salsa, 12.3M), La Vida Es un Carnaval (Salsa, 8.9M).</p>
+<p class="explicacion">Mi Buen Amor queda fuera por ser NULL, y Mi Tierra por tener menos de 5 millones (3.2M).</p>
+
+<p class="pregunta">12. Cuántas canciones tiene cada álbum, y su promedio de reproducciones.</p>
+<div class="sql">SELECT
+  id_album,
+  COUNT(*) AS total_canciones,
+  AVG(reproducciones) AS promedio_reproducciones
+FROM tbl_canciones
+GROUP BY id_album;</div>
+<p class="resultado">Álbum 1: 3 canciones, promedio 9,200,000. Álbum 2: 2 canciones, promedio 10,600,000. Álbum 3: 3 canciones, promedio 4,750,000. Álbum 4: 2 canciones, promedio 10,990,000.</p>
+<p class="explicacion">GROUP BY id_album arma un grupo por álbum; COUNT(*) y AVG(reproducciones) se calculan dentro de cada grupo.</p>
+
+</body>
+</html>

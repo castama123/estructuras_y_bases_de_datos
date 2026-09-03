@@ -38,8 +38,8 @@ const WEEKS = [
     descarga: "presentaciones/semana-03.pdf",
     disponible: true,
     // Bloquea la Clase 2 en el sitio (pestaña oculta) mientras se termina de revisar.
-    // Cámbialo a true cuando esté lista para publicarse a los estudiantes.
-    disponibleClase2: false
+    // Cámbialo a false para volver a ocultarla.
+    disponibleClase2: true
   },
   {
     n: 4,

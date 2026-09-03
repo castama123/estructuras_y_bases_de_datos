@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tablas de resultado - Diagramas de JOIN (Semana 3, Clase 1)</title>
+<style>
+  body { background:#1b1f27; color:#e6e6e6; font-family:'Segoe UI', sans-serif; max-width:920px; margin:0 auto; padding:2rem 1.5rem 4rem; line-height:1.5; }
+  h1 { color:#fff; border-bottom:2px solid #3d5a70; padding-bottom:0.5rem; }
+  h2 { color:#7fa5a3; margin-top:2.6rem; border-left:4px solid #7fa5a3; padding-left:0.6rem; }
+  .consulta { font-weight:700; color:#fff; margin-top:1rem; }
+  .sql { background:#11151b; border:1px solid #333; border-radius:6px; padding:0.8rem 1rem; font-family:Consolas, monospace; font-size:0.85rem; color:#d4d4d4; white-space:pre-wrap; margin:0.5rem 0; }
+  table { border-collapse:collapse; width:100%; margin:0.6rem 0; font-size:0.88rem; }
+  th, td { border:1px solid #333; padding:0.4rem 0.6rem; text-align:left; }
+  th { background:#232830; color:#fff; }
+  .nota { color:#888; font-size:0.82rem; font-style:italic; margin-top:0.4rem; }
+  .leyenda { font-size:0.82rem; color:#b8bcc4; margin-top:0.5rem; }
+  .leyenda span { display:inline-block; width:12px; height:12px; border-radius:2px; margin-right:5px; vertical-align:middle; }
+</style>
+</head>
+<body>
+
+<h1>Tablas de resultado: diagramas de cada JOIN</h1>
+<p class="nota">Documento de apoyo para analizar en clase junto a cada diagrama entidad-relación de Semana 3, Clase 1. No forma parte de la página web del curso.</p>
+
+<h2>1. INNER JOIN &mdash; canciones + álbumes</h2>
+<p class="consulta">Consulta: listar el título de cada canción junto con el título de su álbum, ordenado por título de canción.</p>
+<div class="sql">SELECT c.titulo, al.titulo_album
+FROM tbl_canciones c
+INNER JOIN tbl_albumes al ON c.id_album = al.id_album
+ORDER BY c.titulo;</div>
+<table>
+<thead><tr><th>titulo</th><th>titulo_album</th></tr></thead>
+<tbody>
+<tr><td>Cuando Pase el Temblor</td><td>Grandes Éxitos</td></tr>
+<tr><td>De Música Ligera</td><td>Grandes Éxitos</td></tr>
+<tr><td>La Negra Tiene Tumbao</td><td>Éxitos Eternos</td></tr>
+<tr><td>La Vida Es un Carnaval</td><td>Éxitos Eternos</td></tr>
+<tr><td>Mi Buen Amor</td><td>Grandes Éxitos</td></tr>
+<tr><td>Mi Tierra</td><td>Grandes Éxitos</td></tr>
+<tr><td>Oye Mi Amor</td><td>¿Dónde Jugarán los Niños?</td></tr>
+<tr><td>Persiana Americana</td><td>Grandes Éxitos</td></tr>
+<tr><td>Rayando el Sol</td><td>¿Dónde Jugarán los Niños?</td></tr>
+<tr><td>Tres Deseos</td><td>Grandes Éxitos</td></tr>
+</tbody>
+</table>
+<p class="nota">Sin color especial: las 10 canciones tienen álbum, así que no hay huérfanos que resaltar en este ejemplo.</p>
+
+<h2>2. INNER JOIN &mdash; artistas + álbumes + canciones</h2>
+<p class="consulta">Consulta: listar el título de cada canción, el título de su álbum y el nombre de su artista, ordenado por título de canción.</p>
+<div class="sql">SELECT c.titulo, al.titulo_album, ar.nombre_artista
+FROM tbl_canciones c
+INNER JOIN tbl_albumes al ON c.id_album = al.id_album
+INNER JOIN tbl_artistas ar ON al.id_artista = ar.id_artista
+ORDER BY c.titulo;</div>
+<table>
+<thead><tr><th>titulo</th><th>titulo_album</th><th>nombre_artista</th></tr></thead>
+<tbody>
+<tr><td>Cuando Pase el Temblor</td><td>Grandes Éxitos</td><td>Soda Stereo</td></tr>
+<tr><td>De Música Ligera</td><td>Grandes Éxitos</td><td>Soda Stereo</td></tr>
+<tr><td>La Negra Tiene Tumbao</td><td>Éxitos Eternos</td><td>Celia Cruz</td></tr>
+<tr><td>La Vida Es un Carnaval</td><td>Éxitos Eternos</td><td>Celia Cruz</td></tr>
+<tr><td>Mi Buen Amor</td><td>Grandes Éxitos</td><td>Gloria Estefan</td></tr>
+<tr><td>Mi Tierra</td><td>Grandes Éxitos</td><td>Gloria Estefan</td></tr>
+<tr><td>Oye Mi Amor</td><td>¿Dónde Jugarán los Niños?</td><td>Maná</td></tr>
+<tr><td>Persiana Americana</td><td>Grandes Éxitos</td><td>Soda Stereo</td></tr>
+<tr><td>Rayando el Sol</td><td>¿Dónde Jugarán los Niños?</td><td>Maná</td></tr>
+<tr><td>Tres Deseos</td><td>Grandes Éxitos</td><td>Gloria Estefan</td></tr>
+</tbody>
+</table>
+<p class="nota">Tampoco hay huérfanos aquí: las dos cadenas de FK (canción→álbum, álbum→artista) están completas para las 10 canciones.</p>
+
+<h2>3. LEFT JOIN &mdash; usuarios + reproducciones</h2>
+<p class="consulta">Consulta: listar el nombre de cada usuario junto con el id de cada canción que reprodujo, incluyendo a los usuarios que no han reproducido nada.</p>
+<div class="sql">SELECT u.nombre, r.id_cancion
+FROM tbl_usuarios u
+LEFT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario
+ORDER BY u.nombre;</div>
+<table>
+<thead><tr><th>nombre</th><th>id_cancion</th></tr></thead>
+<tbody>
+<tr><td>Andrés Torres</td><td>101</td></tr>
+<tr><td>Camilo Restrepo</td><td>102</td></tr>
+<tr><td>Daniela Ortiz</td><td>109</td></tr>
+<tr><td>Felipe Castro</td><td>107</td></tr>
+<tr><td>Juan Pablo León</td><td>110</td></tr>
+<tr style="background:rgba(139,127,184,0.18);"><td style="color:#b3a9e0; font-weight:700;">Lucia Marin</td><td style="color:#b3a9e0; font-weight:700;">101</td></tr>
+<tr style="background:rgba(139,127,184,0.18);"><td style="color:#b3a9e0; font-weight:700;">Lucia Marin</td><td style="color:#b3a9e0; font-weight:700;">105</td></tr>
+<tr><td>Mariana Ruiz</td><td>108</td></tr>
+<tr><td>Santiago Marin</td><td>104</td></tr>
+<tr style="background:rgba(201,113,78,0.2);"><td style="color:#e0a583; font-weight:700;">Sofía Herrera</td><td style="color:#e0a583; font-weight:700; font-style:italic;">NULL</td></tr>
+<tr><td>Valentina Gómez</td><td>106</td></tr>
+</tbody>
+</table>
+<p class="leyenda">
+  <span style="background:rgba(139,127,184,0.6);"></span>morado: un mismo usuario repetido, una fila por cada reproducción (lado N).
+  &nbsp;&nbsp;<span style="background:rgba(201,113,78,0.6);"></span>naranja: usuario huérfano, sin ninguna reproducción (NULL del lado derecho).
+</p>
+
+<h2>4. RIGHT JOIN &mdash; canciones + álbumes</h2>
+<p class="consulta">Consulta: listar el título de cada álbum junto con el título de cada canción que tiene, incluyendo los álbumes que no tienen ninguna canción.</p>
+<div class="sql">SELECT al.titulo_album, c.titulo
+FROM tbl_canciones c
+RIGHT JOIN tbl_albumes al ON c.id_album = al.id_album
+ORDER BY al.id_album;</div>
+<table>
+<thead><tr><th>titulo_album</th><th>titulo</th></tr></thead>
+<tbody>
+<tr><td>Grandes Éxitos</td><td>Tres Deseos</td></tr>
+<tr><td>Grandes Éxitos</td><td>Mi Tierra</td></tr>
+<tr><td>Grandes Éxitos</td><td>Mi Buen Amor</td></tr>
+<tr><td>Éxitos Eternos</td><td>La Vida Es un Carnaval</td></tr>
+<tr><td>Éxitos Eternos</td><td>La Negra Tiene Tumbao</td></tr>
+<tr><td>Grandes Éxitos</td><td>De Música Ligera</td></tr>
+<tr><td>Grandes Éxitos</td><td>Persiana Americana</td></tr>
+<tr><td>Grandes Éxitos</td><td>Cuando Pase el Temblor</td></tr>
+<tr><td>¿Dónde Jugarán los Niños?</td><td>Rayando el Sol</td></tr>
+<tr><td>¿Dónde Jugarán los Niños?</td><td>Oye Mi Amor</td></tr>
+<tr style="background:rgba(201,113,78,0.2);"><td style="color:#e0a583; font-weight:700;">Avalancha</td><td style="color:#e0a583; font-weight:700; font-style:italic;">NULL</td></tr>
+<tr style="background:rgba(201,113,78,0.2);"><td style="color:#e0a583; font-weight:700;">Pies Descalzos</td><td style="color:#e0a583; font-weight:700; font-style:italic;">NULL</td></tr>
+<tr style="background:rgba(201,113,78,0.2);"><td style="color:#e0a583; font-weight:700;">La Voz</td><td style="color:#e0a583; font-weight:700; font-style:italic;">NULL</td></tr>
+<tr style="background:rgba(201,113,78,0.2);"><td style="color:#e0a583; font-weight:700;">El Nervio del Volcán</td><td style="color:#e0a583; font-weight:700; font-style:italic;">NULL</td></tr>
+<tr style="background:rgba(201,113,78,0.2);"><td style="color:#e0a583; font-weight:700;">Amor a la Mexicana</td><td style="color:#e0a583; font-weight:700; font-style:italic;">NULL</td></tr>
+<tr style="background:rgba(201,113,78,0.2);"><td style="color:#e0a583; font-weight:700;">Siembra</td><td style="color:#e0a583; font-weight:700; font-style:italic;">NULL</td></tr>
+</tbody>
+</table>
+<p class="leyenda"><span style="background:rgba(201,113,78,0.6);"></span>naranja: álbumes huérfanos (de los artistas 5 a 10), sin ninguna canción registrada &mdash; quedan con NULL del lado izquierdo.</p>
+
+<h2>5. FULL OUTER JOIN (simulado) &mdash; usuarios + reproducciones</h2>
+<p class="consulta">Consulta: listar el nombre de cada usuario junto con el id de cada canción que reprodujo, trayendo también los usuarios sin reproducciones y las reproducciones sin usuario.</p>
+<div class="sql">SELECT u.nombre, r.id_cancion
+FROM tbl_usuarios u
+LEFT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario
+UNION
+SELECT u.nombre, r.id_cancion
+FROM tbl_usuarios u
+RIGHT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario;</div>
+<p class="nota">Con estos datos, el resultado es idéntico a la tabla del LEFT JOIN de arriba (11 filas): como toda reproducción tiene un id_usuario obligatorio, nunca hay una reproducción huérfana del lado derecho que agregar.</p>
+<table>
+<thead><tr><th>nombre</th><th>id_cancion</th></tr></thead>
+<tbody>
+<tr><td>Andrés Torres</td><td>101</td></tr>
+<tr><td>Camilo Restrepo</td><td>102</td></tr>
+<tr><td>Daniela Ortiz</td><td>109</td></tr>
+<tr><td>Felipe Castro</td><td>107</td></tr>
+<tr><td>Juan Pablo León</td><td>110</td></tr>
+<tr style="background:rgba(139,127,184,0.18);"><td style="color:#b3a9e0; font-weight:700;">Lucia Marin</td><td style="color:#b3a9e0; font-weight:700;">101</td></tr>
+<tr style="background:rgba(139,127,184,0.18);"><td style="color:#b3a9e0; font-weight:700;">Lucia Marin</td><td style="color:#b3a9e0; font-weight:700;">105</td></tr>
+<tr><td>Mariana Ruiz</td><td>108</td></tr>
+<tr><td>Santiago Marin</td><td>104</td></tr>
+<tr style="background:rgba(201,113,78,0.2);"><td style="color:#e0a583; font-weight:700;">Sofía Herrera</td><td style="color:#e0a583; font-weight:700; font-style:italic;">NULL</td></tr>
+<tr><td>Valentina Gómez</td><td>106</td></tr>
+</tbody>
+</table>
+<p class="leyenda">Mismo color que en LEFT JOIN: naranja = huérfano de la izquierda (Sofía). No hay huérfanos de la derecha que resaltar en este dataset.</p>
+
+<h2>6. CROSS JOIN &mdash; artistas × usuarios</h2>
+<p class="consulta">Consulta: listar todas las combinaciones posibles entre nombre de artista y nombre de usuario, ordenadas por artista y luego por usuario.</p>
+<div class="sql">SELECT ar.nombre_artista, u.nombre
+FROM tbl_artistas ar
+CROSS JOIN tbl_usuarios u
+ORDER BY ar.nombre_artista, u.nombre;</div>
+<table>
+<thead><tr><th>nombre_artista</th><th>nombre</th></tr></thead>
+<tbody>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Andrés Torres</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Camilo Restrepo</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Daniela Ortiz</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Felipe Castro</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Juan Pablo León</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Lucia Marin</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Mariana Ruiz</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Santiago Marin</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Sofía Herrera</td></tr>
+<tr style="background:rgba(139,127,184,0.14);"><td>Caifanes</td><td>Valentina Gómez</td></tr>
+<tr style="background:rgba(127,165,163,0.14);"><td>Celia Cruz</td><td>Andrés Torres</td></tr>
+<tr style="background:rgba(127,165,163,0.14);"><td>Celia Cruz</td><td>Camilo Restrepo</td></tr>
+<tr style="background:rgba(127,165,163,0.14);"><td>Celia Cruz</td><td>Daniela Ortiz</td></tr>
+<tr style="background:rgba(127,165,163,0.14);"><td>Celia Cruz</td><td>...</td></tr>
+</tbody>
+</table>
+<p class="nota">Se muestran solo los primeros 2 de 10 artistas para ilustrar el patrón; el resultado real tiene 100 filas (10 artistas × 10 usuarios). Las bandas de color solo marcan dónde empieza cada bloque de "artista fijo, los 10 usuarios completos" &mdash; no significan coincidencia real, porque un CROSS JOIN no compara nada.</p>
+
+<h2>7. SELF JOIN &mdash; canciones del mismo género</h2>
+<p class="consulta">Consulta: listar todos los pares de canciones que comparten el mismo género, sin repetir pares ni comparar una canción consigo misma.</p>
+<div class="sql">SELECT a.titulo AS cancion_1, b.titulo AS cancion_2, a.genero
+FROM tbl_canciones a
+JOIN tbl_canciones b ON a.genero = b.genero AND a.id_cancion &lt; b.id_cancion
+ORDER BY a.genero, a.titulo;</div>
+<table>
+<thead><tr><th>cancion_1</th><th>cancion_2</th><th>genero</th></tr></thead>
+<tbody>
+<tr style="background:rgba(139,127,184,0.16);"><td>Tres Deseos</td><td>Mi Buen Amor</td><td>Pop</td></tr>
+<tr style="background:rgba(127,165,163,0.16);"><td>La Vida Es un Carnaval</td><td>Mi Tierra</td><td>Salsa</td></tr>
+<tr style="background:rgba(127,165,163,0.16);"><td>La Vida Es un Carnaval</td><td>La Negra Tiene Tumbao</td><td>Salsa</td></tr>
+<tr style="background:rgba(127,165,163,0.16);"><td>Mi Tierra</td><td>La Negra Tiene Tumbao</td><td>Salsa</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>Cuando Pase el Temblor</td><td>De Música Ligera</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>Cuando Pase el Temblor</td><td>Oye Mi Amor</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>Cuando Pase el Temblor</td><td>Persiana Americana</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>Cuando Pase el Temblor</td><td>Rayando el Sol</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>De Música Ligera</td><td>Oye Mi Amor</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>De Música Ligera</td><td>Persiana Americana</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>De Música Ligera</td><td>Rayando el Sol</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>Oye Mi Amor</td><td>Persiana Americana</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>Oye Mi Amor</td><td>Rayando el Sol</td><td>Rock</td></tr>
+<tr style="background:rgba(201,154,78,0.16);"><td>Persiana Americana</td><td>Rayando el Sol</td><td>Rock</td></tr>
+</tbody>
+</table>
+<p class="leyenda">
+  <span style="background:rgba(139,127,184,0.6);"></span>Pop (1 par, C(2,2)=1)
+  &nbsp;&nbsp;<span style="background:rgba(127,165,163,0.6);"></span>Salsa (3 pares, C(3,2)=3)
+  &nbsp;&nbsp;<span style="background:rgba(201,154,78,0.6);"></span>Rock (10 pares, C(5,2)=10)
+</p>
+<p class="nota">Total: 14 pares. En las filas de Rock, cuál canción queda como cancion_1 y cuál como cancion_2 depende del id_cancion interno de cada una (a.id_cancion &lt; b.id_cancion); aquí se listan en orden alfabético del par para que sea fácil verificar que las 10 combinaciones posibles están completas.</p>
+
+</body>
+</html>

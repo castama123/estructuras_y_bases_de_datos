@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Respuestas - Semana 3, Clase 1</title>
+<style>
+  body { background:#1b1f27; color:#e6e6e6; font-family:'Segoe UI', sans-serif; max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; line-height:1.5; }
+  h1 { color:#fff; border-bottom:2px solid #3d5a70; padding-bottom:0.5rem; }
+  h2 { color:#7fa5a3; margin-top:2.5rem; border-left:4px solid #7fa5a3; padding-left:0.6rem; }
+  h3 { color:#c99a4e; margin-top:1.8rem; }
+  .pregunta { font-weight:700; color:#fff; margin-top:1.4rem; }
+  .sql { background:#11151b; border:1px solid #333; border-radius:6px; padding:0.8rem 1rem; font-family:Consolas, monospace; font-size:0.85rem; color:#d4d4d4; white-space:pre-wrap; margin:0.5rem 0; }
+  .resultado { color:#a3d9a5; font-family:Consolas, monospace; font-size:0.82rem; margin:0.3rem 0; }
+  .explicacion { color:#b8bcc4; font-size:0.9rem; margin-top:0.3rem; }
+  .nota { color:#888; font-size:0.8rem; font-style:italic; }
+</style>
+</head>
+<body>
+
+<h1>Respuestas: Semana 3, Clase 1 (SoundFlow)</h1>
+<p class="nota">Documento de uso personal, no forma parte de la página web del curso.</p>
+
+<h2>Práctica: escribe tus propias consultas</h2>
+
+<h3>Fáciles</h3>
+
+<p class="pregunta">1. Muestra el título de cada canción junto con el título de su álbum (INNER JOIN).</p>
+<div class="sql">SELECT c.titulo, al.titulo_album
+FROM tbl_canciones c
+INNER JOIN tbl_albumes al ON c.id_album = al.id_album
+ORDER BY c.titulo;</div>
+<p class="resultado">10 filas: cada canción con el título de su álbum (solo canciones de los álbumes 1 a 4, que son los únicos con canciones registradas).</p>
+<p class="explicacion">INNER JOIN solo trae canciones que sí tienen un álbum coincidente; como todas las canciones tienen id_album NOT NULL, las 10 aparecen.</p>
+
+<p class="pregunta">2. Muestra el nombre de cada artista junto con el título de cada uno de sus álbumes.</p>
+<div class="sql">SELECT ar.nombre_artista, al.titulo_album
+FROM tbl_artistas ar
+INNER JOIN tbl_albumes al ON ar.id_artista = al.id_artista
+ORDER BY ar.nombre_artista;</div>
+<p class="resultado">10 filas (uno por artista, ya que en este dataset cada artista tiene exactamente un álbum): Caifanes - El Nervio del Volcán, Celia Cruz - Éxitos Eternos, Gloria Estefan - Grandes Éxitos, Héctor Lavoe - La Voz, Héroes del Silencio - Avalancha, Maná - ¿Dónde Jugarán los Niños?, Rubén Blades - Siembra, Shakira - Pies Descalzos, Soda Stereo - Grandes Éxitos, Thalía - Amor a la Mexicana.</p>
+<p class="explicacion">Como la relación artista-álbum es 1 a 1 en este dataset, el INNER JOIN no descarta ni repite a nadie.</p>
+
+<p class="pregunta">3. Muestra todos los álbumes, tengan o no canciones registradas todavía (LEFT JOIN).</p>
+<div class="sql">SELECT al.titulo_album, c.titulo
+FROM tbl_albumes al
+LEFT JOIN tbl_canciones c ON al.id_album = c.id_album
+ORDER BY al.id_album;</div>
+<p class="resultado">16 filas: 10 con canción real (álbumes 1 a 4) y 6 con NULL en titulo (álbumes 5 a 10: Avalancha, Pies Descalzos, La Voz, El Nervio del Volcán, Amor a la Mexicana, Siembra).</p>
+<p class="explicacion">LEFT JOIN conserva todos los álbumes (tabla izquierda), pongan o no canción del lado derecho.</p>
+
+<p class="pregunta">4. De la consulta anterior, filtra solo los álbumes que <strong>no</strong> tienen ninguna canción.</p>
+<div class="sql">SELECT al.titulo_album, c.titulo
+FROM tbl_albumes al
+LEFT JOIN tbl_canciones c ON al.id_album = c.id_album
+WHERE c.id_cancion IS NULL
+ORDER BY al.id_album;</div>
+<p class="resultado">6 filas: Avalancha, Pies Descalzos, La Voz, El Nervio del Volcán, Amor a la Mexicana, Siembra.</p>
+<p class="explicacion">El patrón "huérfanos": LEFT JOIN + WHERE columna_de_la_derecha IS NULL se queda solo con lo que no encontró pareja.</p>
+
+<p class="pregunta">5. Combina en una sola lista los nombres de todos los artistas y todos los usuarios, con una columna extra que diga "artista" o "usuario" según corresponda.</p>
+<div class="sql">SELECT nombre_artista AS nombre, 'artista' AS tipo FROM tbl_artistas
+UNION ALL
+SELECT nombre, 'usuario' AS tipo FROM tbl_usuarios
+ORDER BY tipo, nombre;</div>
+<p class="resultado">20 filas: 10 artistas seguidos de 10 usuarios, cada uno con su etiqueta.</p>
+<p class="explicacion">UNION ALL apila los dos SELECT; la columna de texto fijo 'artista' / 'usuario' se repite igual en cada fila de su bloque.</p>
+
+<p class="pregunta">6. Crea una vista <code>vista_canciones_pop</code> que solo muestre las canciones de género "Pop".</p>
+<div class="sql">CREATE VIEW vista_canciones_pop AS
+SELECT * FROM tbl_canciones WHERE genero = 'Pop';
+
+-- Para usarla:
+SELECT * FROM vista_canciones_pop;</div>
+<p class="resultado">2 filas: Tres Deseos y Mi Buen Amor.</p>
+<p class="explicacion">La vista guarda el filtro; cada vez que la consultas, MySQL vuelve a ejecutar el WHERE genero = 'Pop' sobre los datos actuales.</p>
+
+<p class="pregunta">7. Crea un índice sobre la columna <code>genero</code> de <code>tbl_canciones</code> y explica en qué casos ayudaría.</p>
+<div class="sql">CREATE INDEX idx_canciones_genero ON tbl_canciones (genero);</div>
+<p class="resultado">No devuelve filas, solo crea la estructura.</p>
+<p class="explicacion">Ayuda cuando filtras o agrupas seguido por genero (WHERE genero = 'Rock', GROUP BY genero, JOIN por genero): MySQL ubica directo las filas de ese género en vez de revisar toda la tabla. Con 10 filas no se nota, pero con miles o millones sí.</p>
+
+<h3>Mediana complejidad</h3>
+
+<p class="pregunta">8. Muestra el nombre del usuario, el título de la canción y el nombre del artista para cada reproducción registrada.</p>
+<div class="sql">SELECT u.nombre, c.titulo, ar.nombre_artista
+FROM tbl_reproducciones r
+INNER JOIN tbl_usuarios u ON r.id_usuario = u.idusuario
+INNER JOIN tbl_canciones c ON r.id_cancion = c.id_cancion
+INNER JOIN tbl_albumes al ON c.id_album = al.id_album
+INNER JOIN tbl_artistas ar ON al.id_artista = ar.id_artista
+ORDER BY u.nombre;</div>
+<p class="resultado">10 filas, por ejemplo: Lucia Marin - Tres Deseos - Gloria Estefan, Lucia Marin - Rayando el Sol - Maná, Camilo Restrepo - La Vida Es un Carnaval - Celia Cruz, etc. Sofía Herrera no aparece (no tiene reproducciones).</p>
+<p class="explicacion">Para llegar de reproducciones hasta el artista hacen falta 5 tablas en cadena (reproducciones → usuarios, reproducciones → canciones → álbumes → artistas), porque el nombre del artista no está directamente en canciones.</p>
+
+<p class="pregunta">9. Encuentra los pares de artistas que son del mismo país (SELF JOIN sobre tbl_artistas).</p>
+<div class="sql">SELECT a.nombre_artista AS artista_1, b.nombre_artista AS artista_2, a.pais
+FROM tbl_artistas a
+JOIN tbl_artistas b ON a.pais = b.pais AND a.id_artista < b.id_artista
+ORDER BY a.pais, a.nombre_artista;</div>
+<p class="resultado">4 filas: Gloria Estefan - Celia Cruz (Cuba); Maná - Caifanes (México); Maná - Thalía (México); Caifanes - Thalía (México).</p>
+<p class="explicacion">a.id_artista &lt; b.id_artista evita duplicar cada par al revés y evita que un artista se empareje consigo mismo, igual que en el ejemplo de canciones por género.</p>
+
+<p class="pregunta">10. Genera todas las combinaciones posibles de género y año de lanzamiento de álbum (CROSS JOIN), usando SELECT DISTINCT sobre cada columna.</p>
+<div class="sql">SELECT g.genero, a.anio_lanzamiento
+FROM (SELECT DISTINCT genero FROM tbl_canciones) g
+CROSS JOIN (SELECT DISTINCT anio_lanzamiento FROM tbl_albumes) a
+ORDER BY g.genero, a.anio_lanzamiento;</div>
+<p class="resultado">24 filas (3 géneros × 8 años distintos de álbum: 1975, 1978, 1992, 1994, 1995, 1997, 1998, 2001).</p>
+<p class="explicacion">Cada subconsulta en FROM primero deduplica su columna (3 géneros, 8 años), y el CROSS JOIN arma todas las combinaciones entre esas dos listas ya sin repetidos.</p>
+
+<p class="pregunta">11. Simula un FULL OUTER JOIN entre <code>tbl_artistas</code> y <code>tbl_albumes</code> con LEFT JOIN + RIGHT JOIN + UNION, y explica si trae filas nuevas frente al LEFT JOIN solo.</p>
+<div class="sql">SELECT ar.nombre_artista, al.titulo_album
+FROM tbl_artistas ar
+LEFT JOIN tbl_albumes al ON ar.id_artista = al.id_artista
+UNION
+SELECT ar.nombre_artista, al.titulo_album
+FROM tbl_artistas ar
+RIGHT JOIN tbl_albumes al ON ar.id_artista = al.id_artista;</div>
+<p class="resultado">10 filas, exactamente las mismas que trae el LEFT JOIN solo.</p>
+<p class="explicacion"><strong>No trae filas nuevas</strong>, porque en este dataset la relación artista-álbum es 1 a 1 sin huérfanos de ningún lado: cada uno de los 10 artistas tiene exactamente un álbum, y cada uno de los 10 álbumes tiene un artista. Como no hay artistas sin álbum ni álbumes sin artista, el RIGHT JOIN no aporta nada que el LEFT JOIN no tuviera ya, y la UNION no encuentra nada que agregar.</p>
+
+<p class="pregunta">12. Usa UNION ALL para juntar los títulos de canciones de género "Pop" con los títulos de canciones de género "Rock" en una sola columna, y cuenta cuántas filas trae en total.</p>
+<div class="sql">SELECT titulo FROM tbl_canciones WHERE genero = 'Pop'
+UNION ALL
+SELECT titulo FROM tbl_canciones WHERE genero = 'Rock';
+
+-- Para contar:
+SELECT COUNT(*) AS total FROM (
+  SELECT titulo FROM tbl_canciones WHERE genero = 'Pop'
+  UNION ALL
+  SELECT titulo FROM tbl_canciones WHERE genero = 'Rock'
+) AS t;</div>
+<p class="resultado">7 filas en total: 2 de Pop (Tres Deseos, Mi Buen Amor) + 5 de Rock (De Música Ligera, Rayando el Sol, Persiana Americana, Oye Mi Amor, Cuando Pase el Temblor).</p>
+<p class="explicacion">Como Pop y Rock son géneros distintos, ninguna canción puede cumplir las dos condiciones a la vez, así que aquí UNION ALL y UNION darían el mismo resultado (no hay duplicados que eliminar).</p>
+
+<p class="pregunta">13. Escribe una subconsulta en el WHERE que encuentre los álbumes con más canciones que el promedio de canciones por álbum.</p>
+<div class="sql">SELECT id_album, cantidad
+FROM (
+  SELECT id_album, COUNT(*) AS cantidad
+  FROM tbl_canciones
+  GROUP BY id_album
+) AS resumen
+WHERE cantidad > (
+  SELECT AVG(cantidad) FROM (
+    SELECT COUNT(*) AS cantidad FROM tbl_canciones GROUP BY id_album
+  ) AS promedio_general
+);</div>
+<p class="resultado">2 filas: álbum 1 (3 canciones) y álbum 3 (3 canciones). El promedio es 2.5 (álbumes 1-4 tienen 3, 2, 3 y 2 canciones respectivamente); los álbumes 2 y 4 (2 canciones cada uno) quedan fuera por no superarlo.</p>
+<p class="explicacion">El promedio solo se calcula sobre los álbumes que sí tienen canciones registradas (1 a 4); los álbumes 5 a 10 no entran en el cálculo porque GROUP BY no genera ningún grupo para ellos (0 canciones = ninguna fila que agrupar).</p>
+
+<p class="pregunta">14. Crea un procedimiento <code>sp_contar_canciones_por_genero(p_genero)</code> que reciba un género por parámetro y muestre cuántas canciones hay de ese género.</p>
+<div class="sql">DELIMITER //
+
+CREATE PROCEDURE sp_contar_canciones_por_genero(IN p_genero VARCHAR(50))
+BEGIN
+  SELECT COUNT(*) AS total
+  FROM tbl_canciones
+  WHERE genero = p_genero;
+END //
+
+DELIMITER ;
+
+-- Para usarlo:
+CALL sp_contar_canciones_por_genero('Rock');   -- 5
+CALL sp_contar_canciones_por_genero('Pop');    -- 2
+CALL sp_contar_canciones_por_genero('Salsa');  -- 3</div>
+<p class="resultado">CALL con 'Rock' devuelve 5, con 'Pop' devuelve 2, con 'Salsa' devuelve 3.</p>
+<p class="explicacion">p_genero recibe el valor que le pases al llamar, y el WHERE lo usa para filtrar antes de contar.</p>
+
+<p class="pregunta">15. Crea un trigger <code>BEFORE INSERT</code> sobre <code>tbl_canciones</code> que impida insertar una canción con <code>duracion_seg</code> negativa o en cero (usa <code>SIGNAL</code> para lanzar un error).</p>
+<div class="sql">DELIMITER //
+
+CREATE TRIGGER trg_before_insert_duracion
+BEFORE INSERT ON tbl_canciones
+FOR EACH ROW
+BEGIN
+  IF NEW.duracion_seg <= 0 THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'La duracion_seg debe ser mayor que 0';
+  END IF;
+END //
+
+DELIMITER ;</div>
+<p class="resultado">Un INSERT con duracion_seg = 0 o negativo se rechaza con el mensaje de error personalizado, en vez de guardarse.</p>
+<p class="explicacion">BEFORE INSERT se ejecuta antes de que la fila quede guardada, así que SIGNAL puede cancelar la operación a tiempo; NEW.duracion_seg es el valor que se está intentando insertar.</p>
+
+</body>
+</html>

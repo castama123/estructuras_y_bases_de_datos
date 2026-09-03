@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Actividad 2, Semana 2: Estructuras No Lineales (Grafos)</title>
+<style>
+  body { background:#1b1f27; color:#e6e6e6; font-family:'Segoe UI', sans-serif; max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; line-height:1.55; }
+  h1 { color:#fff; border-bottom:2px solid #3d5a70; padding-bottom:0.5rem; }
+  h2 { color:#7fa5a3; margin-top:2.2rem; border-left:4px solid #7fa5a3; padding-left:0.6rem; }
+  h3 { color:#c99a4e; margin-top:1.5rem; }
+  .box { background:#232830; border-radius:8px; padding:1rem 1.2rem; margin-top:0.8rem; }
+  .sql { background:#11151b; border:1px solid #333; border-radius:6px; padding:0.8rem 1rem; font-family:Consolas, monospace; font-size:0.85rem; color:#d4d4d4; white-space:pre-wrap; margin:0.5rem 0; }
+  .nota { color:#888; font-size:0.8rem; font-style:italic; }
+  ol, ul { padding-left:1.3rem; }
+  li { margin-bottom:0.35rem; }
+</style>
+</head>
+<body>
+
+<h1>Actividad 2, Semana 2: Estructuras No Lineales (Grafos)</h1>
+<p class="nota">Documento de uso personal, resuelto como guía para dar idea a los estudiantes. No forma parte de la página web del curso.</p>
+
+<div class="box">
+  <p><strong>Objetivo:</strong> modelar e implementar la red de conexiones de SoundFlow mediante la teoría
+  de grafos, comprendiendo la diferencia entre nodos y aristas, y evaluando la eficiencia de las
+  representaciones en memoria (Matriz vs. Lista de Adyacencia).</p>
+  <p style="margin-top:0.6rem;"><strong>Escenario:</strong> el grafo de colaboraciones de un "Festival de
+  Música" dentro de SoundFlow. G = (V, E), donde V son los artistas y E son las colaboraciones musicales
+  (no dirigidas).</p>
+</div>
+
+<h2>Vértices (V): los 10 artistas</h2>
+<p>Shakira, Bizarrap, Quevedo, Karol G, J Balvin, Bad Bunny, Rosalía, Rauw Alejandro, Dua Lipa, Elton John.</p>
+
+<h2>Aristas (E): las 10 colaboraciones</h2>
+<ol>
+  <li>Shakira &mdash; Bizarrap (Music Sessions)</li>
+  <li>Bizarrap &mdash; Quevedo (Music Sessions)</li>
+  <li>Karol G &mdash; Shakira (TQG)</li>
+  <li>Karol G &mdash; J Balvin (China)</li>
+  <li>J Balvin &mdash; Bad Bunny (Oasis)</li>
+  <li>Bad Bunny &mdash; Dua Lipa (Un Día)</li>
+  <li>J Balvin &mdash; Dua Lipa (Un Día)</li>
+  <li>Dua Lipa &mdash; Elton John (Cold Heart)</li>
+  <li>Rosalía &mdash; J Balvin (Con Altura)</li>
+  <li>Rosalía &mdash; Rauw Alejandro (RR)</li>
+</ol>
+
+<h2>Paso 1 y 2: Grafo y lista de adyacencia, lado a lado</h2>
+<div style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:flex-start; margin-top:1rem;">
+<div style="flex:1 1 380px; min-width:300px;">
+<h3 style="margin-top:0;">Paso 1: Representación gráfica</h3>
+<svg viewBox="0 0 700 650" xmlns="http://www.w3.org/2000/svg" style="max-width:420px; width:100%; height:auto; display:block; margin:0 auto;">
+  <line x1="230" y1="120" x2="100" y2="80"  stroke="#8a8f99" stroke-width="2"/>
+  <line x1="100" y1="80"  x2="30"  y2="150" stroke="#8a8f99" stroke-width="2"/>
+  <line x1="380" y1="150" x2="230" y2="120" stroke="#8a8f99" stroke-width="2"/>
+  <line x1="380" y1="150" x2="380" y2="300" stroke="#8a8f99" stroke-width="2"/>
+  <line x1="380" y1="300" x2="550" y2="300" stroke="#8a8f99" stroke-width="2"/>
+  <line x1="550" y1="300" x2="380" y2="450" stroke="#8a8f99" stroke-width="2"/>
+  <line x1="380" y1="300" x2="380" y2="450" stroke="#8a8f99" stroke-width="2"/>
+  <line x1="380" y1="450" x2="380" y2="570" stroke="#8a8f99" stroke-width="2"/>
+  <line x1="210" y1="300" x2="380" y2="300" stroke="#8a8f99" stroke-width="2"/>
+  <line x1="210" y1="300" x2="60"  y2="380" stroke="#8a8f99" stroke-width="2"/>
+
+  <circle cx="380" cy="300" r="30" fill="none" stroke="#c99a4e" stroke-width="3"/>
+  <text x="380" y="305" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#fff">J Balvin</text>
+
+  <circle cx="30" cy="150" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="30" y="155" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#fff">Quevedo</text>
+
+  <circle cx="380" cy="150" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="380" y="155" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#fff">Karol G</text>
+
+  <circle cx="550" cy="300" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="550" y="305" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#fff">Bad Bunny</text>
+
+  <circle cx="380" cy="450" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="380" y="455" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#fff">Dua Lipa</text>
+
+  <circle cx="210" cy="300" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="210" y="305" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#fff">Rosalía</text>
+
+  <circle cx="230" cy="120" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="230" y="125" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#fff">Shakira</text>
+
+  <circle cx="100" cy="80" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="100" y="85" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#fff">Bizarrap</text>
+
+  <circle cx="380" cy="570" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="380" y="575" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#fff">Elton John</text>
+
+  <circle cx="60" cy="380" r="26" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
+  <text x="60" y="378" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="#fff">Rauw</text>
+  <text x="60" y="390" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="#fff">Alejandro</text>
+</svg>
+<p class="nota" style="text-align:center;">J Balvin (dorado) es el hub, con 4 conexiones. Quevedo queda en la periferia, con solo 1.</p>
+</div>
+
+<div style="flex:1 1 320px; min-width:280px;">
+<h3 style="margin-top:0;">Paso 2: Lista de adyacencia</h3>
+<div class="sql">Shakira:        [Bizarrap, Karol G]
+Bizarrap:       [Shakira, Quevedo]
+Quevedo:        [Bizarrap]
+Karol G:        [Shakira, J Balvin]
+J Balvin:       [Karol G, Bad Bunny, Dua Lipa, Rosalía]
+Bad Bunny:      [J Balvin, Dua Lipa]
+Dua Lipa:       [Bad Bunny, J Balvin, Elton John]
+Elton John:     [Dua Lipa]
+Rosalía:        [J Balvin, Rauw Alejandro]
+Rauw Alejandro: [Rosalía]</div>
+<p class="nota">Es recíproca: si J Balvin tiene a Karol G en su lista, Karol G también tiene a J Balvin en
+la suya. Grado de cada artista: J Balvin = 4 (hub), Dua Lipa = 3, Shakira/Bizarrap/Karol G/Bad Bunny/Rosalía
+= 2, Quevedo/Elton John/Rauw Alejandro = 1 (periferia).</p>
+</div>
+</div>
+
+<div class="box">
+  <h3 style="margin-top:0;">Lista de adyacencia en formato compacto (para el graficador online)</h3>
+  <p>Esta es la misma lista de adyacencia de arriba, pero con códigos de máximo 3 caracteres por artista,
+  lista para pegar directo en el modo "Adjacency List" de
+  <a href="https://tree-graph-algorithm-visualizer.vercel.app/graph" style="color:#7fa5a3;" target="_blank" rel="noopener">tree-graph-algorithm-visualizer.vercel.app</a>:</p>
+  <div class="sql">BB:  [DL, JB]
+BIZ: [QUE, SHA]
+DL:  [BB, EJ, JB]
+EJ:  [DL]
+JB:  [BB, DL, KG, ROS]
+KG:  [JB, SHA]
+QUE: [BIZ]
+RAU: [ROS]
+ROS: [JB, RAU]
+SHA: [BIZ, KG]</div>
+  <p class="nota">BB = Bad Bunny, BIZ = Bizarrap, DL = Dua Lipa, EJ = Elton John, JB = J Balvin, KG = Karol G,
+  QUE = Quevedo, RAU = Rauw Alejandro, ROS = Rosalía, SHA = Shakira. La misma lista, en formato de lista de
+  aristas: <code>SHA-BIZ, BIZ-QUE, KG-SHA, KG-JB, JB-BB, BB-DL, JB-DL, DL-EJ, ROS-JB, ROS-RAU</code>.</p>
+</div>
+
+<h2>Paso 3: Análisis de grados de separación</h2>
+
+<h3>¿A cuántos saltos está Quevedo de Karol G?</h3>
+<p>Quevedo solo tiene un vecino (Bizarrap), así que no hay atajos: el camino está forzado.</p>
+<div class="sql">Quevedo &rarr; Bizarrap &rarr; Shakira &rarr; Karol G</div>
+<p><strong>Respuesta: 3 saltos.</strong></p>
+
+<h3>¿Cuál es la ruta más corta para que Elton John colabore con Bad Bunny?</h3>
+<p>Elton John solo tiene un vecino (Dua Lipa), y Dua Lipa ya está conectada directamente con Bad Bunny:</p>
+<div class="sql">Elton John &rarr; Dua Lipa &rarr; Bad Bunny</div>
+<p><strong>Respuesta: 2 saltos</strong> (con Dua Lipa como intermediaria).</p>
+
+<h2>Reflexión técnica</h2>
+<p><strong>¿Qué pasaría con el dibujo si agregamos 100 artistas más?</strong> El diagrama visual dejaría de
+ser legible: con más de 100 nodos y sus conexiones cruzándose, se vuelve un amasijo de líneas ("hairball")
+imposible de leer a simple vista.</p>
+<p style="margin-top:0.6rem;">La <strong>lista de adyacencia</strong>, en cambio, sigue siendo manejable:
+solo ocupa espacio proporcional al número real de conexiones que existen (10 en este caso), no al número
+total de combinaciones posibles. Una <strong>matriz de adyacencia</strong> con 110 artistas necesitaría una
+tabla de 110&times;110 = 12,100 casillas, casi todas en cero, porque la mayoría de artistas no colaboran
+entre sí (un grafo disperso o "sparse graph"). La lista de adyacencia evita ese desperdicio de memoria,
+guardando solo las conexiones que sí existen.</p>
+
+</body>
+</html>

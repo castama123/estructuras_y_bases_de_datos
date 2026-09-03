@@ -1982,7 +1982,7 @@ mysql -u root -p soundflow_db < backup_soundflow.sql</code></pre>
 
 window.WEEK_CONTENT_3_2 = `
 
-  <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">SoundFlow: conexión segura, transacciones y despliegue</h2>
+  <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">Laboratorio SoundFlow</h2>
 
   <!-- ===================== 0. POR QUÉ ===================== -->
   <div class="activity-section" style="border-top:none; padding-top:0;">
@@ -1998,10 +1998,6 @@ window.WEEK_CONTENT_3_2 = `
         <p style="font-size:0.85rem;">Cómo Python habla con MySQL, y cómo evitar que alguien manipule tus consultas.</p>
       </div>
       <div class="concept-card">
-        <h4 style="color:#7fa5a3;">Transacciones</h4>
-        <p style="font-size:0.85rem;">Agrupar varios cambios en un "todo o nada", para que nunca queden a medias.</p>
-      </div>
-      <div class="concept-card">
         <h4 style="color:#c99a4e;">Despliegue</h4>
         <p style="font-size:0.85rem;">Llevar la aplicación y su base de datos de tu computador a internet.</p>
       </div>
@@ -2012,200 +2008,10 @@ window.WEEK_CONTENT_3_2 = `
     </div>
   </div>
 
-  <!-- ===================== 1. CONEXIÓN Y SQL INJECTION ===================== -->
+  <!-- ===================== 1. TRANSACCIONES ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>1. Conexión desde Python y SQL injection</h3>
-    </div>
-    <p>
-      Para que una aplicación use <code>soundflow_db</code>, el código (en este caso, Python) tiene que
-      conectarse a MySQL. La librería más común es <code>mysql-connector-python</code> (también existe
-      <code>pymysql</code>, funciona muy parecido).
-    </p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">conexion_basica.py</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>import mysql.connector
-
-conexion = mysql.connector.connect(
-    host="localhost",
-    user="app_soundflow",
-    password="********",
-    database="soundflow_db"
-)
-cursor = conexion.cursor()
-cursor.execute("SELECT titulo FROM tbl_canciones WHERE genero = 'Pop'")
-resultados = cursor.fetchall()
-for fila in resultados:
-    print(fila)
-
-cursor.close()
-conexion.close()</code></pre>
-    </div>
-
-    <p style="margin-top:1rem;">
-      El problema empieza cuando la consulta ya no es fija, sino que depende de lo que escribe un usuario.
-      Una forma <strong>insegura</strong> y muy común de escribirlo es meter ese valor directo dentro del
-      texto del SQL, con un f-string:
-    </p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">vulnerable.py</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>genero_usuario = input("¿Qué género buscas? ")
-query = f"SELECT titulo FROM tbl_canciones WHERE genero = '{genero_usuario}'"
-cursor.execute(query)</code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Si el usuario escribe <code>Pop</code>, todo funciona bien. Pero si alguien escribe
-        <code>Pop' OR '1'='1</code>, el texto final que le llega a MySQL queda así:
-      </p>
-      <div class="sql" style="margin-top:0.5rem;">SELECT titulo FROM tbl_canciones WHERE genero = 'Pop' OR '1'='1'</div>
-      <p style="margin:0.6rem 0 0;">
-        Como <code>'1'='1'</code> siempre es verdadero, el <code>WHERE</code> deja de filtrar: la consulta
-        devuelve <strong>todas</strong> las canciones de la tabla, sin importar el género. Esto es
-        <strong>SQL injection</strong>: el usuario logró que su texto de entrada se convirtiera en parte de
-        la lógica del SQL, no en un simple dato.
-      </p>
-    </div>
-
-    <p style="margin-top:1rem;">
-      El caso más peligroso es en un login. Si el código arma la validación de la misma forma:
-    </p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">login_vulnerable.py</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>usuario = input("Usuario: ")
-clave = input("Clave: ")
-query = f"SELECT * FROM tbl_usuarios WHERE nombre = '{usuario}' AND password_hash = '{clave}'"
-cursor.execute(query)</code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Si alguien escribe como usuario <code>admin' -- </code> (con espacio al final), la consulta queda:
-      </p>
-      <div class="sql" style="margin-top:0.5rem;">SELECT * FROM tbl_usuarios WHERE nombre = 'admin' -- ' AND password_hash = '...'</div>
-      <p style="margin:0.6rem 0 0;">
-        En SQL, <code>--</code> inicia un comentario: todo lo que sigue en esa línea se ignora. La
-        verificación de la contraseña <strong>nunca se ejecuta</strong>, y quien escribió esto entraría como
-        "admin" sin saber ninguna clave.
-      </p>
-    </div>
-
-    <p style="margin-top:1rem;"><strong>La solución: consultas parametrizadas.</strong> En vez de insertar
-    el valor dentro del texto del SQL, se deja un marcador <code>%s</code> y el valor se pasa aparte:</p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">seguro.py</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>genero_usuario = input("¿Qué género buscas? ")
-query = "SELECT titulo FROM tbl_canciones WHERE genero = %s"
-cursor.execute(query, (genero_usuario,))</code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Con esta forma, el driver de MySQL le manda a la base de datos el SQL y el valor
-        <strong>por separado</strong>. Sin importar qué escriba el usuario, incluso
-        <code>Pop' OR '1'='1</code>, se trata siempre como un simple texto a buscar, nunca como parte de la
-        sintaxis SQL. Esta es la regla de oro: <strong>nunca construir SQL concatenando o con f-strings
-        valores que vienen del usuario</strong>; siempre usar parámetros (<code>%s</code>, o
-        <code>?</code> según la librería).
-      </p>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Esto conecta con lo que ya viste: una consulta parametrizada es la <strong>primera línea de
-        defensa</strong>. Una vista como <code>vista_usuarios_publica</code> (Clase 1) es una segunda capa:
-        aunque algo fallara, esa vista ni siquiera expone <code>password_hash</code>. Ninguna de las dos
-        reemplaza a la otra; una app segura de verdad usa ambas.
-      </p>
-    </div>
-
-    <p style="margin-top:1rem;">
-      El mismo riesgo aparece en un <code>INSERT</code>, no solo en un <code>SELECT</code>. Por ejemplo, al
-      guardar una canción nueva (como hace <code>soundflow_app</code>), la versión insegura concatenaría los
-      valores del formulario directo en el texto del SQL:
-    </p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">insert_vulnerable.py</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>titulo = request.form["titulo"]
-genero = request.form["genero"]
-query = (
-    f"INSERT INTO tbl_canciones (titulo, genero, duracion_seg, reproducciones, id_album) "
-    f"VALUES ('{titulo}', '{genero}', {duracion_seg}, 0, {id_album})"
-)
-cursor.execute(query)</code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Si alguien escribe como título <code>Cancion', 'Pop', 999, 999999, 1) -- </code> (con espacio al
-        final), la consulta que le llega a MySQL queda:
-      </p>
-      <div class="sql" style="margin-top:0.5rem;">INSERT INTO tbl_canciones (titulo, genero, duracion_seg, reproducciones, id_album) VALUES ('Cancion', 'Pop', 999, 999999, 1) -- ', 'Rock', 200, 0, 3)</div>
-      <p style="margin:0.6rem 0 0;">
-        La comilla del atacante cierra el valor de <code>titulo</code> antes de tiempo, y desde ahí escribe
-        él mismo el resto de los valores como si fueran parte legítima de la consulta; el <code>--</code>
-        final comenta lo que sobra. Así logra fijar <code>reproducciones</code> en <code>999999</code>, un
-        valor que el formulario ni siquiera pide, porque el código lo fija en <code>0</code> a propósito.
-      </p>
-    </div>
-
-    <p style="margin-top:1rem;">La solución es la misma de siempre: parámetros, nunca f-strings, también en
-    <code>INSERT</code>:</p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">insert_seguro.py</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>cursor.execute(
-    "INSERT INTO tbl_canciones (titulo, genero, duracion_seg, reproducciones, id_album) "
-    "VALUES (%s, %s, %s, 0, %s)",
-    (titulo, genero, duracion_seg, id_album)
-)</code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Con <code>%s</code>, la comilla dentro de <code>titulo</code> se trata como un simple carácter de
-        texto: MySQL la escapa automáticamente. El título guardado sería literalmente el texto raro que
-        escribió el atacante, pero <code>reproducciones</code> sigue quedando en <code>0</code>, exactamente
-        como el código lo define. Este es el mismo patrón que usa <code>soundflow_app</code> (el prototipo
-        de esta clase) en sus 4 consultas: verificación de correo, registro, login e inserción de canciones.
-      </p>
-    </div>
-  </div>
-
-  <!-- ===================== 2. TRANSACCIONES ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>2. Transacciones (COMMIT / ROLLBACK)</h3>
+      <h3>1. Transacciones (COMMIT / ROLLBACK)</h3>
     </div>
     <p>
       Una <strong>transacción</strong> agrupa varias sentencias en una sola unidad de <strong>todo o
@@ -2245,22 +2051,257 @@ ROLLBACK;
 -- Si en cambio las dos sentencias hubieran salido bien, confirmarías con:
 -- COMMIT;</code></pre>
     </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Sin la transacción, la primera fila (usuario 6) se habría quedado insertada aunque la segunda
-        fallara, dejando los datos a medias. Con <code>START TRANSACTION</code> ... <code>ROLLBACK</code>,
-        puedes deshacer también la primera, para que no quede un cambio "huérfano" de una operación que en
-        conjunto no se completó. También existe <code>SAVEPOINT</code>, para marcar un punto intermedio y
-        poder deshacer solo una parte de la transacción, no todo desde el inicio.
-      </p>
+  </div>
+
+  <!-- ===================== 2. SQL INJECTION ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>2. SQL injection (o inyección SQL)</h3>
+    </div>
+    <div style="max-width:680px; margin:0.5rem auto 0;">
+      <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" style="max-width:680px; width:100%; height:auto; display:block; margin:0 auto;">
+        <defs>
+          <marker id="flechaInjection" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--text-dim)"/>
+          </marker>
+        </defs>
+
+        <!-- Atacante -->
+        <rect x="10" y="35" width="160" height="140" rx="10" fill="#3a1414" stroke="#e24b4a" stroke-width="1.5"/>
+        <path d="M90 52 c-16 0 -27 11 -27 26 v8 c0 3 2.5 5.5 5.5 5.5 h43 c3 0 5.5 -2.5 5.5 -5.5 v-8 c0 -15 -11 -26 -27 -26 z" fill="#f2a3a2"/>
+        <circle cx="90" cy="74" r="9" fill="#1a0a0a"/>
+        <text x="90" y="108" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#f2a3a2">Atacante</text>
+        <text x="90" y="132" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#f2a3a2">' OR '1'='1</text>
+        <text x="90" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#f2a3a2">admin' -- </text>
+
+        <line x1="170" y1="105" x2="255" y2="105" stroke="#e24b4a" stroke-width="2" marker-end="url(#flechaInjection)"/>
+        <text x="212" y="95" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#e24b4a">envía el formulario</text>
+
+        <!-- Servidor -->
+        <rect x="260" y="25" width="180" height="150" rx="10" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.5"/>
+        <rect x="260" y="25" width="180" height="30" rx="10" fill="#4a7c9e"/>
+        <rect x="260" y="45" width="180" height="10" fill="#4a7c9e"/>
+        <text x="350" y="45" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700">Servidor (Python)</text>
+        <rect x="332" y="64" width="36" height="10" rx="2" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.2"/>
+        <circle cx="362" cy="69" r="1.6" fill="#4a7c9e"/>
+        <rect x="332" y="77" width="36" height="10" rx="2" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.2"/>
+        <circle cx="362" cy="82" r="1.6" fill="#4a7c9e"/>
+        <rect x="332" y="90" width="36" height="10" rx="2" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.2"/>
+        <circle cx="362" cy="95" r="1.6" fill="#4a7c9e"/>
+        <text x="350" y="115" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">arma el SQL</text>
+        <text x="350" y="132" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">con f-string</text>
+        <text x="350" y="155" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#a83a3a">(sin parámetros %s)</text>
+
+        <line x1="440" y1="105" x2="525" y2="105" stroke="#4a7c9e" stroke-width="2" marker-end="url(#flechaInjection)"/>
+        <text x="482" y="95" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#4a7c9e">ejecuta la consulta</text>
+
+        <!-- Base de datos -->
+        <rect x="530" y="35" width="140" height="140" rx="10" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.5"/>
+        <rect x="530" y="35" width="140" height="30" rx="10" fill="#7fa5a3"/>
+        <rect x="530" y="55" width="140" height="10" fill="#7fa5a3"/>
+        <text x="600" y="55" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700">MySQL</text>
+        <path d="M583 76 v18 c0 2.8 7.6 5 17 5 s17 -2.2 17 -5 v-18" fill="#eaf5f4" stroke="#7fa5a3" stroke-width="1.2"/>
+        <ellipse cx="600" cy="94" rx="17" ry="5" fill="#eaf5f4" stroke="#7fa5a3" stroke-width="1.2"/>
+        <ellipse cx="600" cy="76" rx="17" ry="5" fill="#eaf5f4" stroke="#7fa5a3" stroke-width="1.2"/>
+        <text x="600" y="118" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">soundflow_db</text>
+        <text x="600" y="138" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#a83a3a">devuelve datos sin</text>
+        <text x="600" y="153" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#a83a3a">autorización real</text>
+
+        <text x="340" y="200" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" font-style="italic" fill="var(--text-dim)">El atacante nunca toca la base de datos directo: manipula lo que el servidor le manda a MySQL</text>
+      </svg>
+    </div>
+    <p style="margin-top:1rem;">
+      <strong>SQL injection</strong> (o <strong>inyección SQL</strong>) es una de las formas más comunes en
+      que un atacante puede vulnerar un sistema: si la aplicación no está bien construida, un hacker puede
+      aprovechar esa falla para manipular las consultas que se ejecutan contra la base de datos y acceder a
+      información que no debería, sin necesitar ninguna contraseña ni permiso real. Ocurre cuando la
+      aplicación pega, directamente dentro del texto de una consulta SQL, un valor que escribió el usuario,
+      en vez de mantenerlo separado del código. Veámoslo paso a paso con un login típico (email y
+      contraseña):
+    </p>
+    <div style="margin-top:0.8rem; display:flex; flex-direction:column; gap:0.6rem;">
+      <div class="content-box" style="border-left:4px solid #4a7c9e; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#4a7c9e; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">1</span>
+        <div>
+          <p style="margin:0;">La aplicación arma la consulta con un molde fijo: un texto SQL que el
+            programador ya escribió de antemano y que no cambia, con un hueco por cada dato del usuario que
+            hace falta:</p>
+          <p style="margin:0.7rem 0; text-align:center;">
+            <code>SELECT id FROM tbl_usuarios WHERE email = '<span style="background:rgba(200,154,78,0.35); padding:0 3px; border-radius:3px;">____</span>' AND password_hash = '<span style="background:rgba(200,154,78,0.35); padding:0 3px; border-radius:3px;">____</span>'</code>
+          </p>
+          <p style="margin:0;">En Python, esos huecos son lo que nosotros llenamos: pegamos ahí las
+            variables <code>email</code> y <code>password</code> con el dato que escribió el usuario.</p>
+        </div>
+      </div>
+      <div class="content-box" style="border-left:4px solid #6f9d7c; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#6f9d7c; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">2</span>
+        <p style="margin:0;">Un usuario normal escribe un dato normal, por ejemplo <code>ana@correo.com</code>. La
+          aplicación pega ese texto en el hueco y todo queda dentro de sus comillas, como se espera.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #e24b4a; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#e24b4a; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">3</span>
+        <p style="margin:0;">Un atacante, en vez de un email, escribe
+          <code style="color:#a83a3a; font-weight:700;">ana@correo.com' -- </code>. Esa comilla simple es
+          justo el carácter que en SQL cierra un texto.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #e24b4a; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#e24b4a; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">4</span>
+        <p style="margin:0;">La aplicación no distingue "esto es un dato" de "esto es código": pega ese texto
+          igual, sin revisarlo.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #e24b4a; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#e24b4a; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">5</span>
+        <p style="margin:0;">La comilla cierra el valor antes de tiempo, y el
+          <code style="color:#a83a3a; font-weight:700;">--</code> convierte todo lo que sigue en un
+          comentario (SQL ignora el resto de esa línea).</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #c99a4e; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#c99a4e; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">6</span>
+        <p style="margin:0;">La consulta que MySQL realmente ejecuta queda recortada a
+          <code>WHERE email = 'ana@correo.com'</code>, sin ninguna verificación de contraseña.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #e24b4a; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#e24b4a; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">7</span>
+        <p style="margin:0;">El atacante entra sin conocer la contraseña, porque esa pregunta nunca se llegó a
+          hacer.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #8b7fb8; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#8b7fb8; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">8</span>
+        <p style="margin:0;">La causa: el atacante nunca tocó la base de datos directamente, solo escribió
+          texto en un formulario. Fue la aplicación, al pegarlo sin separarlo del SQL, la que le dio el poder
+          de reescribir la consulta.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;">
+      El problema empieza cuando la consulta ya no es fija, sino que depende de lo que escribe un usuario.
+      Una forma <strong>insegura</strong> y muy común de escribirlo es meter ese valor directo dentro del
+      texto del SQL, con un f-string:
+    </p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">vulnerable.py</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>genero_usuario = input("¿Qué género buscas? ")
+query = f"SELECT titulo FROM tbl_canciones WHERE genero = '{genero_usuario}'"
+cursor.execute(query)</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
-        <strong>Nota:</strong> esto es la sintaxis SQL de transacciones para bases de datos
-        <strong>relacionales</strong>. En la Semana 7 van a profundizar en las propiedades ACID a nivel
-        conceptual y de arquitectura (incluyendo cómo se manejan, o no, en sistemas NoSQL), pero el
-        <code>START TRANSACTION</code> / <code>COMMIT</code> / <code>ROLLBACK</code> que necesitas para
-        MySQL ya lo viste aquí.
+        Si el usuario escribe <code>Pop</code>, todo funciona bien. Pero si alguien escribe
+        <code style="color:#a83a3a; font-weight:700;">Pop' OR '1'='1</code>, el texto final que le llega a
+        MySQL queda así:
+      </p>
+      <div class="sql" style="margin-top:0.5rem;">SELECT titulo FROM tbl_canciones WHERE genero = 'Pop' OR '1'='1'</div>
+      <p style="margin:0.6rem 0 0;">
+        Como <code>'1'='1'</code> siempre es verdadero, el <code>WHERE</code> deja de filtrar: la consulta
+        devuelve <strong>todas</strong> las canciones de la tabla, sin importar el género. Esto es
+        <strong>SQL injection</strong>: el usuario logró que su texto de entrada se convirtiera en parte de
+        la lógica del SQL, no en un simple dato.
+      </p>
+    </div>
+
+    <p style="margin-top:1rem;">
+      El caso más peligroso es en un login. Si el código arma la validación de la misma forma:
+    </p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">login_vulnerable.py</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>usuario = input("Usuario: ")
+clave = input("Clave: ")
+query = f"SELECT * FROM tbl_usuarios WHERE nombre = '{usuario}' AND password_hash = '{clave}'"
+cursor.execute(query)</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem;">
+      <p style="margin:0;">
+        Si alguien escribe como usuario <code style="color:#a83a3a; font-weight:700;">admin' -- </code> (con
+        espacio al final), la consulta queda:
+      </p>
+      <div class="sql" style="margin-top:0.5rem;">SELECT * FROM tbl_usuarios WHERE nombre = 'admin' -- ' AND password_hash = '...'</div>
+      <p style="margin:0.6rem 0 0;">
+        En SQL, <code>--</code> inicia un comentario: todo lo que sigue en esa línea se ignora. La
+        verificación de la contraseña <strong>nunca se ejecuta</strong>, y quien escribió esto entraría como
+        "admin" sin saber ninguna clave.
+      </p>
+    </div>
+
+    <p style="margin-top:1rem;"><strong>La solución: consultas parametrizadas.</strong> En vez de insertar
+    el valor dentro del texto del SQL, se deja un marcador <code style="color:#a83a3a; font-weight:700;">%s</code>
+    y el valor se pasa aparte. <code style="color:#a83a3a; font-weight:700;">%s</code> es un marcador
+    especial que le dice a la librería de MySQL "aquí va un valor, pero todavía no lo pongas":</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">seguro.py</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>usuario = input("Usuario: ")
+clave = input("Clave: ")
+query = "SELECT * FROM tbl_usuarios WHERE nombre = %s AND password_hash = %s"
+cursor.execute(query, (usuario, clave))</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem;">
+      <p style="margin:0;">
+        Con esta forma, el driver de MySQL le manda a la base de datos el SQL y los valores
+        <strong>por separado</strong>. Sin importar qué escriba el usuario, incluso
+        <code style="color:#a83a3a; font-weight:700;">admin' -- </code>. <strong>Nunca construir SQL
+        concatenando o con f-strings valores que vienen del usuario</strong>; siempre usar parámetros
+        (<code style="color:#a83a3a; font-weight:700;">%s</code>, o
+        <code style="color:#a83a3a; font-weight:700;">?</code> según la librería).
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== 1B. DEMO VULNERABLE EN VIVO ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3 style="text-align:center;">Demo en vivo: hackeando un login vulnerable</h3>
+    </div>
+    <div class="content-box" style="margin-top:0; border-left:4px solid #e24b4a;">
+      <p style="margin:0;">
+        <strong>Uso educativo únicamente:</strong> el proyecto <code>soundflow_vulnerable_demo</code> es a
+        propósito inseguro. Solo debe correr en tu computador, conectado a tu copia local de
+        <code>soundflow_db</code>, mientras dura esta clase. Nunca lo despliegues en internet ni lo dejes
+        corriendo fuera de este contexto.
+      </p>
+    </div>
+    <p style="margin-top:1rem;">
+      Es un mini sitio con un solo formulario de login, construido exactamente con el patrón vulnerable que
+      acabas de ver (<code>login_vulnerable.py</code>), pero corriendo de verdad contra
+      <code>soundflow_db</code>. Cada intento imprime, en la consola donde corre <code>python app.py</code>,
+      la consulta SQL exacta que se construyó y cuántas filas devolvió MySQL, para que el ataque se vea
+      paso a paso, no solo en teoría.
+    </p>
+    <ol style="margin:0.8rem 0 0; padding-left:1.2rem; color:var(--text);">
+      <li>Corre <code>soundflow_vulnerable_demo</code> igual que <code>soundflow_app</code> (mismo
+        <code>venv</code>, <code>pip install -r requirements.txt</code>, tu propio <code>.env</code>), pero
+        en el puerto <code>5001</code> en vez del <code>5000</code>.</li>
+      <li>Primer intento: un correo real que exista en <code>tbl_usuarios</code> y una contraseña
+        cualquiera, inventada. Debería salir "ACCESO DENEGADO": la contraseña no coincide, como se espera.</li>
+      <li>Segundo intento: en el campo de correo, en vez del correo normal, escribe
+        <code>correo_real@ejemplo.com' -- </code> (con el espacio final) y cualquier cosa en la
+        contraseña.</li>
+      <li>Revisa la consola: vas a ver que el <code>--</code> comenta la verificación de
+        <code>password_hash</code>, y el resultado es "ACCESO CONCEDIDO" con el nombre real de ese usuario,
+        sin que el código haya comprobado ninguna contraseña.</li>
+    </ol>
+    <div class="content-box" style="margin-top:0.8rem;">
+      <p style="margin:0;">
+        El archivo <code>README.md</code> de <code>soundflow_vulnerable_demo</code> trae este mismo guion
+        con más detalle, incluyendo el texto exacto para copiar y pegar. Después de la demostración, vuelve
+        a <code>soundflow_app</code> (la versión seria) e intenta el mismo ataque ahí: con <code>%s</code>
+        y parámetros, el intento simplemente falla, como debería.
       </p>
     </div>
   </div>
@@ -2304,18 +2345,6 @@ ROLLBACK;
       <li>Pruébala completa: regístrate, inicia sesión, agrega una canción, y verifica en MySQL Workbench
         que la fila realmente quedó guardada.</li>
     </ol>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        El archivo <code>.env</code> es el mismo principio de seguridad que ya viste con las consultas
-        parametrizadas: la contraseña real de la base de datos nunca queda escrita dentro de
-        <code>app.py</code>. El código solo referencia el <em>nombre</em> de la variable, por ejemplo
-        <code>DB_PASSWORD</code>; el valor real se configura aparte, en un archivo que no se sube a GitHub.
-        Cuando más adelante quieras desplegar en un servidor accesible desde internet, el mismo archivo
-        <code>.env</code> se traduce directamente en variables de entorno configuradas en el panel del
-        servicio que uses: la lógica no cambia, solo dónde vive el valor.
-      </p>
-    </div>
   </div>
 
   <!-- ===================== 4. DISEÑO DE BD SEGÚN NECESIDADES ===================== -->
@@ -2338,23 +2367,6 @@ ROLLBACK;
       <li><strong>Escalabilidad:</strong> ¿bastaría con un servidor más potente, o eventualmente se va a
         necesitar repartir la carga entre varios servidores?</li>
     </ul>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        SoundFlow eligió un modelo <strong>relacional</strong> (MySQL) porque sus datos tienen relaciones
-        muy claras (artista → álbum → canción, usuario → reproducción) y necesita integridad referencial:
-        no debería poder existir una reproducción de una canción que no existe, por ejemplo. Eso es
-        justamente lo que las <code>FOREIGN KEY</code> garantizan.
-      </p>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Pero si SoundFlow quisiera registrar, en tiempo real, cada segundo exacto en que un usuario mueve
-        la barra de reproducción (millones de eventos por minuto, sin relaciones complejas entre ellos),
-        probablemente no usaría solo MySQL para eso: complementaría con una tecnología distinta, pensada
-        para volúmenes así. De eso trata precisamente NoSQL, que van a ver a fondo en la Semana 7: no es
-        que una tecnología sea mejor que la otra, sino que cada una responde a necesidades distintas.
-      </p>
-    </div>
   </div>
 
   <!-- ===================== QUIZ ===================== -->
