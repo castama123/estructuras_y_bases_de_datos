@@ -579,6 +579,66 @@ footer {
   overflow-x: auto;
 }
 
+/* ---------- Variante NoSQL/MongoDB: mismo bloque, cromado distinto ---------- */
+.code-block.nosql {
+  background: #e9edeb;
+  border: 1px solid #2f5d43;
+  box-shadow: 0 0 0 1px rgba(111, 157, 124, 0.12);
+}
+
+.code-block.nosql .code-block-header {
+  background: #0d1a14;
+  border-bottom: 1px solid #234a34;
+}
+
+.code-block.nosql .code-filename {
+  color: #8fd6a8;
+}
+
+.code-block.nosql code {
+  color: #1f2b25;
+}
+
+.code-block.nosql .code-com {
+  color: #5b7065;
+  font-style: italic;
+}
+
+.code-block.nosql .code-str {
+  color: #a2270f;
+}
+
+.code-block.nosql .code-num {
+  color: #0b5fa5;
+}
+
+.code-block.nosql .code-bool {
+  color: #7c3aed;
+  font-weight: 600;
+}
+
+.code-block.nosql .code-key {
+  color: #0f6b5c;
+  font-weight: 600;
+}
+
+.code-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #1d3a29;
+  color: #8fd6a8;
+  border: 1px solid #2f5d43;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-family: "Segoe UI", sans-serif;
+  white-space: nowrap;
+}
+
 .code-block code {
   font-family: "Consolas", "Monaco", monospace;
   font-size: 0.85rem;
@@ -708,6 +768,57 @@ footer {
   margin: 0;
   color: var(--text-dim);
   font-size: 0.84rem;
+}
+
+/* ---------- Simulador animado del pipeline de agregación (Semana 4) ---------- */
+.pipeline-track {
+  position: relative;
+  padding-top: 14px;
+}
+
+.pipeline-stages {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.pipeline-stage {
+  flex: 1 1 120px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.5rem;
+  text-align: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.pipeline-stage p {
+  margin: 0.3rem 0 0;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.pipeline-stage-active {
+  border-color: #e24b4a;
+  box-shadow: 0 0 0 2px rgba(226, 75, 74, 0.25);
+  transform: translateY(-3px);
+}
+
+.pipeline-stage-done:not(.pipeline-stage-active) {
+  border-color: #6f9d7c;
+}
+
+.pipeline-token {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e24b4a;
+  box-shadow: 0 0 6px rgba(226, 75, 74, 0.6);
+  opacity: 0;
+  transition: left 0.6s ease, opacity 0.2s ease;
 }
 
 /* ---------- Contenido de semana: lista de actividades ---------- */

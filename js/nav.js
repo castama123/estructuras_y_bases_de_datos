@@ -164,6 +164,54 @@ document.addEventListener('click', (e) => {
   });
 });
 
+// Simulador del pipeline de agregación (Semana 4): anima, etapa por etapa, cómo
+// un "documento" avanza por $match → $group → $sort → $project. El resumen de
+// cada etapa vive en el atributo data-resumen de cada .pipeline-stage.
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.pipeline-play-btn');
+  if (!btn || btn.disabled) return;
+
+  const demo = btn.closest('.pipeline-demo');
+  if (!demo) return;
+
+  const stages = Array.from(demo.querySelectorAll('.pipeline-stage'));
+  const token = demo.querySelector('.pipeline-token');
+  const estado = demo.querySelector('.pipeline-demo-status');
+  if (!stages.length || !token) return;
+
+  stages.forEach(s => s.classList.remove('pipeline-stage-active', 'pipeline-stage-done'));
+  btn.disabled = true;
+  token.style.opacity = '1';
+
+  const paso = 1300; // milisegundos entre cada etapa
+  const track = token.parentElement;
+
+  stages.forEach((stage, i) => {
+    setTimeout(() => {
+      stages.forEach(s => s.classList.remove('pipeline-stage-active'));
+      stage.classList.add('pipeline-stage-active', 'pipeline-stage-done');
+
+      const trackRect = track.getBoundingClientRect();
+      const stageRect = stage.getBoundingClientRect();
+      const left = stageRect.left - trackRect.left + stageRect.width / 2 - token.offsetWidth / 2;
+      token.style.left = left + 'px';
+
+      if (estado) {
+        estado.textContent = `Etapa ${i + 1} de ${stages.length}: ${stage.dataset.resumen || ''}`;
+      }
+
+      if (i === stages.length - 1) {
+        setTimeout(() => {
+          stages.forEach(s => s.classList.remove('pipeline-stage-active'));
+          if (estado) estado.textContent = 'Pipeline completo. Dale clic de nuevo para repetir la animación.';
+          token.style.opacity = '0';
+          btn.disabled = false;
+        }, paso);
+      }
+    }, i * paso);
+  });
+});
+
 // Pestañas "Clase 1" / "Clase 2" dentro de una semana con varias clases.
 document.addEventListener('click', (e) => {
   const tab = e.target.closest('.class-tab');

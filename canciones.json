@@ -1,0 +1,14 @@
+[
+  { "titulo": "Tusa", "artista": "Karol G", "genero": "Reggaeton", "duracion_seg": 200, "reproducciones": 950000 },
+  { "titulo": "Provenza", "artista": "Karol G", "genero": "Reggaeton", "duracion_seg": 195, "reproducciones": 780000 },
+  { "titulo": "Tacones Rojos", "artista": "Sebastián Yatra", "genero": "Pop", "duracion_seg": 210, "reproducciones": 620000 },
+  { "titulo": "Ojitos Lindos", "artista": "Bad Bunny", "genero": "Reggaeton", "duracion_seg": 254, "reproducciones": 1100000 },
+  { "titulo": "Feliz Cumpleaños Ferxxo", "artista": "Feid", "genero": "Reggaeton", "duracion_seg": 220, "reproducciones": 890000 },
+  { "titulo": "La Jumpa", "artista": "Arcángel", "genero": "Reggaeton", "duracion_seg": 200, "reproducciones": 1050000 },
+  { "titulo": "Yonaguni", "artista": "Bad Bunny", "genero": "Reggaeton", "duracion_seg": 206, "reproducciones": 1300000 },
+  { "titulo": "Con Altura", "artista": "Rosalía", "genero": "Reggaeton", "duracion_seg": 195, "reproducciones": 980000 },
+  { "titulo": "Mi Gente", "artista": "J Balvin", "genero": "Reggaeton", "duracion_seg": 190, "reproducciones": 1200000 },
+  { "titulo": "Ay, DiOs Mío!", "artista": "Karol G", "genero": "Reggaeton", "duracion_seg": 178, "reproducciones": 870000 },
+  { "titulo": "Loco Contigo", "artista": "Ozuna", "genero": "Pop", "duracion_seg": 195, "reproducciones": 430000 },
+  { "titulo": "Girls Like You", "artista": "Maroon 5", "genero": "Pop", "duracion_seg": 235, "reproducciones": 560000 }
+]

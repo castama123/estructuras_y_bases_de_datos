@@ -43,12 +43,17 @@ const WEEKS = [
   },
   {
     n: 4,
-    titulo: "",
-    resumen: "",
-    objetivos: "",
+    titulo: "Bases de datos NoSQL: MongoDB y Redis",
+    tituloClase1: "Introducción a NoSQL, MongoDB y Compass",
+    tituloClase2: "Bases de datos clave-valor con Redis",
+    resumen: "Qué son las bases de datos NoSQL y por qué existen, los distintos modelos (documentos, grafos, clave-valor, columnas), MongoDB con Compass, documentos y colecciones, CRUD, agregación e índices; luego el modelo clave-valor con Redis, sus estructuras de datos, CRUD, y casos de uso como rankings y contadores en tiempo real.",
+    objetivos: "Entender por qué surgen las bases de datos NoSQL y en qué se diferencian de las relacionales, instalar y conectar MongoDB con Compass y Redis con Docker y RedisInsight, modelar documentos flexibles y estructuras clave-valor, y aplicar CRUD en ambos motores para casos reales de SoundFlow.",
     embed: "",
     descarga: "presentaciones/semana-04.pdf",
-    disponible: false
+    disponible: true,
+    // Bloquea la Clase 2 en el sitio (pestaña oculta) mientras se termina de revisar.
+    // Cámbialo a true para volver a mostrarla.
+    disponibleClase2: false
   },
   {
     n: 5,
