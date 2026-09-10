@@ -1841,7 +1841,7 @@ window.WEEK_CONTENT_4_2 = `
     </div>
 
     <p style="margin-top:1.2rem;">Un repaso corto en video de todo lo anterior:</p>
-    <a href="https://www.youtube.com/watch?v=Tay_ORqG-jo" target="_blank" rel="noopener" style="display:block; max-width:640px; margin:0.6rem auto 0; border-radius:10px; overflow:hidden; border:1px solid var(--border); text-decoration:none; position:relative;">
+    <a href="https://www.youtube.com/watch?v=Tay_ORqG-jo" target="_blank" rel="noopener" style="display:block; max-width:360px; margin:0.6rem auto 0; border-radius:10px; overflow:hidden; border:1px solid var(--border); text-decoration:none; position:relative;">
       <img src="https://img.youtube.com/vi/Tay_ORqG-jo/hqdefault.jpg" alt="¿Qué es Redis? Base de datos en memoria RAM ultra rápida" style="display:block; width:100%; height:auto;">
       <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25);">
         <span style="width:64px; height:64px; border-radius:50%; background:rgba(196,68,68,0.9); display:flex; align-items:center; justify-content:center;">
@@ -1993,15 +1993,6 @@ window.WEEK_CONTENT_4_2 = `
       </svg>
     </div>
 
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        La aplicación web siempre le pide el dato al <strong>API</strong>, nunca habla directamente con la
-        base de datos ni con Redis. El API primero revisa si el dato ya está guardado en <strong>Redis</strong>:
-        si está, responde de inmediato en <strong>5 segundos</strong>. Si no está, el API va hasta
-        <strong>PostgreSQL</strong> (una base de datos en disco), tarda <strong>15 segundos</strong>, y
-        guarda ese resultado en Redis para que la próxima consulta sea rápida.
-      </p>
-    </div>
   </div>
 
   <!-- ===================== 2. INSTALACIÓN: DOCKER + REDISINSIGHT ===================== -->
@@ -2118,13 +2109,7 @@ window.WEEK_CONTENT_4_2 = `
     <div class="activity-section-header">
       <h3>3. Estructuras de datos fundamentales</h3>
     </div>
-    <p>
-      La diferencia más grande frente a MongoDB: en Redis el <strong>valor</strong> guardado bajo una llave
-      no es siempre texto plano. Puede ser una de varias <strong>estructuras de datos</strong>, cada una
-      pensada para un tipo de problema distinto.
-    </p>
-
-    <p style="margin-top:1rem;">Pero antes, lo fundamental: todo comando en Redis se arma con tres piezas — el <strong>comando</strong>, la <strong>key</strong> y el <strong>valor</strong>:</p>
+    <p>Todo comando en Redis se arma con tres piezas — el <strong>comando</strong>, la <strong>key</strong> y el <strong>valor</strong>:</p>
     <div style="max-width:520px; margin:0.8rem auto 0;">
       <svg viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="max-width:520px; width:100%; height:auto; display:block; margin:0 auto;">
         <text x="70" y="20" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">comando</text>
@@ -2154,149 +2139,219 @@ window.WEEK_CONTENT_4_2 = `
         guarda el valor, y <code style="background:transparent; border:none; padding:0;"><span style="color:#e24b4a; font-weight:700;">GET</span> country</code>
         lo recupera. La <strong>key</strong> (<span style="color:#7c3aed; font-weight:700;">country</span>) es el nombre único que
         identifica el dato, y el <strong>valor</strong> (<span style="color:#6f9d7c; font-weight:700;">"Chile"</span>) es lo que
-        se guarda ahí. Esta misma estructura — comando + key + valor — se repite en todas las estructuras de datos, solo cambia
-        la forma del valor.
+        se guarda ahí.
       </p>
     </div>
 
-    <p style="margin-top:1.2rem;"><code><span style="color:#e24b4a; font-weight:700;">SET</span></code> además acepta opciones adicionales, después de la key y el valor, para controlar cuándo se guarda y qué tan rápido expira:</p>
-    <div style="display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:0.6rem;">
-      <div style="flex:1 1 260px; min-width:260px;">
-        <p style="margin:0 0 0.3rem; font-weight:700; color:var(--text);">Expiración</p>
-        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
-          <thead>
-            <tr>
-              <th style="text-align:left; padding:0.4rem 0.6rem; background:#e24b4a; color:#fff; border:1px solid var(--border);">Opción</th>
-              <th style="text-align:left; padding:0.4rem 0.6rem; background:#e24b4a; color:#fff; border:1px solid var(--border);">Significado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>EX</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Expira en N segundos</td></tr>
-            <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>PX</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Expira en N milisegundos</td></tr>
-            <tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>EXAT</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Expira en un timestamp Unix (segundos) exacto</td></tr>
-            <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>PXAT</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Expira en un timestamp Unix (milisegundos) exacto</td></tr>
-          </tbody>
-        </table>
+    <p style="margin-top:1.2rem;">
+      En Redis el <strong>valor</strong> guardado bajo una llave
+      no es siempre texto plano. Puede ser una de varias <strong>estructuras de datos</strong>, cada una
+      pensada para un tipo de problema distinto.
+    </p>
+
+    <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1.2rem;">
+      <div class="concept-card" style="display:flex; flex-wrap:wrap; gap:1.2rem; align-items:flex-start;">
+        <div style="flex:1 1 260px; min-width:240px;">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7h14M5 12h14M5 17h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h4>String</h4>
+          <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Un texto o número simple. La
+            estructura más básica.</p>
+          <div style="display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.6rem;">
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">SET</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">asigna el valor</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">GET</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">lo busca y lo devuelve</span>
+            </div>
+          </div>
+          <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">SET</span> <span style="color:#7c3aed; font-weight:600;">usuario:1:nombre</span> <span style="color:#6f9d7c; font-weight:600;">"Ana"</span></code>
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; border-left:1px solid var(--border); padding-left:1.2rem;">
+          <svg viewBox="0 0 260 100" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+            <text x="75" y="15" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="var(--text-dim)">key</text>
+            <rect x="10" y="22" width="130" height="40" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="75" y="46" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" font-weight="700" fill="#7c3aed">usuario:1:nombre</text>
+            <path d="M145 42 L175 42" stroke="var(--text-dim)" stroke-width="1.6" marker-end="url(#arrowMemStr)"/>
+            <text x="215" y="15" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="var(--text-dim)">valor</text>
+            <rect x="180" y="22" width="70" height="40" rx="8" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
+            <text x="215" y="46" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-weight="700" fill="#6f9d7c">"Ana"</text>
+            <defs><marker id="arrowMemStr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--text-dim)"/></marker></defs>
+          </svg>
+          <p style="margin:0.4rem 0 0; font-size:0.78rem; color:var(--text-dim); text-align:center;">Así se ve en memoria: una key, un valor.</p>
+        </div>
       </div>
-      <div style="flex:1 1 260px; min-width:260px;">
-        <p style="margin:0 0 0.3rem; font-weight:700; color:var(--text);">Condición y valor anterior</p>
-        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
-          <thead>
-            <tr>
-              <th style="text-align:left; padding:0.4rem 0.6rem; background:#7c3aed; color:#fff; border:1px solid var(--border);">Opción</th>
-              <th style="text-align:left; padding:0.4rem 0.6rem; background:#7c3aed; color:#fff; border:1px solid var(--border);">Significado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>NX</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Solo guarda si la key <strong>no</strong> existe todavía</td></tr>
-            <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>XX</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Solo guarda si la key <strong>ya</strong> existe</td></tr>
-            <tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>GET</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Devuelve el valor anterior de la key, antes de sobrescribirlo</td></tr>
-          </tbody>
-        </table>
+
+      <div class="concept-card" style="display:flex; flex-wrap:wrap; gap:1.2rem; align-items:flex-start;">
+        <div style="flex:1 1 260px; min-width:240px;">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M10 4v16" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <h4>Hash</h4>
+          <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Un mapa de campo &rarr; valor, como
+            un mini documento. Ideal para agrupar los datos de una sola entidad.</p>
+          <div style="display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.6rem;">
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">HSET</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">asigna uno o varios campos</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">HGET</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">busca el valor de un campo puntual</span>
+            </div>
+          </div>
+          <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">HSET</span> <span style="color:#7c3aed; font-weight:600;">usuario:1</span> nombre <span style="color:#6f9d7c; font-weight:600;">"Ana"</span> edad <span style="color:#6f9d7c; font-weight:600;">25</span> pais <span style="color:#6f9d7c; font-weight:600;">"Chile"</span></code>
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; border-left:1px solid var(--border); padding-left:1.2rem;">
+          <svg viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+            <rect x="70" y="10" width="120" height="32" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="130" y="31" text-anchor="middle" font-family="Consolas, monospace" font-size="10" font-weight="700" fill="#7c3aed">usuario:1</text>
+            <path d="M130 42 L130 58" stroke="var(--text-dim)" stroke-width="1.6" marker-end="url(#arrowMemHash)"/>
+            <rect x="15" y="62" width="230" height="80" rx="8" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <text x="30" y="82" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">nombre &rarr; <tspan fill="#6f9d7c" font-weight="700">"Ana"</tspan></text>
+            <text x="30" y="102" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">edad &rarr; <tspan fill="#6f9d7c" font-weight="700">25</tspan></text>
+            <text x="30" y="122" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">pais &rarr; <tspan fill="#6f9d7c" font-weight="700">"Chile"</tspan></text>
+            <defs><marker id="arrowMemHash" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--text-dim)"/></marker></defs>
+          </svg>
+          <p style="margin:0.4rem 0 0; font-size:0.78rem; color:var(--text-dim); text-align:center;">Así se ve en memoria: una key, varios campos adentro.</p>
+        </div>
+      </div>
+
+      <div class="concept-card" style="display:flex; flex-wrap:wrap; gap:1.2rem; align-items:flex-start;">
+        <div style="flex:1 1 260px; min-width:240px;">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="10.5" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="16" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <h4>List</h4>
+          <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Una lista ordenada de valores.
+            Admite duplicados y mantiene el orden de inserción.</p>
+          <div style="display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.6rem;">
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">RPUSH</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">agrega por la derecha (al final)</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">LPUSH</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">agrega por la izquierda (al principio)</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">RPOP</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">saca de la derecha (el último)</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">LPOP</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">saca de la izquierda (el primero)</span>
+            </div>
+          </div>
+          <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">RPUSH</span> <span style="color:#7c3aed; font-weight:600;">usuario:1:tareas</span> <span style="color:#6f9d7c; font-weight:600;">"Comprar"</span> <span style="color:#6f9d7c; font-weight:600;">"Estudiar"</span> <span style="color:#6f9d7c; font-weight:600;">"Pagar cuentas"</span></code>
+        </div>
+        <div style="flex:1 1 300px; min-width:280px; border-left:1px solid var(--border); padding-left:1.2rem;">
+          <svg viewBox="0 0 300 155" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+            <rect x="70" y="8" width="160" height="30" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="150" y="28" text-anchor="middle" font-family="Consolas, monospace" font-size="9" font-weight="700" fill="#7c3aed">usuario:1:tareas</text>
+            <path d="M150 38 L150 54" stroke="var(--text-dim)" stroke-width="1.6" marker-end="url(#arrowMemList)"/>
+
+            <text x="20" y="72" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#c9a227">&larr; IZQUIERDA</text>
+            <rect x="10" y="78" width="85" height="38" rx="6" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
+            <text x="52" y="101" text-anchor="middle" font-family="Consolas, monospace" font-size="9" font-weight="700" fill="#6f9d7c">"Comprar"</text>
+            <rect x="107" y="78" width="85" height="38" rx="6" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
+            <text x="149" y="101" text-anchor="middle" font-family="Consolas, monospace" font-size="9" font-weight="700" fill="#6f9d7c">"Estudiar"</text>
+            <rect x="204" y="78" width="90" height="38" rx="6" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
+            <text x="249" y="101" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" font-weight="700" fill="#6f9d7c">"Pagar cuentas"</text>
+            <text x="280" y="72" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#c9a227">DERECHA &rarr;</text>
+
+            <text x="52" y="130" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="var(--text-dim)">índice 0</text>
+            <text x="149" y="130" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="var(--text-dim)">índice 1</text>
+            <text x="249" y="130" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="var(--text-dim)">índice 2</text>
+            <text x="150" y="148" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="var(--text-dim)">el orden de inserción se mantiene</text>
+            <defs><marker id="arrowMemList" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--text-dim)"/></marker></defs>
+          </svg>
+          <p style="margin:0.4rem 0 0; font-size:0.78rem; color:var(--text-dim); text-align:center;">Así se ve en memoria: secuencia ordenada, con dos extremos.</p>
+        </div>
+      </div>
+
+      <div class="concept-card" style="display:flex; flex-wrap:wrap; gap:1.2rem; align-items:flex-start;">
+        <div style="flex:1 1 260px; min-width:240px;">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="12" r="6" stroke="currentColor" stroke-width="1.8"/><circle cx="15" cy="12" r="6" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <h4>Set</h4>
+          <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Un conjunto de valores únicos, sin
+            duplicados ni orden garantizado.</p>
+          <div style="display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.6rem;">
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">SADD</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">agrega valores al conjunto</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">SMEMBERS</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">los busca y los devuelve todos</span>
+            </div>
+          </div>
+          <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">SADD</span> <span style="color:#7c3aed; font-weight:600;">usuario:1:colores</span> <span style="color:#6f9d7c; font-weight:600;">"rojo"</span> <span style="color:#6f9d7c; font-weight:600;">"azul"</span> <span style="color:#6f9d7c; font-weight:600;">"verde"</span></code>
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; border-left:1px solid var(--border); padding-left:1.2rem;">
+          <svg viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+            <rect x="45" y="8" width="170" height="30" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="130" y="28" text-anchor="middle" font-family="Consolas, monospace" font-size="9" font-weight="700" fill="#7c3aed">usuario:1:colores</text>
+            <path d="M130 38 L130 54" stroke="var(--text-dim)" stroke-width="1.6" marker-end="url(#arrowMemSet)"/>
+            <ellipse cx="130" cy="98" rx="115" ry="44" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <circle cx="80" cy="85" r="26" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.3"/>
+            <text x="80" y="89" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" font-weight="700" fill="#6f9d7c">"rojo"</text>
+            <circle cx="150" cy="110" r="26" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.3"/>
+            <text x="150" y="114" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" font-weight="700" fill="#6f9d7c">"azul"</text>
+            <circle cx="190" cy="75" r="26" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.3"/>
+            <text x="190" y="79" text-anchor="middle" font-family="Consolas, monospace" font-size="8" font-weight="700" fill="#6f9d7c">"verde"</text>
+            <defs><marker id="arrowMemSet" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--text-dim)"/></marker></defs>
+          </svg>
+          <p style="margin:0.4rem 0 0; font-size:0.78rem; color:var(--text-dim); text-align:center;">Así se ve en memoria: sin orden ni posiciones, solo pertenencia.</p>
+        </div>
+      </div>
+
+      <div class="concept-card" style="display:flex; flex-wrap:wrap; gap:1.2rem; align-items:flex-start;">
+        <div style="flex:1 1 260px; min-width:240px;">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 20V13M12 20V7M19 20V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h4>Sorted Set</h4>
+          <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Como un Set, pero cada valor tiene un
+            puntaje (score) que define su orden. Perfecto para rankings.</p>
+          <div style="display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.6rem;">
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">ZADD</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">agrega un valor con su puntaje</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:0.5rem;">
+              <span style="display:inline-block; flex:none; font-family:Consolas, monospace; font-size:0.74rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.2rem 0.5rem;">ZRANGE</span>
+              <span style="font-size:0.78rem; color:var(--text-dim);">los busca y los devuelve ordenados</span>
+            </div>
+          </div>
+          <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">ZADD</span> <span style="color:#7c3aed; font-weight:600;">ranking</span> 100 <span style="color:#6f9d7c; font-weight:600;">"Ana"</span> 85 <span style="color:#6f9d7c; font-weight:600;">"Luis"</span> 92 <span style="color:#6f9d7c; font-weight:600;">"Sofía"</span></code>
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; border-left:1px solid var(--border); padding-left:1.2rem;">
+          <svg viewBox="0 0 260 165" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+            <rect x="75" y="8" width="110" height="30" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="130" y="28" text-anchor="middle" font-family="Consolas, monospace" font-size="10" font-weight="700" fill="#7c3aed">ranking</text>
+            <path d="M130 38 L130 52" stroke="var(--text-dim)" stroke-width="1.6" marker-end="url(#arrowMemZset)"/>
+            <rect x="35" y="56" width="190" height="30" rx="6" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
+            <text x="130" y="76" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">100 &mdash; <tspan fill="#6f9d7c" font-weight="700">"Ana"</tspan></text>
+            <rect x="35" y="90" width="190" height="30" rx="6" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
+            <text x="130" y="110" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">92 &mdash; <tspan fill="#6f9d7c" font-weight="700">"Sofía"</tspan></text>
+            <rect x="35" y="124" width="190" height="30" rx="6" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
+            <text x="130" y="144" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">85 &mdash; <tspan fill="#6f9d7c" font-weight="700">"Luis"</tspan></text>
+            <text x="245" y="76" font-family="Segoe UI, sans-serif" font-size="8" fill="var(--text-dim)">&#9660;</text>
+            <text x="245" y="145" font-family="Segoe UI, sans-serif" font-size="7.5" fill="var(--text-dim)">score</text>
+            <defs><marker id="arrowMemZset" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--text-dim)"/></marker></defs>
+          </svg>
+          <p style="margin:0.4rem 0 0; font-size:0.78rem; color:var(--text-dim); text-align:center;">Así se ve en memoria: ordenado automáticamente por score.</p>
+        </div>
       </div>
     </div>
-    <div class="code-block nosql" style="margin-top:0.8rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
-          Redis
-        </span>
-        <span class="code-filename">00_set_opciones.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com"># Guarda "Chile" y hace que expire solo en 60 segundos</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> country <span class="code-str">"Chile"</span> EX <span class="code-num">60</span>
 
-<span class="code-com"># Solo la crea si "country" todavía no existe</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> country <span class="code-str">"Chile"</span> NX
-
-<span class="code-com"># La sobrescribe y devuelve el valor que tenía antes</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> country <span class="code-str">"Perú"</span> GET</code></pre>
-    </div>
-
-    <div class="concept-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin-top:1.2rem;">
-      <div class="concept-card">
-        <div class="summary-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7h14M5 12h14M5 17h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <h4>String</h4>
-        <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Un texto o número simple. La
-          estructura más básica, ideal para contadores y valores sueltos.</p>
-        <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">SET</span> <span style="color:#7c3aed; font-weight:600;">usuario:1:nombre</span> <span style="color:#6f9d7c; font-weight:600;">"Ana"</span></code>
-      </div>
-      <div class="concept-card">
-        <div class="summary-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M10 4v16" stroke="currentColor" stroke-width="1.8"/></svg>
-        </div>
-        <h4>Hash</h4>
-        <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Un mapa de campo &rarr; valor, como
-          un mini documento. Ideal para agrupar los datos de una sola entidad.</p>
-        <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">HSET</span> <span style="color:#7c3aed; font-weight:600;">usuario:1</span> nombre <span style="color:#6f9d7c; font-weight:600;">"Ana"</span> edad <span style="color:#6f9d7c; font-weight:600;">25</span> pais <span style="color:#6f9d7c; font-weight:600;">"Chile"</span></code>
-      </div>
-      <div class="concept-card">
-        <div class="summary-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="10.5" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="16" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.8"/></svg>
-        </div>
-        <h4>List</h4>
-        <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Una lista ordenada de valores.
-          Admite duplicados y mantiene el orden de inserción.</p>
-        <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">RPUSH</span> <span style="color:#7c3aed; font-weight:600;">tareas</span> <span style="color:#6f9d7c; font-weight:600;">"Comprar"</span> <span style="color:#6f9d7c; font-weight:600;">"Estudiar"</span> <span style="color:#6f9d7c; font-weight:600;">"Pagar cuentas"</span></code>
-      </div>
-      <div class="concept-card">
-        <div class="summary-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="12" r="6" stroke="currentColor" stroke-width="1.8"/><circle cx="15" cy="12" r="6" stroke="currentColor" stroke-width="1.8"/></svg>
-        </div>
-        <h4>Set</h4>
-        <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Un conjunto de valores únicos, sin
-          duplicados ni orden garantizado.</p>
-        <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">SADD</span> <span style="color:#7c3aed; font-weight:600;">colores</span> <span style="color:#6f9d7c; font-weight:600;">"rojo"</span> <span style="color:#6f9d7c; font-weight:600;">"azul"</span> <span style="color:#6f9d7c; font-weight:600;">"verde"</span></code>
-      </div>
-      <div class="concept-card">
-        <div class="summary-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 20V13M12 20V7M19 20V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <h4>Sorted Set</h4>
-        <p style="margin:0 0 0.6rem; font-size:0.85rem; color:var(--text-dim);">Como un Set, pero cada valor tiene un
-          puntaje (score) que define su orden. Perfecto para rankings.</p>
-        <code style="display:block; font-size:0.76rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.55rem;"><span style="color:#e24b4a; font-weight:700;">ZADD</span> <span style="color:#7c3aed; font-weight:600;">ranking</span> 100 <span style="color:#6f9d7c; font-weight:600;">"Ana"</span> 85 <span style="color:#6f9d7c; font-weight:600;">"Luis"</span> 92 <span style="color:#6f9d7c; font-weight:600;">"Sofía"</span></code>
-      </div>
-    </div>
-
-    <p style="margin-top:1rem;">Un resumen visual de los comandos principales de cada estructura (incluyendo <strong>JSON</strong>, que desde Redis 8 ya viene integrado en el núcleo, para guardar documentos completos):</p>
-    <div class="concept-grid" style="grid-template-columns:repeat(2, 1fr); margin-top:0.6rem; gap:0.8rem;">
-      <div class="concept-card" style="text-align:center;">
-        <h4 style="letter-spacing:0.05em;">STRING</h4>
-        <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-top:0.4rem;">
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">SET</span>
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">GET</span>
-        </div>
-      </div>
-      <div class="concept-card" style="text-align:center;">
-        <h4 style="letter-spacing:0.05em;">HASH</h4>
-        <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-top:0.4rem;">
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">HSET</span>
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">HGET</span>
-        </div>
-      </div>
-      <div class="concept-card" style="text-align:center;">
-        <h4 style="letter-spacing:0.05em;">LIST</h4>
-        <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-top:0.4rem;">
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">RPUSH</span>
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">RPOP</span>
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">LPUSH</span>
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">LPOP</span>
-        </div>
-      </div>
-      <div class="concept-card" style="text-align:center;">
-        <h4 style="letter-spacing:0.05em;">JSON</h4>
-        <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-top:0.4rem;">
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">JSON.SET</span>
-          <span style="display:inline-block; font-family:Consolas, monospace; font-size:0.78rem; font-weight:700; color:#c9a227; border:1px dashed var(--border); border-radius:6px; padding:0.25rem 0.6rem;">JSON.GET</span>
-        </div>
-      </div>
-    </div>
-
-    <p style="margin-top:1.2rem;">Un vistazo rápido a cada una, aplicado a <strong>canciones</strong>:</p>
+    <p style="margin-top:1.2rem;">Un vistazo rápido a cada una, aplicado siempre al mismo <strong>usuario:1</strong>:</p>
     <div class="code-block nosql" style="margin-top:0.6rem;">
       <div class="code-block-header">
         <span class="code-badge">
@@ -2306,20 +2361,23 @@ window.WEEK_CONTENT_4_2 = `
         <span class="code-filename">01_tipos.txt</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code><span class="code-com"># String: el título de una canción</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Tusa"</span>
+      <pre><code><span class="code-com"># String: el nombre del usuario</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> usuario:1:nombre <span class="code-str">"Ana"</span>
 
-<span class="code-com"># Hash: los datos de una canción, agrupados</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> cancion:205 titulo <span class="code-str">"Tusa"</span> artista <span class="code-str">"Karol G"</span> genero <span class="code-str">"Reggaeton"</span>
+<span class="code-com"># Hash: los datos del usuario, agrupados</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> usuario:1 nombre <span class="code-str">"Ana"</span> edad <span class="code-num">25</span> pais <span class="code-str">"Chile"</span>
 
-<span class="code-com"># List: la cola de reproducción de un usuario</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">RPUSH</span> cola:usuario:101 <span class="code-str">"Tusa"</span> <span class="code-str">"Provenza"</span>
+<span class="code-com"># List: la lista de tareas del usuario</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">RPUSH</span> usuario:1:tareas <span class="code-str">"Comprar"</span> <span class="code-str">"Estudiar"</span> <span class="code-str">"Pagar cuentas"</span>
 
-<span class="code-com"># Set: los géneros que le gustan a un usuario, sin repetir</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SADD</span> generos:usuario:101 <span class="code-str">"Reggaeton"</span> <span class="code-str">"Pop"</span>
+<span class="code-com"># Set: los colores favoritos del usuario, sin repetir</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SADD</span> usuario:1:colores <span class="code-str">"rojo"</span> <span class="code-str">"azul"</span> <span class="code-str">"verde"</span>
 
-<span class="code-com"># Sorted Set: ranking de canciones por reproducciones</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZADD</span> ranking:canciones <span class="code-num">950000</span> <span class="code-str">"Tusa"</span></code></pre>
+<span class="code-com"># Sorted Set: un ranking asociado al usuario</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZADD</span> usuario:1:ranking <span class="code-num">100</span> <span class="code-str">"Ana"</span> <span class="code-num">85</span> <span class="code-str">"Luis"</span> <span class="code-num">92</span> <span class="code-str">"Sofía"</span>
+
+<span class="code-com"># JSON: el documento completo del usuario, guardado tal cual (Redis 8+)</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">JSON.SET</span> usuario:1:perfil $ <span class="code-str">'{"nombre":"Ana","edad":25,"pais":"Chile"}'</span></code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -2328,6 +2386,15 @@ window.WEEK_CONTENT_4_2 = `
         estructura va a tener una llave, se define sola con el primer comando que la crea.
       </p>
     </div>
+    <div class="content-box" style="margin-top:0.8rem;">
+      <p style="margin:0;">
+        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">JSON.SET</span></code> guarda un documento JSON completo bajo una llave, algo que antes de Redis 8 no
+        existía de forma nativa (había que simularlo con un Hash o un String). El <code>$</code> indica la
+        raíz del documento; <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">JSON.GET</span></code> usuario:1:perfil lo recupera completo, o con
+        <code>JSON.GET usuario:1:perfil $.nombre</code> se puede leer solo un campo puntual.
+      </p>
+    </div>
+
   </div>
 
   <!-- ===================== 4. TRABAJAR CON KEYS ===================== -->
@@ -2342,7 +2409,35 @@ window.WEEK_CONTENT_4_2 = `
       <code>cancion:205:titulo</code>.
     </p>
 
-    <div class="code-block nosql" style="margin-top:0.6rem;">
+    <div style="max-width:640px; margin:0.8rem auto 0;">
+      <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" style="max-width:640px; width:100%; height:auto; display:block; margin:0 auto;">
+        <text x="150" y="18" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#33404f">MongoDB: jerarquía</text>
+        <rect x="20" y="28" width="260" height="150" rx="8" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.5"/>
+        <text x="35" y="48" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Base de datos</text>
+        <rect x="35" y="55" width="230" height="105" rx="6" fill="#f2f6f9" stroke="#4a7c9e" stroke-width="1.2"/>
+        <text x="50" y="72" font-family="Segoe UI, sans-serif" font-size="9.5" fill="var(--text-dim)">Colección: canciones</text>
+        <rect x="50" y="79" width="200" height="65" rx="5" fill="#ffffff" stroke="#4a7c9e" stroke-width="1"/>
+        <text x="150" y="100" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#4a7c9e">{ _id, titulo, artista... }</text>
+        <text x="150" y="118" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">documento 1 de muchos</text>
+        <text x="150" y="134" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">dentro de la colección</text>
+
+        <text x="480" y="18" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#33404f">Redis: keyspace plano</text>
+        <rect x="330" y="28" width="300" height="150" rx="8" fill="#ffffff" stroke="#b33a2e" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <rect x="345" y="42" width="120" height="34" rx="6" fill="#f5e9e8" stroke="#b33a2e" stroke-width="1.2"/>
+        <text x="405" y="63" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#b33a2e">cancion:205</text>
+        <rect x="475" y="42" width="140" height="34" rx="6" fill="#f5e9e8" stroke="#b33a2e" stroke-width="1.2"/>
+        <text x="545" y="63" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#b33a2e">cancion:205:titulo</text>
+        <rect x="345" y="86" width="120" height="34" rx="6" fill="#f5e9e8" stroke="#b33a2e" stroke-width="1.2"/>
+        <text x="405" y="107" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#b33a2e">usuario:1</text>
+        <rect x="475" y="86" width="140" height="34" rx="6" fill="#f5e9e8" stroke="#b33a2e" stroke-width="1.2"/>
+        <text x="545" y="107" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#b33a2e">sesion:usuario:101</text>
+        <rect x="345" y="130" width="270" height="34" rx="6" fill="#f5e9e8" stroke="#b33a2e" stroke-width="1.2"/>
+        <text x="480" y="151" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#b33a2e">ranking:canciones</text>
+        <text x="480" y="176" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">todas las llaves viven al mismo nivel, sin anidar</text>
+      </svg>
+    </div>
+
+    <div class="code-block nosql" style="margin-top:0.8rem;">
       <div class="code-block-header">
         <span class="code-badge">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
@@ -2366,20 +2461,237 @@ window.WEEK_CONTENT_4_2 = `
 <span class="code-com"># Eliminar una llave</span>
 <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">DEL</span> cancion:205:titulo</code></pre>
     </div>
+  </div>
+
+  <!-- ===================== 5. CRUD: CREAR ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>5. CRUD: crear con <code>SET</code> y <code>HSET</code></h3>
+    </div>
+    <p>
+      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span></code> crea, o sobrescribe, una llave de tipo String. <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span></code> crea, o actualiza, uno o
+      varios campos dentro de un Hash, el equivalente más cercano a "insertar un documento" en Redis.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(111,157,124,0.18); color:#6f9d7c;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h4>SET</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Crea o reemplaza una llave simple,
+          de tipo String.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(111,157,124,0.18); color:#6f9d7c;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M10 4v16" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div>
+        <h4>HSET</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Crea un Hash, o le agrega/actualiza
+          campos, sin tocar los demás campos que ya tenía.</p>
+      </div>
+    </div>
+
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
+          Redis
+        </span>
+        <span class="code-filename">04_crear.txt</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com"># String simple</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Tusa"</span>
+
+<span class="code-com"># Hash con varios campos, como un mini documento</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> cancion:205 titulo <span class="code-str">"Tusa"</span> artista <span class="code-str">"Karol G"</span> genero <span class="code-str">"Reggaeton"</span> reproducciones <span class="code-num">950000</span></code></pre>
+    </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
-        En RedisInsight, todo esto tiene equivalente visual: la lista de llaves aparece en el panel
-        izquierdo, con un buscador que filtra por patrón, igual que <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">KEYS</span></code>. Un ícono de basura junto a
-        cada llave hace lo mismo que <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">DEL</span></code>. La sección "Rendimiento" más adelante explica por qué
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">KEYS</span></code> se debe evitar en un sistema real.
+        En RedisInsight, el botón <strong>"+ Add Key"</strong> deja elegir el tipo (String, Hash, List,
+        Set, Sorted Set) y llenar los campos desde un formulario, el mismo papel que "Insert Document"
+        en Compass.
       </p>
     </div>
   </div>
 
-  <!-- ===================== 5. OPERACIONES ATÓMICAS Y EXPIRACIÓN ===================== -->
+  <!-- ===================== 6. CRUD: LEER ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>5. Operaciones atómicas y expiración</h3>
+      <h3>6. CRUD: leer con <code>GET</code>, <code>MGET</code> y <code>HGETALL</code></h3>
+    </div>
+    <p>
+      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">GET</span></code> lee el valor de una llave String. <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">MGET</span></code> lee varias llaves de una sola vez.
+      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGETALL</span></code> trae todos los campos de un Hash, y <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGET</span></code> trae solo uno.
+    </p>
+
+    <div class="concept-grid" style="grid-template-columns:repeat(2, 1fr);">
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(74,124,158,0.15); color:#4a7c9e;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div>
+        <h4>GET</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve el valor de una llave
+          String.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(74,124,158,0.15); color:#4a7c9e;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h4>MGET</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve varios valores String de
+          una sola vez, en un solo viaje.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(74,124,158,0.15); color:#4a7c9e;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M10 4v16" stroke="currentColor" stroke-width="1.8"/><circle cx="7" cy="7" r="1.4" fill="currentColor"/><circle cx="13.5" cy="7" r="1.4" fill="currentColor"/><circle cx="7" cy="13.5" r="1.4" fill="currentColor"/><circle cx="17" cy="17" r="1.4" fill="currentColor"/></svg>
+        </div>
+        <h4>HGETALL</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve todos los campos y valores
+          de un Hash.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(74,124,158,0.15); color:#4a7c9e;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M10 4v16" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="10" width="6" height="6" fill="currentColor" opacity="0.35"/></svg>
+        </div>
+        <h4>HGET</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve el valor de un solo campo
+          dentro de un Hash.</p>
+      </div>
+    </div>
+
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
+          Redis
+        </span>
+        <span class="code-filename">05_leer.txt</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com"># Leer un String</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">GET</span> cancion:205:titulo
+<span class="code-com"># Devuelve: "Tusa"</span>
+
+<span class="code-com"># Leer un Hash completo</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGETALL</span> cancion:205
+<span class="code-com"># Devuelve: titulo "Tusa", artista "Karol G", genero "Reggaeton", reproducciones "950000"</span>
+
+<span class="code-com"># Leer un solo campo del Hash</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGET</span> cancion:205 artista
+<span class="code-com"># Devuelve: "Karol G"</span></code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== 7. CRUD: ACTUALIZAR ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>7. CRUD: actualizar con <code>SET</code>, <code>HSET</code> y <code>HINCRBY</code></h3>
+    </div>
+    <p>
+      Actualizar en Redis usa los mismos comandos que crear: <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span></code> sobre una llave existente la
+      sobrescribe por completo; <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span></code> sobre un campo existente de un Hash solo cambia ese campo, sin
+      tocar los demás. <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HINCRBY</span></code> suma o resta un número a un campo del Hash, de forma atómica.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(201,154,78,0.18); color:#c99a4e;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20l4-1 10-10-3-3-10 10-1 4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>SET</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Reemplaza por completo el valor de
+          una llave String.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(201,154,78,0.18); color:#c99a4e;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M10 4v16" stroke="currentColor" stroke-width="1.8"/><path d="M15 12l3-1-1 3-3 1z" fill="currentColor"/></svg>
+        </div>
+        <h4>HSET</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Actualiza un campo puntual de un
+          Hash, deja los demás campos intactos.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(201,154,78,0.18); color:#c99a4e;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 17l6-6 4 4 6-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>HINCRBY</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Suma o resta un número a un campo
+          numérico del Hash, de forma atómica.</p>
+      </div>
+    </div>
+
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
+          Redis
+        </span>
+        <span class="code-filename">06_actualizar.txt</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com"># Sobrescribir un String completo</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Tusa (Remix)"</span>
+
+<span class="code-com"># Actualizar solo un campo del Hash, los demás no se tocan</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> cancion:205 reproducciones <span class="code-num">960000</span>
+
+<span class="code-com"># Sumar 10.000 reproducciones sin tener que leer el valor actual primero</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HINCRBY</span> cancion:205 reproducciones <span class="code-num">10000</span></code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== 8. CRUD: ELIMINAR ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>8. CRUD: eliminar con <code>DEL</code> y <code>HDEL</code></h3>
+    </div>
+    <p>
+      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">DEL</span></code> borra una llave completa, sin importar qué tipo de estructura tenga.
+      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HDEL</span></code> borra solo un campo puntual dentro de un Hash, dejando el resto intacto.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(196,68,68,0.12); color:#c44444;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>DEL</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Elimina una llave completa: String,
+          Hash, List, Set o Sorted Set.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(196,68,68,0.12); color:#c44444;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M10 4v16" stroke="currentColor" stroke-width="1.8"/><path d="M11 11l4 4M15 11l-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h4>HDEL</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Elimina un solo campo de un Hash, el
+          resto de campos sigue existiendo.</p>
+      </div>
+    </div>
+
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
+          Redis
+        </span>
+        <span class="code-filename">07_eliminar.txt</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com"># Eliminar solo un campo del Hash</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HDEL</span> cancion:205 reproducciones
+
+<span class="code-com"># Eliminar la llave completa, con todos sus campos</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">DEL</span> cancion:205</code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== 9. OPERACIONES ATÓMICAS Y EXPIRACIÓN ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>9. Operaciones atómicas y expiración</h3>
     </div>
     <p>
       Dos herramientas que no existen igual en MongoDB, y que son el corazón de para qué se usa Redis en la
@@ -2429,312 +2741,102 @@ window.WEEK_CONTENT_4_2 = `
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
+        <strong>Manejo de sesiones:</strong> permite mantener a un usuario "conectado" en una página web y
+        configurar el <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">TTL</span></code> para que su sesión caduque automáticamente tras 30 minutos de inactividad,
+        obligándolo a iniciar sesión nuevamente por seguridad.
+      </p>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem;">
+      <p style="margin:0;">
         <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">INCR</span></code> es atómico: si mil usuarios reproducen la misma canción al mismo tiempo,
         Redis garantiza que las mil sumas se cuentan, sin que se pierda ninguna por una condición de
         carrera. Es exactamente el problema que resolvería mal un simple "leer, sumar 1, guardar" hecho a
         mano.
       </p>
     </div>
-  </div>
 
-  <!-- ===================== 6. CRUD: CREAR ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>6. CRUD: crear con <code>SET</code> y <code>HSET</code></h3>
-    </div>
-    <p>
-      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span></code> crea, o sobrescribe, una llave de tipo String. <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span></code> crea, o actualiza, uno o
-      varios campos dentro de un Hash, el equivalente más cercano a "insertar un documento" en Redis.
-    </p>
+    <div style="max-width:640px; margin:0.8rem auto 0;">
+      <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" style="max-width:640px; width:100%; height:auto; display:block; margin:0 auto;">
+        <rect x="10" y="15" width="300" height="150" rx="10" fill="#ffffff" stroke="#b33a2e" stroke-width="1.5"/>
+        <text x="160" y="36" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#33404f">Sin atomicidad (riesgo)</text>
+        <text x="30" y="58" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Cliente A lee: <tspan font-family="Consolas, monospace" fill="#33404f">950000</tspan></text>
+        <text x="30" y="76" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Cliente B lee: <tspan font-family="Consolas, monospace" fill="#33404f">950000</tspan></text>
+        <text x="30" y="94" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">A suma 1 y guarda: <tspan font-family="Consolas, monospace" fill="#33404f">950001</tspan></text>
+        <text x="30" y="112" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">B suma 1 y guarda: <tspan font-family="Consolas, monospace" fill="#33404f">950001</tspan></text>
+        <line x1="30" y1="124" x2="290" y2="124" stroke="var(--border)" stroke-width="1"/>
+        <text x="30" y="146" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" fill="#b33a2e">Resultado: 950001 (se perdió 1)</text>
 
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>SET</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Crea o reemplaza una llave simple,
-          de tipo String.</p>
-      </div>
-      <div class="concept-card">
-        <h4>HSET</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Crea un Hash, o le agrega/actualiza
-          campos, sin tocar los demás campos que ya tenía.</p>
-      </div>
+        <rect x="330" y="15" width="300" height="150" rx="10" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
+        <text x="480" y="36" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#33404f">Con INCR (atómico)</text>
+        <text x="350" y="58" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Cliente A: <tspan font-family="Consolas, monospace" fill="#33404f">INCR &rarr; 950001</tspan></text>
+        <text x="350" y="76" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Cliente B: <tspan font-family="Consolas, monospace" fill="#33404f">INCR &rarr; 950002</tspan></text>
+        <text x="350" y="94" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Redis procesa una a la vez,</text>
+        <text x="350" y="112" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">nunca al mismo tiempo.</text>
+        <line x1="350" y1="124" x2="610" y2="124" stroke="var(--border)" stroke-width="1"/>
+        <text x="350" y="146" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700" fill="#6f9d7c">Resultado: 950002 (correcto)</text>
+      </svg>
     </div>
 
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
-          Redis
-        </span>
-        <span class="code-filename">04_crear.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
+    <p style="margin-top:1.2rem;"><code><span style="color:#e24b4a; font-weight:700;">SET</span></code> también puede expirar una llave en el mismo paso, sin necesitar un <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">EXPIRE</span></code> aparte, y además acepta condiciones sobre si la key ya existe o no:</p>
+    <div style="display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:0.6rem;">
+      <div style="flex:1 1 260px; min-width:260px;">
+        <p style="margin:0 0 0.3rem; font-weight:700; color:var(--text);">Expiración</p>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:0.4rem 0.6rem; background:#e24b4a; color:#fff; border:1px solid var(--border);">Opción</th>
+              <th style="text-align:left; padding:0.4rem 0.6rem; background:#e24b4a; color:#fff; border:1px solid var(--border);">Significado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>EX</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Expira en N segundos</td></tr>
+            <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>PX</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Expira en N milisegundos</td></tr>
+          </tbody>
+        </table>
       </div>
-      <pre><code><span class="code-com"># String simple</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Tusa"</span>
-
-<span class="code-com"># Hash con varios campos, como un mini documento</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> cancion:205 titulo <span class="code-str">"Tusa"</span> artista <span class="code-str">"Karol G"</span> genero <span class="code-str">"Reggaeton"</span> reproducciones <span class="code-num">950000</span></code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        En RedisInsight, el botón <strong>"+ Add Key"</strong> deja elegir el tipo (String, Hash, List,
-        Set, Sorted Set) y llenar los campos desde un formulario, el mismo papel que "Insert Document"
-        en Compass.
-      </p>
-    </div>
-  </div>
-
-  <!-- ===================== 7. CRUD: LEER ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>7. CRUD: leer con <code>GET</code>, <code>MGET</code> y <code>HGETALL</code></h3>
-    </div>
-    <p>
-      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">GET</span></code> lee el valor de una llave String. <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">MGET</span></code> lee varias llaves de una sola vez.
-      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGETALL</span></code> trae todos los campos de un Hash, y <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGET</span></code> trae solo uno.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>GET</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve el valor de una llave
-          String.</p>
-      </div>
-      <div class="concept-card">
-        <h4>MGET</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve varios valores String de
-          una sola vez, en un solo viaje.</p>
-      </div>
-      <div class="concept-card">
-        <h4>HGETALL</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve todos los campos y valores
-          de un Hash.</p>
-      </div>
-      <div class="concept-card">
-        <h4>HGET</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve el valor de un solo campo
-          dentro de un Hash.</p>
+      <div style="flex:1 1 260px; min-width:260px;">
+        <p style="margin:0 0 0.3rem; font-weight:700; color:var(--text);">Condición de escritura</p>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:0.4rem 0.6rem; background:#7c3aed; color:#fff; border:1px solid var(--border);">Opción</th>
+              <th style="text-align:left; padding:0.4rem 0.6rem; background:#7c3aed; color:#fff; border:1px solid var(--border);">Significado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>NX</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Solo guarda si la key <strong>no</strong> existe todavía</td></tr>
+            <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>XX</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Solo guarda si la key <strong>ya</strong> existe</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
-          Redis
-        </span>
-        <span class="code-filename">05_leer.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com"># Leer un String</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">GET</span> cancion:205:titulo
-<span class="code-com"># Devuelve: "Tusa"</span>
-
-<span class="code-com"># Leer un Hash completo</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGETALL</span> cancion:205
-<span class="code-com"># Devuelve: titulo "Tusa", artista "Karol G", genero "Reggaeton", reproducciones "950000"</span>
-
-<span class="code-com"># Leer un solo campo del Hash</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGET</span> cancion:205 artista
-<span class="code-com"># Devuelve: "Karol G"</span></code></pre>
-    </div>
-  </div>
-
-  <!-- ===================== 8. CRUD: ACTUALIZAR ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>8. CRUD: actualizar con <code>SET</code>, <code>HSET</code> y <code>HINCRBY</code></h3>
-    </div>
-    <p>
-      Actualizar en Redis usa los mismos comandos que crear: <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span></code> sobre una llave existente la
-      sobrescribe por completo; <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span></code> sobre un campo existente de un Hash solo cambia ese campo, sin
-      tocar los demás. <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HINCRBY</span></code> suma o resta un número a un campo del Hash, de forma atómica.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>SET</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Reemplaza por completo el valor de
-          una llave String.</p>
-      </div>
-      <div class="concept-card">
-        <h4>HSET</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Actualiza un campo puntual de un
-          Hash, deja los demás campos intactos.</p>
-      </div>
-      <div class="concept-card">
-        <h4>HINCRBY</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Suma o resta un número a un campo
-          numérico del Hash, de forma atómica.</p>
-      </div>
-    </div>
-
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
-          Redis
-        </span>
-        <span class="code-filename">06_actualizar.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com"># Sobrescribir un String completo</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Tusa (Remix)"</span>
-
-<span class="code-com"># Actualizar solo un campo del Hash, los demás no se tocan</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> cancion:205 reproducciones <span class="code-num">960000</span>
-
-<span class="code-com"># Sumar 10.000 reproducciones sin tener que leer el valor actual primero</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HINCRBY</span> cancion:205 reproducciones <span class="code-num">10000</span></code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span></code> actualizando un solo campo es el equivalente en Redis de
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateOne</span></code> con <code>$set</code> en MongoDB: cambia una parte puntual del registro sin
-        reescribir todo lo demás.
-      </p>
-    </div>
-  </div>
-
-  <!-- ===================== 9. CRUD: ELIMINAR ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>9. CRUD: eliminar con <code>DEL</code> y <code>HDEL</code></h3>
-    </div>
-    <p>
-      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">DEL</span></code> borra una llave completa, sin importar qué tipo de estructura tenga.
-      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HDEL</span></code> borra solo un campo puntual dentro de un Hash, dejando el resto intacto.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>DEL</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Elimina una llave completa: String,
-          Hash, List, Set o Sorted Set.</p>
-      </div>
-      <div class="concept-card">
-        <h4>HDEL</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Elimina un solo campo de un Hash, el
-          resto de campos sigue existiendo.</p>
-      </div>
-    </div>
-
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
-          Redis
-        </span>
-        <span class="code-filename">07_eliminar.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com"># Eliminar solo un campo del Hash</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HDEL</span> cancion:205 reproducciones
-
-<span class="code-com"># Eliminar la llave completa, con todos sus campos</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">DEL</span> cancion:205</code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Otra forma de "eliminar" en Redis, sin comando explícito, es dejar que una llave expire sola con
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">EXPIRE</span></code> (sección 5). Es la manera natural de borrar datos temporales, como una sesión o
-        un caché, sin tener que acordarte de limpiarlos a mano.
-      </p>
-    </div>
-  </div>
-
-  <!-- ===================== 10. ESTRUCTURAS AVANZADAS ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>10. Estructuras avanzadas: Lists y Sets</h3>
-    </div>
-    <p>
-      Más allá de String y Hash, Redis tiene estructuras pensadas para casos muy concretos. Una
-      <strong>List</strong> es una cola o pila ordenada; un <strong>Set</strong> es un conjunto de valores
-      únicos, ideal para responder preguntas de pertenencia o de intersección entre grupos.
-    </p>
-
-    <p style="margin-top:1rem;"><strong>Lists: la cola de reproducción de un usuario</strong></p>
-    <p style="margin-top:0.4rem;">
-      Los comandos de List combinan dos letras: <strong>qué extremo</strong> de la lista se usa
-      (<code>R</code> = right/derecha, <code>L</code> = left/izquierda) y <strong>qué acción</strong> se
-      hace (<code>PUSH</code> = agregar, <code>POP</code> = sacar). No es que <code>R</code> agregue y
-      <code>L</code> saque: los cuatro comandos existen para ambos extremos.
-    </p>
-    <table style="width:100%; max-width:420px; border-collapse:collapse; font-size:0.85rem; margin:0.6rem 0 0;">
-      <thead>
-        <tr>
-          <th style="text-align:left; padding:0.4rem 0.6rem; background:#c9a227; color:#fff; border:1px solid var(--border);">Comando</th>
-          <th style="text-align:left; padding:0.4rem 0.6rem; background:#c9a227; color:#fff; border:1px solid var(--border);">Qué hace</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>RPUSH</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Agrega por la derecha (al final)</td></tr>
-        <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>LPUSH</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Agrega por la izquierda (al principio)</td></tr>
-        <tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>RPOP</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Saca de la derecha (el último)</td></tr>
-        <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>LPOP</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Saca de la izquierda (el primero)</td></tr>
-      </tbody>
-    </table>
-    <p style="margin-top:0.6rem; font-size:0.85rem; color:var(--text-dim);">
-      Por ejemplo, una cola de reproducción normal usa <code>RPUSH</code> para ir agregando canciones al
-      final, y <code>LPOP</code> para ir sacando/reproduciendo la primera que entró — el mismo
-      comportamiento FIFO (primero en entrar, primero en salir) de una fila.
-    </p>
     <div class="code-block nosql" style="margin-top:0.8rem;">
       <div class="code-block-header">
         <span class="code-badge">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
           Redis
         </span>
-        <span class="code-filename">08_lists.txt</span>
+        <span class="code-filename">00_set_opciones.txt</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code><span class="code-com"># Agregar canciones al final de la cola</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">RPUSH</span> cola:usuario:101 <span class="code-str">"Tusa"</span> <span class="code-str">"Provenza"</span>
+      <pre><code><span class="code-com"># Atajo: lo mismo que SET + EXPIRE, pero en un solo paso</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> country <span class="code-str">"Chile"</span> EX <span class="code-num">60</span>
 
-<span class="code-com"># Ver toda la cola, de principio a fin</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">LRANGE</span> cola:usuario:101 <span class="code-num">0</span> <span class="code-num">-1</span>
-<span class="code-com"># Devuelve: "Tusa", "Provenza"</span>
+<span class="code-com"># Solo la crea si "country" todavía no existe</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> country <span class="code-str">"Chile"</span> NX
 
-<span class="code-com"># Sacar la siguiente canción de la cola (la de más adelante)</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">LPOP</span> cola:usuario:101
-<span class="code-com"># Devuelve: "Tusa", y la quita de la lista</span></code></pre>
-    </div>
-
-    <p style="margin-top:1.2rem;"><strong>Sets: géneros favoritos, sin repetir</strong></p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
-          Redis
-        </span>
-        <span class="code-filename">09_sets.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com"># Géneros que le gustan a cada usuario</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SADD</span> generos:usuario:101 <span class="code-str">"Reggaeton"</span> <span class="code-str">"Pop"</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SADD</span> generos:usuario:102 <span class="code-str">"Reggaeton"</span> <span class="code-str">"Salsa"</span>
-
-<span class="code-com"># Ver todos los géneros de un usuario</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SMEMBERS</span> generos:usuario:101
-
-<span class="code-com"># ¿Le gusta el Reggaeton a este usuario? (1 = sí, 0 = no)</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SISMEMBER</span> generos:usuario:101 <span class="code-str">"Reggaeton"</span>
-
-<span class="code-com"># Géneros que tienen en común dos usuarios</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SINTER</span> generos:usuario:101 generos:usuario:102
-<span class="code-com"># Devuelve: "Reggaeton"</span></code></pre>
+<span class="code-com"># Expira en 500 milisegundos (medio segundo)</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> country <span class="code-str">"Chile"</span> PX <span class="code-num">500</span></code></pre>
     </div>
   </div>
 
-  <!-- ===================== 11. RENDIMIENTO ===================== -->
+  <!-- ===================== 10. RENDIMIENTO ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>11. Rendimiento en Redis</h3>
+      <h3>10. Rendimiento en Redis</h3>
     </div>
     <p>
-      En MongoDB, el rendimiento depende de crear los índices correctos, sin un índice adecuado, una
-      consulta revisa documento por documento. En Redis el problema es distinto: como todo vive en RAM y se
+      En Redis el problema es distinto: como todo vive en RAM y se
       accede directo por la llave, <strong>la llave misma ya funciona como índice</strong>. No hace falta
       crear nada aparte para que <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">GET</span></code> o <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGETALL</span></code> sean instantáneos.
     </p>
@@ -2765,7 +2867,9 @@ window.WEEK_CONTENT_4_2 = `
       <p style="margin:0;">
         Aunque Redis vive en RAM, no pierde los datos si el equipo se apaga: <strong>puede ser persistente</strong>,
         guardando copias de respaldo en disco de dos formas distintas, <strong>RDB</strong> o <strong>AOF</strong>.
-        Ojo: ese respaldo en disco no reemplaza la RAM como fuente de trabajo, solo sirve para recuperar los
+      </p>
+      <p style="margin:0.6rem 0 0;">
+        Cuidado: ese respaldo en disco no reemplaza la RAM como fuente de trabajo, solo sirve para recuperar los
         datos si Redis se reinicia o se cae.
       </p>
     </div>
@@ -2778,6 +2882,10 @@ window.WEEK_CONTENT_4_2 = `
           ejemplo, cada 5 minutos) y la guarda en un archivo. Es liviano y rápido de recuperar, pero si
           Redis se cae justo antes de la siguiente foto, se pierden los cambios más recientes.
         </p>
+        <ul style="margin:0.5rem 0 0; padding-left:1.1rem; font-size:0.85rem; color:var(--text-dim);">
+          <li style="margin-bottom:0.3rem;">Se configura estableciendo reglas de tiempo y cantidad de cambios. Por ejemplo: "toma una foto si pasan 60 segundos y hay al menos 1000 modificaciones".</li>
+          <li>Una vez configurada la regla, Redis evalúa las condiciones constantemente y ejecuta el respaldo por su cuenta.</li>
+        </ul>
       </div>
       <div class="content-box" style="flex:1 1 260px; min-width:260px; margin:0;">
         <p style="margin:0 0 0.4rem; font-weight:700; color:var(--text);">AOF (registro de escrituras)</p>
@@ -2786,100 +2894,56 @@ window.WEEK_CONTENT_4_2 = `
           medida que ocurre. Pierde menos información si Redis se cae, pero el archivo crece más y
           reconstruir los datos al reiniciar es más lento que con RDB.
         </p>
+        <ul style="margin:0.5rem 0 0; padding-left:1.1rem; font-size:0.85rem; color:var(--text-dim);">
+          <li style="margin-bottom:0.3rem;">Generalmente viene desactivado por defecto. Para que funcione, solo debes cambiar un parámetro en el servidor (ej. <code>appendonly yes</code>).</li>
+          <li>A partir de ese momento, el motor de Redis se encarga automáticamente de interceptar y anotar cada comando que modifique los datos (<code>SET</code>, <code>RPUSH</code>, etc.) en el archivo de registro, sin que tu código deba enviar una instrucción extra.</li>
+        </ul>
       </div>
     </div>
+
+    <div style="max-width:640px; margin:0.8rem auto 0;">
+      <svg viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg" style="max-width:640px; width:100%; height:auto; display:block; margin:0 auto;">
+        <text x="20" y="18" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#4a7c9e">RDB: foto completa cada N minutos</text>
+        <line x1="20" y1="45" x2="620" y2="45" stroke="#4a7c9e" stroke-width="1.5"/>
+        <circle cx="20" cy="45" r="6" fill="#4a7c9e"/>
+        <circle cx="170" cy="45" r="6" fill="#4a7c9e"/>
+        <circle cx="320" cy="45" r="6" fill="#4a7c9e"/>
+        <circle cx="470" cy="45" r="6" fill="#4a7c9e"/>
+        <circle cx="620" cy="45" r="6" fill="#4a7c9e"/>
+        <text x="20" y="62" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">0min</text>
+        <text x="170" y="62" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">5min</text>
+        <text x="320" y="62" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">10min</text>
+        <text x="470" y="62" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">15min</text>
+        <text x="620" y="62" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">20min</text>
+
+        <text x="20" y="98" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#b33a2e">AOF: se anota cada escritura, sin esperar</text>
+        <line x1="20" y1="120" x2="620" y2="120" stroke="#b33a2e" stroke-width="1.5"/>
+        <line x1="35" y1="112" x2="35" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="65" y1="112" x2="65" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="90" y1="112" x2="90" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="130" y1="112" x2="130" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="160" y1="112" x2="160" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="195" y1="112" x2="195" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="230" y1="112" x2="230" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="255" y1="112" x2="255" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="290" y1="112" x2="290" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="330" y1="112" x2="330" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="360" y1="112" x2="360" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="395" y1="112" x2="395" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="420" y1="112" x2="420" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="460" y1="112" x2="460" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="495" y1="112" x2="495" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="520" y1="112" x2="520" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="555" y1="112" x2="555" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <line x1="585" y1="112" x2="585" y2="128" stroke="#b33a2e" stroke-width="1.3"/>
+        <text x="20" y="145" font-family="Segoe UI, sans-serif" font-size="9" fill="var(--text-dim)">cada línea = un SET, HSET, INCR... anotado al instante</text>
+      </svg>
+    </div>
+
     <p style="margin-top:0.6rem; font-size:0.85rem; color:var(--text-dim);">
       Se pueden usar por separado o combinadas: RDB para respaldos livianos y rápidos de restaurar, AOF para
       minimizar lo que se pierde si Redis se cae de forma inesperada.
     </p>
-  </div>
-
-  <!-- ===================== 12. PRÁCTICA: RANKING CON SORTED SETS ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>12. Práctica: ranking de canciones con Sorted Sets</h3>
-    </div>
-    <p>
-      Un caso de uso clásico de Redis: mostrar en tiempo real las canciones más reproducidas de SoundFlow.
-      Hacer esto con un <code>ORDER BY</code> en MySQL, o un <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$sort</span></code> en MongoDB, funciona, pero
-      recalcula el orden cada vez que alguien pregunta. Con un <strong>Sorted Set</strong>, Redis mantiene
-      el orden actualizado todo el tiempo, y leer el top siempre es instantáneo.
-    </p>
-
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
-          Redis
-        </span>
-        <span class="code-filename">10_ranking.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com"># Agregar canciones al ranking: ZADD llave puntaje miembro</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZADD</span> ranking:canciones <span class="code-num">950000</span> <span class="code-str">"Tusa"</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZADD</span> ranking:canciones <span class="code-num">780000</span> <span class="code-str">"Provenza"</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZADD</span> ranking:canciones <span class="code-num">1300000</span> <span class="code-str">"Yonaguni"</span>
-
-<span class="code-com"># Top 3, de mayor a menor, con el puntaje incluido</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZREVRANGE</span> ranking:canciones <span class="code-num">0</span> <span class="code-num">2</span> WITHSCORES
-
-<span class="code-com"># Cada vez que alguien la reproduce otra vez, sube su puntaje</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZINCRBY</span> ranking:canciones <span class="code-num">1</span> <span class="code-str">"Tusa"</span></code></pre>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Para la actividad: usa el archivo <code>canciones.json</code> de la Clase 1 y agrega las
-        <strong>12 canciones</strong> al Sorted Set <code>ranking:canciones</code>, usando
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZADD</span></code> con las reproducciones de cada una como puntaje. Después, consulta con
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZREVRANGE</span></code> el top 5, y simula un par de reproducciones nuevas con
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">ZINCRBY</span></code> para ver el ranking moverse.
-      </p>
-    </div>
-  </div>
-
-  <!-- ===================== 13. PRÁCTICA: CONTADOR EN TIEMPO REAL ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>13. Práctica: contador de reproducciones en tiempo real</h3>
-    </div>
-    <p>
-      SoundFlow recibe reproducciones todo el tiempo. Actualizar un contador de reproducciones directo en
-      MySQL o MongoDB, por cada reproducción, saturaría la base de datos principal con escrituras
-      constantes sobre el mismo registro. Acá la prioridad es la <strong>velocidad de escritura</strong>,
-      el mismo motivo por el que en la Clase 1 los logs de tráfico se manejaron en Mongo en vez de MySQL,
-      solo que esta vez el volumen es tan alto que ni siquiera Mongo es la mejor opción: Redis sí.
-    </p>
-
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12Z" fill="#6f9d7c"/></svg>
-          Redis
-        </span>
-        <span class="code-filename">11_contador.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com"># Cada reproducción es un simple incremento atómico</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">INCR</span> reproducciones:cancion:205
-
-<span class="code-com"># Sumar varias de una vez (por ejemplo, al sincronizar un lote)</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">INCRBY</span> reproducciones:cancion:205 <span class="code-num">5</span>
-
-<span class="code-com"># Leer el conteo actual</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">GET</span> reproducciones:cancion:205</code></pre>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Para la actividad: crea un contador <code>reproducciones:cancion:ID</code> para cada una de las
-        <strong>12 canciones</strong> del archivo <code>canciones.json</code>, inicializado con sus
-        reproducciones actuales usando <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span></code>, y luego simula <strong>5 reproducciones nuevas</strong>
-        repartidas entre distintas canciones usando <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">INCR</span></code>. Compara cuánto tardaste en escribir esos 5
-        incrementos en Redis frente a lo que tardaría hacer lo mismo con <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateOne</span></code> y <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span></code>
-        en MongoDB.
-      </p>
-    </div>
   </div>
 
   <!-- ===================== QUIZ ===================== -->
@@ -2990,37 +3054,6 @@ window.WEEK_CONTENT_4_2 = `
     </div>
   </div>
 
-  <!-- ===================== PRÁCTICA GUIADA ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>Práctica: Docker, RedisInsight y tus primeros comandos</h3>
-    </div>
-    <p>Antes de la próxima clase, asegúrate de completar esta lista:</p>
-
-    <div class="content-box" style="border-left:4px solid #b33a2e; margin-top:1rem;">
-      <h4 style="margin:0 0 0.5rem; color:#b33a2e;">Instalación</h4>
-      <ol style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li>Instala <strong>Docker Desktop</strong> y confirma que el ícono de la ballena está en verde.</li>
-        <li>Corre <code>docker run -d --name redis -p 6379:6379 redis:latest</code> en una terminal.</li>
-        <li>Instala <strong>RedisInsight</strong> y conéctate a <code>127.0.0.1:6379</code>, recuerda darle
-          "Save" antes de "Connect".</li>
-      </ol>
-    </div>
-
-    <div class="content-box" style="border-left:4px solid #6f9d7c; margin-top:1rem;">
-      <h4 style="margin:0 0 0.5rem; color:#6f9d7c;">Mediana complejidad</h4>
-      <ol start="4" style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li>Crea un Hash <code>cancion:1</code> con los datos de una canción a tu elección.</li>
-        <li>Aplica <code>EXPIRE</code> a una llave de prueba con 60 segundos, y confirma con <code>TTL</code>
-          que la cuenta regresiva funciona.</li>
-        <li>Crea el Sorted Set <code>ranking:canciones</code> con las 12 canciones de
-          <code>canciones.json</code>, y consulta el top 3 con <code>ZREVRANGE</code>.</li>
-        <li>Explica con tus palabras por qué <code>KEYS *</code> sería un problema si SoundFlow tuviera
-          10 millones de llaves.</li>
-      </ol>
-    </div>
-  </div>
-
   <!-- ===================== FORO DE DEBATE: CONSULTOR SENIOR DE RENDIMIENTO ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
@@ -3047,6 +3080,18 @@ window.WEEK_CONTENT_4_2 = `
           es superior a una relacional o documental.</li>
       </ul>
     </div>
+
+    <p style="margin-top:1.2rem;">Revisa el siguiente video y responde a las preguntas del debate:</p>
+    <a href="https://www.youtube.com/watch?v=3leZhg7kYYQ" target="_blank" rel="noopener" style="display:block; max-width:360px; margin:0.6rem auto 0; border-radius:10px; overflow:hidden; border:1px solid var(--border); text-decoration:none; position:relative;">
+      <img src="https://img.youtube.com/vi/3leZhg7kYYQ/hqdefault.jpg" alt="¿Qué es Redis y por qué se usa en todos los proyectos modernos?" style="display:block; width:100%; height:auto;">
+      <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25);">
+        <span style="width:64px; height:64px; border-radius:50%; background:rgba(196,68,68,0.9); display:flex; align-items:center; justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </span>
+      <span style="display:block; padding:0.6rem 0.8rem; background:#111; color:#fff; font-size:0.85rem;">¿Qué es Redis y por qué se usa en todos los proyectos modernos? — ver en YouTube</span>
+    </a>
+    <p style="margin-top:0.5rem; font-size:0.78rem; color:var(--text-dim); text-align:center;">CodingMindsDev. (2026). ¿Qué es Redis y por qué se usa en todos los proyectos modernos? [Video]. YouTube.</p>
 
     <p style="margin-top:1.2rem;"><strong>Preguntas para el debate:</strong></p>
 
@@ -3084,6 +3129,7 @@ window.WEEK_CONTENT_4_2 = `
     </div>
     <p style="line-height:1.9;">
       · Redis Documentation, Data types. redis.io/docs/latest/develop/data-types<br>
+      · Redis Documentation, Sets. redis.io/docs/latest/develop/data-types/sets<br>
       · Redis Documentation, Commands. redis.io/docs/latest/commands<br>
       · RedisInsight Documentation. redis.io/docs/latest/operate/redisinsight<br>
       · Docker Documentation, Redis official image. hub.docker.com/_/redis<br>
