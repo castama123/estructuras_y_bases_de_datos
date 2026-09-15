@@ -55,12 +55,17 @@ const WEEKS = [
   },
   {
     n: 5,
-    titulo: "",
-    resumen: "",
-    objetivos: "",
+    titulo: "Índices B-Tree/B+Tree y uso de ORMs",
+    tituloClase1: "Índices B-Tree vs. B+Tree",
+    tituloClase2: "Uso de ORMs y prevención del problema N+1",
+    resumen: "Desde cero: qué es un árbol (raíz, padre, hijo, hoja, grado, altura) y cómo se recorre; luego el árbol binario y sus recorridos (preorden, inorden, postorden) con inserción y eliminación; y de ahí a los árboles que realmente usan las bases de datos, B-Tree y B+Tree, con inserción por división, eliminación por fusión, el rol de las hojas encadenadas en consultas de rango, y cómo MySQL (InnoDB) y MongoDB (WiredTiger) usan variantes de B+Tree por debajo de sus índices. Luego, qué es un ORM (SQLAlchemy) y el problema N+1: por qué es un \"asesino silencioso\" del rendimiento, cómo se ve en los logs, y cómo evitarlo con joinedload/selectinload, aplicado a una playlist de SoundFlow y al perfil de artistas similares.",
+    objetivos: "Manejar con dominio el vocabulario de árboles (grado, altura, padre, hijo, hoja) y sus recorridos, distinguir un árbol binario de un B-Tree y de un B+Tree según dónde viven los datos y cuántos hijos permite cada nodo, explicar cómo inserción/eliminación mantienen el árbol balanceado (división y fusión), y reconocer estas estructuras en los motores ya usados en el curso (MySQL, MongoDB). Además, entender qué resuelve un ORM, identificar el problema N+1 (incluyendo su forma anidada N×M+1) en escenarios reales de SoundFlow, y aplicar estrategias de carga (joinedload, selectinload) para prevenirlo.",
     embed: "",
     descarga: "presentaciones/semana-05.pdf",
-    disponible: false
+    disponible: true,
+    // Bloquea la Clase 2 en el sitio (pestaña oculta) mientras se termina de revisar.
+    // Cámbialo a true para volver a mostrarla.
+    disponibleClase2: false
   },
   {
     n: 6,

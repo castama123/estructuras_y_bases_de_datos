@@ -138,6 +138,14 @@ document.addEventListener('click', (e) => {
     g.classList.remove('tree-nodo-visitando', 'tree-nodo-visitado');
   });
 
+  // Antes de cada recorrido, vuelve el árbol a su estado original: oculta cualquier
+  // nodo/línea "extra" que se hubiera insertado (data-extra), y vuelve a mostrar
+  // cualquier nodo/línea "eliminable" que se hubiera ocultado (data-removable) en
+  // un recorrido anterior. Así, inserciones/eliminaciones simuladas en un botón no
+  // dejan rastro al probar otro botón.
+  demo.querySelectorAll('[data-extra]').forEach(el => { el.style.opacity = '0'; });
+  demo.querySelectorAll('[data-removable]').forEach(el => { el.style.opacity = '1'; });
+
   botones.forEach(b => { b.disabled = true; });
 
   const paso = 750; // milisegundos entre cada nodo visitado
@@ -156,9 +164,129 @@ document.addEventListener('click', (e) => {
       if (i === secuencia.length - 1) {
         setTimeout(() => {
           nodos.forEach(g => { g.classList.remove('tree-nodo-visitando'); });
-          if (estado) estado.textContent = 'Recorrido completo. Elige otro recorrido para comparar el orden.';
+
+          // data-revela="X": el botón termina insertando de verdad el nodo/línea
+          // marcados con data-extra="X" (aparecen con una transición de opacidad).
+          if (btn.dataset.revela) {
+            demo.querySelectorAll(`[data-extra="${btn.dataset.revela}"]`).forEach(el => { el.style.opacity = '1'; });
+          }
+          // data-oculta="X": el botón termina eliminando de verdad el nodo/línea
+          // marcados con data-removable="X" (desaparecen con una transición de opacidad).
+          if (btn.dataset.oculta) {
+            demo.querySelectorAll(`[data-removable="${btn.dataset.oculta}"]`).forEach(el => { el.style.opacity = '0'; });
+          }
+
+          if (estado) {
+            estado.textContent = btn.dataset.mensajeFinal || 'Recorrido completo. Elige otro recorrido para comparar el orden.';
+          }
           botones.forEach(b => { b.disabled = false; });
         }, paso);
+      }
+    }, i * paso);
+  });
+});
+
+// Visor paso a paso (.tree-stepper): muestra una serie de diagramas fijos, uno
+// por paso (.tree-step-frame[data-step]), y dos botones (.tree-step-prev /
+// .tree-step-next) para avanzar o retroceder entre ellos. A diferencia del
+// simulador de recorrido, aquí cada paso es un dibujo distinto (no una
+// animación), útil para explicar procesos con varios cambios encadenados.
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.tree-step-prev, .tree-step-next');
+  if (!btn || btn.disabled) return;
+
+  const stepper = btn.closest('.tree-stepper');
+  if (!stepper) return;
+
+  const frames = Array.from(stepper.querySelectorAll('.tree-step-frame'));
+  if (!frames.length) return;
+
+  let actual = frames.findIndex(f => f.style.display !== 'none');
+  if (actual === -1) actual = 0;
+
+  const delta = btn.classList.contains('tree-step-next') ? 1 : -1;
+  const siguiente = Math.min(frames.length - 1, Math.max(0, actual + delta));
+
+  frames.forEach((f, i) => { f.style.display = (i === siguiente) ? '' : 'none'; });
+
+  const contador = stepper.querySelector('.tree-step-counter');
+  if (contador) contador.textContent = `Paso ${siguiente + 1} de ${frames.length}`;
+
+  const prevBtn = stepper.querySelector('.tree-step-prev');
+  const nextBtn = stepper.querySelector('.tree-step-next');
+  if (prevBtn) prevBtn.disabled = siguiente === 0;
+  if (nextBtn) nextBtn.disabled = siguiente === frames.length - 1;
+});
+
+// Botón "Reiniciar árbol": devuelve un .tree-demo a su estado original (oculta
+// lo "extra", vuelve a mostrar lo "removable", limpia resaltados) sin tener que
+// volver a correr una animación completa. Útil para repetir la explicación.
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.tree-reset-btn');
+  if (!btn) return;
+
+  const demo = btn.closest('.tree-demo');
+  if (!demo) return;
+
+  demo.querySelectorAll('.tree-nodo').forEach(g => {
+    g.classList.remove('tree-nodo-visitando', 'tree-nodo-visitado');
+  });
+  demo.querySelectorAll('[data-extra]').forEach(el => { el.style.opacity = '0'; });
+  demo.querySelectorAll('[data-removable]').forEach(el => { el.style.opacity = '1'; });
+  demo.querySelectorAll('.tree-traversal-btn').forEach(b => { b.disabled = false; });
+
+  const estado = demo.querySelector('.tree-demo-status');
+  if (estado) estado.textContent = 'Árbol reiniciado. Elige una operación para verla de nuevo.';
+});
+
+// Simulador de logs de queries (Semana 5, Clase 2: problema N+1): revela línea
+// por línea las consultas SQL que un ORM dispararía de verdad, para visualizar
+// cuántas queries se ejecutan según la estrategia de carga usada. El botón trae
+// data-lineas (JSON con la lista de queries en texto), data-total (mensaje final)
+// y data-tono ("malo"/"bueno") para colorear el contador.
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.query-log-btn');
+  if (!btn || btn.disabled) return;
+
+  const demo = btn.closest('.query-log-demo');
+  if (!demo) return;
+  const salida = demo.querySelector('.query-log-output');
+  const contador = demo.querySelector('.query-log-counter');
+  if (!salida) return;
+
+  let lineas;
+  try {
+    lineas = JSON.parse(btn.dataset.lineas || '[]');
+  } catch (err) {
+    return;
+  }
+  if (!lineas.length) return;
+
+  const botones = demo.querySelectorAll('.query-log-btn');
+  botones.forEach(b => { b.disabled = true; });
+  salida.innerHTML = '';
+  if (contador) {
+    contador.textContent = '';
+    contador.className = 'query-log-counter';
+  }
+
+  const paso = 140;
+  lineas.forEach((linea, i) => {
+    setTimeout(() => {
+      const fila = document.createElement('div');
+      fila.className = 'query-log-line';
+      fila.textContent = `[${i + 1}] ${linea}`;
+      salida.appendChild(fila);
+      salida.scrollTop = salida.scrollHeight;
+
+      if (i === lineas.length - 1) {
+        setTimeout(() => {
+          if (contador) {
+            contador.textContent = btn.dataset.total || `Total: ${lineas.length} queries ejecutadas`;
+            contador.classList.add(btn.dataset.tono === 'bueno' ? 'query-log-bueno' : 'query-log-malo');
+          }
+          botones.forEach(b => { b.disabled = false; });
+        }, 200);
       }
     }, i * paso);
   });

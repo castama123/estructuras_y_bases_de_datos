@@ -69,6 +69,7 @@
 <script src="js/content/semana-02.js"></script>
 <script src="js/content/semana-03.js"></script>
 <script src="js/content/semana-04.js"></script>
+<script src="js/content/semana-05.js"></script>
 <script src="js/nav.js"></script>
 <script>
   const params = new URLSearchParams(location.search);
@@ -80,6 +81,11 @@
 
   document.getElementById('pageTitle').textContent = `Semana ${week.n}`;
   document.getElementById('pageResumen').textContent = week.resumen;
+  // El resumen de la Semana 5 se lee mejor alineado a la izquierda (es más largo que el resto);
+  // el resto de semanas conserva el resumen centrado por defecto.
+  if (week.n === 5) {
+    document.getElementById('pageResumen').classList.add('resumen-left');
+  }
   document.getElementById('detailObjetivos').textContent = week.objetivos;
 
   const weekContentEl = document.getElementById('weekContent');
