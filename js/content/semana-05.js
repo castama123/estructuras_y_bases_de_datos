@@ -1678,15 +1678,92 @@ db.canciones.getIndexes()</code></pre>
 `;
 
 window.WEEK_CONTENT_5_2 = `
-  <!-- ===================== 1. QUÉ ES UN ORM ===================== -->
+
+  <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">SoundFlow: el N+1 Queries, el "asesino silencioso" que se esconde en tu ORM</h2>
+
+  <!-- ===================== DEFINICIÓN INICIAL ===================== -->
   <div class="activity-section" style="border-top:none; padding-top:0;">
+    <div class="activity-section-header">
+      <h3>¿Qué es el problema de la consulta N+1 Queries?</h3>
+    </div>
+    <p>
+      El problema de las consultas N+1 es un problema de rendimiento común en las aplicaciones basadas en
+      bases de datos, especialmente en aquellas que utilizan marcos de trabajo de mapeo objeto-relacional
+      (ORM). Ocurre cuando una consulta inicial recupera un conjunto de registros y, posteriormente, se
+      ejecuta una consulta adicional para obtener los datos relacionados con cada registro. Esto da como
+      resultado N+1 consultas, donde N es el número de registros recuperados por la consulta inicial. Por
+      ejemplo, si tiene 10 usuarios y necesita obtener sus publicaciones asociadas, la aplicación podría
+      ejecutar una consulta para obtener los usuarios y luego 10 consultas adicionales para obtener las
+      publicaciones de cada usuario.
+    </p>
+  </div>
+
+  <!-- ===================== 0. ANALOGÍA DE ARRANQUE ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Analogía: 21 viajes al supermercado</h3>
+    </div>
+    <p>
+      Olvídate de código por un momento. Imagina que te piden organizar una cena para 20 invitados, cada uno
+      con un plato distinto, y tienes que hacer el mercado para prepararlos todos.
+    </p>
+    <p>
+      Lo lógico: haces <strong>una sola lista</strong> con los 20 ingredientes que necesitas, vas
+      <strong>un solo viaje</strong> al supermercado, llenas el carrito con todo, y vuelves a casa. Un viaje,
+      veinte ingredientes.
+    </p>
+    <p>
+      Ahora imagina la versión absurda: vas al supermercado <strong>una primera vez</strong> solo para ver la
+      lista de los 20 invitados y qué plato le toca a cada uno. Sales y vas a casa de nuevo.
+    </p>
+    <p>
+      Vuelves a subir al carro, manejas de nuevo hasta el supermercado, compras
+      <strong>únicamente el ingrediente del primer plato</strong>, y regresas a casa. Repites exactamente lo
+      mismo para el segundo plato. Y para el tercero. Y así, veinte veces más. Al final hiciste
+      <strong>21 viajes</strong> al supermercado para traer exactamente lo mismo que hubieras podido traer en
+      uno solo.
+    </p>
+
+    <div class="concept-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(196,68,68,0.12); color:#c44444;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+        </div>
+        <h4>21 viajes (el problema)</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">1 viaje para ver la lista de platos, +
+          20 viajes más, uno por cada ingrediente suelto. Mismo resultado, muchísimo más tiempo perdido
+          manejando de ida y vuelta.</p>
+      </div>
+      <div class="concept-card">
+        <div class="summary-icon" style="background:rgba(111,157,124,0.18); color:#6f9d7c;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h4>1 viaje (la solución)</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Anotas todo lo que necesitas de una
+          vez, y traes todos los ingredientes en un solo viaje con el carrito lleno.</p>
+      </div>
+    </div>
+
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #7c3aed;">
+      <p style="margin:0;">
+        Eso es exactamente lo que le puede pasar a un ORM mal configurado: 1 consulta para traer la lista de
+        20 canciones de una playlist, y luego <strong>20 consultas más</strong> — una por cada canción — para
+        ir a buscar, una por una, el álbum al que pertenece. "1 consulta para la lista, + N consultas de
+        vuelta, una por cada ítem" es exactamente la fórmula <strong>N+1 Queries</strong> que vas a ver hoy, aplicada
+        a SoundFlow.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== 1. QUÉ ES UN ORM ===================== -->
+  <div class="activity-section">
     <div class="activity-section-header">
       <h3>1. ¿Qué es un ORM (y por qué SoundFlow usa uno)?</h3>
     </div>
     <p>
       Un <strong>ORM</strong> (Object-Relational Mapping, "mapeo objeto-relacional") es una capa de software
       que traduce entre dos formas distintas de representar los mismos datos:<br><br>
-      El mundo de <strong>objetos</strong> de tu código (clases, atributos, listas)<br>
+      El mundo de <strong>objetos</strong> del código (clases, atributos, listas)<br>
       El mundo de <strong>tablas</strong> de la base de datos (filas, columnas, llaves foráneas).<br><br>
       En vez de
       escribir <code style="color:#4a7c9e; font-weight:700;">SELECT * FROM tbl_canciones WHERE id_cancion = 5</code>, escribes algo como
@@ -1699,8 +1776,8 @@ window.WEEK_CONTENT_5_2 = `
       <div class="numbered-grid numbered-grid-2col" style="margin:0;">
         <div class="numbered-card">
           <div class="num" style="color:#7c3aed;">1. Mapeas clases a tablas</div>
-          <p>Defines una clase por cada tabla y un atributo por cada columna — como <code>Artista</code>,
-            <code>Album</code>, <code>Cancion</code> en la Sección 2. Le dices al ORM "estos objetos
+          <p>Defines una clase por cada tabla y un atributo por cada columna como <code>Artista</code>,
+            <code>Album</code>, <code>Cancion</code> y le dices al ORM "estos objetos
             corresponden a esas filas".</p>
           <p style="margin:0.5rem 0 0; font-size:0.82rem; color:var(--text-dim);">Ejemplo:
             <code style="color:#7c3aed; font-weight:700;">id_cancion = Column(Integer, primary_key=True)</code>
@@ -1732,9 +1809,7 @@ window.WEEK_CONTENT_5_2 = `
       <p style="margin:0.8rem 0 0;">
         Todo esto ocurre dentro de una <strong>sesión</strong>: un espacio donde el ORM lleva la cuenta de
         qué objetos creaste, modificaste o borraste, para mandar esos cambios juntos a la base de datos con
-        <code>session.commit()</code> (o deshacerlos todos con <code>rollback()</code> si algo falla) — la
-        misma idea de transacción que viste en la Semana 3, ahora expresada en objetos en vez de sentencias
-        SQL sueltas.
+        <code>session.commit()</code> (o deshacerlos todos con <code>rollback()</code> si algo falla).
       </p>
     </div>
 
@@ -1745,8 +1820,7 @@ window.WEEK_CONTENT_5_2 = `
         </div>
         <h4>Ventajas</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Menos SQL escrito a mano, código más
-          legible en el lenguaje que ya usas, protección automática contra SQL injection, y es más fácil
-          cambiar de motor de base de datos.</p>
+          legible en el lenguaje que ya usas, y protección automática contra SQL injection.</p>
       </div>
       <div class="concept-card">
         <div class="summary-icon" style="background:rgba(196,68,68,0.12); color:#c44444;">
@@ -1755,7 +1829,7 @@ window.WEEK_CONTENT_5_2 = `
         <h4>El riesgo</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">El ORM oculta el SQL que en verdad se
           ejecuta. Eso es cómodo... hasta que esconde algo costoso, como el problema que vamos a ver hoy: el
-          <strong>N+1</strong>.</p>
+          <strong>N+1 Queries</strong>.</p>
       </div>
     </div>
 
@@ -1769,15 +1843,14 @@ window.WEEK_CONTENT_5_2 = `
       <div class="concept-card">
         <h4>¿Cuándo evitarlo?</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">En reportes/analítica pesada o
-          consultas muy específicas de rendimiento. Lo más común en proyectos reales: ORM para el CRUD
-          normal, SQL crudo solo para lo pesado.</p>
+          consultas muy específicas de rendimiento.</p>
       </div>
     </div>
 
     <p style="margin-top:1rem;">
-      Para esta clase usamos <strong>SQLAlchemy</strong>, el ORM más usado en Python (el mismo ecosistema de
-      Flask que ya conectamos en la Semana 3). La idea aplica igual en Django ORM, Sequelize (Node.js) o
-      Hibernate (Java): todos pueden sufrir el mismo problema, y todos ofrecen una forma de resolverlo.
+      Para esta clase usamos <strong>SQLAlchemy</strong>, el ORM más usado en Python. La idea aplica igual en
+      Django ORM, Sequelize (Node.js) o Hibernate (Java): todos pueden sufrir el mismo problema, y todos
+      ofrecen una forma de resolverlo.
     </p>
   </div>
 
@@ -1786,11 +1859,24 @@ window.WEEK_CONTENT_5_2 = `
     <div class="activity-section-header">
       <h3>2. Los modelos de SoundFlow en SQLAlchemy</h3>
     </div>
+    <div class="content-box" style="border-left:4px solid #7c3aed;">
+      <p style="margin:0;">
+        Antes del código: en este ejercicio vamos a conectar las tablas de <strong>Artista</strong>,
+        <strong>Álbum</strong> y <strong>Canción</strong> (más <strong>Playlist</strong> y
+        <strong>Artistas Similares</strong>) con clases de Python, para lograr algo puntual:
+        <strong>poder encontrar el álbum de cada canción de una playlist, o las canciones top de un artista
+        similar</strong>, con un simple
+        atributo (<code>artista.albumes</code>, <code>playlist.canciones</code>) en vez de escribir SQL a
+        mano.
+      </p>
+    </div>
     <p>
-      Para esta clase sumamos dos tablas nuevas a nuestra base de SoundFlow: <code>tbl_playlists</code>
-      (con su tabla puente <code>tbl_playlist_canciones</code>) y <code>tbl_artistas_similares</code>, una
-      relación de artista a artista (autorreferenciada). Todo lo demás —artistas, álbumes, canciones— es la
-      misma base que ya construimos desde la Semana 2.
+      Para esta clase sumamos tres tablas nuevas a nuestra base de SoundFlow:
+      <code style="color:#7c3aed; font-weight:700;">tbl_playlists</code>,
+      su tabla puente <code style="color:#c99a4e; font-weight:700;">tbl_playlist_canciones</code>, y
+      <code style="color:#6f9d7c; font-weight:700;">tbl_artistas_similares</code>, una
+      relación de artista a artista (autorreferenciada). Todo lo demás, artistas, álbumes, canciones, es la
+      misma base que ya construimos.
     </p>
 
     <div class="code-block" style="margin-top:0.6rem;">
@@ -1837,37 +1923,50 @@ CREATE TABLE tbl_artistas_similares (
         <span class="code-filename">modelos.py</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>class Artista(Base):
-    __tablename__ = "tbl_artistas"
-    id_artista = Column(Integer, primary_key=True)
-    nombre_artista = Column(String(100))
-    albumes = relationship("Album", back_populates="artista")
-    similares = relationship(
-        "Artista", secondary="tbl_artistas_similares",
-        primaryjoin="Artista.id_artista==tbl_artistas_similares.c.id_artista",
-        secondaryjoin="Artista.id_artista==tbl_artistas_similares.c.id_artista_similar"
-    )
+      <pre style="overflow-x:auto;"><code style="font-size:0.78rem;">class Artista(Base):                       # Esta clase = la tabla tbl_artistas
+    __tablename__ = "tbl_artistas"         # Nombre real de la tabla en la BD
+    id_artista = Column(Integer, primary_key=True)     # Variable -> objeto Column (columna real, llave primaria)
+    nombre_artista = Column(String(100))               # Variable -> objeto Column (columna real, VARCHAR(100))
+    <span style="color:#6f9d7c; font-weight:600;">albumes = relationship("Album", back_populates="artista")</span>
+    # Variable -> objeto relationship. NO es columna: declara la relación:
+    # un Artista tiene una lista de Album relacionados, encuéntralos usando
+    # la llave foránea que ya está en Album.id_artista
 
-class Album(Base):
-    __tablename__ = "tbl_albumes"
-    id_album = Column(Integer, primary_key=True)
-    titulo_album = Column(String(150))
-    id_artista = Column(Integer, ForeignKey("tbl_artistas.id_artista"))
-    artista = relationship("Artista", back_populates="albumes")
+    <span style="color:#6f9d7c; font-weight:600;">similares = relationship(              # Variable -> objeto relationship. Autorreferencia: Artista con otros Artista
+        "Artista", secondary="tbl_artistas_similares",   # vía la tabla puente
+        primaryjoin="Artista.id_artista==tbl_artistas_similares.c.id_artista",       # cuál lado es "el artista"
+        secondaryjoin="Artista.id_artista==tbl_artistas_similares.c.id_artista_similar"  # cuál lado es "el similar"
+    )</span>
 
-class Cancion(Base):
-    __tablename__ = "tbl_canciones"
-    id_cancion = Column(Integer, primary_key=True)
-    titulo = Column(String(150))
-    reproducciones = Column(Integer)
-    id_album = Column(Integer, ForeignKey("tbl_albumes.id_album"))
-    album = relationship("Album")          # <- sin "lazy", queda en el valor por defecto
+class Album(Base):                         # Esta clase = la tabla tbl_albumes
+    __tablename__ = "tbl_albumes"          # Nombre real de la tabla en la BD
+    id_album = Column(Integer, primary_key=True)       # Variable -> objeto Column (columna real, llave primaria)
+    titulo_album = Column(String(150))                 # Variable -> objeto Column (columna real, VARCHAR(150))
+    id_artista = Column(Integer, ForeignKey("tbl_artistas.id_artista"))   # Variable -> objeto Column (columna real, FK hacia Artista)
+    <span style="color:#6f9d7c; font-weight:600;">artista = relationship("Artista", back_populates="albumes")</span>
+    # Variable -> objeto relationship. NO es columna: declara la relación:
+    # cada Album pertenece a un solo Artista, encuéntralo usando la llave
+    # foránea id_artista de esta misma tabla. Es el espejo de "albumes" en Artista.
 
-class Playlist(Base):
-    __tablename__ = "tbl_playlists"
-    id_playlist = Column(Integer, primary_key=True)
-    nombre_playlist = Column(String(120))
-    canciones = relationship("Cancion", secondary="tbl_playlist_canciones")</code></pre>
+class Cancion(Base):                       # Esta clase = la tabla tbl_canciones
+    __tablename__ = "tbl_canciones"        # Nombre real de la tabla en la BD
+    id_cancion = Column(Integer, primary_key=True)     # Variable -> objeto Column (columna real, llave primaria)
+    titulo = Column(String(150))                       # Variable -> objeto Column (columna real, VARCHAR(150))
+    reproducciones = Column(Integer)                   # Variable -> objeto Column (columna real, entero)
+    id_album = Column(Integer, ForeignKey("tbl_albumes.id_album"))    # Variable -> objeto Column (columna real, FK hacia Album)
+    <span style="color:#6f9d7c; font-weight:600;">album = relationship("Album")</span>
+    # Variable -> objeto relationship. NO es columna: declara la relación:
+    # cada Cancion pertenece a un solo Album, encuéntralo usando la llave
+    # foránea id_album de esta misma tabla.
+
+class Playlist(Base):                      # Esta clase = la tabla tbl_playlists
+    __tablename__ = "tbl_playlists"        # Nombre real de la tabla en la BD
+    id_playlist = Column(Integer, primary_key=True)    # Variable -> objeto Column (columna real, llave primaria)
+    nombre_playlist = Column(String(120))              # Variable -> objeto Column (columna real, VARCHAR(120))
+    <span style="color:#6f9d7c; font-weight:600;">canciones = relationship("Cancion", secondary="tbl_playlist_canciones")</span>
+    # Variable -> objeto relationship. NO es columna: muchos a muchos, vía la
+    # tabla puente tbl_playlist_canciones. Una Playlist tiene muchas Canciones,
+    # y una Cancion puede estar en muchas Playlist.</code></pre>
     </div>
 
     <p style="margin-top:0.8rem;">
@@ -1881,12 +1980,7 @@ class Playlist(Base):
     __tablename__ = "tbl_artistas"</span>
     <span class="orm-columna">id_artista = Column(Integer, primary_key=True)</span>
     <span class="orm-columna">nombre_artista = Column(String(100))</span>
-    <span class="orm-relacion">albumes = relationship("Album", back_populates="artista")</span>
-    <span class="orm-auto">similares = relationship(
-        "Artista", secondary="tbl_artistas_similares",
-        primaryjoin="Artista.id_artista==tbl_artistas_similares.c.id_artista",
-        secondaryjoin="Artista.id_artista==tbl_artistas_similares.c.id_artista_similar"
-    )</span></code></pre>
+    <span class="orm-relacion">albumes = relationship("Album", back_populates="artista")</span></code></pre>
     </div>
 
     <div class="numbered-grid numbered-grid-2col" style="margin-top:0.8rem;">
@@ -1898,45 +1992,19 @@ class Playlist(Base):
       </div>
       <div class="numbered-card" data-highlight="columna" data-highlight-target="ormModeloDemo" style="cursor:pointer;">
         <div class="num" style="color:#6f9d7c;"><span class="color-dot" style="background:#6f9d7c;"></span>Column = columna real</div>
-        <p><code>id_artista = Column(Integer, primary_key=True)</code> se lee igual que en SQL: "columna
-          <code>id_artista</code>, entero, llave primaria" — lo mismo que <code>id_artista INT PRIMARY KEY</code>.</p>
+        <p><code>id_artista</code> es una <strong>variable</strong> (un atributo de la clase) que apunta a un
+          <strong>objeto</strong> <code>Column(Integer, primary_key=True)</code>.</p>
       </div>
-      <div class="numbered-card" data-highlight="relacion" data-highlight-target="ormModeloDemo" style="cursor:pointer;">
+      <div class="numbered-card" data-highlight="relacion" data-highlight-target="ormModeloDemo" style="cursor:pointer; grid-column: 1 / -1;">
         <div class="num" style="color:#8b7fb8;"><span class="color-dot" style="background:#8b7fb8;"></span>relationship = atajo de navegación</div>
-        <p><code>albumes = relationship(...)</code> <strong>no crea una columna nueva</strong>. Le dice a
+        <p><code>albumes</code> es otra <strong>variable</strong>, pero apunta a un objeto distinto:
+          <code>relationship(...)</code>, que <strong>no crea una columna nueva</strong>. Le dice a
           SQLAlchemy "cuando pidan <code>artista.albumes</code>, ve tú mismo a <code>tbl_albumes</code>", en
           vez de escribir el JOIN a mano. <code>back_populates="artista"</code> la conecta con su espejo en
           la clase <code>Album</code>.</p>
       </div>
-      <div class="numbered-card" data-highlight="auto" data-highlight-target="ormModeloDemo" style="cursor:pointer;">
-        <div class="num" style="color:#c99a4e;"><span class="color-dot" style="background:#c99a4e;"></span>Autorreferencia: artista → artista</div>
-        <p><code>similares</code> conecta un <code>Artista</code> con <em>otros</em> <code>Artista</code>, a
-          través de la tabla puente <code>tbl_artistas_similares</code>. Como ambos lados apuntan a la misma
-          tabla, SQLAlchemy no puede adivinar solo cuál es "el artista" y cuál "el similar" — por eso hacen
-          falta <code>primaryjoin</code> y <code>secondaryjoin</code>, explicando cada lado a mano.</p>
-      </div>
     </div>
 
-    <p style="margin:1rem 0 0.6rem;">El resto de las clases usan las mismas piezas, con dos variantes que vale la pena notar:</p>
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>Album: ForeignKey vs. relationship</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
-          <code>id_artista = Column(Integer, ForeignKey("tbl_artistas.id_artista"))</code> sí es una columna
-          real (la llave foránea), igual que en SQL. <code>ForeignKey</code> define la restricción en la
-          base de datos; <code>relationship</code> es la comodidad en Python para navegar esa restricción
-          sin escribir SQL.</p>
-      </div>
-      <div class="concept-card">
-        <h4>Playlist: tabla puente sin autorreferencia</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
-          <code>canciones = relationship("Cancion", secondary="tbl_playlist_canciones")</code> usa el mismo
-          patrón de tabla puente que <code>similares</code>, pero sin <code>primaryjoin</code>/
-          <code>secondaryjoin</code>: aquí los dos lados apuntan a tablas distintas
-          (<code>tbl_playlists</code> y <code>tbl_canciones</code>), así que SQLAlchemy adivina la dirección
-          solo.</p>
-      </div>
-    </div>
   </div>
 
   <!-- ===================== 3. CARGA PEREZOSA ===================== -->
@@ -1945,7 +2013,7 @@ class Playlist(Base):
       <h3>3. La carga perezosa (lazy loading): la raíz del problema</h3>
     </div>
     <p>
-      Fíjate en <code>album = relationship("Album")</code>: no dice cuándo traer ese álbum. Por defecto,
+      Fíjate en <code style="color:#6f9d7c; font-weight:600;">album = relationship("Album")</code>: no dice cuándo traer ese álbum. Por defecto,
       SQLAlchemy usa <code>lazy="select"</code>, es decir, <strong>carga perezosa</strong>: el álbum de una
       canción NO se trae junto con la canción. Se trae después, en una consulta aparte, y solo en el
       instante exacto en que tu código escribe <code>cancion.album</code>.
@@ -1955,15 +2023,24 @@ class Playlist(Base):
         Esto no es un error de SQLAlchemy: es una decisión de diseño. Traer TODO relacionado con TODO,
         siempre, sería un desperdicio (¿para qué traer el álbum si nunca lo vas a usar?). El problema
         aparece cuando accedes a esa relación perezosa <strong>dentro de un ciclo</strong>, una vez por cada
-        fila — ahí es donde nace el N+1.
+        fila — ahí es donde nace el N+1 Queries.
       </p>
     </div>
+
+    <p style="margin-top:1rem;"><strong>Carga ansiosa (eager loading): la otra cara de la moneda</strong></p>
+    <p>
+      Es la estrategia opuesta a la carga perezosa: en vez de esperar a que el código pida la relación,
+      le dices a SQLAlchemy que la traiga <strong>de una vez</strong>, junto con (o inmediatamente después
+      de) la consulta principal, para no disparar una consulta nueva por cada fila. Más adelante vas a ver
+      dos formas concretas de pedirla: <code>joinedload</code> (todo en un solo JOIN) y
+      <code>selectinload</code> (una consulta en bloque por cada nivel de la relación).
+    </p>
   </div>
 
   <!-- ===================== 4. EL PROBLEMA N+1 ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>4. El problema N+1: el "asesino silencioso" del rendimiento</h3>
+      <h3>4. El problema N+1 Queries: el "asesino silencioso" del rendimiento</h3>
     </div>
     <p>
       El patrón es siempre el mismo: <strong>1 consulta</strong> para traer una lista de N filas, y luego
@@ -2022,7 +2099,7 @@ for cancion in playlist.canciones:               # 1 consulta: trae las 20 canci
       <span class="query-log-counter"></span>
     </div>
 
-    <p style="margin-top:0.8rem;">La solución: pedirle a SQLAlchemy que traiga la relación de una vez, con <code>joinedload</code> (un solo JOIN):</p>
+    <p style="margin-top:0.8rem;">La solución: pedirle a SQLAlchemy que traiga la relación de una vez, con <code>joinedload</code> (un solo JOIN), quitando así la carga perezosa para esta consulta:</p>
     <div class="code-block" style="margin-top:0.6rem;">
       <div class="code-block-header">
         <span class="code-dot" style="background:#ff5f56"></span>
@@ -2031,15 +2108,15 @@ for cancion in playlist.canciones:               # 1 consulta: trae las 20 canci
         <span class="code-filename">playlist_optimizada.py</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>from sqlalchemy.orm import joinedload
+      <pre style="overflow-x:auto;"><code style="font-size:0.78rem;">from sqlalchemy.orm import joinedload   # Importa la función para pedir un JOIN explícito
 
 playlist = (
-    session.query(Playlist)
-    .options(joinedload(Playlist.canciones).joinedload(Cancion.album))
-    .get(7)
+    session.query(Playlist)                                            # Consulta sobre Playlist
+    .options(joinedload(Playlist.canciones).joinedload(Cancion.album))  # Trae canciones Y álbumes ya, en el mismo JOIN
+    .get(7)                                                             # Filtra por id_playlist = 7
 )
 
-for cancion in playlist.canciones:
+for cancion in playlist.canciones:                      # Recorre las 20 canciones, ya cargadas en memoria
     print(cancion.titulo, cancion.album.titulo_album)   # ya está en memoria: 0 consultas extra</code></pre>
     </div>
 
@@ -2072,7 +2149,7 @@ for cancion in playlist.canciones:
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Activando
           <code>create_engine(url, echo=True)</code>, SQLAlchemy imprime en consola cada SQL que ejecuta de
           verdad. Si ves la misma consulta repetida 20 veces con distinto <code>WHERE id = ?</code>, ahí está
-          el N+1.</p>
+          el N+1 Queries.</p>
       </div>
       <div class="concept-card">
         <h4>Debug toolbars</h4>
@@ -2092,12 +2169,12 @@ for cancion in playlist.canciones:
   <!-- ===================== 7. ESCENARIO ARTISTAS SIMILARES ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>7. Escenario 2: artistas similares y sus canciones top (el N+1 anidado)</h3>
+      <h3>7. Escenario 2: artistas similares y sus canciones top (el N+1 Queries anidado)</h3>
     </div>
     <p>
       En el perfil de un artista queremos mostrar sus <strong>5 "Artistas Similares"</strong>, y por cada
       uno de esos 5, sus <strong>3 canciones más populares</strong>. Este caso es más traicionero que el
-      anterior: el N+1 aparece <strong>dos veces, uno anidado dentro del otro</strong>.
+      anterior: el N+1 Queries aparece <strong>dos veces, uno anidado dentro del otro</strong>.
     </p>
     <div class="code-block" style="margin-top:0.6rem;">
       <div class="code-block-header">
@@ -2107,17 +2184,17 @@ for cancion in playlist.canciones:
         <span class="code-filename">similares_sin_optimizar.py</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>artista = session.query(Artista).get(12)              # 1 consulta: el artista
+      <pre style="overflow-x:auto;"><code style="font-size:0.78rem;">artista = session.query(Artista).get(12)               # 1 consulta: trae el artista con id_artista = 12
 
-for similar in artista.similares:                      # 1 consulta MÁS: los 5 artistas similares
+for similar in artista.similares:                       # 1 consulta MÁS: trae los 5 artistas similares
     top3 = (
-        session.query(Cancion)
-        .filter(Cancion.id_artista == similar.id_artista)
-        .order_by(Cancion.reproducciones.desc())
-        .limit(3)
-        .all()                                          # 1 consulta POR CADA similar (5 en total)
+        session.query(Cancion)                          # Nueva consulta a Cancion, una vez por cada similar
+        .filter(Cancion.id_artista == similar.id_artista)   # Filtra solo las canciones de ESE similar
+        .order_by(Cancion.reproducciones.desc())         # Ordena de más a menos reproducida
+        .limit(3)                                        # Se queda solo con las 3 canciones top
+        .all()                                           # 1 consulta POR CADA similar (5 en total)
     )
-    for cancion in top3:
+    for cancion in top3:                                 # Recorre las 3 canciones top de este similar
         print(cancion.titulo, cancion.album.titulo_album)   # 1 consulta MÁS por canción (15 en total)</code></pre>
     </div>
 
@@ -2145,9 +2222,9 @@ for similar in artista.similares:                      # 1 consulta MÁS: los 5 
     </div>
 
     <p style="margin-top:0.8rem;">
-      La solución: encadenar <code>selectinload</code> por cada nivel de la relación. En vez de una consulta
-      por fila, SQLAlchemy hace <strong>una consulta por nivel</strong>, trayendo todas las filas de ese
-      nivel de una vez con un <code>WHERE id IN (...)</code>:
+      La solución: encadenar <code>selectinload</code> por cada nivel de la relación, quitando así la carga
+      perezosa de cada una. En vez de una consulta por fila, SQLAlchemy hace <strong>una consulta por
+      nivel</strong>, trayendo todas las filas de ese nivel de una vez con un <code>WHERE id IN (...)</code>:
     </p>
     <div class="code-block" style="margin-top:0.6rem;">
       <div class="code-block-header">
@@ -2157,16 +2234,16 @@ for similar in artista.similares:                      # 1 consulta MÁS: los 5 
         <span class="code-filename">similares_optimizado.py</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>from sqlalchemy.orm import selectinload
+      <pre style="overflow-x:auto;"><code style="font-size:0.78rem;">from sqlalchemy.orm import selectinload   # Importa la función que carga colecciones en bloque
 
 artista = (
-    session.query(Artista)
+    session.query(Artista)                     # Consulta sobre Artista
     .options(
-        selectinload(Artista.similares)
-        .selectinload(Artista.top_canciones)
-        .selectinload(Cancion.album)
+        selectinload(Artista.similares)        # Nivel 1: trae los 5 similares en 1 sola consulta (no 5)
+        .selectinload(Artista.top_canciones)    # Nivel 2: trae las top 3 de CADA similar en 1 sola consulta (no 5)
+        .selectinload(Cancion.album)            # Nivel 3: trae los álbumes de esas canciones en 1 sola consulta (no 15)
     )
-    .get(12)
+    .get(12)                                    # Filtra por id_artista = 12
 )
 # Ya no importa si son 5 similares o 500: siempre son las mismas 4 consultas.</code></pre>
     </div>
@@ -2264,11 +2341,10 @@ artista = (
   <!-- ===================== NO SOLO SQLALCHEMY ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>Esto no es solo de SQLAlchemy</h3>
+      <h3>Otros ORM similares a SQLAlchemy</h3>
     </div>
     <p>
-      Usamos Python + SQLAlchemy porque ya conoces Flask y el modelo relacional de SoundFlow de semanas
-      anteriores, pero el problema N+1 no depende de este ORM ni de que la base sea relacional: aparece en
+      El problema N+1 Queries no depende de este ORM ni de que la base sea relacional: aparece en
       cualquier tecnología que cargue datos relacionados <strong>uno por uno</strong> en vez de en lote.
     </p>
     <div class="concept-grid" style="grid-template-columns:1fr 1fr 1fr;">
@@ -2277,7 +2353,7 @@ artista = (
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Django (<code>select_related</code> /
           <code>prefetch_related</code>), Sequelize o Prisma en Node.js (<code>include</code>), Eloquent en
           Laravel, Entity Framework en C#. Todos tienen el mismo par de herramientas: carga perezosa por
-          defecto, y un método de carga ansiosa para arreglar el N+1.</p>
+          defecto, y un método de carga ansiosa para arreglar el N+1 Queries.</p>
       </div>
       <div class="concept-card">
         <h4>MongoDB (NoSQL)</h4>
