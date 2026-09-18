@@ -2372,6 +2372,116 @@ artista = (
     </div>
   </div>
 
+  <!-- ===================== QUIZ ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Quiz rápido de autoevaluación</h3>
+    </div>
+    <div class="quiz-box">
+
+      <div class="quiz-question">
+        <p>1. ¿Qué es el problema N+1 Queries?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Un error de sintaxis en las consultas SQL</button>
+          <button type="button" class="quiz-option" data-correct="true">Hacer 1 consulta para traer una lista, y luego 1 consulta más por cada fila de esa lista, en vez de traerlo todo junto</button>
+          <button type="button" class="quiz-option" data-correct="false">Un límite que impide hacer más de N consultas por segundo</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>2. Por defecto, cuando defines <code>relationship()</code> en SQLAlchemy sin escribir <code>lazy=</code>, ¿qué comportamiento tiene?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="true">Carga perezosa (<code>lazy="select"</code>): no trae el dato relacionado hasta que el código lo pide</button>
+          <button type="button" class="quiz-option" data-correct="false">Carga ansiosa automática con JOIN</button>
+          <button type="button" class="quiz-option" data-correct="false">Lanza un error: siempre hay que declarar <code>lazy</code> a mano</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>3. Una playlist tiene 20 canciones. Sin optimizar, el código pide el álbum de cada una dentro de un <code>for</code>. ¿Cuántas consultas se ejecutan en total?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">20</button>
+          <button type="button" class="quiz-option" data-correct="true">21 (1 de la playlist + 20, una por cada álbum)</button>
+          <button type="button" class="quiz-option" data-correct="false">1, porque SQLAlchemy siempre optimiza automáticamente</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>4. ¿Por qué se le llama al problema N+1 el "asesino silencioso"?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Porque bloquea la base de datos por completo</button>
+          <button type="button" class="quiz-option" data-correct="true">Porque con pocos datos de prueba pasa desapercibido, y solo se nota cuando hay muchos datos reales en producción</button>
+          <button type="button" class="quiz-option" data-correct="false">Porque borra datos sin avisar</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>5. ¿Qué hace <code>joinedload</code> frente a la carga perezosa?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Elimina la relación del modelo</button>
+          <button type="button" class="quiz-option" data-correct="true">Trae la relación de una vez, con un solo JOIN, en la misma consulta</button>
+          <button type="button" class="quiz-option" data-correct="false">Convierte la base de datos relacional en NoSQL</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>6. ¿Cómo trae los datos <code>selectinload</code>, a diferencia de <code>joinedload</code>?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Con exactamente el mismo JOIN que <code>joinedload</code></button>
+          <button type="button" class="quiz-option" data-correct="true">Con una consulta separada por cada nivel de relación, usando <code>WHERE id IN (...)</code></button>
+          <button type="button" class="quiz-option" data-correct="false">No trae ningún dato, solo cuenta las filas</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>7. En el Escenario 2 (artistas similares y sus canciones top), ¿por qué el problema es peor que en la Playlist?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Porque usa una base de datos distinta</button>
+          <button type="button" class="quiz-option" data-correct="true">Porque el N+1 aparece anidado, dos veces: una por los similares y otra por las canciones top de cada similar</button>
+          <button type="button" class="quiz-option" data-correct="false">Porque no se puede resolver con ningún ORM</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>8. ¿Para qué sirven <code>primaryjoin</code> y <code>secondaryjoin</code> en la relación <code>similares</code> de <code>Artista</code>?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Para ordenar los resultados alfabéticamente</button>
+          <button type="button" class="quiz-option" data-correct="true">Para indicarle a SQLAlchemy cuál columna de la tabla puente es "el artista" y cuál es "el similar", ya que ambas apuntan a la misma tabla</button>
+          <button type="button" class="quiz-option" data-correct="false">Para crear un índice nuevo en la base de datos</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>9. ¿Cómo se detecta el problema N+1 en un proyecto real?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Solo revisando el código línea por línea a simple vista</button>
+          <button type="button" class="quiz-option" data-correct="true">Activando el log de SQL (<code>echo=True</code>) o con herramientas como Django Debug Toolbar o un APM (New Relic, Datadog), que muestran ráfagas de consultas casi idénticas</button>
+          <button type="button" class="quiz-option" data-correct="false">No se puede detectar, solo evitar desde el diseño</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>10. ¿El problema N+1 Queries es exclusivo de SQLAlchemy?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="true">No: aparece en cualquier ORM o tecnología que cargue datos relacionados uno por uno (Django, Sequelize, Mongoose, Entity Framework, etc.)</button>
+          <button type="button" class="quiz-option" data-correct="false">Sí, es un bug específico de SQLAlchemy que no existe en otros ORMs</button>
+          <button type="button" class="quiz-option" data-correct="false">Solo ocurre en bases de datos NoSQL</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ===================== RECURSOS ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
