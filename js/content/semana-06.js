@@ -530,7 +530,7 @@ window.WEEK_CONTENT_6_1 = `
     <div class="content-box" style="border-left:4px solid #7c3aed; margin-top:0.8rem;">
       <p style="margin:0 0 0.5rem;"><strong>Pero un momento: ¿no que los LLM solo entienden texto?</strong></p>
       <p style="margin:0;">
-        Los LLM "clásicos" (GPT-3, BERT, el <code>all-MiniLM-L6-v2</code> de esta actividad) sí nacieron
+        Los LLM "clásicos" (GPT-3, BERT, el <code>paraphrase-multilingual-MiniLM-L12-v2</code> de esta actividad) sí nacieron
         trabajando solo con texto. Pero hoy existen <strong>modelos multimodales</strong> (GPT-4o, Gemini)
         que reciben directamente imágenes, audio o video además de texto, en el mismo modelo. Y para
         embeddings específicamente hay modelos dedicados a otras modalidades.
@@ -602,7 +602,7 @@ window.WEEK_CONTENT_6_1 = `
           "coordenada" más. Un vector de 384 dimensiones tiene 384 números. Más dimensiones capturan matices
           más finos, pero pesan más y son más lentas de comparar.</p>
         <ul style="margin:0.5rem 0 0; padding-left:1.1rem; font-size:0.8rem; color:var(--text-dim);">
-          <li><code>all-MiniLM-L6-v2</code> (el tuyo): <strong>384</strong>, liviano, corre bien en tu propia computadora.</li>
+          <li><code>paraphrase-multilingual-MiniLM-L12-v2</code> (el tuyo): <strong>384</strong>, liviano, corre bien en tu propia computadora.</li>
           <li><code>all-mpnet-base-v2</code>: <strong>768</strong>, medio, más preciso pero más lento.</li>
           <li>OpenAI <code>text-embedding-3-small</code>: <strong>1.536</strong>, pesado, necesita API/servidor.</li>
           <li>OpenAI <code>text-embedding-3-large</code>: <strong>3.072</strong>, muy pesado, el que más recursos consume de esta lista.</li>
@@ -810,7 +810,7 @@ window.WEEK_CONTENT_6_1 = `
           más costoso y no sirve para información que cambia seguido; por eso RAG suele ser la opción más
           práctica para "que el modelo conozca tus documentos".</p>
       </div>
-      <div class="concept-card">
+      <div class="concept-card" style="grid-column: 1 / -1;">
         <h4 style="color:#c99a4e;">GPU (Graphics Processing Unit, unidad de procesamiento gráfico)</h4>
         <div style="color:#c99a4e; margin:0 0 0.6rem; height:65px; display:flex; align-items:center;">
           <svg viewBox="0 0 160 34" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -829,9 +829,16 @@ window.WEEK_CONTENT_6_1 = `
           </svg>
         </div>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Procesador pensado originalmente para
-          gráficos y videojuegos, capaz de hacer miles de operaciones matemáticas simples en paralelo. Por
-          eso es clave para entrenar modelos de IA: entrenar es ajustar millones de pesos una y otra vez, algo
-          mucho más rápido en una GPU que en un CPU normal.</p>
+          renderizar gráficos y videojuegos, pero resultó ser excelente también para entrenar modelos de IA:
+          mientras un CPU normal hace pocas operaciones a la vez pero muy flexibles, una GPU hace miles de
+          operaciones matemáticas simples en paralelo, justo lo que se necesita para ajustar los millones de
+          pesos de una red neuronal una y otra vez durante el entrenamiento.</p>
+        <p style="margin:0.5rem 0 0; font-size:0.85rem; color:var(--text-dim);">Por eso entrenar un LLM o un
+          modelo de embeddings desde cero es tan poco realista para casi cualquier proyecto: cuesta dinero
+          (miles de GPUs funcionando semanas o meses, más el equipo especializado), toma tiempo (recolectar y
+          limpiar datos, más el entrenamiento en sí), y exige un procesamiento y una cantidad de datos
+          masivos que muy pocas empresas pueden pagar. Por eso la estrategia normal, la que usas hoy con
+          <code>paraphrase-multilingual-MiniLM-L12-v2</code>, es reutilizar lo que ya entrenó alguien más.</p>
       </div>
     </div>
   </div>
@@ -1341,7 +1348,15 @@ window.WEEK_CONTENT_6_1 = `
       <p style="margin:0.6rem 0 0;">
         Además del repositorio (el "Hub"), Hugging Face mantiene librerías de código abierto muy usadas, como
         <code>transformers</code> (para LLMs) y <code>sentence-transformers</code>, la misma librería que vas
-        a usar en el laboratorio para descargar <code>all-MiniLM-L6-v2</code>.
+        a usar en el laboratorio para descargar <code>paraphrase-multilingual-MiniLM-L12-v2</code>.
+      </p>
+      <p style="margin:0.6rem 0 0;">
+        Hoy aloja más de 2 millones de modelos, más de 500.000 datasets y más de un millón de demos
+        interactivas, la mayoría publicados gratis por las mismas empresas y universidades que los entrenaron
+        (Google, Meta, laboratorios académicos), como parte de una cultura de investigación abierta. No solo
+        hay modelos de embeddings, también de texto, visión, audio y multimodales; la idea de fondo siempre
+        es la misma: reutilizar lo que ya entrenaron equipos grandes de investigación, en vez de entrenar
+        algo desde cero.
       </p>
     </div>
 
@@ -1355,7 +1370,7 @@ window.WEEK_CONTENT_6_1 = `
       <div class="concept-card">
         <h4 style="color:#6f9d7c;">SentenceTransformer</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Convierten texto en vectores densos
-          (embeddings), para búsqueda semántica. Este es el tipo que vas a usar: <code>all-MiniLM-L6-v2</code>
+          (embeddings), para búsqueda semántica. Este es el tipo que vas a usar: <code>paraphrase-multilingual-MiniLM-L12-v2</code>
           es un SentenceTransformer.</p>
       </div>
       <div class="concept-card">
@@ -1383,12 +1398,14 @@ window.WEEK_CONTENT_6_1 = `
         clasificación, similitud, etc.).</li>
       <li><strong>Tamaño vs. calidad:</strong> modelos más grandes (más dimensiones, más parámetros) suelen
         dar mejores resultados, pero son más lentos y pesados de correr. Para un proyecto de práctica como
-        SoundFlow-Pro, un modelo liviano como <code>all-MiniLM-L6-v2</code> (384 dimensiones) es más que
+        SoundFlow-Pro, un modelo liviano como <code>paraphrase-multilingual-MiniLM-L12-v2</code> (384 dimensiones) es más que
         suficiente.</li>
       <li><strong>Descargas y "likes":</strong> un buen indicador de qué tan probado y confiable es un
         modelo dentro de la comunidad.</li>
       <li><strong>Idioma:</strong> algunos modelos son solo en inglés, otros son multilingües, hay que
-        revisar que soporte el idioma que vas a usar.</li>
+        revisar que soporte el idioma que vas a usar. Por eso en SoundFlow-Pro usamos
+        <code>paraphrase-multilingual-MiniLM-L12-v2</code> y no un modelo solo-inglés: tus descripciones
+        están en español.</li>
       <li><strong>Licencia:</strong> revisar si el modelo se puede usar libremente, algunos tienen
         restricciones de uso comercial.</li>
     </ul>
@@ -1469,7 +1486,7 @@ window.WEEK_CONTENT_6_1 = `
       </div>
       <div class="numbered-card">
         <div class="num" style="color:#8b7fb8;">3. Generar los embeddings</div>
-        <p>Descargar un modelo de embeddings <strong>ya entrenado</strong> (<code>all-MiniLM-L6-v2</code>,
+        <p>Descargar un modelo de embeddings <strong>ya entrenado</strong> (<code>paraphrase-multilingual-MiniLM-L12-v2</code>,
           modelo de Hugging Face) y usarlo para convertir la descripción de cada canción en un vector de 384
           dimensiones o números, guardado en <code>canciones_vectoriales</code>.</p>
       </div>
@@ -1505,7 +1522,7 @@ window.WEEK_CONTENT_6_1 = `
     </p>
     <ol style="margin:0.6rem 0 0; padding-left:1.3rem;">
       <li>Ingresa a <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a>.</li>
-      <li>Regístrate con GitHub.</li>
+      <li>Regístrate con GitHub o Gmail.</li>
       <li>Haz clic en <strong>"New project"</strong>.</li>
       <li>Escribe el nombre <strong>SoundFlow-Pro</strong>, crea una contraseña segura y haz clic en
         <strong>"Create new project"</strong>.</li>
@@ -1722,12 +1739,52 @@ CREATE EXTENSION IF NOT EXISTS vector;
 
 -- 2. Creamos la tabla
 CREATE TABLE canciones_vectoriales (
-  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   titulo TEXT,
   artista TEXT,
   descripcion_emocional TEXT,
   embedding VECTOR(384)
 );</code></pre>
+    </div>
+    <div class="content-box" style="border-left:4px solid #6f9d7c; margin-top:0.6rem;">
+      <p style="margin:0 0 0.5rem; font-weight:600; color:#6f9d7c;">¿Qué está haciendo este código, línea por línea?</p>
+      <ul style="margin:0; padding-left:1.2rem; font-size:0.85rem; color:var(--text-dim);">
+        <li><strong>Línea 1, <code>CREATE EXTENSION IF NOT EXISTS vector;</code>:</strong> activa
+          <code>pgvector</code> en tu base de datos, esto es lo único que hace falta para que PostgreSQL
+          reconozca el tipo de columna <code>VECTOR</code>. No crea ningún dato todavía.</li>
+        <li><strong>Línea 2, <code>CREATE TABLE canciones_vectoriales (...)</code>:</strong> crea la tabla
+          que va a funcionar como tu base de datos vectorial: cada fila va a ser una canción con toda su
+          información junta.</li>
+        <li><strong><code>id UUID PRIMARY KEY DEFAULT gen_random_uuid()</code>:</strong> un identificador
+          único que se genera solo, en vez de un número que sube de 1 en 1 como en tablas relacionales
+          anteriores.</li>
+        <li><strong><code>titulo</code>, <code>artista</code>, <code>descripcion_emocional</code> (<code>TEXT</code>):</strong>
+          los datos normales de cada canción, texto plano, como cualquier columna que ya conoces.</li>
+        <li><strong><code>embedding VECTOR(384)</code>:</strong> la columna nueva. Aquí es donde, más
+          adelante, Python va a guardar el vector de 384 números que genera <code>sentence-transformers</code>
+          a partir de <code>descripcion_emocional</code>. Por ahora la tabla queda vacía, esta columna solo
+          define el "molde" que va a recibir esos números.</li>
+      </ul>
+      <p style="margin:0.6rem 0 0; font-size:0.85rem; color:var(--text-dim);">
+        En resumen: con estas dos líneas no estás generando ningún embedding todavía, solo estás preparando
+        el lugar donde se va a guardar cada uno cuando corras <code>insertar_canciones.py</code>.
+      </p>
+    </div>
+    <div class="content-box" style="border-left:4px solid #8b7fb8; margin-top:0.6rem;">
+      <p style="margin:0 0 0.5rem; font-weight:600; color:#8b7fb8;">¿Por qué usamos UUID aquí, y cómo funciona?</p>
+      <p style="margin:0 0 0.5rem; font-size:0.85rem; color:var(--text-dim);">
+        Un <code>UUID</code> es un identificador único generado al azar (larguísimo, tipo
+        <code>a1b2c3d4-...</code>), en vez de contar 1, 2, 3... como <code>BIGINT GENERATED ALWAYS AS IDENTITY</code>.
+        No revela el orden ni la cantidad de filas, y es prácticamente imposible que se repita aunque
+        generes datos desde sistemas distintos. <code>gen_random_uuid()</code> es la función de PostgreSQL
+        que lo genera, y <code>DEFAULT</code> hace que se calcule solo si no le mandas un <code>id</code>
+        desde Python.
+      </p>
+      <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
+        Aquí lo usamos porque es el estándar que trae Supabase en la mayoría de sus tablas, y porque en un
+        proyecto real donde varias fuentes insertan canciones al mismo tiempo, un <code>UUID</code> generado
+        en cada lugar nunca choca con otro.
+      </p>
     </div>
     <div class="content-box" style="border-left:4px solid #5b7c99; margin-top:0.6rem;">
       <p style="margin:0;">
@@ -1767,117 +1824,35 @@ CREATE TABLE canciones_vectoriales (
     <div class="content-box" style="border-left:4px solid #8b7fb8; margin-top:0.8rem;">
       <p style="margin:0 0 0.5rem;"><strong>¿Qué es exactamente esta librería, <code>sentence-transformers</code>?</strong></p>
       <p style="margin:0;">
-        Está construida sobre <code>transformers</code> de Hugging Face, y nació de un problema concreto:
-        BERT (el modelo de 2018 que viste en la línea de tiempo) entiende muy bien el texto, pero no fue
-        pensado para comparar frases entre sí de forma eficiente, con BERT "puro" tendrías que pasar dos
-        frases juntas por el modelo cada vez que las quieras comparar, algo carísimo si necesitas comparar
-        una consulta contra miles de canciones. En 2019, investigadores de la Universidad Técnica de
-        Darmstadt publicaron <strong>SBERT (Sentence-BERT)</strong>: una versión modificada de BERT
-        entrenada para que cada frase se convierta en <strong>un solo vector, de forma independiente</strong>,
-        y luego esos vectores se comparen con similitud de coseno, mucho más rápido, y exactamente el
-        patrón que necesita una base de datos vectorial. <code>sentence-transformers</code> es la
-        implementación oficial de esa idea, y además sirve de "puente" fácil hacia Hugging Face: te deja
-        cargar modelos de embeddings ya entrenados, como <code>all-MiniLM-L6-v2</code>, con una sola línea
-        (<code>model.encode(...)</code>), sin lidiar tú mismo con tokenización ni con la arquitectura del
-        modelo por dentro.
+        Está construida sobre la base de <strong style="color:#b33a2e;"><code>transformers</code> de Hugging
+        Face</strong>, que accede a miles de modelos de IA ya entrenados como (BERT, GPT, T5, y cientos más)
+        y trae las herramientas para cargarlos, tokenizarlos (convertir texto en las piezas que el modelo
+        entiende) y correrlos, sin importar para qué tarea sean: clasificar texto, traducir, generar texto,
+        resumir, responder preguntas, etc.
+      </p>
+      <p style="margin:0.6rem 0 0;">
+        Su trabajo es convertir cada
+        frase en <strong>un solo vector, de forma independiente</strong>, para que esos vectores se puedan
+        comparar después con similitud de coseno. Además sirve de "puente" fácil
+        hacia Hugging Face: te deja cargar modelos de embeddings ya entrenados, como
+        <code>paraphrase-multilingual-MiniLM-L12-v2</code>, con una sola línea (<code>model.encode(...)</code>), sin lidiar tú
+        mismo con tokenización ni con la arquitectura del modelo por dentro.
       </p>
     </div>
 
     <div class="content-box" style="border-left:4px solid #5b7c99; margin-top:0.8rem;">
-      <p style="margin:0 0 0.5rem;"><strong>¿Qué es exactamente ese "modelo de IA" que se acaba de descargar?</strong></p>
-      <p style="margin:0 0 0.5rem;">
-        <code>all-MiniLM-L6-v2</code> (el que vas a usar) no es un LLM generativo como GPT: es un
-        <strong>modelo de embeddings</strong>. Comparte la misma arquitectura Transformer que usan los LLM,
-        por eso salió en la línea de tiempo cerca de BERT, pero está entrenado para comprimir un texto en
-        un vector de significado, no para generar texto palabra por palabra.
-      </p>
-      <p style="margin:0 0 0.5rem;">
-        ¿Y quién lo hizo? No es un modelo propio de Hugging Face como empresa. Es una colaboración de
-        varias partes. La arquitectura base, <strong>MiniLM</strong>, es una técnica de compresión creada por
-        <strong>Microsoft Research</strong>: toma un BERT grande (12 capas) y lo "destila" en una versión
-        mucho más pequeña (6 capas) sin perder casi nada de calidad. Sobre esa arquitectura, el investigador
-        <strong>Nils Reimers</strong> (el mismo creador de SBERT que viste antes) publicó un checkpoint
-        específico. Y la versión final, <code>all-MiniLM-L6-v2</code>, se entrenó con mil millones de pares
-        de frases durante un evento comunitario organizado por Hugging Face ("Community week using JAX/Flax
-        for NLP & CV"). Hugging Face aquí es más el anfitrión, la plataforma que lo aloja y que impulsó que
-        se creara, que el autor único.
-      </p>
-      <p style="margin:0 0 0.5rem;">
-        Cuando se descarga un modelo así, en realidad se descargan varias piezas juntas: los
-        <strong>pesos</strong> (millones de números aprendidos durante el entrenamiento, el "conocimiento" del
-        modelo), la <strong>arquitectura</strong> (cuántas capas Transformer tiene y cómo están conectadas),
-        un <strong>tokenizador</strong> (el vocabulario y las reglas para partir el texto en tokens, el
-        término que vimos en el glosario) y un archivo de <strong>configuración</strong> (por ejemplo, que la
-        salida tenga 384 dimensiones). Todo eso llega junto cuando escribes <code>SentenceTransformer('all-MiniLM-L6-v2')</code>.
-      </p>
+      <p style="margin:0 0 0.5rem;"><strong>¿Qué es exactamente ese "modelo de IA" <code>paraphrase-multilingual-MiniLM-L12-v2</code>, con el que vamos a trabajar?</strong></p>
       <p style="margin:0;">
-        ¿De dónde sale? De <strong>Hugging Face</strong> (huggingface.co), el repositorio más grande de
-        modelos de IA gratuitos y descargables, ahí vive <code>all-MiniLM-L6-v2</code> y cientos de modelos
-        de embeddings más, en distintos idiomas y tamaños. También existen modelos de embeddings "como
-        servicio" vía API (OpenAI, Cohere, Google), sin descargar nada pero de pago; para esta actividad, el
-        modelo local y gratuito de Hugging Face es suficiente.
+        <code>paraphrase-multilingual-MiniLM-L12-v2</code> no es un LLM generativo como GPT: es un <strong>modelo
+        de embeddings</strong>, entrenado para convertir texto en un vector de significado, en más de 50
+        idiomas (incluido español). Se creó con una técnica llamada <strong>destilación de conocimiento</strong>:
+        un modelo "maestro" en inglés le enseña a un modelo "estudiante" multilingüe a producir vectores
+        parecidos para frases equivalentes en distintos idiomas. Vive en <strong>Hugging Face</strong>, la
+        plataforma desde donde lo descargas gratis al escribir
+        <code>SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')</code>.
       </p>
     </div>
 
-    <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:0.8rem;">
-      <p style="margin:0 0 0.5rem;"><strong>¿Qué es Hugging Face, exactamente?</strong></p>
-      <p style="margin:0 0 0.5rem;">
-        Es como "el GitHub de la inteligencia artificial": una plataforma abierta y colaborativa donde se
-        comparten modelos ya entrenados, gratis. Hoy aloja más de 2 millones de modelos, más de 500.000
-        datasets (conjuntos de datos para entrenar), y más de un millón de demos interactivas donde puedes
-        probar un modelo en el navegador sin instalar nada.
-      </p>
-      <p style="margin:0 0 0.5rem;">
-        ¿Por qué son gratis? La mayoría los publican gratuitamente las mismas empresas o universidades que
-        los entrenaron (Google, Meta, laboratorios académicos), como parte de una cultura de investigación
-        abierta: publicar el modelo, no solo el paper, permite que otros lo verifiquen, lo mejoren y
-        construyan cosas nuevas encima. Hugging Face no cobra por alojar ni descargar modelos públicos; solo
-        cobra planes de pago a quien necesita más cómputo (GPU) o almacenamiento privado, algo que no
-        necesitas para esta actividad.
-      </p>
-      <p style="margin:0;">
-        Y no solo hay modelos de embeddings: hay modelos de texto (generación, traducción, resumen), de
-        visión (clasificar o generar imágenes), de audio (reconocimiento y generación de voz), y cada vez
-        más modelos multimodales. La idea de fondo es siempre la misma: no tener que entrenar nada desde
-        cero, un proceso carísimo, con datos masivos y GPUs muy potentes, sino usar directamente lo que
-        equipos grandes de investigación ya entrenaron, como haces tú con <code>all-MiniLM-L6-v2</code>.
-      </p>
-      <p style="margin:0.5rem 0 0;">
-        Una <strong>GPU</strong> (Graphics Processing Unit) es un procesador pensado originalmente para
-        renderizar gráficos y videojuegos, pero resultó ser excelente también para entrenar modelos de IA:
-        mientras un CPU normal hace pocas operaciones a la vez pero muy flexibles, una GPU hace miles de
-        operaciones matemáticas simples en paralelo, justo lo que se necesita para ajustar los millones de
-        pesos de una red neuronal una y otra vez durante el entrenamiento.
-      </p>
-      <p style="margin:0.5rem 0 0;">
-        Por eso entrenar un LLM o un modelo de embeddings desde cero es tan poco realista para casi cualquier
-        proyecto: cuesta dinero (miles de GPUs funcionando semanas o meses, más el equipo especializado),
-        toma tiempo (recolectar y limpiar datos, más el entrenamiento en sí), y exige un procesamiento y una
-        cantidad de datos masivos que muy pocas empresas pueden pagar. Por eso la estrategia normal, la que
-        usas hoy con <code>all-MiniLM-L6-v2</code>, es reutilizar lo que ya entrenó alguien más.
-      </p>
-    </div>
-
-    <div class="content-box" style="border-left:4px solid #8b7fb8; margin-top:0.8rem;">
-      <p style="margin:0 0 0.5rem;"><strong>¿Por qué 384 dimensiones y no otro número?</strong></p>
-      <p style="margin:0 0 0.5rem;">
-        No hay un único tamaño "correcto": distintos modelos de embeddings usan distintas cantidades de
-        dimensiones, y hoy el rango va, más o menos, de unas 300 hasta más de 3.000. Algunos ejemplos reales:
-        <code>all-MiniLM-L6-v2</code> (el tuyo) usa 384; <code>all-mpnet-base-v2</code>, un modelo más grande
-        y preciso de la misma familia, usa 768; los modelos de embeddings de OpenAI usan 1.536 o hasta 3.072
-        dimensiones.
-      </p>
-      <p style="margin:0;">
-        Más dimensiones generalmente capturan matices más finos de significado (mejor calidad), pero cuestan
-        más: cada vector ocupa más espacio en la base de datos, y comparar vectores más largos es más lento.
-        Sin contar que, como viste en "sus límites reales" al inicio de la clase, demasiadas dimensiones
-        empiezan a sufrir la maldición de la dimensionalidad. Para esta actividad se eligió
-        <code>all-MiniLM-L6-v2</code> con sus 384 dimensiones porque es liviano y rápido (corre bien en tu
-        computadora, sin GPU, y se descarga en segundos), y da resultados más que suficientes para comparar
-        descripciones cortas de canciones, exactamente el balance que necesitas para aprender el concepto
-        sin esperar minutos por cada búsqueda.
-      </p>
-    </div>
 
     <p style="margin-top:0.8rem;">
       Crea <code>insertar_canciones.py</code>: convierte la descripción de cada canción en un vector de 384
@@ -1894,8 +1869,8 @@ CREATE TABLE canciones_vectoriales (
       <pre style="overflow-x:auto;"><code style="font-size:0.82rem;">from sentence_transformers import SentenceTransformer
 from database import supabase
 
-# 1. Cargamos el modelo de IA (se descarga la primera vez que se usa)
-model = SentenceTransformer('all-MiniLM-L6-v2')
+# 1. Cargamos el modelo de IA y usa la clase SentenceTransformer para cargar el modelo llamado 'paraphrase-multilingual-MiniLM-L12-v2'
+model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 
 def insertar_cancion(titulo, artista, descripcion):
     print(f"Generando vector para: {titulo}...")
@@ -1915,12 +1890,37 @@ def insertar_cancion(titulo, artista, descripcion):
         print(f"Error: {e}")
 
 if __name__ == "__main__":
-    # Insertemos un par de ejemplos con "vibras" bien distintas entre sí
+    # Insertemos 30 canciones con "vibras" bien distintas entre sí
     insertar_cancion("Café de Medianoche", "Ritmos Lo-Fi", "Música instrumental tranquila para estudiar en la noche con lluvia")
     insertar_cancion("Fiesta de Verano", "DJ Sol", "Ritmos electrónicos movidos para bailar en la playa bajo el sol")
     insertar_cancion("Golpe de Trueno", "Furia Eléctrica", "Guitarras distorsionadas muy potentes y batería rápida, ideal para descargar adrenalina o hacer ejercicio pesado")
     insertar_cancion("Gris y Lluvioso", "Piano Sentimental", "Una melodía de piano muy lenta y triste que transmite soledad, perfecta para un día de nostalgia en casa")
-    insertar_cancion("Enfoque Profundo", "Ondas de Enfoque", "Ritmos electrónicos constantes y suaves sin voces, diseñados para entrar en estado de flujo mientras programas o estudias")</code></pre>
+    insertar_cancion("Enfoque Profundo", "Ondas de Enfoque", "Ritmos electrónicos constantes y suaves sin voces, diseñados para entrar en estado de flujo mientras programas o estudias")
+    insertar_cancion("Bajo la Luna de Plata", "Trío Nocturno", "Balada romántica lenta con guitarra acústica, perfecta para una cena a la luz de las velas")
+    insertar_cancion("Perreo Sin Control", "MC Candela", "Reggaetón pegajoso y sensual con bajo potente, ideal para una fiesta hasta el amanecer")
+    insertar_cancion("Sabor Caribeño", "Orquesta Tropical", "Salsa alegre y bailable con trompetas vibrantes, perfecta para una celebración familiar")
+    insertar_cancion("Humo de Café", "Cuarteto Azul", "Jazz suave con saxofón relajado, ideal para una tarde tranquila leyendo en una cafetería")
+    insertar_cancion("Camino Sin Rumbo", "Blues del Sur", "Blues melancólico con guitarra eléctrica lenta, transmite nostalgia y desamor")
+    insertar_cancion("Ira de Acero", "Bestia de Hierro", "Metal pesado con riffs agresivos y gritos intensos, para liberar rabia y frustración")
+    insertar_cancion("Batalla Final", "Orquesta Sinfónica del Norte", "Música orquestal épica con coros poderosos, ideal para una escena de película de acción")
+    insertar_cancion("Levántate y Lucha", "Rimas del Barrio", "Hip-hop motivacional con letras de superación personal, para empezar el día con energía")
+    insertar_cancion("Pensamientos en Voz Baja", "Habitación 204", "Indie introspectivo con voz susurrada y guitarra minimalista, para momentos de reflexión a solas")
+    insertar_cancion("Rutas del Viajero", "Cuerdas al Viento", "Folk acústico con guitarra y armónica, perfecta para un viaje por carretera con amigos")
+    insertar_cancion("Respiración Consciente", "Sonidos del Bosque", "Música ambiental suave con sonidos de la naturaleza, ideal para meditar o practicar yoga")
+    insertar_cancion("Cumbia de mi Tierra", "Los Herederos", "Cumbia alegre y festiva con acordeón, perfecta para una reunión familiar de fin de semana")
+    insertar_cancion("Neón de los 80", "Retro Wave", "Synthwave nostálgico con sintetizadores brillantes, evoca las noches de una ciudad ochentera")
+    insertar_cancion("Promesa Eterna", "Cuarteto Real", "Vals romántico y elegante, perfecto para el primer baile de una boda")
+    insertar_cancion("Voz del Barrio", "MC Justicia", "Rap con letras de crítica social sobre la vida en la ciudad, crudo y directo")
+    insertar_cancion("Lágrimas de Ayer", "Bolero del Recuerdo", "Bolero lento y triste sobre un amor que ya no volverá, con mucho sentimiento")
+    insertar_cancion("Pasos en la Oscuridad", "Sombras del Ático", "Banda sonora tensa e inquietante con cuerdas disonantes, ideal para una escena de suspenso")
+    insertar_cancion("Brisa de Coco", "Costa Serena", "Reggae relajado con ritmo suave, perfecto para un atardecer en la playa sin prisas")
+    insertar_cancion("Domingo de Sol", "Mañanas Felices", "Pop alegre y ligero con guitarras brillantes, ideal para un desayuno soleado en familia")
+    insertar_cancion("Bachata de mi Vida", "Los Enamorados", "Bachata romántica y sensual, perfecta para bailar pegados con la persona que quieres")
+    insertar_cancion("Rebeldía Total", "Puños en Alto", "Punk rápido y crudo con letras de protesta, para quienes quieren romper las reglas")
+    insertar_cancion("Alma en Llamas", "Voces del Sur", "Soul profundo con una voz llena de emoción, transmite pasión y sufrimiento a la vez")
+    insertar_cancion("Fiesta en el Barrio", "Cumbia Brava", "Cumbia villera con mucho ritmo y coros gritados, ideal para una fiesta callejera")
+    insertar_cancion("Teclas Serenas", "Piano de Estudio", "Piano instrumental suave y repetitivo, diseñado para acompañar largas horas de estudio o lectura")
+    insertar_cancion("Saltando y Riendo", "Banda Infantil Alegre", "Canción infantil juguetona con ritmo saltarín, perfecta para que los niños bailen y se diviertan")</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.6rem;">
       <p style="margin:0;">
@@ -1940,6 +1940,13 @@ if __name__ == "__main__":
       </div>
       <pre style="overflow-x:auto;"><code>python insertar_canciones.py</code></pre>
     </div>
+    <p style="margin-top:0.6rem;">
+      Al ejecutarlo pasan dos cosas en cadena, por cada canción: primero
+      <code>model.encode(descripcion)</code> genera el vector de 384 números localmente en tu computadora
+      con <code>paraphrase-multilingual-MiniLM-L12-v2</code>, y luego
+      <code>supabase.table("canciones_vectoriales").insert(data).execute()</code> manda esa fila completa
+      (título, artista, descripción y el vector) a la nube, a tu proyecto de Supabase.
+    </p>
     <p style="margin-top:0.6rem;">
       Verifica en Supabase, en <strong>Table Editor &gt; canciones_vectoriales</strong>: en la columna
       <code>embedding</code> vas a ver una lista interminable de números por cada canción. Eso es la música
@@ -1961,27 +1968,28 @@ if __name__ == "__main__":
         <span class="code-filename">SQL Editor (Supabase)</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre style="overflow-x:auto;"><code style="font-size:0.82rem;">CREATE OR REPLACE FUNCTION buscar_canciones (
-  query_embedding VECTOR(384),
-  match_threshold FLOAT,
-  match_count INT
-) RETURNS TABLE (
-  id BIGINT,
+      <pre style="overflow-x:auto;"><code style="font-size:0.82rem;">-- Creamos (o reemplazamos, si ya existía) una función llamada "buscar_canciones"
+CREATE OR REPLACE FUNCTION buscar_canciones (
+  query_embedding VECTOR(384), -- El vector de la pregunta del usuario, ya convertido por Python
+  match_threshold FLOAT,       -- Qué tan parecidas deben ser las canciones (0 a 1) para contar como resultado
+  match_count INT              -- Cuántos resultados como máximo queremos que devuelva
+) RETURNS TABLE ( -- La forma de la tabla de resultados que va a devolver
+  id UUID,
   titulo TEXT,
   artista TEXT,
   similarity FLOAT
-) LANGUAGE plpgsql AS $$
+) LANGUAGE plpgsql AS $$ -- plpgsql es el lenguaje de PostgreSQL para escribir funciones con lógica
 BEGIN
-  RETURN QUERY
+  RETURN QUERY -- Todo lo que devuelva el SELECT de abajo se convierte en el resultado de la función
   SELECT
-    cv.id,
+    cv.id,       -- "cv" es el alias que le dimos a la tabla canciones_vectoriales, para escribir menos
     cv.titulo,
     cv.artista,
-    1 - (cv.embedding <=> query_embedding) AS similarity
+    1 - (cv.embedding <=> query_embedding) AS similarity -- El cálculo clave: distancia de coseno convertida en similitud (0 a 1)
   FROM canciones_vectoriales cv
-  WHERE 1 - (cv.embedding <=> query_embedding) > match_threshold
-  ORDER BY similarity DESC
-  LIMIT match_count;
+  WHERE 1 - (cv.embedding <=> query_embedding) > match_threshold -- Descarta las canciones demasiado distintas
+  ORDER BY similarity DESC -- Las más parecidas primero
+  LIMIT match_count; -- Cuántos resultados como máximo
 END;
 $$;</code></pre>
     </div>
@@ -2004,10 +2012,13 @@ $$;</code></pre>
         <span class="code-filename">buscar_musica.py</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre style="overflow-x:auto;"><code style="font-size:0.82rem;">from sentence_transformers import SentenceTransformer
+      <pre style="overflow-x:auto;"><code style="font-size:0.82rem;"># Importamos la clase que sabe convertir texto en vectores
+from sentence_transformers import SentenceTransformer
+# Importamos el cliente de Supabase que ya conectamos en database.py
 from database import supabase
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
+# Cargamos el MISMO modelo que usó insertar_canciones.py, es obligatorio que sea igual
+model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 
 def buscar_por_vibra(consulta_usuario):
     print(f"Buscando canciones para: '{consulta_usuario}'...")
@@ -2021,13 +2032,17 @@ def buscar_por_vibra(consulta_usuario):
             'match_threshold': 0.5, # Qué tan parecidos deben ser (0 a 1)
             'match_count': 3        # Cuántos resultados queremos
         }).execute()
+        # 3. res.data es la lista de canciones que devolvió la función de Supabase
         print("\\nRecomendaciones de SoundFlow AI:")
         for cancion in res.data:
+            # Recorremos cada canción encontrada y mostramos su similitud (0 a 1)
             print(f"{cancion['titulo']} - {cancion['artista']} (Similitud: {cancion['similarity']:.2f})")
     except Exception as e:
+        # Si algo falla (por ejemplo, la función no existe todavía), lo avisamos sin tumbar el programa
         print(f"Error en la búsqueda: {e}")
         print("Tip: ¿Ya creaste la función 'buscar_canciones' en el SQL Editor?")
 
+# Solo se ejecuta si corres este archivo directamente (no si lo importas desde otro script)
 if __name__ == "__main__":
     buscar_por_vibra("necesito algo para bailar y pasarla bien con amigos")</code></pre>
     </div>
@@ -2201,7 +2216,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="quiz-question">
-        <p>12. ¿Por qué el modelo usado en <code>insertar_canciones.py</code> y en <code>buscar_musica.py</code> debe ser exactamente el mismo (<code>all-MiniLM-L6-v2</code>)?</p>
+        <p>12. ¿Por qué el modelo usado en <code>insertar_canciones.py</code> y en <code>buscar_musica.py</code> debe ser exactamente el mismo (<code>paraphrase-multilingual-MiniLM-L12-v2</code>)?</p>
         <div class="quiz-options">
           <button type="button" class="quiz-option" data-correct="false">Porque solo ese modelo funciona con Supabase</button>
           <button type="button" class="quiz-option" data-correct="true">Porque cada modelo construye su propio "mapa del significado"; comparar vectores generados por modelos distintos no tiene sentido</button>
