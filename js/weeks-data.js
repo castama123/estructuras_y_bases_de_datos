@@ -67,12 +67,15 @@ const WEEKS = [
   },
   {
     n: 6,
-    titulo: "",
-    resumen: "",
-    objetivos: "",
+    titulo: "IA y búsqueda semántica con vectores",
+    tituloClase1: "Bases de datos vectoriales: Supabase y Embeddings",
+    tituloClase2: "Búsqueda semántica con Supabase y Python",
+    resumen: "Construcción paso a paso de SoundFlow-AI: configurar un proyecto en Supabase y un entorno virtual de Python, conectar ambos con database.py, crear una tabla con una columna VECTOR usando la extensión pgvector, generar embeddings de las descripciones de canciones con sentence-transformers, y construir una función de búsqueda semántica en SQL (similitud de coseno con el operador <=>) invocada desde Python con RPC (Remote Procedure Call), para encontrar canciones por significado y no solo por palabras clave.",
+    objetivos: "Configurar un proyecto real en Supabase con entorno virtual y variables de entorno, entender qué es un embedding y generarlo con un modelo de sentence-transformers, crear y usar una columna vectorial con pgvector, construir una función SQL que mida similitud de coseno entre vectores, y conectar todo desde Python para implementar una búsqueda semántica funcional en SoundFlow.",
     embed: "",
     descarga: "presentaciones/semana-06.pdf",
-    disponible: false
+    disponible: true,
+    disponibleClase2: false
   },
   {
     n: 7,

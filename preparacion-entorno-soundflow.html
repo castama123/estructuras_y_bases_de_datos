@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preparación previa: configuración de entorno - SoundFlow-Pro</title>
+<style>
+  :root {
+    --bg-card: #ffffff;
+    --accent: #5b7c99;
+    --text: #33404f;
+    --text-dim: #6c7a89;
+    --border: #dde3ea;
+    --warn: #b33a2e;
+    --warn-bg: rgba(179,58,46,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f4f6f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.2rem 3rem;
+  }
+  .header-box {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .header-box p.eyebrow {
+    margin: 0 0 0.3rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .header-box h1 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+  .header-box p.sub {
+    margin: 0.6rem 0 0;
+    font-size: 0.92rem;
+    opacity: 0.95;
+  }
+  .content-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  .content-box h3 {
+    margin: 0 0 0.6rem;
+    color: var(--accent);
+    font-size: 1.05rem;
+  }
+  .inner-box {
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    background: rgba(91,124,153,0.06);
+  }
+  .inner-box.warn-border {
+    border-left: 4px solid var(--warn);
+    background: rgba(179,58,46,0.05);
+  }
+  ol {
+    margin: 0.6rem 0 0;
+    padding-left: 1.3rem;
+  }
+  ol li {
+    margin-bottom: 0.7rem;
+  }
+  ol li:last-child { margin-bottom: 0; }
+  code {
+    background: rgba(91,124,153,0.10);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.88em;
+    color: var(--text);
+  }
+  a { color: var(--accent); }
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+  .concept-card {
+    background: rgba(91,124,153,0.06);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+  }
+  .concept-card h4 {
+    margin: 0 0 0.3rem;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+  .concept-card p {
+    margin: 0;
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    word-break: break-all;
+  }
+  .warn {
+    margin: 0.7rem 0 0;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    background: var(--warn-bg);
+    border-left: 3px solid var(--warn);
+    font-size: 0.82rem;
+    color: var(--warn);
+  }
+  .code-block {
+    background: #1e2530;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 0.7rem;
+  }
+  .code-block-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
+    background: #151a22;
+  }
+  .code-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .code-filename { color: #8b98a8; font-size: 0.75rem; margin-left: 0.4rem; }
+  .code-block pre {
+    margin: 0;
+    padding: 0.9rem 1rem;
+    overflow-x: auto;
+  }
+  .code-block code {
+    background: none;
+    color: #d8dee8;
+    padding: 0;
+    font-size: 0.82rem;
+  }
+  .code-block code.ok { color: #7ee787; }
+  .note {
+    margin-top: 0.7rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 8px;
+    background: rgba(91,124,153,0.08);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  .checklist {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    margin-top: 1.5rem;
+  }
+  .checklist h3 { margin: 0 0 0.6rem; color: var(--accent); font-size: 1.05rem; }
+  .checklist label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.55rem;
+    cursor: pointer;
+  }
+  .checklist input { margin-top: 0.2rem; }
+  footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header-box">
+    <p class="eyebrow">Preparación previa · Semana 6</p>
+    <h1>Configuración de entorno: SoundFlow-Pro</h1>
+    <p class="sub">Antes de la próxima clase, completa todo este paso 1 en tu computadora. Así llegamos con el
+      entorno listo y usamos el tiempo de clase para lo importante: construir el buscador con IA.</p>
+  </div>
+
+  <div class="content-box">
+    <h3>Paso 1: Configurar entorno aislado (venv) y archivo de secretos (.env)</h3>
+    <p>Antes de escribir una sola línea de IA, necesitamos construir el puente sólido entre tu código de
+      Python y la base de datos en la nube.</p>
+
+    <ol>
+      <li>Ingresa a <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a>.</li>
+      <li>Regístrate con GitHub.</li>
+      <li>Haz clic en <strong>"New project"</strong>.</li>
+      <li>Escribe el nombre <strong>SoundFlow-Pro</strong>, crea una contraseña segura y haz clic en
+        <strong>"Create new project"</strong>.</li>
+      <li>En la barra lateral izquierda, haz clic en <strong>Settings</strong> y copia estos dos datos. Vas
+        a encontrarlos en dos apartados distintos, con un ejemplo de cómo se ven:
+        <div class="concept-grid">
+          <div class="concept-card">
+            <h4>Data API / API URL</h4>
+            <p>https://abcd1234efgh.supabase.co/rest/v1/</p>
+          </div>
+          <div class="concept-card">
+            <h4>API Keys / Publishable key</h4>
+            <p>sb_publishable_ABCdef123GHIjkl456MNOpqr</p>
+          </div>
+        </div>
+        <p class="warn">
+          <strong>Ojo:</strong> el dashboard muestra la URL con <code>/rest/v1/</code> al final, pero para tu
+          <code>.env</code> solo copia la parte base, sin ese sufijo (ej: <code>https://abcd1234efgh.supabase.co</code>).
+          La librería <code>supabase-py</code> ya agrega <code>/rest/v1/</code> por su cuenta, y si lo dejas
+          repetido vas a ver el error "Invalid path specified in request URL" (PGRST125).
+        </p>
+      </li>
+      <li>En el explorador de Windows, crea una carpeta llamada <code>soundflow-ai</code> y arrástrala dentro
+        de VS Code.</li>
+      <li>Ahora crea el <strong>entorno virtual</strong> (venv): un espacio aislado donde se instalan las
+        librerías de este proyecto, para que no se mezclen con las de otros proyectos de Python en tu
+        computadora.</li>
+    </ol>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">terminal</span>
+      </div>
+      <pre><code># Crear el entorno virtual
+python -m venv venv
+
+# Activar el entorno virtual (Windows, PowerShell o CMD)
+.\venv\Scripts\activate
+
+# Activar el entorno virtual (Git Bash en Windows)
+source venv/Scripts/activate
+
+# Activar el entorno virtual (Mac/Linux)
+source venv/bin/activate
+
+# Si Windows bloquea la activación, da permiso con este comando primero:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\venv\Scripts\Activate.ps1</code></pre>
+    </div>
+
+    <p class="note">
+      Si no activas el entorno virtual, las librerías se instalan en cualquier otro lado de tu computadora,
+      y tu proyecto no las va a encontrar cuando las necesite. Sabes que está activo porque el nombre
+      <code>(venv)</code> aparece al inicio de la línea en tu terminal.
+    </p>
+
+    <p style="margin-top:1rem;">Con el entorno activo, instala el traductor de Supabase y el lector de configuraciones:</p>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">terminal</span>
+      </div>
+      <pre><code>pip install supabase python-dotenv</code></pre>
+    </div>
+
+    <p style="margin-top:1rem;">
+      En la raíz de <code>soundflow-ai</code>, crea un archivo llamado <code>.env</code> con las credenciales
+      que copiaste de Supabase:
+    </p>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">.env</span>
+      </div>
+      <pre><code>SUPABASE_URL=https://tu_proyecto.supabase.co
+SUPABASE_KEY=tu_publishable_key_que_encontramos_antes</code></pre>
+    </div>
+    <div class="inner-box warn-border">
+      El <code>.env</code> guarda datos sensibles fuera del código fuente. Nunca lo subas a un repositorio
+      público. Es la misma idea de "no dejar las llaves pegadas en la puerta" que ya viste con las
+      credenciales de base de datos en semanas anteriores.
+    </div>
+
+    <p style="margin-top:1rem;">
+      Crea un archivo nuevo llamado <code>database.py</code> dentro de tu carpeta <code>soundflow-ai</code>,
+      y copia ahí todo el siguiente código: es el archivo que establece el túnel oficial entre Python y la
+      nube.
+    </p>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">database.py</span>
+      </div>
+      <pre><code>import os
+from dotenv import load_dotenv
+from supabase import create_client, Client
+
+# 1. Cargamos el archivo .env
+load_dotenv()
+
+# 2. Traemos las variables (URL y llave) desde el .env
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
+
+# --- Debugeamos: confirmamos que sí se leyeron ---
+print(f"DEBUG: La URL encontrada es: {url}")
+print(f"DEBUG: La KEY encontrada es: {key}")
+# --------------------------------------------------
+
+# 3. Intentamos conectar
+if not url or not key:
+    raise ValueError("¡Error! No se encontraron las credenciales en el archivo .env")
+
+supabase: Client = create_client(url, key)
+print("¡Puente hacia la nube establecido!")</code></pre>
+    </div>
+
+    <p style="margin-top:1rem;">
+      Para confirmar que todo quedó bien conectado, crea otro archivo llamado <code>test_supabase.py</code>.
+      Todavía no hemos creado ninguna tabla (eso viene en clase), así que esta prueba no consulta ninguna
+      tabla: solo confirma que el cliente de Supabase se pudo crear con la URL y la Publishable key
+      correctas.
+    </p>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">test_supabase.py</span>
+      </div>
+      <pre><code>from database import supabase
+
+def probar_conexion():
+    try:
+        # Todavía no existe ninguna tabla, así que no consultamos ninguna.
+        # Si "supabase" se creó sin lanzar una excepción, la conexión es válida.
+        print("Conexión exitosa. Cliente de Supabase listo para usarse:", supabase)
+    except Exception as e:
+        print(f"Error de conexión: {e}")
+
+if __name__ == "__main__":
+    probar_conexion()</code></pre>
+    </div>
+
+    <p style="margin-top:0.8rem;">Ejecuta en la terminal:</p>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">terminal</span>
+      </div>
+      <pre><code>python test_supabase.py</code></pre>
+    </div>
+
+    <p style="margin-top:0.8rem;">Si todo salió bien, va a verse así:</p>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">terminal (resultado esperado)</span>
+      </div>
+      <pre><code class="ok">DEBUG: La URL encontrada es: https://abcd1234efgh.supabase.co
+DEBUG: La KEY encontrada es: sb_publishable_ABCdef123GHIjkl456MNOpqr
+¡Puente hacia la nube establecido!
+Conexión exitosa. Cliente de Supabase listo para usarse: &lt;supabase._sync.client.Client object at 0x0000019CFB7520F0&gt;</code></pre>
+    </div>
+
+    <div class="inner-box">
+      <strong>¿Te sale error de que Python está instalado en la carpeta global?</strong> (algo como
+      <code>C:\Users\...\AppData\Local\Programs\Python\Python312\...</code>). Eso pasa porque tu proyecto
+      busca las herramientas dentro de <code>soundflow-ai\venv</code>, y como la librería está "afuera" (en
+      la instalación global), no la encuentra. Soluciónalo diciéndole explícitamente que use el Python del
+      entorno virtual activo:
+      <pre style="overflow-x:auto; margin:0.6rem 0 0; background:none; padding:0;"><code style="background:none; padding:0; color:var(--text);">python -m pip install python-dotenv supabase
+python -m pip show python-dotenv
+python test_supabase.py</code></pre>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h3>Antes de clase, confirma que tienes:</h3>
+    <label><input type="checkbox"> Cuenta en Supabase creada con GitHub</label>
+    <label><input type="checkbox"> Proyecto "SoundFlow-Pro" creado, con su contraseña guardada en un lugar seguro</label>
+    <label><input type="checkbox"> Project URL y Publishable key copiados y guardados</label>
+    <label><input type="checkbox"> Carpeta "soundflow-ai" creada y abierta en VS Code</label>
+    <label><input type="checkbox"> Entorno virtual (venv) creado y activado, con "(venv)" visible en la terminal</label>
+    <label><input type="checkbox"> Librerías instaladas: <code>pip install supabase python-dotenv</code></label>
+    <label><input type="checkbox"> Archivo <code>.env</code> creado con tu URL y Publishable key</label>
+    <label><input type="checkbox"> Archivo <code>database.py</code> creado y copiado tal cual</label>
+    <label><input type="checkbox"> Archivo <code>test_supabase.py</code> creado, ejecutado, y mostró "Conexión exitosa"</label>
+  </div>
+
+  <footer>Estructuras y Bases de Datos · Semana 6 · SoundFlow-Pro</footer>
+
+</div>
+</body>
+</html>

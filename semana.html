@@ -70,6 +70,7 @@
 <script src="js/content/semana-03.js"></script>
 <script src="js/content/semana-04.js"></script>
 <script src="js/content/semana-05.js"></script>
+<script src="js/content/semana-06.js"></script>
 <script src="js/nav.js"></script>
 <script>
   const params = new URLSearchParams(location.search);
@@ -85,6 +86,10 @@
   // el resto de semanas conserva el resumen centrado por defecto.
   if (week.n === 5) {
     document.getElementById('pageResumen').classList.add('resumen-left');
+  }
+  // El resumen de la Semana 6 se lee mejor justificado (también es un párrafo largo).
+  if (week.n === 6) {
+    document.getElementById('pageResumen').classList.add('resumen-justify');
   }
   document.getElementById('detailObjetivos').textContent = week.objetivos;
 

@@ -368,3 +368,41 @@ document.addEventListener('click', (e) => {
   const weekN = parseInt(params.get('n'), 10) || 1;
   localStorage.setItem('classTab_semana' + weekN, cls);
 });
+
+// Simulador de búsqueda vectorial (Semana 6): al elegir una "búsqueda" de ejemplo, mueve un
+// punto de consulta sobre un mapa 2D de canciones y resalta las más cercanas (sus "vecinos
+// más cercanos"), para visualizar sin código qué hace una base de datos vectorial por debajo.
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.vsim-btn');
+  if (!btn) return;
+
+  const demo = btn.closest('.vsim-demo');
+  if (!demo) return;
+
+  const query = btn.dataset.query;
+  const point = (btn.dataset.point || '').split(',').map(Number);
+  const marker = demo.querySelector('.vsim-marker');
+  if (marker && point.length === 2) {
+    marker.setAttribute('cx', point[0]);
+    marker.setAttribute('cy', point[1]);
+    marker.setAttribute('opacity', '1');
+  }
+
+  demo.querySelectorAll('.vsim-line').forEach(line => {
+    line.setAttribute('opacity', line.dataset.query === query ? '1' : '0');
+  });
+
+  demo.querySelectorAll('.vsim-song').forEach(song => {
+    song.classList.remove('vsim-active');
+  });
+  (btn.dataset.nearest || '').split(',').forEach(id => {
+    const song = demo.querySelector('.vsim-song[data-song="' + id + '"]');
+    if (song) song.classList.add('vsim-active');
+  });
+
+  demo.querySelectorAll('.vsim-btn').forEach(b => b.classList.remove('vsim-btn-active'));
+  btn.classList.add('vsim-btn-active');
+
+  const status = demo.querySelector('.vsim-status');
+  if (status) status.textContent = btn.dataset.status || '';
+});
