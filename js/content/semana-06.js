@@ -1523,6 +1523,8 @@ window.WEEK_CONTENT_6_1 = `
     <ol style="margin:0.6rem 0 0; padding-left:1.3rem;">
       <li>Ingresa a <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a>.</li>
       <li>Regístrate con GitHub o Gmail.</li>
+      <li>Te va a pedir crear una <strong>organización</strong> antes de dejarte crear un proyecto: es solo
+        una forma de agrupar proyectos, dale cualquier nombre y continúa, no hay nada más que configurar.</li>
       <li>Haz clic en <strong>"New project"</strong>.</li>
       <li>Escribe el nombre <strong>SoundFlow-Pro</strong>, crea una contraseña segura y haz clic en
         <strong>"Create new project"</strong>.</li>
