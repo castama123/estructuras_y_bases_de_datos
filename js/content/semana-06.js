@@ -6,7 +6,7 @@
 
 window.WEEK_CONTENT_6_1 = `
 
-  <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">SoundFlow-AI: cuando buscar por significado le gana a buscar por palabras</h2>
+  <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">SoundFlow-AI: Buscando por significado y no por palabras</h2>
 
   <p style="margin-top:0;">Antes de entrar en materia, un video corto para ubicarte en el tema:</p>
   <a href="https://www.youtube.com/watch?v=NxvuhoXDAZ8" target="_blank" rel="noopener" style="display:block; max-width:360px; margin:0.6rem auto 1.4rem; border-radius:10px; overflow:hidden; border:1px solid var(--border); text-decoration:none; position:relative;">
@@ -25,18 +25,56 @@ window.WEEK_CONTENT_6_1 = `
     <div class="activity-section-header">
       <h3>¿Por qué existen las bases de datos vectoriales?</h3>
     </div>
-    <div class="content-box" style="border-left:4px solid #7c3aed;">
-      <p style="margin:0;">
-        Imagina a un usuario de SoundFlow un martes gris, con la lluvia golpeando la ventana. Abre la app y
-        escribe en el buscador: <strong>"música para un día lluvioso"</strong>. En el catálogo hay una
-        canción guardada con esta descripción: <em>"una melodía de piano muy lenta y triste que transmite
-        soledad, perfecta para un día de nostalgia en casa"</em>. Ningún ser humano dudaría: el piano lento,
-        la soledad y la nostalgia encajan perfecto con ese ánimo lluvioso. Es exactamente la canción que
-        ese usuario está buscando, aunque ninguna de las dos frases comparta una sola palabra con la otra.
-        Para una persona, esa canción es una respuesta obvia. Para una consulta SQL tradicional, son dos
-        textos completamente distintos, sin ninguna relación.
-      </p>
+    <p>
+      Imagina a un usuario de SoundFlow un martes gris, con la lluvia golpeando la ventana. Abre la app y
+      escribe en el buscador "música para un día lluvioso". En el catálogo hay una canción guardada con una
+      descripción muy distinta en palabras, pero con el mismo significado de fondo:
+    </p>
+    <div class="content-box" style="margin-top:0.6rem;">
+      <svg viewBox="0 0 640 360" style="width:100%; max-width:640px; display:block; margin:0 auto;">
+        <rect x="20" y="20" width="280" height="140" rx="8" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+        <text x="160" y="45" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#7c3aed">🔍 Búsqueda del usuario</text>
+        <text x="160" y="90" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-style="italic" fill="var(--text-dim)">"música para</text>
+        <text x="160" y="108" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-style="italic" fill="var(--text-dim)">un día lluvioso"</text>
+
+        <rect x="340" y="20" width="280" height="140" rx="8" fill="none" stroke="#5b7c99" stroke-width="1.5"/>
+        <text x="480" y="45" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#5b7c99">🎵 Canción en el catálogo</text>
+        <text x="480" y="72" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-style="italic" fill="var(--text-dim)">"una melodía de piano</text>
+        <text x="480" y="88" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-style="italic" fill="var(--text-dim)">muy lenta y triste que</text>
+        <text x="480" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-style="italic" fill="var(--text-dim)">transmite soledad,</text>
+        <text x="480" y="120" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-style="italic" fill="var(--text-dim)">perfecta para un día</text>
+        <text x="480" y="136" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-style="italic" fill="var(--text-dim)">de nostalgia en casa"</text>
+
+        <line x1="160" y1="160" x2="330" y2="205" stroke="var(--text-dim)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="480" y1="160" x2="330" y2="205" stroke="var(--text-dim)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <circle cx="330" cy="205" r="4" fill="var(--text-dim)"/>
+        <text x="330" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">¿comparten palabras?</text>
+
+        <line x1="330" y1="205" x2="160" y2="228" stroke="#6f9d7c" stroke-width="1.5"/>
+        <path d="M160 228 L154 218 L166 218 Z" fill="#6f9d7c"/>
+        <line x1="330" y1="205" x2="480" y2="228" stroke="#b33a2e" stroke-width="1.5"/>
+        <path d="M480 228 L474 218 L486 218 Z" fill="#b33a2e"/>
+
+        <rect x="20" y="228" width="280" height="112" rx="8" fill="none" stroke="#6f9d7c" stroke-width="1.5"/>
+        <text x="160" y="252" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#6f9d7c">🧠 Para un humano</text>
+        <text x="160" y="272" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-weight="bold" fill="#6f9d7c">✅ Conexión obvia</text>
+        <text x="160" y="294" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">piano lento + soledad +</text>
+        <text x="160" y="310" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">nostalgia = ánimo lluvioso</text>
+        <text x="160" y="328" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">aunque no compartan palabras</text>
+
+        <rect x="340" y="228" width="280" height="112" rx="8" fill="none" stroke="#b33a2e" stroke-width="1.5"/>
+        <text x="480" y="252" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#b33a2e">🗄️ Para SQL tradicional</text>
+        <text x="480" y="272" text-anchor="middle" font-family="Consolas, monospace" font-size="11" font-weight="bold" fill="#b33a2e">❌ Sin relación</text>
+        <text x="480" y="294" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">0 palabras en común entre</text>
+        <text x="480" y="310" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">las dos frases</text>
+        <text x="480" y="328" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">(un WHERE ... LIKE no las conecta)</text>
+      </svg>
     </div>
+    <p style="margin-top:0.6rem; font-size:0.85rem; color:var(--text-dim); text-align:center;">
+      Para una persona, esa canción es una respuesta obvia. Para una consulta SQL tradicional, son dos textos
+      completamente distintos, sin ninguna relación. Ese salto es justo lo que resuelve una base de datos
+      vectorial.
+    </p>
     <div class="content-box" style="border-left:4px solid #b33a2e; margin-top:0.8rem;">
       <p style="margin:0;">
         <code>SELECT * FROM tbl_canciones WHERE descripcion LIKE '%lluvia%'</code>, cero resultados. La
@@ -67,9 +105,9 @@ window.WEEK_CONTENT_6_1 = `
       hoy:
     </p>
     <ul style="margin:0.4rem 0 0; padding-left:1.2rem; color:var(--text);">
-      <li><strong>Pinecone</strong>, <strong>Milvus</strong> y <strong>Weaviate</strong>, que ya conoces de la línea de tiempo.</li>
+      <li><strong>Pinecone</strong>, <strong>Milvus</strong> y <strong>Weaviate</strong>.</li>
       <li><strong>Chroma</strong>, pensada para prototipos y proyectos pequeños de IA.</li>
-      <li><strong>Qdrant</strong>, fácil de instalar tú mismo, muy usada por su buen desempeño.</li>
+      <li><strong>Qdrant</strong>, fácil de instalar, muy usada por su buen desempeño.</li>
       <li><strong>LanceDB</strong>, pensada para correr localmente, sin necesidad de un servidor aparte.</li>
     </ul>
   </div>
@@ -90,8 +128,8 @@ window.WEEK_CONTENT_6_1 = `
       <div class="concept-card">
         <h4 style="color:#6f9d7c;">Indexar la información</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Organizar esos vectores con una
-          estructura como HNSW, para no tener que compararlos todos contra todos cada vez que alguien
-          busca algo.</p>
+          estructura como HNSW (mundo pequeño navegable jerárquico), para no tener que compararlos todos
+          contra todos cada vez que alguien busca algo.</p>
       </div>
       <div class="concept-card">
         <h4 style="color:#8b7fb8;">Búsqueda rápida</h4>
@@ -103,8 +141,8 @@ window.WEEK_CONTENT_6_1 = `
       <p style="margin:0 0 0.6rem;">
         <strong>¿Qué es HNSW?</strong> El algoritmo que casi todas las bases de datos vectoriales usan para
         indexar: en vez de comparar tu búsqueda contra cada vector guardado, uno por uno, arma un mapa en
-        varias capas, como un sistema de carreteras. Mira cómo "viaja" una búsqueda de la autopista a la
-        calle local, cada vez más cerca del resultado:
+        varias capas, como un sistema de carreteras, y su búsqueda es por cercanía (vecinos más cercanos),
+        pero de forma aproximada y mucho más rápida que comparar contra todos.
       </p>
       <svg viewBox="0 0 480 175" style="width:100%; max-width:480px; display:block; margin:0 auto;">
         <text x="30" y="16" font-size="9.5" fill="var(--accent)" font-family="Consolas, monospace">Capa superior, pocos nodos, saltos largos</text>
@@ -168,18 +206,15 @@ window.WEEK_CONTENT_6_1 = `
     <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
       <div class="concept-card">
         <h4 style="color:#b33a2e;">La maldición de la dimensionalidad</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Cuando un vector tiene muchísimas
-          dimensiones (384, 768, 1536...), el concepto de "distancia" empieza a perder fuerza: casi todos
-          los puntos terminan pareciendo igual de lejanos entre sí, y distinguir "parecido" de "no
-          parecido" se vuelve más difícil. Por eso los índices como HNSW usan aproximaciones inteligentes en
-          vez de comparar exactamente todo contra todo.</p>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Con muchísimas dimensiones (384, 768,
+          1536...), el concepto de "distancia" pierde fuerza: casi todos los puntos parecen igual de
+          lejanos entre sí.</p>
       </div>
       <div class="concept-card">
         <h4 style="color:#c99a4e;">Ruido y redundancia</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">No todos los números de un embedding
-          aportan información útil (ruido), y es común terminar con vectores casi idénticos guardados varias
-          veces (redundancia) si no se limpian los datos de entrada. Ambos problemas desperdician espacio y
-          pueden empeorar la calidad de los resultados de búsqueda.</p>
+          aportan información útil, y es común terminar con vectores casi idénticos guardados varias veces
+          si no se limpian los datos de entrada.</p>
       </div>
     </div>
   </div>
@@ -190,8 +225,8 @@ window.WEEK_CONTENT_6_1 = `
       <h3>Un poco de historia: cómo llegamos hasta aquí</h3>
     </div>
     <p>
-      Nada de esto apareció de la nada. Es la suma de varios avances, cada uno resolviendo una pieza del
-      rompecabezas, a lo largo de más de diez años:
+      Es la suma de varios avances, cada uno resolviendo una pieza del rompecabezas, a lo largo de más de
+      diez años:
     </p>
 
     <div style="position:relative; margin:1.2rem 0 0.4rem; padding-left:30px; border-left:3px solid var(--border);">
@@ -217,9 +252,7 @@ window.WEEK_CONTENT_6_1 = `
           El ejemplo más famoso de este
           entrenamiento: al hacer la operación <code>vector("rey") - vector("hombre") + vector("mujer")</code>,
           el resultado queda muy cerca de <code>vector("reina")</code>. La aritmética de vectores termina
-          reflejando relaciones de significado reales. Este mismo principio, aplicado más tarde a frases
-          completas en vez de palabras sueltas, es lo que usa el modelo que vas a usar hoy para "entender"
-          que una descripción sobre soledad y piano lento se relaciona con un día lluvioso.
+          reflejando relaciones de significado reales.
         </p>
       </div>
 
@@ -230,7 +263,7 @@ window.WEEK_CONTENT_6_1 = `
           Malkov y Yashunin publican el algoritmo HNSW (Hierarchical Navigable Small World): una estructura
           que permite encontrar los vecinos más cercanos de un vector sin tener que compararlo contra todos
           los demás, uno por uno. Se convierte en el "motor" que usan casi todas las bases de datos
-          vectoriales modernas, el equivalente, para vectores, de lo que un índice B-Tree es para números.
+          vectoriales modernas.
         </p>
       </div>
 
@@ -249,8 +282,7 @@ window.WEEK_CONTENT_6_1 = `
         <div style="font-weight:700; color:#c99a4e;">2018. BERT (Google)</div>
         <p style="margin:0.2rem 0 0; font-size:0.9rem; color:var(--text-dim);">
           Los embeddings dan un salto: en vez de asignarle un vector fijo a cada palabra suelta, BERT genera
-          vectores que dependen del <strong>contexto</strong> de toda la frase. Es el antepasado directo de
-          los modelos que vas a usar esta semana.
+          vectores que dependen del <strong>contexto</strong> de toda la frase.
         </p>
       </div>
 
@@ -277,8 +309,7 @@ window.WEEK_CONTENT_6_1 = `
         <div style="font-weight:700; color:var(--accent);">Abril 2021. pgvector</div>
         <p style="margin:0.2rem 0 0; font-size:0.9rem; color:var(--text-dim);">
           Andrew Kane libera <code>pgvector</code>: una extensión que le agrega el tipo de columna
-          <code>VECTOR</code> a PostgreSQL, la misma base de datos relacional que ya conoces desde la
-          Semana 1. Ya no hace falta una base de datos nueva y separada solo para vectores.
+          <code>VECTOR</code> a PostgreSQL.
         </p>
       </div>
 
@@ -292,12 +323,18 @@ window.WEEK_CONTENT_6_1 = `
           datos vectorial.
         </p>
         <p style="margin:0.5rem 0 0; font-size:0.9rem; color:var(--text-dim);">
-          <strong style="color:#b33a2e;">RAG es un patrón de arquitectura</strong>, no depende de una base de datos en particular. Cualquiera que
-          pueda guardar vectores y buscar por similitud sirve como la pieza de "Retrieval": pgvector sobre
-          PostgreSQL (lo que vas a usar aquí), una especializada como Pinecone, Milvus, Weaviate, Qdrant,
-          Chroma o LanceDB, o incluso Redis, MongoDB o Elasticsearch con su módulo vectorial agregado. La
-          base de datos es intercambiable, lo que no cambia es el patrón: buscar por significado y pasarle
-          ese contexto a un LLM antes de que genere la respuesta.
+          <strong style="color:#b33a2e;">RAG es un patrón de arquitectura, no depende de una base de datos
+          en particular.</strong> Cualquiera que pueda guardar vectores y buscar por similitud sirve como la
+          pieza de "Retrieval", por ejemplo:
+        </p>
+        <ul style="margin:0.4rem 0 0; padding-left:1.2rem; font-size:0.9rem; color:var(--text-dim);">
+          <li><code>pgvector</code> sobre PostgreSQL, lo que vas a usar aquí.</li>
+          <li>Una especializada como Pinecone, Milvus, Weaviate, Qdrant, Chroma o LanceDB.</li>
+          <li>O incluso Redis, MongoDB o Elasticsearch, con su módulo vectorial agregado.</li>
+        </ul>
+        <p style="margin:0.4rem 0 0; font-size:0.9rem; color:var(--text-dim);">
+          La base de datos es intercambiable, lo que no cambia es el patrón: buscar por significado y
+          pasarle ese contexto a un LLM antes de que genere la respuesta.
         </p>
       </div>
 
@@ -315,16 +352,13 @@ window.WEEK_CONTENT_6_1 = `
         <div style="position:absolute; left:-38px; top:2px; width:14px; height:14px; border-radius:50%; background:#c99a4e; box-shadow:0 0 0 4px var(--bg-card);"></div>
         <div style="font-weight:700; color:#c99a4e;">Hoy. Supabase + pgvector</div>
         <p style="margin:0.2rem 0 0; font-size:0.9rem; color:var(--text-dim);">
-          Lo que vas a usar en esta actividad: PostgreSQL de siempre, con <code>pgvector</code> encima. Todo
-          el poder de una base de datos vectorial, dentro de la base de datos relacional que ya sabes usar.
+          Lo que vas a usar en esta actividad: PostgreSQL de siempre, con <code>pgvector</code> encima.
         </p>
         <p style="margin:0.5rem 0 0; font-size:0.9rem; color:var(--text-dim);">
-          Word2Vec, con el que arrancó todo en 2013, ya quedó superado: hoy casi nadie lo usa en producción.
-          Lo reemplazaron los modelos basados en <strong style="color:#b33a2e;">Transformers</strong>, que generan un vector distinto según el
-          contexto de toda la frase, no uno fijo por palabra. Muy pocas empresas entrenan su propio modelo
-          de embeddings desde cero (es carísimo), la mayoría reutiliza uno ya existente. Hoy eso significa,
-          sobre todo, modelos abiertos de Hugging Face como el <code style="color:#b33a2e;">sentence-transformers</code> que vas a usar
-          en esta actividad, o modelos por API de unos pocos jugadores grandes:
+          Entrenar un modelo de embeddings desde cero es carísimo, así que muy pocas empresas lo hacen, la
+          mayoría reutiliza uno ya existente. Hoy eso significa, sobre todo, dos caminos: modelos abiertos de
+          Hugging Face como <code style="color:#b33a2e;">sentence-transformers</code>, el que vas a usar en
+          esta actividad, o modelos por API de unos pocos jugadores grandes:
         </p>
         <ul style="margin:0.4rem 0 0; padding-left:1.2rem; color:var(--text);">
           <li><strong>OpenAI</strong> (text-embedding-3)</li>
@@ -336,8 +370,7 @@ window.WEEK_CONTENT_6_1 = `
           <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
             Dato curioso: <strong style="color:#c99a4e;">Claude</strong>, el modelo de Anthropic, no tiene su
             propio modelo de embeddings, es un LLM enfocado solo en generar texto. Para armar un RAG con
-            Claude, Anthropic recomienda apoyarse justo en <strong>Voyage AI</strong>, uno de los que acabas
-            de ver en esta lista.
+            Claude, Anthropic recomienda apoyarse justo en <strong>Voyage AI</strong>.
           </p>
           <p style="margin:0.6rem 0 0.3rem; font-size:0.85rem; color:var(--text-dim);">Sus puntos más fuertes:</p>
           <ul style="margin:0; padding-left:1.2rem; color:var(--text); font-size:0.85rem;">
@@ -371,11 +404,9 @@ window.WEEK_CONTENT_6_1 = `
         <span class="curioso-card-year">2013</span>
         <h4 style="color:#6f9d7c; margin:0 0 0.4rem;">Spotify creó su propia herramienta</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
-          Mucho antes de que existiera Pinecone o pgvector, Spotify ya tenía el mismo problema: encontrar
-          canciones "parecidas" entre millones. En 2013, su ingeniero Erik Bernhardsson construyó
-          <strong>Annoy</strong> (Approximate Nearest Neighbors Oh Yeah) en un par de tardes durante una
-          Hack Week, y terminó siendo la librería que impulsó recomendaciones como <strong>Discover
-          Weekly</strong> durante años.
+          En 2013, mucho antes de Pinecone o pgvector, un ingeniero de Spotify construyó <strong>Annoy</strong>
+          en un par de tardes, la librería que impulsó recomendaciones como <strong>Discover Weekly</strong>
+          durante años.
         </p>
         <div class="curioso-timeline">
           <span class="curioso-timeline-label" style="color:#6f9d7c;">Annoy · 2013</span>
@@ -387,9 +418,8 @@ window.WEEK_CONTENT_6_1 = `
         <span class="curioso-card-year">10x</span>
         <h4 style="color:#8b7fb8; margin:0 0 0.4rem;">Notion: más escala, menos costo</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
-          Notion usa búsqueda vectorial para su función de IA (preguntas y respuestas sobre tus propias
-          notas). Entre su lanzamiento (2023) y su optimización más reciente, lograron atender 10 veces más
-          carga con menos infraestructura, la diferencia entre notar o no notar la espera.
+          Notion usa búsqueda vectorial para preguntar sobre tus propias notas, y optimizándola logró atender
+          10 veces más carga con menos infraestructura.
         </p>
         <div class="curioso-stat">
           <div class="curioso-stat-label"><span>Costo de infraestructura</span><span>-90%</span></div>
@@ -419,7 +449,6 @@ window.WEEK_CONTENT_6_1 = `
     <div class="activity-section-header">
       <h3>Casos de uso: dónde más se usa esto</h3>
     </div>
-    <p>SoundFlow es un caso, pero el mismo patrón, convertir algo en un vector y buscar "lo más parecido", se repite en industrias muy distintas:</p>
     <div class="usecase-grid" style="grid-template-columns: 1fr 1fr;">
       <div class="usecase-card" style="background:rgba(91,124,153,0.10);">
         <div class="usecase-icon" style="background:rgba(91,124,153,0.16); color:#5b7c99;">
@@ -469,7 +498,7 @@ window.WEEK_CONTENT_6_1 = `
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Buscar en manuales, políticas internas
           o bases de conocimiento antes de responder, el caso que vas a ver a fondo más adelante en esta
           misma clase.</p>
-        <p style="margin:0.5rem 0 0; font-size:0.78rem; color:var(--text-dim);"><strong>Quién lo hace:</strong> Glean, Microsoft Copilot, Notion AI.</p>
+        <p style="margin:0.5rem 0 0; font-size:0.78rem; color:var(--text-dim);"><strong>Quién lo hace:</strong> Microsoft Copilot, Notion AI.</p>
       </div>
       <div class="usecase-card" style="background:rgba(201,154,78,0.10);">
         <div class="usecase-icon" style="background:rgba(201,154,78,0.16); color:#c99a4e;">
@@ -484,7 +513,7 @@ window.WEEK_CONTENT_6_1 = `
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Encontrar el fragmento exacto de una
           clase o charla donde se menciona un tema, sin depender de que el subtítulo tenga la palabra exacta
           que buscas.</p>
-        <p style="margin:0.5rem 0 0; font-size:0.78rem; color:var(--text-dim);"><strong>Quién lo hace:</strong> Twelve Labs, YouTube, Google Photos.</p>
+        <p style="margin:0.5rem 0 0; font-size:0.78rem; color:var(--text-dim);"><strong>Quién lo hace:</strong> YouTube, Google Photos.</p>
       </div>
       <div class="usecase-card" style="background:rgba(179,58,46,0.10);">
         <div class="usecase-icon" style="background:rgba(179,58,46,0.16); color:#b33a2e;">
@@ -511,13 +540,12 @@ window.WEEK_CONTENT_6_1 = `
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Encontrar canciones o efectos de
           sonido parecidos a partir de un clip de audio, comparando embeddings generados a partir del sonido
           en vez del texto.</p>
-        <p style="margin:0.5rem 0 0; font-size:0.78rem; color:var(--text-dim);"><strong>Quién lo hace:</strong> Shazam, SoundHound, Spotify.</p>
+        <p style="margin:0.5rem 0 0; font-size:0.78rem; color:var(--text-dim);"><strong>Quién lo hace:</strong> Shazam, Spotify.</p>
       </div>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0 0 0.5rem;">Y hay más:</p>
       <ul style="margin:0.4rem 0 0; padding-left:1.2rem; color:var(--text);">
-        <li>Deduplicar o agrupar automáticamente documentos y tickets de soporte por tema, sin etiquetarlos a mano.</li>
         <li>Comparar secuencias de proteínas en bioinformática para encontrar estructuras parecidas.</li>
         <li>Buscar imágenes médicas parecidas (radiografías, resonancias, dermatología) para apoyar un diagnóstico, comparando el caso actual con miles de casos previos ya diagnosticados.</li>
         <li>Búsqueda semántica en historias clínicas y literatura médica, para encontrar pacientes con síntomas parecidos o artículos científicos relevantes, sin depender de las palabras exactas del texto.</li>
@@ -525,22 +553,6 @@ window.WEEK_CONTENT_6_1 = `
       <p style="margin:0.6rem 0 0;">
         El patrón de fondo es siempre el mismo: convertir algo en un vector, y preguntar "¿qué más se parece
         a esto?".
-      </p>
-    </div>
-    <div class="content-box" style="border-left:4px solid #7c3aed; margin-top:0.8rem;">
-      <p style="margin:0 0 0.5rem;"><strong>Pero un momento: ¿no que los LLM solo entienden texto?</strong></p>
-      <p style="margin:0;">
-        Los LLM "clásicos" (GPT-3, BERT, el <code>paraphrase-multilingual-MiniLM-L12-v2</code> de esta actividad) sí nacieron
-        trabajando solo con texto. Pero hoy existen <strong>modelos multimodales</strong> (GPT-4o, Gemini)
-        que reciben directamente imágenes, audio o video además de texto, en el mismo modelo. Y para
-        embeddings específicamente hay modelos dedicados a otras modalidades.
-      </p>
-      <p style="margin:0.5rem 0 0;">
-        <strong>CLIP</strong> (OpenAI) se entrenó con pares de imagen + descripción para que ambas terminen en
-        el mismo espacio vectorial, y modelos más recientes como <strong>Gemini Embedding 2</strong> meten texto, imagen, video
-        y audio en un solo espacio. Por eso la búsqueda de imágenes o de audio que viste arriba sí es posible:
-        no es que "el LLM de texto" haga esa búsqueda, es que existe un modelo de embeddings entrenado para
-        esa modalidad específica, con el mismo principio de fondo.
       </p>
     </div>
   </div>
@@ -551,7 +563,29 @@ window.WEEK_CONTENT_6_1 = `
       <h3>Terminología esencial de Bases de Datos Vectoriales - VDB</h3>
     </div>
     <p>El vocabulario que vas a encontrar todo el tiempo, tanto hoy como en el resto de la semana:</p>
-    <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">      <div class="concept-card">
+    <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="concept-card">
+        <h4 style="color:#7c3aed;">LLM (Large Language Model, modelo de lenguaje grande)</h4>
+        <div style="color:#7c3aed; margin:0 0 0.6rem; height:76px; display:flex; align-items:center;">
+          <svg viewBox="0 0 160 40" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <text x="2" y="24" font-size="8" fill="currentColor" font-family="Consolas, monospace">"¿Cómo...?"</text>
+            <path d="M58 20 L74 20 M70 16 L74 20 L70 24" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="78" y="8" width="34" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <text x="95" y="23" font-size="8" text-anchor="middle" fill="currentColor">LLM</text>
+            <path d="M116 20 L132 20 M128 16 L132 20 L128 24" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <text x="136" y="24" font-size="8" fill="currentColor" font-family="Consolas, monospace">"..."</text>
+          </svg>
+        </div>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Un modelo entrenado con textos
+          masivos para <strong>generar</strong> lenguaje, prediciendo la palabra más probable según patrones
+          aprendidos (GPT, Gemini, <strong>Claude</strong>, LLaMA, son ejemplos). Comparte arquitectura con
+          los modelos de embeddings, pero mientras el LLM genera texto, el modelo de embeddings comprime un
+          texto en un vector de significado.</p>
+        <p style="margin:0.5rem 0 0; font-size:0.85rem; color:var(--text-dim);"><strong>¿Cuándo usarlo?</strong>
+          Cuando necesitas que algo redacte texto nuevo (responder, resumir, traducir). Si solo necesitas
+          buscar lo más parecido entre muchas opciones, como en SoundFlow-Pro, no hace falta un LLM.</p>
+      </div>
+      <div class="concept-card">
         <h4 style="color:var(--accent);">Embedding</h4>
         <div style="color:#5b7c99; margin:0 0 0.6rem; height:76px; display:flex; align-items:center;">
           <svg viewBox="0 0 160 40" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -566,7 +600,7 @@ window.WEEK_CONTENT_6_1 = `
           </svg>
         </div>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Una lista de números (vector) que un
-          modelo de IA genera a partir de un texto (o imagen, o audio), y que representa su significado. Ese
+          modelo de IA genera a partir de un texto, y que representa su significado. Ese
           significado no es una sola cosa: el vector codifica a la vez tono, contexto, tema y estilo, todo
           mezclado en los mismos números. Por eso dos frases con las mismas palabras pero distinto tono
           (una seria, otra sarcástica) pueden terminar en puntos distintos del espacio vectorial.</p>
@@ -655,7 +689,8 @@ window.WEEK_CONTENT_6_1 = `
           </svg>
         </div>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Mide la distancia "en línea recta"
-          entre dos puntos. Una alternativa a la similitud de coseno, menos usada con texto.</p>
+          entre dos puntos. Una alternativa a la similitud de coseno, menos usada con texto, pero común en
+          mapas y geolocalización (qué tan lejos está un punto de otro) o para agrupar datos numéricos.</p>
         <p style="margin:0.5rem 0 0; padding:0.5rem 0.7rem; background:rgba(179,58,46,0.10); border-radius:6px; font-family:Consolas, monospace; font-size:0.85rem; color:var(--text); text-align:center;">
           d(A,B) = √(Σ (Aᵢ − Bᵢ)²)
         </p>
@@ -719,6 +754,10 @@ window.WEEK_CONTENT_6_1 = `
           (un párrafo, una sección de un documento). Antes de generar embeddings de documentos extensos, se
           "trocean" en chunks, porque los modelos tienen un límite de texto que pueden procesar de una vez, y
           porque un embedding de un párrafo específico es más preciso que uno de un documento entero.</p>
+        <p style="margin:0.5rem 0 0; font-size:0.85rem; color:var(--text-dim);">El
+          chunking lo hace tu propio código (o una librería como LangChain con su <code>TextSplitter</code>),
+          no un modelo de IA: tú decides cómo cortar, por número de caracteres, por párrafos o por tamaño de
+          tokens, con algo de solapamiento entre pedazos para no perder contexto en los cortes.</p>
       </div>
       <div class="concept-card">
         <h4 style="color:#5b7c99;">Token</h4>
@@ -736,6 +775,10 @@ window.WEEK_CONTENT_6_1 = `
           "jugando" puede partirse en "jug" + "ando"). El límite de cuánto texto puede procesar un modelo de
           una sola vez, incluyendo el modelo de embeddings, se mide en tokens, no en palabras ni en
           caracteres. Es una de las razones por las que un documento largo necesita dividirse en chunks.</p>
+        <p style="margin:0.5rem 0 0; font-size:0.85rem; color:var(--text-dim);">A diferencia del chunking,
+          tokenizar no lo haces tú: lo hace el tokenizador que trae cada modelo, entrenado junto con él, con
+          su propio vocabulario. Ocurre automáticamente al pasarle texto al modelo, antes de generar el
+          embedding o la respuesta.</p>
       </div>
       <div class="concept-card">
         <h4 style="color:var(--accent);">pgvector</h4>
@@ -754,26 +797,6 @@ window.WEEK_CONTENT_6_1 = `
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">La extensión que le agrega a
           PostgreSQL el tipo de columna <code>VECTOR</code> y operadores para comparar vectores, como
           <code>&lt;=&gt;</code> (distancia de coseno). Es lo que usa Supabase por debajo.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#7c3aed;">LLM (Large Language Model, modelo de lenguaje grande)</h4>
-        <div style="color:#7c3aed; margin:0 0 0.6rem; height:76px; display:flex; align-items:center;">
-          <svg viewBox="0 0 160 40" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <text x="2" y="24" font-size="8" fill="currentColor" font-family="Consolas, monospace">"¿Cómo...?"</text>
-            <path d="M58 20 L74 20 M70 16 L74 20 L70 24" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <rect x="78" y="8" width="34" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <text x="95" y="23" font-size="8" text-anchor="middle" fill="currentColor">LLM</text>
-            <path d="M116 20 L132 20 M128 16 L132 20 L128 24" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <text x="136" y="24" font-size="8" fill="currentColor" font-family="Consolas, monospace">"..."</text>
-          </svg>
-        </div>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Un modelo entrenado con textos
-          masivos (muchos tomados de la web) para <strong>generar</strong> lenguaje, prediciendo la palabra
-          más probable según patrones aprendidos (GPT, Gemini, <strong>Claude</strong>, LLaMA, son ejemplos).
-          No guarda esos textos, solo quedan sus pesos. Comparte
-          arquitectura con los modelos de embeddings (Transformer, capas de atención), pero mientras el LLM
-          genera texto, el modelo de embeddings comprime un texto en un vector de significado: son primos,
-          no la misma cosa.</p>
       </div>
       <div class="concept-card">
         <h4 style="color:#c99a4e;">RAG (Retrieval-Augmented Generation, generación aumentada por recuperación)</h4>
@@ -942,15 +965,11 @@ window.WEEK_CONTENT_6_1 = `
     <div class="content-box" style="border-left:4px solid #b33a2e; margin-top:0.6rem;">
       <p style="margin:0 0 0.5rem;"><strong>Un LLM no es una base de datos con internet guardado adentro.</strong></p>
       <p style="margin:0;">
-        Durante el entrenamiento se le muestran textos masivos, muchos tomados de la web, otros de libros o
-        código, pero el modelo no los memoriza ni los deja guardados para consultarlos después. Lo que queda
-        son los <strong>pesos</strong>: números ajustados que capturan patrones estadísticos del lenguaje, no
-        una copia de los textos originales. Por eso, cuando responde, el LLM no está "buscando" un dato
-        exacto: está <strong>generando</strong> la palabra más probable según esos patrones. Eso explica por
-        qué puede "alucinar" (inventar algo plausible pero falso cuando no tiene un patrón claro), por qué
-        tiene una fecha de corte de conocimiento, y por qué no puede saber algo específico y actualizado que
-        nunca vio durante su entrenamiento, como la información privada de tu empresa. Ahí es exactamente
-        donde entra RAG.
+        Durante el entrenamiento se le muestran textos masivos, pero el modelo no los memoriza: lo que queda
+        son los <strong>pesos</strong>, números que capturan patrones del lenguaje, no una copia de los textos.
+        Por eso el LLM no "busca" un dato exacto, lo <strong>genera</strong> según esos patrones, y por eso
+        puede "alucinar", tiene una fecha de corte, y no puede saber algo actualizado que nunca vio, como la
+        información privada de tu empresa. Ahí entra RAG.
       </p>
     </div>
     <div class="content-box" style="border-left:4px solid #7c3aed; margin-top:0.6rem;">
@@ -965,21 +984,13 @@ window.WEEK_CONTENT_6_1 = `
     </div>
 
     <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:0.6rem;">
-      <p style="margin:0 0 0.5rem;"><strong>¿Entonces búsqueda semántica y RAG son lo mismo?</strong></p>
+      <p style="margin:0 0 0.5rem;"><strong>¿Quién entrena los LLM?</strong></p>
       <p style="margin:0;">
-        No exactamente: la búsqueda semántica es el <strong>ingrediente</strong>, RAG es la
-        <strong>receta completa</strong>. Búsqueda semántica es justo lo que vas a construir hoy con
-        SoundFlow: convertir una consulta en un vector, compararla por significado contra lo que hay
-        guardado, y devolver los resultados más parecidos. <code>buscar_musica.py</code> se detiene ahí, sin
-        involucrar ningún LLM.
-      </p>
-      <p style="margin:0.5rem 0 0;">
-        RAG toma ese mismo paso (de hecho, es literalmente la fase de
-        <strong>Retrieval</strong> que viste arriba) y le agrega un paso más: en vez de devolverle los
-        resultados crudos al usuario, se los pasa como contexto a un LLM para que redacte una respuesta en
-        lenguaje natural. Dicho de otra forma: toda RAG usa búsqueda semántica por debajo, pero no toda
-        búsqueda semántica es RAG, depende de si al final hay un LLM generando una respuesta, o si el
-        resultado de la búsqueda ya es la respuesta.
+        Las empresas que los desarrollan: Anthropic (Claude), OpenAI (GPT), Google (Gemini), Meta (LLaMA),
+        entre otras. Son casi las únicas con la infraestructura y el dinero para hacerlo: entrenar un LLM
+        grande desde cero cuesta millones de dólares en GPUs y requiere datasets masivos. Por eso lo normal
+        es usar un modelo ya entrenado vía su API, o como mucho hacerle <strong>fine-tuning</strong>: ajustarlo
+        con un dataset propio más pequeño, mucho más barato que entrenar desde cero.
       </p>
     </div>
 
