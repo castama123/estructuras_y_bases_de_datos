@@ -406,3 +406,34 @@ document.addEventListener('click', (e) => {
   const status = demo.querySelector('.vsim-status');
   if (status) status.textContent = btn.dataset.status || '';
 });
+
+// Demo de coseno sobre el plano cartesiano de SoundFlow (Semana 6): al elegir una canción,
+// resalta su flecha (vector) junto a la de "una nueva búsqueda" y dibuja el ángulo entre
+// ambas, para mostrar en vivo que la similitud de coseno mide ese ángulo, no la distancia.
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.cosplane-btn');
+  if (!btn) return;
+
+  const demo = btn.closest('.cosplane-demo');
+  if (!demo) return;
+  const stage = demo.previousElementSibling;
+  if (!stage) return;
+
+  const target = btn.dataset.compare;
+
+  stage.querySelectorAll('.cosplane-wedge').forEach(w => {
+    w.setAttribute('opacity', w.dataset.compare === target ? '0.35' : '0');
+  });
+
+  stage.querySelectorAll('.cosplane-vec').forEach(v => {
+    const isTarget = v.dataset.compare === target || v.dataset.compare === 'query';
+    v.setAttribute('opacity', isTarget ? '1' : '0.25');
+    v.setAttribute('stroke-width', v.dataset.compare === 'query' ? '3' : (isTarget ? '3' : '1.5'));
+  });
+
+  demo.querySelectorAll('.cosplane-btn').forEach(b => b.classList.remove('vsim-btn-active'));
+  btn.classList.add('vsim-btn-active');
+
+  const status = demo.querySelector('.cosplane-status');
+  if (status) status.textContent = btn.dataset.status || '';
+});

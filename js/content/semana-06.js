@@ -1511,6 +1511,125 @@ window.WEEK_CONTENT_6_1 = `
     </div>
   </div>
 
+  <!-- ===================== 3D. PLANO CARTESIANO SOUNDFLOW ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Antes de programar: así se van a ver tus canciones en el espacio</h3>
+    </div>
+    <p>
+      Cada descripción de canción se va a convertir en un vector de 384 números (su embedding). No podemos
+      dibujar 384 ejes, así que aquí tomamos solo 3 de esos números como coordenadas X, Y, Z, para poder
+      verlo.
+    </p>
+    <p>
+      Cada canción no es solo un punto suelto: es una <strong>flecha que sale del origen</strong> (el punto
+      0,0,0) y termina en ese punto. Esa flecha es literalmente su vector. Fíjate en dos cosas del dibujo: las
+      canciones quedan agrupadas por colores según qué tan parecida es su "vibra" (así se verá tu tabla
+      <code>canciones_vectoriales</code> con las 36 canciones reales), y el punto violeta es una búsqueda
+      nueva del usuario, cayendo cerca de las flechas con las que comparte más significado.
+    </p>
+    <div class="content-box" style="margin-top:0.6rem;">
+      <svg viewBox="0 0 600 420" style="width:100%; max-width:620px; display:block; margin:0 auto;">
+        <line x1="150" y1="360" x2="540" y2="360" stroke="var(--text-dim)" stroke-width="1.5"/>
+        <path d="M540 360 L530 355 L530 365 Z" fill="var(--text-dim)"/>
+        <text x="550" y="365" font-family="Consolas, monospace" font-size="13" fill="var(--text-dim)">X</text>
+
+        <line x1="150" y1="360" x2="150" y2="40" stroke="var(--text-dim)" stroke-width="1.5"/>
+        <path d="M150 40 L145 50 L155 50 Z" fill="var(--text-dim)"/>
+        <text x="158" y="34" font-family="Consolas, monospace" font-size="13" fill="var(--text-dim)">Y</text>
+
+        <line x1="150" y1="360" x2="40" y2="260" stroke="var(--text-dim)" stroke-width="1.5"/>
+        <path d="M40 260 L48 256 L45 266 Z" fill="var(--text-dim)"/>
+        <text x="16" y="252" font-family="Consolas, monospace" font-size="13" fill="var(--text-dim)">Z</text>
+
+        <circle cx="150" cy="360" r="3" fill="var(--text-dim)"/>
+        <text x="132" y="378" font-family="Consolas, monospace" font-size="10" fill="var(--text-dim)">origen (0,0,0)</text>
+
+        <path id="cp-cafe" data-compare="cafe" class="cosplane-wedge" d="M150,360 L169.4,325.0 A40,40 0 0,1 167.9,324.2 Z" fill="#6f9d7c" opacity="0"/>
+        <path id="cp-enfoque" data-compare="enfoque" class="cosplane-wedge" d="M150,360 L169.4,325.0 A40,40 0 0,1 163.3,322.3 Z" fill="#6f9d7c" opacity="0"/>
+        <path id="cp-golpe" data-compare="golpe" class="cosplane-wedge" d="M150,360 L169.4,325.0 A40,40 0 0,1 190.0,358.9 Z" fill="#c99a4e" opacity="0"/>
+
+        <line class="cosplane-vec" data-compare="cafe" x1="150" y1="360" x2="260" y2="140" stroke="#6f9d7c" stroke-width="1.5" opacity="0.55"/>
+        <circle cx="260" cy="140" r="8" fill="#6f9d7c" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="260" y="124" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#6f9d7c">Café de Medianoche</text>
+
+        <line class="cosplane-vec" data-compare="enfoque" x1="150" y1="360" x2="210" y2="190" stroke="#6f9d7c" stroke-width="1.5" opacity="0.55"/>
+        <circle cx="210" cy="190" r="8" fill="#6f9d7c" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="200" y="205" text-anchor="end" font-family="Consolas, monospace" font-size="11" fill="#6f9d7c">Enfoque Profundo</text>
+
+        <line x1="150" y1="360" x2="230" y2="110" stroke="#6f9d7c" stroke-width="1" opacity="0.4"/>
+        <circle cx="230" cy="110" r="7" fill="#6f9d7c" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="230" y="94" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#6f9d7c">Respiración Consciente</text>
+
+        <line x1="150" y1="360" x2="430" y2="160" stroke="#c99a4e" stroke-width="1" opacity="0.4"/>
+        <circle cx="430" cy="160" r="7" fill="#c99a4e" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="430" y="144" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#c99a4e">Fiesta de Verano</text>
+
+        <line x1="150" y1="360" x2="470" y2="240" stroke="#c99a4e" stroke-width="1" opacity="0.4"/>
+        <circle cx="470" cy="240" r="7" fill="#c99a4e" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="480" y="244" text-anchor="start" font-family="Consolas, monospace" font-size="10" fill="#c99a4e">Perreo Sin Control</text>
+
+        <line class="cosplane-vec" data-compare="golpe" x1="150" y1="360" x2="520" y2="350" stroke="#c99a4e" stroke-width="1.5" opacity="0.55"/>
+        <circle cx="520" cy="350" r="8" fill="#c99a4e" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="520" y="335" text-anchor="end" font-family="Consolas, monospace" font-size="11" fill="#c99a4e">Golpe de Trueno</text>
+
+        <line x1="150" y1="360" x2="170" y2="260" stroke="#5b7c99" stroke-width="1" opacity="0.4"/>
+        <circle cx="170" cy="260" r="7" fill="#5b7c99" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="185" y="264" text-anchor="start" font-family="Consolas, monospace" font-size="10" fill="#5b7c99">Gris y Lluvioso</text>
+
+        <line x1="150" y1="360" x2="120" y2="300" stroke="#5b7c99" stroke-width="1" opacity="0.4"/>
+        <circle cx="120" cy="300" r="7" fill="#5b7c99" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="120" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#5b7c99">Camino Sin Rumbo</text>
+
+        <line x1="150" y1="360" x2="95" y2="240" stroke="#5b7c99" stroke-width="1" opacity="0.4"/>
+        <circle cx="95" cy="240" r="7" fill="#5b7c99" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="60" y="236" text-anchor="start" font-family="Consolas, monospace" font-size="10" fill="#5b7c99">Lágrimas de Ayer</text>
+
+        <line x1="150" y1="360" x2="340" y2="260" stroke="#2f8f8f" stroke-width="1" opacity="0.4"/>
+        <circle cx="340" cy="260" r="7" fill="#2f8f8f" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="340" y="244" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#2f8f8f">Copa de Vino Tinto</text>
+
+        <line x1="150" y1="360" x2="370" y2="300" stroke="#2f8f8f" stroke-width="1" opacity="0.4"/>
+        <circle cx="370" cy="300" r="7" fill="#2f8f8f" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="370" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#2f8f8f">Domingo de Limpieza</text>
+
+        <line x1="150" y1="360" x2="400" y2="335" stroke="#2f8f8f" stroke-width="1" opacity="0.4"/>
+        <circle cx="400" cy="335" r="7" fill="#2f8f8f" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="400" y="352" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#2f8f8f">Sazón en la Cocina</text>
+
+        <line class="cosplane-vec" data-compare="query" x1="150" y1="360" x2="250" y2="180" stroke="#7c3aed" stroke-width="3"/>
+        <circle cx="250" cy="180" r="9" fill="#7c3aed" stroke="var(--bg-card)" stroke-width="2"/>
+        <text x="250" y="164" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7c3aed">Una nueva búsqueda</text>
+      </svg>
+    </div>
+    <div class="cosplane-demo" style="margin-top:0.6rem;">
+      <p style="margin:0 0 0.5rem; font-size:0.85rem; color:var(--text-dim); text-align:center;">
+        Haz clic para comparar la flecha violeta (la búsqueda) con otra canción, y mira el ángulo entre las
+        dos flechas, exactamente eso es lo que mide la similitud de coseno:
+      </p>
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:center;">
+        <button type="button" class="btn btn-secondary cosplane-btn" data-compare="cafe" data-status="Ángulo ≈ 3° entre las dos flechas → similitud de coseno ≈ 0.99. Casi la misma dirección: significan prácticamente lo mismo.">Comparar con Café de Medianoche</button>
+        <button type="button" class="btn btn-secondary cosplane-btn" data-compare="enfoque" data-status="Ángulo ≈ 10° entre las dos flechas → similitud de coseno ≈ 0.99. Muy parecidas, aunque no tan cerca como con Café de Medianoche.">Comparar con Enfoque Profundo</button>
+        <button type="button" class="btn btn-secondary cosplane-btn" data-compare="golpe" data-status="Ángulo ≈ 59° entre las dos flechas → similitud de coseno ≈ 0.51. Apuntan en direcciones bastante distintas: comparten poco significado.">Comparar con Golpe de Trueno</button>
+      </div>
+      <p class="cosplane-status" style="margin-top:0.6rem; font-size:0.85rem; color:var(--text-dim); min-height:2.4em; text-align:center;">Elige una comparación para ver el ángulo entre la búsqueda y esa canción.</p>
+    </div>
+    <p style="margin-top:0.6rem; font-size:0.8rem; color:var(--text-dim); text-align:center;">
+      <strong style="color:#6f9d7c;">Verde = tranquilas</strong>, <strong style="color:#c99a4e;">dorado = enérgicas</strong>,
+      <strong style="color:#5b7c99;">azul = melancólicas</strong>, <strong style="color:#2f8f8f;">teal = actividades cotidianas</strong>,
+      <strong style="color:#7c3aed;">violeta = una búsqueda nueva</strong>.
+    </p>
+    <div class="content-box" style="border-left:4px solid #8b7fb8; margin-top:0.8rem;">
+      <p style="margin:0 0 0.5rem;">
+        La similitud de coseno no mide qué tan lejos está la punta de la flecha del
+        origen (eso sería más parecido a la <strong>distancia euclidiana</strong>), mide el <strong>ángulo
+        entre las flechas</strong>. Una flecha larga y una corta pueden apuntar exactamente en la misma
+        dirección y tener coseno 1, mientras que dos flechas del mismo tamaño apuntando en direcciones
+        opuestas dan un coseno cercano a -1.
+      </p>
+    </div>
+  </div>
+
   <!-- ===================== PASO 1 ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
@@ -1529,8 +1648,9 @@ window.WEEK_CONTENT_6_1 = `
       <li>Haz clic en <strong>"New project"</strong>.</li>
       <li>Escribe el nombre <strong>SoundFlow-Pro</strong>, crea una contraseña segura y haz clic en
         <strong>"Create new project"</strong>.</li>
-      <li>En la barra lateral izquierda, haz clic en <strong>Settings</strong> y copia estos dos datos. Vas
-        a encontrarlos en dos apartados distintos, con un ejemplo de cómo se ven:
+      <li>En la barra lateral izquierda, haz clic en <strong>Settings</strong> y copia estos dos datos en un
+        bloc de notas, los vas a necesitar más adelante. Vas a encontrarlos en dos apartados distintos, con
+        un ejemplo de cómo se ven:
         <div class="concept-grid" style="grid-template-columns: 1fr 1fr; margin-top:0.4rem;">
           <div class="concept-card">
             <h4 style="font-size:0.9rem;">Data API / API URL</h4>
@@ -1893,7 +2013,7 @@ def insertar_cancion(titulo, artista, descripcion):
         print(f"Error: {e}")
 
 if __name__ == "__main__":
-    # Insertemos 30 canciones con "vibras" bien distintas entre sí
+    # Insertemos 36 canciones con "vibras" bien distintas entre sí
     insertar_cancion("Café de Medianoche", "Ritmos Lo-Fi", "Música instrumental tranquila para estudiar en la noche con lluvia, con ritmos suaves y repetitivos, sin voces, ideal para relajarse, bajar el ritmo y quedarse dormido poco a poco")
     insertar_cancion("Fiesta de Verano", "DJ Sol", "Ritmos electrónicos movidos para bailar en la playa bajo el sol, con mucha energía, bajos intensos y un ritmo acelerado pensado para fiestas al aire libre con amigos")
     insertar_cancion("Golpe de Trueno", "Furia Eléctrica", "Guitarras distorsionadas muy potentes y batería rápida, ideal para entrenar en el gimnasio, descargar adrenalina o hacer ejercicio pesado, con un sonido agresivo y lleno de energía")
@@ -1923,7 +2043,13 @@ if __name__ == "__main__":
     insertar_cancion("Alma en Llamas", "Voces del Sur", "Soul profundo con una voz llena de emoción, transmite pasión y sufrimiento a la vez, con un ritmo pausado y arreglos cálidos de metales")
     insertar_cancion("Fiesta en el Barrio", "Cumbia Brava", "Cumbia villera con mucho ritmo y coros gritados, ideal para una fiesta callejera, con un tempo rápido y una energía ruidosa y festiva")
     insertar_cancion("Teclas Serenas", "Piano de Estudio", "Piano instrumental suave y repetitivo, diseñado para acompañar largas horas de estudio o lectura, con un volumen bajo, sin letras y un ritmo calmado que ayuda a concentrarse o relajarse antes de dormir")
-    insertar_cancion("Saltando y Riendo", "Banda Infantil Alegre", "Canción infantil juguetona con ritmo saltarín, perfecta para que los niños bailen y se diviertan, con voces alegres y un tempo rápido pensado para jugar")</code></pre>
+    insertar_cancion("Saltando y Riendo", "Banda Infantil Alegre", "Canción infantil juguetona con ritmo saltarín, perfecta para que los niños bailen y se diviertan, con voces alegres y un tempo rápido pensado para jugar")
+    insertar_cancion("Domingo de Limpieza", "Pop Casero", "Música pop pensada para limpiar y arreglar la casa: alegre, movida y con mucha energía positiva, ideal para poner mientras ordenas, sacudes el polvo o organizas el hogar, con un ritmo animado de principio a fin")
+    insertar_cancion("Pasos al Aire Libre", "Ritmo Urbano Ligero", "Pop indie con un ritmo constante y ligero, perfecto para salir a caminar al aire libre o hacer una caminata rápida por el barrio, con un tempo animado que acompaña bien el paso sin ser agresivo")
+    insertar_cancion("Sazón en la Cocina", "Ritmo Casero", "Ritmos latinos alegres con trompetas y percusión, ideal para cocinar en casa mientras te mueves un poco entre ollas y sartenes, con energía festiva pero sin ser una canción de fiesta nocturna")
+    insertar_cancion("Modo Productivo", "Oficina Silenciosa", "Instrumental minimalista con ritmo suave y constante, sin voces, diseñado para mantenerte concentrado en el trabajo de oficina durante horas, ideal para responder correos, escribir informes o hacer tareas administrativas")
+    insertar_cancion("Tarde de Calma", "Sonidos Zen", "Música suave con sonidos de agua y campanas tibetanas, ideal para relajarte después de un día largo, sin ritmo marcado y con un ambiente tranquilo tipo spa, pensada para bajar el estrés sin necesariamente quedarte dormido")
+    insertar_cancion("Copa de Vino Tinto", "Lounge Nocturno", "Jazz lounge suave con piano y contrabajo, perfecto para tomar una copa de vino por la noche con buena compañía, con un ritmo relajado y elegante, ideal para una conversación tranquila")</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.6rem;">
       <p style="margin:0;">
@@ -2089,6 +2215,40 @@ if __name__ == "__main__":
         Lo impresionante: aunque no uses las mismas palabras que en la descripción guardada, la IA va a
         encontrar la canción que más se acerque al <strong>sentimiento</strong> de tu búsqueda. Eso es
         exactamente lo que una consulta <code>WHERE ... LIKE</code> nunca podría hacer.
+      </p>
+    </div>
+    <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:0.8rem;">
+      <p style="margin:0 0 0.5rem; font-weight:600; color:#c99a4e;">Qué puede pasar cuando pruebes tus propias búsquedas</p>
+      <ul style="margin:0; padding-left:1.2rem; font-size:0.85rem; color:var(--text-dim); line-height:1.7;">
+        <li>El primer resultado no siempre es perfecto: si dos canciones quedan con similitudes muy parecidas
+          (por ejemplo 0.56 y 0.57), no es un error, es que el modelo no logró separar bien esos dos
+          significados con una descripción corta.</li>
+        <li>Si una búsqueda no trae nada (o trae solo resultados raros), prueba bajar temporalmente
+          <code>match_threshold</code> a un valor negativo y subir <code>match_count</code> al total de
+          canciones, así ves el ranking completo y detectas si el problema es el umbral o el modelo mismo.</li>
+        <li>Un mismo número de similitud no significa lo mismo en dos búsquedas distintas: 0.55 puede ser un
+          resultado excelente en una consulta y mediocre en otra, la similitud de coseno es relativa a cada
+          búsqueda, no un puntaje absoluto de calidad.</li>
+        <li>Tener la palabra exacta en la descripción no garantiza el primer lugar: el modelo promedia el
+          significado de toda la frase, así que si esa palabra queda rodeada de mucho texto genérico, su peso
+          se diluye.</li>
+        <li>La forma de escribir la búsqueda también importa: una frase corta y directa ("Arreglar casa")
+          puede dar mejores resultados que una frase larga y conversacional llena de palabras de relleno
+          ("Recomiéndame música para arreglar la casa").</li>
+        <li>Si buscas algo que ninguna canción de la base de datos describe (por ejemplo, un género que no
+          existe en tu catálogo), el sistema igual va a devolver las canciones menos parecidas que encuentre,
+          no te va a decir "no tengo nada para eso". Esa es una limitación real de la búsqueda semántica, no
+          un bug.</li>
+      </ul>
+    </div>
+    <div class="content-box" style="border-left:4px solid #5b7c99; margin-top:0.8rem;">
+      <p style="margin:0 0 0.5rem; font-weight:600; color:#5b7c99;">Nota final: ¿esto se puede solucionar?</p>
+      <p style="margin:0;">
+        Todo lo anterior es normal, es el techo natural de un modelo de embeddings pequeño y de propósito
+        general con descripciones cortas. En producción se reduce (no se elimina) combinando varias técnicas:
+        un modelo de embeddings más grande y preciso, <strong>búsqueda híbrida</strong> (vectores + palabra
+        clave), un segundo modelo de <strong>re-ranking</strong> sobre los primeros resultados, y metadatos o
+        etiquetas estructuradas además del embedding.
       </p>
     </div>
   </div>
