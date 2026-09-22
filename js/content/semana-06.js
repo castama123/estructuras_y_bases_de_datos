@@ -1524,7 +1524,8 @@ window.WEEK_CONTENT_6_1 = `
       <li>Ingresa a <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a>.</li>
       <li>Regístrate con GitHub o Gmail.</li>
       <li>Te va a pedir crear una <strong>organización</strong> antes de dejarte crear un proyecto: es solo
-        una forma de agrupar proyectos, dale cualquier nombre y continúa, no hay nada más que configurar.</li>
+        una forma de agrupar proyectos, ponle el nombre <strong>estructuras_y_bases_de_datos</strong> y
+        continúa, no hay nada más que configurar.</li>
       <li>Haz clic en <strong>"New project"</strong>.</li>
       <li>Escribe el nombre <strong>SoundFlow-Pro</strong>, crea una contraseña segura y haz clic en
         <strong>"Create new project"</strong>.</li>
@@ -1893,36 +1894,36 @@ def insertar_cancion(titulo, artista, descripcion):
 
 if __name__ == "__main__":
     # Insertemos 30 canciones con "vibras" bien distintas entre sí
-    insertar_cancion("Café de Medianoche", "Ritmos Lo-Fi", "Música instrumental tranquila para estudiar en la noche con lluvia")
-    insertar_cancion("Fiesta de Verano", "DJ Sol", "Ritmos electrónicos movidos para bailar en la playa bajo el sol")
-    insertar_cancion("Golpe de Trueno", "Furia Eléctrica", "Guitarras distorsionadas muy potentes y batería rápida, ideal para descargar adrenalina o hacer ejercicio pesado")
-    insertar_cancion("Gris y Lluvioso", "Piano Sentimental", "Una melodía de piano muy lenta y triste que transmite soledad, perfecta para un día de nostalgia en casa")
-    insertar_cancion("Enfoque Profundo", "Ondas de Enfoque", "Ritmos electrónicos constantes y suaves sin voces, diseñados para entrar en estado de flujo mientras programas o estudias")
-    insertar_cancion("Bajo la Luna de Plata", "Trío Nocturno", "Balada romántica lenta con guitarra acústica, perfecta para una cena a la luz de las velas")
-    insertar_cancion("Perreo Sin Control", "MC Candela", "Reggaetón pegajoso y sensual con bajo potente, ideal para una fiesta hasta el amanecer")
-    insertar_cancion("Sabor Caribeño", "Orquesta Tropical", "Salsa alegre y bailable con trompetas vibrantes, perfecta para una celebración familiar")
-    insertar_cancion("Humo de Café", "Cuarteto Azul", "Jazz suave con saxofón relajado, ideal para una tarde tranquila leyendo en una cafetería")
-    insertar_cancion("Camino Sin Rumbo", "Blues del Sur", "Blues melancólico con guitarra eléctrica lenta, transmite nostalgia y desamor")
-    insertar_cancion("Ira de Acero", "Bestia de Hierro", "Metal pesado con riffs agresivos y gritos intensos, para liberar rabia y frustración")
-    insertar_cancion("Batalla Final", "Orquesta Sinfónica del Norte", "Música orquestal épica con coros poderosos, ideal para una escena de película de acción")
-    insertar_cancion("Levántate y Lucha", "Rimas del Barrio", "Hip-hop motivacional con letras de superación personal, para empezar el día con energía")
-    insertar_cancion("Pensamientos en Voz Baja", "Habitación 204", "Indie introspectivo con voz susurrada y guitarra minimalista, para momentos de reflexión a solas")
-    insertar_cancion("Rutas del Viajero", "Cuerdas al Viento", "Folk acústico con guitarra y armónica, perfecta para un viaje por carretera con amigos")
-    insertar_cancion("Respiración Consciente", "Sonidos del Bosque", "Música ambiental suave con sonidos de la naturaleza, ideal para meditar o practicar yoga")
-    insertar_cancion("Cumbia de mi Tierra", "Los Herederos", "Cumbia alegre y festiva con acordeón, perfecta para una reunión familiar de fin de semana")
-    insertar_cancion("Neón de los 80", "Retro Wave", "Synthwave nostálgico con sintetizadores brillantes, evoca las noches de una ciudad ochentera")
-    insertar_cancion("Promesa Eterna", "Cuarteto Real", "Vals romántico y elegante, perfecto para el primer baile de una boda")
-    insertar_cancion("Voz del Barrio", "MC Justicia", "Rap con letras de crítica social sobre la vida en la ciudad, crudo y directo")
-    insertar_cancion("Lágrimas de Ayer", "Bolero del Recuerdo", "Bolero lento y triste sobre un amor que ya no volverá, con mucho sentimiento")
-    insertar_cancion("Pasos en la Oscuridad", "Sombras del Ático", "Banda sonora tensa e inquietante con cuerdas disonantes, ideal para una escena de suspenso")
-    insertar_cancion("Brisa de Coco", "Costa Serena", "Reggae relajado con ritmo suave, perfecto para un atardecer en la playa sin prisas")
-    insertar_cancion("Domingo de Sol", "Mañanas Felices", "Pop alegre y ligero con guitarras brillantes, ideal para un desayuno soleado en familia")
-    insertar_cancion("Bachata de mi Vida", "Los Enamorados", "Bachata romántica y sensual, perfecta para bailar pegados con la persona que quieres")
-    insertar_cancion("Rebeldía Total", "Puños en Alto", "Punk rápido y crudo con letras de protesta, para quienes quieren romper las reglas")
-    insertar_cancion("Alma en Llamas", "Voces del Sur", "Soul profundo con una voz llena de emoción, transmite pasión y sufrimiento a la vez")
-    insertar_cancion("Fiesta en el Barrio", "Cumbia Brava", "Cumbia villera con mucho ritmo y coros gritados, ideal para una fiesta callejera")
-    insertar_cancion("Teclas Serenas", "Piano de Estudio", "Piano instrumental suave y repetitivo, diseñado para acompañar largas horas de estudio o lectura")
-    insertar_cancion("Saltando y Riendo", "Banda Infantil Alegre", "Canción infantil juguetona con ritmo saltarín, perfecta para que los niños bailen y se diviertan")</code></pre>
+    insertar_cancion("Café de Medianoche", "Ritmos Lo-Fi", "Música instrumental tranquila para estudiar en la noche con lluvia, con ritmos suaves y repetitivos, sin voces, ideal para relajarse, bajar el ritmo y quedarse dormido poco a poco")
+    insertar_cancion("Fiesta de Verano", "DJ Sol", "Ritmos electrónicos movidos para bailar en la playa bajo el sol, con mucha energía, bajos intensos y un ritmo acelerado pensado para fiestas al aire libre con amigos")
+    insertar_cancion("Golpe de Trueno", "Furia Eléctrica", "Guitarras distorsionadas muy potentes y batería rápida, ideal para entrenar en el gimnasio, descargar adrenalina o hacer ejercicio pesado, con un sonido agresivo y lleno de energía")
+    insertar_cancion("Gris y Lluvioso", "Piano Sentimental", "Una melodía de piano muy lenta y triste que transmite soledad, perfecta para un día de nostalgia en casa, sin ritmo acelerado, ideal para momentos de calma y reflexión mientras llueve afuera")
+    insertar_cancion("Enfoque Profundo", "Ondas de Enfoque", "Ritmos electrónicos constantes y suaves sin voces, diseñados para entrar en estado de flujo mientras programas o estudias, con un volumen bajo y sin sobresaltos que ayuda a mantener la concentración por horas")
+    insertar_cancion("Bajo la Luna de Plata", "Trío Nocturno", "Balada romántica lenta con guitarra acústica, perfecta para una cena a la luz de las velas, con un ritmo pausado y una voz suave pensada para momentos íntimos en pareja")
+    insertar_cancion("Perreo Sin Control", "MC Candela", "Reggaetón pegajoso y sensual con bajo potente, ideal para una fiesta hasta el amanecer, con un ritmo acelerado y letras pensadas para bailar pegado y sin parar")
+    insertar_cancion("Sabor Caribeño", "Orquesta Tropical", "Salsa alegre y bailable con trompetas vibrantes, perfecta para una celebración familiar, con un ritmo rápido y contagioso que anima a todos a moverse en la pista")
+    insertar_cancion("Humo de Café", "Cuarteto Azul", "Jazz suave con saxofón relajado, ideal para una tarde tranquila leyendo en una cafetería, con un ritmo pausado y una atmósfera cálida sin sobresaltos")
+    insertar_cancion("Camino Sin Rumbo", "Blues del Sur", "Blues melancólico con guitarra eléctrica lenta, transmite nostalgia y desamor, con un ritmo arrastrado y una voz cargada de tristeza que invita a la introspección")
+    insertar_cancion("Ira de Acero", "Bestia de Hierro", "Metal pesado con riffs agresivos y gritos intensos, para liberar rabia y frustración, con un sonido ruidoso, rápido y lleno de tensión")
+    insertar_cancion("Batalla Final", "Orquesta Sinfónica del Norte", "Música orquestal épica con coros poderosos, ideal para una escena de película de acción, con crescendos intensos y una energía dramática y arrolladora")
+    insertar_cancion("Levántate y Lucha", "Rimas del Barrio", "Hip-hop motivacional con letras de superación personal, ideal para entrenar en el gimnasio o empezar el día con energía, con un ritmo marcado y una actitud positiva y enérgica")
+    insertar_cancion("Pensamientos en Voz Baja", "Habitación 204", "Indie introspectivo con voz susurrada y guitarra minimalista, para momentos de reflexión a solas, con un ritmo lento y un ambiente íntimo y calmado")
+    insertar_cancion("Rutas del Viajero", "Cuerdas al Viento", "Folk acústico con guitarra y armónica, perfecta para un viaje por carretera con amigos, con un ritmo relajado pero animado, ideal para cantar en grupo")
+    insertar_cancion("Respiración Consciente", "Sonidos del Bosque", "Música ambiental suave con sonidos de la naturaleza, ideal para meditar o practicar yoga, sin ritmo marcado, pensada para relajar la mente y bajar el estrés antes de dormir")
+    insertar_cancion("Cumbia de mi Tierra", "Los Herederos", "Cumbia alegre y festiva con acordeón, perfecta para una reunión familiar de fin de semana, con un ritmo animado que invita a bailar en grupo")
+    insertar_cancion("Neón de los 80", "Retro Wave", "Synthwave nostálgico con sintetizadores brillantes, evoca las noches de una ciudad ochentera, con un ritmo constante y una energía retro entre melancólica y bailable")
+    insertar_cancion("Promesa Eterna", "Cuarteto Real", "Vals romántico y elegante, perfecto para el primer baile de una boda, con un ritmo suave y ceremonioso pensado para momentos especiales en pareja")
+    insertar_cancion("Voz del Barrio", "MC Justicia", "Rap con letras de crítica social sobre la vida en la ciudad, crudo y directo, con un ritmo marcado y una energía combativa e intensa")
+    insertar_cancion("Lágrimas de Ayer", "Bolero del Recuerdo", "Bolero lento y triste sobre un amor que ya no volverá, con mucho sentimiento, un ritmo pausado y una voz cargada de nostalgia")
+    insertar_cancion("Pasos en la Oscuridad", "Sombras del Ático", "Banda sonora tensa e inquietante con cuerdas disonantes, ideal para una escena de suspenso, con silencios incómodos y una atmósfera oscura y alerta")
+    insertar_cancion("Brisa de Coco", "Costa Serena", "Reggae relajado con ritmo suave, perfecto para un atardecer en la playa sin prisas, con un tempo lento y una sensación de calma tropical")
+    insertar_cancion("Domingo de Sol", "Mañanas Felices", "Pop alegre y ligero con guitarras brillantes, ideal para un desayuno soleado en familia, con un ritmo animado pero suave, sin ser una canción para fiesta nocturna")
+    insertar_cancion("Bachata de mi Vida", "Los Enamorados", "Bachata romántica y sensual, perfecta para bailar pegados con la persona que quieres, con un ritmo marcado pero cadencioso pensado para el baile en pareja")
+    insertar_cancion("Rebeldía Total", "Puños en Alto", "Punk rápido y crudo con letras de protesta, para quienes quieren romper las reglas, con acordes agresivos y un ritmo acelerado sin pausas")
+    insertar_cancion("Alma en Llamas", "Voces del Sur", "Soul profundo con una voz llena de emoción, transmite pasión y sufrimiento a la vez, con un ritmo pausado y arreglos cálidos de metales")
+    insertar_cancion("Fiesta en el Barrio", "Cumbia Brava", "Cumbia villera con mucho ritmo y coros gritados, ideal para una fiesta callejera, con un tempo rápido y una energía ruidosa y festiva")
+    insertar_cancion("Teclas Serenas", "Piano de Estudio", "Piano instrumental suave y repetitivo, diseñado para acompañar largas horas de estudio o lectura, con un volumen bajo, sin letras y un ritmo calmado que ayuda a concentrarse o relajarse antes de dormir")
+    insertar_cancion("Saltando y Riendo", "Banda Infantil Alegre", "Canción infantil juguetona con ritmo saltarín, perfecta para que los niños bailen y se diviertan, con voces alegres y un tempo rápido pensado para jugar")</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.6rem;">
       <p style="margin:0;">
@@ -2031,8 +2032,8 @@ def buscar_por_vibra(consulta_usuario):
     try:
         res = supabase.rpc('buscar_canciones', {
             'query_embedding': vector_busqueda,
-            'match_threshold': 0.5, # Qué tan parecidos deben ser (0 a 1)
-            'match_count': 3        # Cuántos resultados queremos
+            'match_threshold': 0.35, # Qué tan parecidos deben ser (0 a 1)
+            'match_count': 5         # Cuántos resultados queremos
         }).execute()
         # 3. res.data es la lista de canciones que devolvió la función de Supabase
         print("\\nRecomendaciones de SoundFlow AI:")
@@ -2054,14 +2055,6 @@ if __name__ == "__main__":
         RPC significa <strong>Remote Procedure Call</strong> (llamado a procedimiento remoto): te deja
         invocar una función que vive en otro lugar, aquí, dentro de la base de datos, como si fuera una
         función normal de tu código, aunque en realidad viaja por una petición HTTP hasta el servidor.
-        <code>buscar_canciones</code> es, de hecho, una función SQL como las que ya viste en la Semana 3
-        (<code>CREATE FUNCTION</code>), solo que ahora vive dentro de PostgreSQL en Supabase. El problema es
-        que Supabase normalmente solo da acceso REST a operaciones simples de tabla
-        (<code>.table(...).select()</code>, <code>.insert()</code>), no a funciones personalizadas, para
-        eso existe <code>.rpc(...)</code>: le dice a Supabase "ejecuta esta función que ya está guardada en
-        la base de datos, con estos parámetros", en vez de "lee esta tabla". Así, la comparación de
-        similitud de coseno ocurre dentro de PostgreSQL, no en tu computadora, y Python solo recibe el
-        resultado ya calculado.
       </p>
     </div>
     <p style="margin-top:0.6rem;">Ejecuta la búsqueda:</p>
@@ -2240,6 +2233,7 @@ if __name__ == "__main__":
       · KodeKloud (2025). ¿Cómo funciona una base de datos vectorial? [Video]. YouTube. youtube.com/watch?v=VVNYQKDLY5s<br>
       · CodelyTV (2025). Qué son las BÚSQUEDAS SEMÁNTICAS y los EMBEDDINGS: IA con tu base de datos [Video]. YouTube. youtube.com/watch?v=5rvUTeb0be4<br>
       · CodelyTV (2025). Dónde y cuándo generar los Embeddings (Programa IA) [Video]. YouTube. youtube.com/watch?v=HHr96KF4fWQ<br>
+      · BettaTech (2025). Dame 30 Minutos y te enseño a implementar un RAG con Embeddings [Video]. YouTube. youtube.com/watch?v=lBimeKh88OU<br>
       · Real Python (2026). Python Virtual Environments: A Primer. realpython.com/python-virtual-environments-a-primer<br>
       · Supabase (2026). AI &amp; Vectors. supabase.com/docs/guides/ai<br>
       · Supabase (2026). What are embeddings? supabase.com/docs/guides/ai/concepts<br>
