@@ -2415,3 +2415,741 @@ if __name__ == "__main__":
     </p>
   </div>
 `;
+
+window.WEEK_CONTENT_6_2 = `
+
+  <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">El laboratorio de sensibilidad IA: calibrando SoundFlow-Pro</h2>
+
+  <!-- ===================== DEFINICIÓN INICIAL ===================== -->
+  <div class="activity-section" style="border-top:none; padding-top:0;">
+    <p>
+      Con SoundFlow-Pro funcionando, ahora toca <strong>calibrarlo</strong>: la precisión de un modelo de
+      embeddings depende de qué tan bien escribes <span style="color:#b33a2e;">las descripciones, tus
+      búsquedas, y el <code>match_threshold</code></span>. Esta actividad tiene tres partes, un test de estrés con distintos tipos de
+      consulta, un experimento con el umbral para encontrar el <span style="color:#7c3aed;">"punto dulce"</span>, y la optimización real de una
+      descripción que esté rindiendo mal.
+    </p>
+  </div>
+
+  <!-- ===================== PARTE 1: TEST DE ESTRÉS ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Parte 1: El test de estrés</h3>
+    </div>
+    <p>
+      Un "test de estrés" es una prueba que empuja un sistema a propósito hacia sus límites, para ver en qué
+      punto empieza a fallar o a perder calidad, en vez de solo probarlo con casos fáciles donde todo funciona
+      bien. Aquí lo vas a hacer con tu buscador semántico, en vez de escribir siempre consultas cómodas y
+      parecidas a las descripciones, vas a exigirle cada vez más al modelo, hasta consultas que no comparten
+      ni una palabra con lo que buscas.
+    </p>
+    <p>
+      Vas a probar tu buscador con tres tipos de consulta muy distintos entre sí, y vas a anotar el score de
+      similitud que te devuelve la consola en cada caso. La idea es ver, con números reales y no solo con
+      intuición, qué tan lejos puede llegar el modelo antes de perder precisión.
+    </p>
+    <div class="concept-grid" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="concept-card">
+        <h4 style="color:#5b7c99;">Literal</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Usa palabras que sí aparecen o son muy
+          cercanas a las de la descripción guardada. Ejemplo: <strong style="color:#5b7c99;">"melodía de piano
+          triste y solitaria"</strong>.</p>
+      </div>
+      <div class="concept-card">
+        <h4 style="color:#c99a4e;">Con sinónimos</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Dice lo mismo pero con otras palabras,
+          sin coincidencia léxica directa. Ejemplo: <strong style="color:#c99a4e;">"una pieza musical calmada que
+          refleja aislamiento"</strong>.</p>
+      </div>
+      <div class="concept-card">
+        <h4 style="color:#7c3aed;">Abstracta</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">No describe la canción, describe un
+          estado de ánimo o una sensación. Ejemplo: <strong style="color:#7c3aed;">"me siento solo en un día
+          gris"</strong>.</p>
+      </div>
+    </div>
+    <p style="margin-top:0.6rem; font-size:0.85rem; color:var(--text-dim); font-style:italic;">
+      Los tres ejemplos apuntan a la misma canción del catálogo, "Gris y Lluvioso", cada vez con menos palabras
+      en común con su descripción real, para que puedas comparar cómo baja el score a medida que subes de nivel.
+    </p>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #c99a4e;">
+      <p style="margin:0;">
+        Es normal que la búsqueda abstracta no devuelva ningún resultado con tu <code>match_threshold</code>
+        actual, mientras que la literal y la de sinónimos sí lo hacen. Eso no es un error, es la progresión que
+        esta parte busca que veas: entre menos comparta tu consulta con la descripción real, más bajo el score,
+        hasta el punto de quedar por debajo del umbral.
+      </p>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #5b7c99;">
+      <p style="margin:0 0 0.6rem;">Estas tres consultas no son igual de difíciles para el modelo:</p>
+      <p style="margin:0 0 0.5rem;"><strong style="color:#5b7c99;">Literal:</strong> casi siempre saca el score
+        más alto, porque hay coincidencia de palabras además de significado.</p>
+      <p style="margin:0 0 0.5rem;"><strong style="color:#c99a4e;">Con sinónimos:</strong> depende de qué tan
+        bien el modelo aprendió que esas dos formas de decir lo mismo caen cerca en el espacio vectorial.</p>
+      <p style="margin:0;"><strong style="color:#7c3aed;">Abstracta:</strong> es la más exigente, ahí el modelo
+        tiene que "leer entre líneas" sin ninguna pista léxica, y es normal que el score baje.</p>
+    </div>
+    <p style="margin-top:0.8rem;">
+      Completa esta tabla con tres búsquedas propias de cada tipo (9 en total) y lo que te devuelva
+      <code>buscar_musica.py</code>:
+    </p>
+    <div class="content-box" style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+        <tr style="border-bottom:1px solid var(--border);">
+          <th style="text-align:left; padding:0.4rem;">Tipo de búsqueda</th>
+          <th style="text-align:left; padding:0.4rem;">Prompt del usuario</th>
+          <th style="text-align:left; padding:0.4rem;">Canción recomendada</th>
+          <th style="text-align:left; padding:0.4rem;">Similitud</th>
+          <th style="text-align:left; padding:0.4rem;">¿Fue acertada?</th>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#5b7c99;">Literal</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#5b7c99;">Literal</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#5b7c99;">Literal</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#c99a4e;">Sinónimos</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#c99a4e;">Sinónimos</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#c99a4e;">Sinónimos</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#7c3aed;">Abstracta</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#7c3aed;">Abstracta</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr>
+          <td style="padding:0.4rem; color:#7c3aed;">Abstracta</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== PARTE 2: MATCH_THRESHOLD ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Parte 2: Jugando con match_threshold</h3>
+    </div>
+    <p>
+      Ahora vas a mover el <code>match_threshold</code> de <code>buscar_musica.py</code> hacia los dos
+      extremos, y observar qué pasa en cada uno.
+    </p>
+    <div class="concept-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="concept-card">
+        <h4 style="color:#b33a2e;">Umbral muy alto (0.9)</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">El buscador se vuelve demasiado
+          exigente. Como viste en la Clase 1, las similitudes de coseno rara vez llegan a valores tan altos
+          salvo cuando el texto es casi idéntico, así que lo más probable es que no encuentres nada, incluso
+          para búsquedas razonables.</p>
+      </div>
+      <div class="concept-card">
+        <h4 style="color:#b33a2e;">Umbral muy bajo (0.3)</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">El buscador acepta casi cualquier cosa.
+          Empiezan a aparecer canciones que no tienen relación real con la búsqueda, "lo menos malo" en vez de
+          una coincidencia real.</p>
+      </div>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #5b7c99;">
+      <p style="margin:0 0 0.5rem;"><strong>Por qué el umbral vive en un rango tan estrecho</strong></p>
+      <p style="margin:0;">
+        La similitud de coseno matemáticamente puede ir de -1 a 1, pero en la práctica, con modelos de
+        sentence-transformers, casi todos los resultados caen entre 0.2 y 0.7. Esto pasa porque estos modelos
+        tienden a ubicar los vectores de cualquier texto, sin importar el tema, en una región parecida del
+        espacio, en vez de repartirlos parejo por todas las direcciones posibles.
+      </p>
+      <p style="margin:0.6rem 0 0;">
+        Ese fenómeno se llama <strong style="color:#b33a2e;">anisotropía</strong>. En términos simples,
+        significa que el espacio de embeddings no está "distribuido parejo" en todas las direcciones, la
+        mayoría de los vectores terminan apuntando hacia una misma zona general del espacio, sin importar de
+        qué hable el texto. El umbral no está partiendo un rango de 0 a 1
+        limpio, está partiendo esa franja angosta donde realmente se mueven tus datos.
+      </p>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #7c3aed;">
+      <p style="margin:0 0 0.5rem;"><strong>¿Y si una búsqueda válida queda por debajo del umbral?</strong></p>
+      <p style="margin:0;">
+        No se trata de bajar el umbral hasta que absolutamente todas las búsquedas den resultado, se trata de
+        encontrar el "punto dulce". Un umbral más bajo es más permisivo (deja pasar más búsquedas difíciles) pero más ruidoso (deja pasar también
+        más basura). Uno más alto es más estricto (más preciso) pero puede dejar fuera casos válidos.
+      </p>
+      <p style="margin:0.6rem 0 0;"><strong>Analogía:</strong> es la misma lógica de un filtro de spam, si lo
+        haces demasiado estricto, bloquea correos legítimos, si lo haces demasiado permisivo, deja pasar spam.
+        No hay un punto donde ambos errores lleguen a cero a la vez.
+      </p>
+      <p style="margin:0.6rem 0 0;"><strong>La clave es:</strong> calibrar el umbral con una muestra
+        representativa de búsquedas, no con una sola. Reúne unas 10 o 15 consultas variadas (literales, con
+        sinónimos, abstractas), anota a mano cuál sería la canción correcta para cada una, y prueba esa tabla
+        completa con distintos valores de <code>match_threshold</code>. El número ganador no es el que hace
+        que todas den resultado, es el que acierta en la mayor cantidad de casos sin dejar pasar demasiado
+        ruido en los demás.
+      </p>
+    </div>
+    <p style="margin-top:0.8rem;">
+      Prueba estos 6 valores de <code>match_threshold</code> en tu propio código, con la misma búsqueda, y
+      anota qué observas:
+    </p>
+    <div class="content-box" style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+        <tr style="border-bottom:1px solid var(--border);">
+          <th style="text-align:left; padding:0.4rem;">Valor probado</th>
+          <th style="text-align:left; padding:0.4rem;">¿Cuántos resultados aparecen?</th>
+          <th style="text-align:left; padding:0.4rem;">¿Son relevantes?</th>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem;">0.9</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem;">0.7</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem;">0.5</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem;">0.35</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem;">0.3</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr>
+          <td style="padding:0.4rem;">0.2</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+      </table>
+    </div>
+    <p style="margin-top:0.8rem;">
+      Con esos datos, escribe un párrafo explicando cuál es, para tu propio catálogo de canciones, el número
+      ideal para que SoundFlow no sea ni muy exigente ni muy descuidado.
+    </p>
+  </div>
+
+  <!-- ===================== PARTE 3: OPTIMIZACIÓN DE VIBRAS ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Parte 3: Optimización de vibras</h3>
+    </div>
+    <p>
+      Elige la canción con el score más bajo entre todas las que probaste en las partes anteriores.
+      Vas a reescribir su "descripción emocional" en la base de datos Supabase para que el vector represente
+      mejor su significado real, y vas a medir si eso mejora el score.
+    </p>
+    <p style="margin-top:0.8rem;">
+      Registra tu propio antes y después:
+    </p>
+    <div class="content-box" style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+        <tr style="border-bottom:1px solid var(--border);">
+          <th style="text-align:left; padding:0.4rem;"></th>
+          <th style="text-align:left; padding:0.4rem;">Descripción</th>
+          <th style="text-align:left; padding:0.4rem;">Similitud</th>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem; color:#b33a2e;">Antes</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+        <tr>
+          <td style="padding:0.4rem; color:#6f9d7c;">Después</td>
+          <td style="padding:0.4rem;">...</td>
+          <td style="padding:0.4rem;">...</td>
+        </tr>
+      </table>
+    </div>
+    <div class="content-box" style="border-left:4px solid #7c3aed; margin-top:0.8rem;">
+      <p style="margin:0 0 0.5rem;"><strong>¿Cómo elegir cuál canción optimizar?</strong></p>
+      <p style="margin:0;">
+        Toma los resultados que ya tienes de las partes anteriores. Si una búsqueda te devolvió dos o más
+        canciones, la que tenga el score más bajo entre ellas es tu candidata (por ejemplo, si "Gris y
+        Lluvioso" salió con 0.44 y "Lágrimas de Ayer" con 0.37 para la misma búsqueda, trabajas sobre "Lágrimas
+        de Ayer"). Los pasos son:
+      </p>
+      <ol style="margin:0.6rem 0 0; padding-left:1.3rem; font-size:0.9rem;">
+        <li>En Supabase (Table Editor), busca la fila de esa canción en <code>canciones_vectoriales</code> y
+          revisa su <code>descripcion_emocional</code> actual.</li>
+        <li>Reescríbela repitiendo y adelantando palabras más directamente relacionadas con el significado de
+          tu búsqueda (por ejemplo, si buscaste algo sobre soledad y la canción habla de desamor, incluye cerca
+          del inicio palabras como <strong style="color:#b33a2e;">"soledad"</strong>,
+          <strong style="color:#b33a2e;">"tristeza"</strong>,
+          <strong style="color:#b33a2e;">"recuerdos que pesan"</strong>).</li>
+        <li>Genera el nuevo vector a partir de esa descripción y actualiza solo la fila de esa canción.
+          <p style="margin:0.5rem 0 0; font-size:0.9rem;">
+            Comenta o elimina el código de <code>insertar_canciones.py</code> que usaste para la carga inicial,
+            y usa este bloque en su lugar. Así solo se reemplaza el vector viejo por el nuevo en la fila de esa
+            canción, y los datos de las demás 35 canciones quedan intactos.
+          </p>
+          <div class="code-block" style="margin-top:0.6rem;">
+            <div class="code-block-header">
+              <span class="code-dot" style="background:#ff5f56"></span>
+              <span class="code-dot" style="background:#ffbd2e"></span>
+              <span class="code-dot" style="background:#27c93f"></span>
+              <span class="code-filename">terminal</span>
+              <button class="code-copy-btn" type="button">Copiar</button>
+            </div>
+            <pre><code>from sentence_transformers import SentenceTransformer
+from database import supabase
+
+model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+
+nueva_descripcion = "Un bolero sobre la soledad y la tristeza de un amor perdido, con recuerdos que pesan..."
+nuevo_vector = model.encode(nueva_descripcion).tolist()
+
+supabase.table("canciones_vectoriales").update({
+    "descripcion_emocional": nueva_descripcion,
+    "embedding": nuevo_vector
+}).eq("titulo", "Lágrimas de Ayer").execute()
+
+print("Canción actualizada con éxito.")</code></pre>
+          </div>
+        </li>
+      </ol>
+      <ol style="margin:0.6rem 0 0; padding-left:1.3rem; font-size:0.9rem;" start="4">
+        <li>Verifica en Supabase (Table Editor) que se haya actualizado ese vector.</li>
+        <li>Vuelve a correr <code>buscar_musica.py</code> con la misma búsqueda y compara: ¿el nuevo score
+          subió por encima del original?</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===================== EXTRA: CHROMADB ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>ChromaDB, cómo guarda tus vectores por dentro</h3>
+    </div>
+    <p>
+      Toda esta clase usaste pgvector, una extensión que le agrega el tipo de dato VECTOR a PostgreSQL. Pero
+      no es la única forma de guardar vectores: Chroma es una base de datos vectorial dedicada, de código
+      abierto, pensada específicamente para IA. No es una extensión de nada más, es su propio motor, se usa
+      directamente desde Python sin escribir SQL, y se levanta con una sola línea de código, sin servidor
+      aparte que configurar.
+    </p>
+    <div class="activity-section-header" style="margin-top:1rem;">
+      <h3 style="display:flex; align-items:center; gap:0.55rem; flex-wrap:wrap; margin:0; font-size:1rem;">
+        <span class="curioso-title-badge">
+          <svg class="curioso-title-spark" viewBox="0 0 24 24" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l1.9 5.7L19.6 9l-5.7 1.9L12 16.6l-1.9-5.7L4.4 9l5.7-1.3L12 2z" fill="currentColor"/>
+          </svg>
+          Dato curioso
+        </span>
+        <span style="color:var(--accent);">De dónde salió Chroma</span>
+      </h3>
+    </div>
+    <div class="curioso-grid">
+      <div class="curioso-card curioso-card--violet">
+        <span class="curioso-card-year">$18M</span>
+        <h4 style="color:#7c3aed; margin:0 0 0.4rem;">De una ronda semilla a 27 mil estrellas</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
+          Chroma nació en 2022, fundada por Anton Troynikov y Jeff Huber. En 2023 recaudó 18 millones de
+          dólares en su ronda semilla. Hoy su repositorio en GitHub supera las 27,000 estrellas, una de las
+          bases de datos vectoriales de código abierto más populares que existen.
+        </p>
+        <div class="curioso-timeline">
+          <span class="curioso-timeline-label" style="color:#7c3aed;">Fundada · 2022</span>
+          <div class="curioso-timeline-track"><div class="curioso-timeline-dot"></div></div>
+          <span class="curioso-timeline-label" style="color:#7c3aed;">Chroma Cloud · 2025</span>
+        </div>
+      </div>
+      <div class="curioso-card curioso-card--green">
+        <span class="curioso-card-year">0</span>
+        <h4 style="color:#6f9d7c; margin:0 0 0.4rem;">Mintlify: cero incidentes de guardia</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
+          Mintlify, la plataforma que usan miles de empresas de tecnología para su documentación, migró su
+          buscador a Chroma Cloud. Según el caso publicado por Chroma, los incidentes de guardia relacionados
+          con el buscador (las alertas nocturnas por fallas) desaparecieron por completo.
+        </p>
+        <div class="curioso-stat">
+          <div class="curioso-stat-label"><span>Incidentes de guardia por el buscador</span><span>-100%</span></div>
+          <div class="curioso-stat-track"><div class="curioso-stat-fill" style="--fill:100%; background:#6f9d7c;"></div></div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:1rem;">
+      Así como en Supabase una tabla tiene columnas con un tipo de dato cada una, en Chroma cada elemento que
+      guardas dentro de una colección tiene internamente estos cuatro campos:
+    </p>
+    <div class="content-box" style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+        <tr style="border-bottom:1px solid var(--border);">
+          <th style="text-align:left; padding:0.4rem;">Campo</th>
+          <th style="text-align:left; padding:0.4rem;">Tipo</th>
+          <th style="text-align:left; padding:0.4rem;">Qué guarda</th>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem;"><code>id</code></td>
+          <td style="padding:0.4rem;">string</td>
+          <td style="padding:0.4rem;">Identificador único del elemento, tú lo defines (equivalente a la
+            llave primaria de una tabla).</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem;"><code>document</code></td>
+          <td style="padding:0.4rem;">string</td>
+          <td style="padding:0.4rem;">El texto original, por ejemplo la descripción emocional de la canción
+            (equivalente a tu columna <code>descripcion_emocional</code>).</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:0.4rem;"><code>embedding</code></td>
+          <td style="padding:0.4rem;">lista de floats</td>
+          <td style="padding:0.4rem;">El vector de 384 números. Si no se lo pasas tú, Chroma lo genera
+            automáticamente a partir del <code>document</code> (equivalente a tu columna
+            <code>embedding VECTOR(384)</code>).</td>
+        </tr>
+        <tr>
+          <td style="padding:0.4rem;"><code>metadata</code></td>
+          <td style="padding:0.4rem;">dict (diccionario)</td>
+          <td style="padding:0.4rem;">Datos extra opcionales, como título o artista, para filtrar resultados
+            (equivalente a tus demás columnas de texto y números).</td>
+        </tr>
+      </table>
+    </div>
+    <p style="margin-top:0.8rem; text-align:center; font-size:0.85rem; color:var(--text-dim);">
+      Así se ve, por dentro, un solo elemento guardado en la colección:
+    </p>
+    <svg viewBox="0 0 340 210" xmlns="http://www.w3.org/2000/svg" style="max-width:340px; display:block; margin:0.4rem auto;">
+      <rect x="10" y="5" width="320" height="200" rx="10" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+      <text x="170" y="24" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="var(--text-dim)">un elemento de la colección "canciones"</text>
+      <rect x="24" y="34" width="292" height="34" rx="6" fill="rgba(74,124,158,0.12)" stroke="#4a7c9e"/>
+      <text x="34" y="55" font-family="Consolas, monospace" font-size="11" fill="#4a7c9e">id</text>
+      <text x="90" y="55" font-family="Consolas, monospace" font-size="11" fill="var(--text-dim)">"1"</text>
+      <rect x="24" y="74" width="292" height="34" rx="6" fill="rgba(111,157,124,0.12)" stroke="#6f9d7c"/>
+      <text x="34" y="95" font-family="Consolas, monospace" font-size="11" fill="#6f9d7c">document</text>
+      <text x="110" y="95" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">"Piano lento y triste..."</text>
+      <rect x="24" y="114" width="292" height="34" rx="6" fill="rgba(124,58,237,0.12)" stroke="#7c3aed"/>
+      <text x="34" y="135" font-family="Consolas, monospace" font-size="11" fill="#7c3aed">embedding</text>
+      <text x="118" y="135" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">[0.12, -0.04, ...]</text>
+      <rect x="24" y="154" width="292" height="34" rx="6" fill="rgba(201,154,78,0.12)" stroke="#c99a4e"/>
+      <text x="34" y="175" font-family="Consolas, monospace" font-size="11" fill="#c99a4e">metadata</text>
+      <text x="105" y="175" font-family="Consolas, monospace" font-size="10.5" fill="var(--text-dim)">{"titulo": "Gris y Lluvioso"}</text>
+    </svg>
+    <p style="margin-top:0.8rem;">Así se ve crear una colección e insertar una canción:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">terminal</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>import chromadb
+cliente = chromadb.Client()
+coleccion = cliente.create_collection("canciones")
+
+# Insertar (Chroma puede generar el embedding por ti a partir del document)
+coleccion.add(
+    ids=["1"],
+    documents=["Piano lento y triste, ideal para noches de lluvia"],
+    metadatas=[{"titulo": "Gris y Lluvioso", "artista": "..."}]
+)
+
+# Buscar por similitud
+coleccion.query(query_texts=["algo melancólico"], n_results=5)</code></pre>
+    </div>
+    <div class="content-box" style="border-left:4px solid #7c3aed; margin-top:0.8rem;">
+      <p style="margin:0 0 0.5rem;"><strong>¿Qué modelo usa Chroma cuando no le pasas uno tú?</strong></p>
+      <p style="margin:0;">
+        Por defecto, Chroma genera esos embeddings con <code>all-MiniLM-L6-v2</code>, un modelo de
+        <code>sentence-transformers</code>, que corre en tu propia computadora sin necesitar API ni conexión a
+        internet. Lo eligieron como default por ser pequeño, rápido y con buena calidad general para
+        búsquedas semánticas en inglés, ideal para prototipos.
+      </p>
+      <p style="margin:0.6rem 0 0;">
+        Ese modelo por defecto está pensado sobre todo para inglés, así que si quieres usar otro (por ejemplo
+        uno multilingüe), tienes que indicárselo explícitamente al crear la colección, Chroma no lo detecta
+        ni lo cambia solo.
+      </p>
+    </div>
+    <p style="margin-top:0.8rem;">
+      Chroma también puede combinar la búsqueda por significado con un filtro exacto sobre la metadata, algo
+      parecido a lo que un <code>WHERE</code> haría en SQL junto a tu búsqueda por similitud:
+    </p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">terminal</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code># Solo busca por similitud entre las canciones de un artista puntual
+coleccion.query(
+    query_texts=["algo melancólico"],
+    n_results=5,
+    where={"artista": "..."}
+)</code></pre>
+    </div>
+    <p style="margin:0.5rem 0 0; font-size:0.85rem; color:var(--text-dim);">
+      Es lo más cerca que Chroma llega de un JOIN, pero solo filtra sobre la metadata que guardaste junto al
+      vector, no puede combinar con otra tabla como sí hace pgvector dentro de PostgreSQL.
+    </p>
+
+    <div class="content-box" style="overflow-x:auto; margin-top:1rem;">
+      <p style="margin:0 0 0.6rem; font-weight:600; text-align:center;">Así quedaría SoundFlow-Pro si usaras Chroma en vez de Supabase + pgvector</p>
+      <div style="display:flex; align-items:center; flex-wrap:wrap; gap:0.5rem; justify-content:center;">
+        <div style="background:var(--accent-soft); border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.8rem; font-size:0.82rem; text-align:center;">🧑‍💻<br>Usuario escribe una búsqueda</div>
+        <span style="color:var(--text-dim); font-size:1.1rem;">→</span>
+        <div style="background:var(--accent-soft); border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.8rem; font-size:0.82rem; text-align:center;">🧠<br><code style="font-size:0.75rem;">model.encode()</code></div>
+        <span style="color:var(--text-dim); font-size:1.1rem;">→</span>
+        <div style="background:rgba(124,58,237,0.12); border:1px solid #7c3aed; border-radius:8px; padding:0.5rem 0.8rem; font-size:0.82rem; text-align:center; color:#5b3a99;">🎨<br><code style="font-size:0.75rem;">coleccion.query()</code></div>
+        <span style="color:var(--text-dim); font-size:1.1rem;">→</span>
+        <div style="background:#e9f2ec; border:1px solid #6f9d7c; border-radius:8px; padding:0.5rem 0.8rem; font-size:0.82rem; text-align:center; color:#3f5c47;">🎵<br>Canción recomendada + score</div>
+      </div>
+      <p style="margin:0.8rem 0 0; font-size:0.8rem; color:var(--text-dim);">
+        Todo pasa dentro del mismo script de Python, sin RPC ni SQL de por medio: no hay una función como
+        <code>buscar_canciones</code> en la base de datos, porque ya no hay una base de datos relacional
+        separada, <code>coleccion.query()</code> hace todo el trabajo (comparar vectores y devolver los más
+        parecidos) desde Chroma directamente.
+      </p>
+      <p style="margin:0.6rem 0 0; font-size:0.8rem; color:var(--text-dim);">
+        La diferencia clave frente a lo que ya construiste: aquí la canción, su descripción y su vector viven
+        solo dentro de la colección de Chroma. Si SoundFlow necesitara además usuarios, playlists o pagos,
+        esos datos tendrían que vivir en otra base de datos aparte (por ejemplo PostgreSQL), y tu código sería
+        el encargado de unir manualmente los resultados de ambas, en vez de un solo JOIN como con pgvector.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== QUIZ ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Quiz rápido de autoevaluación</h3>
+    </div>
+    <p style="font-size:0.85rem; color:var(--text-dim);">
+      Este quiz mezcla conceptos de la Clase 1 (fundamentos e implementación) con los de esta clase
+      (calibración), para que repases todo el tema de una vez.
+    </p>
+    <div class="quiz-box">
+
+      <div class="quiz-question">
+        <p>1. ¿Qué avance de 2013 fue el primer ladrillo de todo lo que hoy conocemos como embeddings?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">FAISS</button>
+          <button type="button" class="quiz-option" data-correct="true">Word2Vec</button>
+          <button type="button" class="quiz-option" data-correct="false">pgvector</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>2. ¿Qué problema resuelve un algoritmo como HNSW?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Traducir texto a otros idiomas</button>
+          <button type="button" class="quiz-option" data-correct="true">Encontrar los vectores más cercanos a uno dado, sin tener que compararlo contra todos los demás uno por uno</button>
+          <button type="button" class="quiz-option" data-correct="false">Encriptar las contraseñas de los usuarios</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>3. ¿Qué evento de noviembre de 2022 disparó la demanda masiva de bases de datos vectoriales?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">El lanzamiento de PostgreSQL 15</button>
+          <button type="button" class="quiz-option" data-correct="true">El lanzamiento de ChatGPT y la popularización del patrón RAG</button>
+          <button type="button" class="quiz-option" data-correct="false">El cierre de Facebook</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>4. ¿Qué le agrega <code>pgvector</code> a PostgreSQL?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Un panel de administración gráfico</button>
+          <button type="button" class="quiz-option" data-correct="true">Un tipo de columna VECTOR y operadores para comparar vectores</button>
+          <button type="button" class="quiz-option" data-correct="false">Soporte para bases de datos NoSQL</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>5. ¿Qué es un embedding?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Una contraseña encriptada</button>
+          <button type="button" class="quiz-option" data-correct="true">Una lista de números (vector) que representa el significado de un texto</button>
+          <button type="button" class="quiz-option" data-correct="false">Un tipo de índice B-Tree más rápido</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>6. La similitud de coseno mide principalmente...</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Qué tan largos son los dos vectores</button>
+          <button type="button" class="quiz-option" data-correct="true">El ángulo entre los dos vectores</button>
+          <button type="button" class="quiz-option" data-correct="false">Cuántos números en común tienen los dos vectores</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>7. ¿Qué significa RAG (Retrieval-Augmented Generation)?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Un tipo de red neuronal para generar imágenes</button>
+          <button type="button" class="quiz-option" data-correct="true">Buscar información relevante por significado y dársela como contexto a un modelo de lenguaje antes de que responda</button>
+          <button type="button" class="quiz-option" data-correct="false">Un protocolo de seguridad para bases de datos</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>8. Un score de 0.55 en la búsqueda "gimnasio" y un score de 0.55 en la búsqueda "lluvia", ¿significan
+          el mismo nivel de acierto?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Sí, 0.55 siempre representa la misma
+            calidad de resultado</button>
+          <button type="button" class="quiz-option" data-correct="true">No necesariamente, la similitud de
+            coseno es relativa a cada consulta, no una medida absoluta comparable entre búsquedas distintas</button>
+          <button type="button" class="quiz-option" data-correct="false">No, porque "gimnasio" siempre da
+            scores más altos que "lluvia"</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>9. En la función SQL <code>buscar_canciones</code>, ¿qué calcula <code>cv.embedding &lt;=&gt; query_embedding</code>?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Una resta entre dos columnas numéricas</button>
+          <button type="button" class="quiz-option" data-correct="true">La distancia de coseno entre el vector de la canción y el vector de la búsqueda</button>
+          <button type="button" class="quiz-option" data-correct="false">El número de palabras en común</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>10. ¿Por qué el modelo usado para insertar canciones y el usado para buscar debe ser exactamente el mismo (<code>paraphrase-multilingual-MiniLM-L12-v2</code>)?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Porque solo ese modelo funciona con Supabase</button>
+          <button type="button" class="quiz-option" data-correct="true">Porque cada modelo construye su propio "mapa del significado"; comparar vectores generados por modelos distintos no tiene sentido</button>
+          <button type="button" class="quiz-option" data-correct="false">Porque los otros modelos son de pago</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>11. ¿Por qué una búsqueda "abstracta" (como "me siento solo en un día gris") suele sacar un score más
+          bajo que una "literal"?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Porque el modelo solo entiende
+            español formal</button>
+          <button type="button" class="quiz-option" data-correct="true">Porque no hay coincidencia léxica
+            directa, el modelo tiene que inferir el significado solo por el contexto</button>
+          <button type="button" class="quiz-option" data-correct="false">Porque las búsquedas abstractas
+            tienen más de 384 dimensiones</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>12. Si subes el match_threshold a 0.9, ¿qué es lo más probable que pase?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">El buscador se vuelve más rápido</button>
+          <button type="button" class="quiz-option" data-correct="true">El buscador se vuelve demasiado
+            exigente y probablemente no devuelva ningún resultado</button>
+          <button type="button" class="quiz-option" data-correct="false">Se generan embeddings de más
+            dimensiones automáticamente</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>13. Si bajas el match_threshold a 0.3, ¿qué riesgo corres?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="true">Que aparezcan canciones sin relación
+            real con la búsqueda, "lo menos malo" en vez de una coincidencia real</button>
+          <button type="button" class="quiz-option" data-correct="false">Que la base de datos se corrompa</button>
+          <button type="button" class="quiz-option" data-correct="false">Que el modelo deje de generar
+            embeddings</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>14. ¿Para qué sirve <code>match_threshold</code> en la búsqueda?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Para limitar cuántas canciones puede tener la tabla</button>
+          <button type="button" class="quiz-option" data-correct="true">Para descartar canciones cuya similitud sea demasiado baja como para ser un resultado relevante</button>
+          <button type="button" class="quiz-option" data-correct="false">Para acelerar la conexión con Supabase</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>15. Reescribiste la descripción de una canción repitiendo y adelantando una palabra clave. ¿Por qué
+          eso puede subir su score frente a una búsqueda relacionada?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Porque el modelo memoriza esa
+            palabra y la busca de forma literal</button>
+          <button type="button" class="quiz-option" data-correct="true">Porque el nuevo embedding representa
+            mejor el significado real de la canción, y queda más cerca del embedding de la búsqueda</button>
+          <button type="button" class="quiz-option" data-correct="false">Porque aumenta el número de
+            dimensiones del vector</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== RECURSOS ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Recursos y referencias</h3>
+    </div>
+    <p style="line-height:1.9;">
+      · Supabase (2026). Semantic search. supabase.com/docs/guides/ai/semantic-search<br>
+      · Supabase (2026). What are embeddings? supabase.com/docs/guides/ai/concepts<br>
+      · sbert (2026). SentenceTransformers Documentation. sbert.net<br>
+      · Weaviate (2026). Métricas de distancia en la búsqueda vectorial. weaviate.io/blog/distance-metrics-in-vector-search
+    </p>
+  </div>
+`;

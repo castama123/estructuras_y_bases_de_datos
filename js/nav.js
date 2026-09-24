@@ -437,3 +437,24 @@ document.addEventListener('click', (e) => {
   const status = demo.querySelector('.cosplane-status');
   if (status) status.textContent = btn.dataset.status || '';
 });
+
+// Toggle pgvector vs Chroma (Semana 6, Clase 2): al hacer clic en uno de los dos botones,
+// muestra el panel correspondiente y oculta el otro.
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.dbcompare-btn');
+  if (!btn) return;
+
+  const wrapper = btn.closest('div');
+  if (!wrapper) return;
+  const group = wrapper.parentElement;
+  if (!group) return;
+
+  const target = btn.dataset.target;
+
+  group.querySelectorAll('.dbcompare-btn').forEach(b => b.classList.remove('vsim-btn-active'));
+  btn.classList.add('vsim-btn-active');
+
+  group.querySelectorAll('.dbcompare-panel').forEach(p => {
+    p.style.display = p.dataset.panel === target ? '' : 'none';
+  });
+});
