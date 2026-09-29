@@ -1119,6 +1119,10 @@ footer {
   background: linear-gradient(135deg, rgba(139,127,184,0.18), rgba(139,127,184,0.03) 65%);
 }
 
+.curioso-card--red {
+  background: linear-gradient(135deg, rgba(179,58,46,0.18), rgba(179,58,46,0.03) 65%);
+}
+
 .curioso-card-year {
   position: absolute;
   top: -0.5rem;

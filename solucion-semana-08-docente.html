@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>SOLO DOCENTE · Solución Semana 8 · Estructuras y Bases de Datos</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f3f5f8;
+    --bg-card: #ffffff;
+    --accent: #5b7c99;
+    --accent-2: #7fa5a3;
+    --accent-soft: #e7edf2;
+    --text: #33404f;
+    --text-dim: #6c7a89;
+    --border: #dde3ea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  main {
+    max-width: 1180px;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
+  }
+  .week-detail {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+  }
+  code {
+    font-family: "Consolas", "Monaco", monospace;
+    background: rgba(91,124,153,0.1);
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .activity-section {
+    margin: 2rem 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--border);
+  }
+  .activity-section:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .activity-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+  }
+  .activity-section-header h3 {
+    margin: 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+  }
+  h2 { color: var(--accent); }
+  .content-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.2rem 0;
+  }
+  .content-box p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.92rem;
+  }
+  .numbered-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.2rem 0;
+  }
+  @media (max-width: 640px) {
+    .numbered-grid-2col { grid-template-columns: 1fr; }
+  }
+  .flip-card {
+    perspective: 1000px;
+    min-height: 240px;
+    cursor: pointer;
+  }
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  .flip-card-front {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .flip-card-front p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.85rem;
+  }
+  .flip-card-back {
+    transform: rotateY(180deg);
+    text-align: left;
+  }
+  .flip-card-back p {
+    color: #fff;
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .flip-hint {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+</style>
+<script>
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.flip-card');
+    if (!card) return;
+    card.classList.toggle('flipped');
+  });
+</script>
+</head>
+<body>
+
+<main>
+  <div class="week-detail">
+
+    <div style="background:#8a3030; color:#fff; border-radius:10px; padding:1rem 1.3rem; margin-bottom:1.5rem; text-align:center;">
+      <p style="margin:0; font-weight:700; font-size:1rem;">⚠️ SOLO PARA EL DOCENTE</p>
+      <p style="margin:0.3rem 0 0; font-size:0.85rem;">Esta página no está enlazada desde el sitio de los estudiantes. No compartas este archivo ni su enlace con el curso.</p>
+    </div>
+
+    <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 0.3rem; text-align:center;">Solución: Estación del Éxito, The SoundFlow Chaos Challenge</h2>
+    <p style="text-align:center; color:var(--text-dim); font-size:0.9rem; margin-top:0;">Guía de respuestas y rúbrica de referencia para las 4 Cámaras de Prueba, incluyendo las 10 preguntas de la Cámara 4.</p>
+
+    <!-- ===================== CÁMARA 1 ===================== -->
+    <div class="activity-section" style="border-top:none; padding-top:0;">
+      <div class="activity-section-header">
+        <h3 style="color:#b33a2e;">Cámara 1: El Vacío Atómico (ACID / ROLLBACK)</h3>
+      </div>
+      <p style="margin:0 0 0.8rem;">
+        Idea general: inducir un fallo a mitad de una transacción de pago y comprobar que no quedan
+        datos a medias.
+      </p>
+      <div class="content-box" style="border-left:4px solid #b33a2e;">
+        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Qué hacer en VS Code</strong></p>
+        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
+          <li>Pide que abran el script donde hacen el pago (ej. <code>pagos.py</code>) y que te muestren
+            la línea donde llaman la función RPC de Supabase.</li>
+          <li>Corre el flujo una vez completo, sin interrupciones, para confirmar que en el caso exitoso
+            sí quedan los dos cambios (pago registrado y usuario premium).</li>
+          <li>Pide que agreguen un <code>print()</code> o un <code>time.sleep(3)</code> justo después de
+            iniciar el pago, para tener tiempo de interrumpir el proceso en el punto exacto que
+            necesitas (justo después del <code>INSERT</code>, antes del <code>UPDATE</code>).</li>
+          <li>Vuelve a correr el script y, en ese punto exacto, mata el proceso con <code>Ctrl+C</code> en
+            la terminal de VS Code (o desconecta el Wi-Fi un segundo).</li>
+        </ul>
+        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Qué hacer en Supabase</strong></p>
+        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
+          <li>Antes de la prueba, ve a Database &gt; Functions y pide que te muestren la función SQL:
+            debe tener <code>BEGIN ... EXCEPTION WHEN OTHERS THEN ROLLBACK</code> envolviendo el
+            <code>INSERT</code> en <code>historial_pagos</code> y el <code>UPDATE</code> en
+            <code>perfiles</code>.</li>
+          <li>Después del fallo inducido, abre el SQL Editor y corre
+            <code>SELECT * FROM historial_pagos ORDER BY created_at DESC LIMIT 5;</code> y
+            <code>SELECT * FROM perfiles WHERE user_id = '...';</code> con el <code>user_id</code> de la
+            prueba.</li>
+          <li>Revisa Logs &gt; Postgres Logs por si quedó registrada la excepción capturada en el momento
+            del fallo.</li>
+        </ul>
+        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Cómo verificar que cumple</strong></p>
+        <ul style="margin:0; padding-left:1.2rem; line-height:1.7;">
+          <li>Si aparece un registro en <code>historial_pagos</code> sin el cambio correspondiente en
+            <code>perfiles</code> (o viceversa), la transacción NO es atómica: reprueba esta cámara.</li>
+          <li>Pide que expliquen con sus palabras qué hace <code>EXCEPTION</code> y por qué el
+            <code>ROLLBACK</code> deshace todo el bloque, no solo la última instrucción, sin leerlo de
+            memoria.</li>
+          <li>Repite la prueba matando el proceso en un punto distinto (por ejemplo, antes del
+            <code>INSERT</code>) para confirmar que el comportamiento es consistente y no solo
+            "funcionó una vez de casualidad".</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===================== CÁMARA 2 ===================== -->
+    <div class="activity-section">
+      <div class="activity-section-header">
+        <h3 style="color:#7c3aed;">Cámara 2: El Intento de Infiltración (RLS / SQL Injection)</h3>
+      </div>
+      <p style="margin:0 0 0.8rem;">
+        Idea general: intentar dos ataques distintos (inyección SQL y acceso a datos de otro usuario) y
+        comprobar que ambos son bloqueados.
+      </p>
+      <div class="content-box" style="border-left:4px solid #7c3aed;">
+        <p style="margin:0 0 0.5rem; color:#7c3aed;"><strong>Qué hacer en VS Code</strong></p>
+        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
+          <li>Pide el archivo donde está la función de búsqueda (ej. <code>buscar_musica.py</code>) y
+            revisa la línea exacta de la consulta: debe usar <code>.eq()</code>, <code>.ilike()</code> o
+            similar de la librería de Supabase, nunca f-strings ni concatenación con <code>+</code>.</li>
+          <li>Pide que ejecuten en su terminal una búsqueda usando como texto
+            <code>' ; DROP TABLE canciones; --'</code> (tal cual, con la comilla).</li>
+          <li>Pide que abran o creen <code>probar_rls.py</code> (visto en Semana 7) con el
+            <code>user_id</code> de otro estudiante puesto a mano, y que lo ejecuten frente a ti.</li>
+        </ul>
+        <p style="margin:0 0 0.5rem; color:#7c3aed;"><strong>Qué hacer en Supabase</strong></p>
+        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
+          <li>Antes del ataque, en Table Editor confirma que la tabla <code>canciones</code> existe y
+            tiene datos.</li>
+          <li>Después de correr la inyección, refresca la tabla <code>canciones</code> en Table Editor:
+            debe seguir existiendo, intacta.</li>
+          <li>Ve a Authentication &gt; Policies y pide que te muestren la política RLS activa de
+            <code>perfiles</code>: debe filtrar por <code>auth.uid() = user_id</code> o equivalente.</li>
+          <li>Abre Logs &gt; API Logs, filtra por Warning (4xx) y Error (5xx) (ver nota en Semana 7 sobre
+            el filtro de Level), y busca el momento exacto de cada ataque.</li>
+        </ul>
+        <p style="margin:0 0 0.5rem; color:#7c3aed;"><strong>Cómo verificar que cumple</strong></p>
+        <ul style="margin:0; padding-left:1.2rem; line-height:1.7;">
+          <li>Si la tabla <code>canciones</code> desapareció o quedó vacía después del intento de
+            inyección, el ataque funcionó: reprueba.</li>
+          <li>Si <code>probar_rls.py</code> logra imprimir datos de otro <code>user_id</code> (nombre,
+            email, etc.), RLS no está protegiendo: reprueba.</li>
+          <li>En los API Logs, el intento no autorizado debe aparecer como <code>403</code> o con un
+            arreglo vacío, nunca como un <code>200</code> exitoso devolviendo datos ajenos.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===================== CÁMARA 3 ===================== -->
+    <div class="activity-section">
+      <div class="activity-section-header">
+        <h3 style="color:#5b7c99;">Cámara 3: El Oráculo Semántico (Embeddings)</h3>
+      </div>
+      <p style="margin:0 0 0.8rem;">
+        Idea general: hacer una consulta abstracta que el equipo no haya probado antes y confirmar que el
+        buscador entiende significado, no solo palabras.
+      </p>
+      <div class="content-box" style="border-left:4px solid #5b7c99;">
+        <p style="margin:0 0 0.5rem; color:#5b7c99;"><strong>Qué hacer en VS Code</strong></p>
+        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
+          <li>Pide que abran el script de búsqueda semántica (ej. <code>buscar_semantica.py</code>) y
+            señalen dónde generan el embedding de la consulta con <code>sentence-transformers</code>
+            antes de mandarlo a Supabase.</li>
+          <li>Dicta tú (el profesor) una consulta que el equipo no haya usado en sus pruebas, algo
+            abstracto o metafórico, por ejemplo "música que se siente como un atardecer en una ciudad
+            futurista, pero con un poco de tristeza".</li>
+          <li>Pide que la ejecuten en vivo, en su terminal, sin ajustar nada del código antes.</li>
+        </ul>
+        <p style="margin:0 0 0.5rem; color:#5b7c99;"><strong>Qué hacer en Supabase</strong></p>
+        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
+          <li>Ve a Database &gt; Functions y pide que te muestren la función SQL (RPC) de búsqueda: debe
+            usar el operador de similitud de coseno <code>&lt;=&gt;</code> y tener un
+            <code>match_threshold</code> configurable.</li>
+          <li>En Table Editor, revisa la columna vectorial de la tabla de canciones y confirma que no hay
+            valores <code>NULL</code> o vacíos (eso indicaría embeddings a medio generar).</li>
+          <li>Si quieres, corre la función RPC manualmente desde el SQL Editor con tu propia consulta, para
+            confirmar que el resultado no depende de nada oculto en el código de Python.</li>
+        </ul>
+        <p style="margin:0 0 0.5rem; color:#5b7c99;"><strong>Cómo verificar que cumple</strong></p>
+        <ul style="margin:0; padding-left:1.2rem; line-height:1.7;">
+          <li>Si los resultados solo coinciden por palabras exactas (por ejemplo, "triste" solo aparece si
+            esa palabra literal está en la descripción), no hay comprensión semántica real: reprueba.</li>
+          <li>Pide que bajen el <code>match_threshold</code> a un valor absurdamente permisivo y muestren
+            cómo aparecen resultados irrelevantes: si no saben explicar ese parámetro, no lo entienden de
+            verdad.</li>
+          <li>Pide que expliquen con sus palabras qué es un embedding y por qué dos frases distintas
+            pueden tener vectores parecidos, sin leerlo de un apunte.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===================== CÁMARA 4 ===================== -->
+    <div class="activity-section">
+      <div class="activity-section-header">
+        <h3 style="color:#c99a4e;">Cámara 4: Prueba de Fuego de Conocimiento (Respuestas modelo)</h3>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim); margin-top:0;">
+        Estas son respuestas de referencia para evaluar si el equipo realmente entendió la conexión entre
+        semanas, no una única redacción obligatoria: acepta explicaciones equivalentes bien argumentadas.
+      </p>
+
+      <div class="numbered-grid-2col">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #b33a2e;">
+              <p style="color:#b33a2e; font-weight:700; margin-bottom:0.4rem;">Pregunta 1 (Semanas 2 y 7)</p>
+              <p>Si quitamos las Transacciones ACID, ¿cómo se vería afectada la integridad de tus reportes de agregación al final del mes?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#b33a2e;">
+              <p>Sin Atomicidad, un pago fallido deja un <code style="color:#fff; background:rgba(255,255,255,0.2);">INSERT</code> en historial_pagos sin su UPDATE en perfiles (o al revés). Un reporte de agregación sumaría esos pagos "fantasma", inflando ingresos o contando usuarios premium que no pagaron. ACID evita esos datos a medias.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #7c3aed;">
+              <p style="color:#7c3aed; font-weight:700; margin-bottom:0.4rem;">Pregunta 2 (Semanas 2, 6 y 7)</p>
+              <p>¿Por qué es más eficiente usar una Búsqueda Vectorial en la nube que un simple LIKE en una base de datos local?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#7c3aed;">
+              <p>LIKE compara texto literal, sin entender significado ni sinónimos, y escanea todo secuencialmente. La búsqueda vectorial convierte el texto en un embedding y usa similitud de coseno con un índice (HNSW/pgvector) para encontrar resultados semánticamente cercanos, más rápido y relevante, en un motor en la nube ya optimizado para esto.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #5b7c99;">
+              <p style="color:#5b7c99; font-weight:700; margin-bottom:0.4rem;">Pregunta 3 (Semana 6)</p>
+              <p>¿Qué es un embedding y por qué dos canciones con letras totalmente distintas pueden tener embeddings muy parecidos?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#5b7c99;">
+              <p>Un embedding es un vector numérico que un modelo genera a partir de un texto, de forma que textos con significado parecido quedan cerca en ese espacio, aunque compartan pocas o ninguna palabra. Dos canciones con letras distintas pero el mismo sentimiento o tema pueden tener vectores cercanos porque el modelo capturó el significado, no las palabras exactas.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #c99a4e;">
+              <p style="color:#c99a4e; font-weight:700; margin-bottom:0.4rem;">Pregunta 4 (Semanas 5 y 6)</p>
+              <p>¿Por qué un índice vectorial como HNSW no garantiza siempre el resultado más parecido exacto, a diferencia de un B+Tree que sí es exacto?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#c99a4e;">
+              <p>HNSW es un índice aproximado (ANN): construye atajos entre vectores cercanos para buscar rápido sin comparar contra todos, sacrificando algo de precisión por velocidad en millones de vectores. Un B+Tree opera sobre un orden exacto de valores escalares y siempre puede garantizar el resultado correcto, porque comparar "mayor o menor" es exacto; comparar cercanía en cientos de dimensiones no lo es.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #6f9d7c;">
+              <p style="color:#6f9d7c; font-weight:700; margin-bottom:0.4rem;">Pregunta 5 (Semanas 5 y 7)</p>
+              <p>El problema N+1 del ORM y la Atomicidad de una transacción: ¿son el mismo tipo de problema o son distintos?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#6f9d7c;">
+              <p>Son distintos. N+1 es un problema de rendimiento (muchas consultas de más por no usar JOIN o carga anticipada), pero los datos siguen siendo correctos. La Atomicidad es un problema de integridad: garantiza que una operación de varios pasos se aplique completa o nada. Se puede tener uno sin el otro.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #b33a2e;">
+              <p style="color:#b33a2e; font-weight:700; margin-bottom:0.4rem;">Pregunta 6 (Semanas 1, 2, 4 y 7)</p>
+              <p>¿Por qué MongoDB sería más práctico que SQL para el historial de reproducciones, y qué perderías en RLS?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#b33a2e;">
+              <p>MongoDB permite guardar cada reproducción como documento flexible, sin migrar el esquema cada vez que cambia un campo. Pero al salir de Postgres se pierde RLS, que filtra por fila dentro del motor relacional; habría que reimplementar ese control manualmente, con menos garantías.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #7c3aed;">
+              <p style="color:#7c3aed; font-weight:700; margin-bottom:0.4rem;">Pregunta 7 (Semanas 4 y 7)</p>
+              <p>Un contador de "me gusta" en Redis se cae a mitad de una actualización: ¿qué propiedad ACID está en riesgo?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#7c3aed;">
+              <p>La Durabilidad (y quizá la Atomicidad). Redis trabaja en memoria y, aunque persiste a disco, no da garantías transaccionales tan fuertes como Postgres: un incremento puede perderse si el servidor cae antes de guardarlo. Se gana velocidad, se pierde certeza absoluta.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #5b7c99;">
+              <p style="color:#5b7c99; font-weight:700; margin-bottom:0.4rem;">Pregunta 8 (Semanas 4, 6 y 7)</p>
+              <p>Si SoundFlow-AI guardara los embeddings de las canciones en MongoDB en vez de pgvector, ¿qué cambiaría y qué ventaja perderías?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#5b7c99;">
+              <p>MongoDB también soporta búsqueda vectorial (Atlas Vector Search), guardando el embedding como campo del documento. Pero en Supabase/Postgres el embedding vive en la misma base relacional que el resto de los datos, así que un JOIN y una búsqueda semántica pueden combinarse en una sola consulta con RLS protegiendo todo junto. En MongoDB perderías esa mezcla directa entre filtro relacional (RLS) y búsqueda semántica en una sola consulta.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #c99a4e;">
+              <p style="color:#c99a4e; font-weight:700; margin-bottom:0.4rem;">Pregunta 9 (Semanas 6 y 7)</p>
+              <p>Calibrar el match_threshold probando consultas literales, con sinónimos y abstractas: ¿por qué es distinto a arreglar un bug como el de SQL Injection?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#c99a4e;">
+              <p>Arreglar SQL Injection es corregir un error binario: la consulta es vulnerable o no, y con el parámetro correcto queda resuelto para siempre. Calibrar el match_threshold no corrige un error sino ajusta un balance: muy bajo trae resultados irrelevantes, muy alto descarta resultados válidos, y no hay un valor perfecto universal, sino el que mejor balancea precisión y cobertura, probando distintos tipos de consulta.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #6f9d7c;">
+              <p style="color:#6f9d7c; font-weight:700; margin-bottom:0.4rem;">Pregunta 10 (Semanas 5, 6 y 7)</p>
+              <p>Resultados "casi correctos" en el buscador semántico: ¿match_threshold, B+Tree, o una transacción a medias?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#6f9d7c;">
+              <p>El B+Tree no participa aquí (es para columnas escalares, no vectores). Si hay embeddings NULL o incompletos, el problema es una transacción de carga interrumpida. Si todos están completos pero los resultados no son los mejores, es calibración: ajustar el match_threshold.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-left:4px solid #b33a2e;">
+              <p style="color:#b33a2e; font-weight:700; margin-bottom:0.4rem;">Pregunta 11 (Semana 6)</p>
+              <p>¿Por qué la búsqueda semántica de SoundFlow-AI es la base de un sistema RAG, aunque el proyecto no genere texto con un modelo de lenguaje?</p>
+              <span class="flip-hint">Toca para ver la respuesta &rarr;</span>
+            </div>
+            <div class="flip-card-back" style="background:#b33a2e;">
+              <p>RAG combina recuperación (retrieval) y generación: primero se busca la información más relevante, luego un modelo de lenguaje la usa para responder. La búsqueda semántica de SoundFlow-AI ya implementa el retrieval: convierte una consulta en embedding y recupera las canciones más relevantes por significado. Aunque falte la generación, ya está construida la mitad más difícil de un RAG real.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== RÚBRICA GENERAL ===================== -->
+    <div class="activity-section">
+      <div class="activity-section-header">
+        <h3>Rúbrica general de referencia (5 criterios de 1 punto = 100 puntos)</h3>
+      </div>
+      <div class="content-box" style="border-left:4px solid var(--accent);">
+        <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:0.4rem 0.5rem; border-bottom:2px solid var(--border); color:var(--accent);">Criterio</th>
+              <th style="text-align:left; padding:0.4rem 0.5rem; border-bottom:2px solid var(--border); color:var(--accent);">Qué se evalúa</th>
+              <th style="text-align:right; padding:0.4rem 0.5rem; border-bottom:2px solid var(--border); color:var(--accent); white-space:nowrap;">Puntos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);"><strong style="color:#b33a2e;">Cámara 1</strong><br>El Vacío Atómico</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);">El ROLLBACK revierte por completo el fallo inducido y el equipo explica correctamente <code>BEGIN/EXCEPTION/ROLLBACK</code>.</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border); text-align:right;">1</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);"><strong style="color:#7c3aed;">Cámara 2</strong><br>El Intento de Infiltración</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);">La inyección SQL no tiene efecto y el acceso no autorizado queda bloqueado por RLS (403 o vacío en los logs).</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border); text-align:right;">1</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);"><strong style="color:#5b7c99;">Cámara 3</strong><br>El Oráculo Semántico</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);">La búsqueda con una consulta nueva del profesor devuelve resultados semánticamente relevantes, no solo coincidencia de palabras.</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border); text-align:right;">1</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);"><strong style="color:#c99a4e;">Cámara 4</strong><br>Prueba de Fuego de Conocimiento</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);">Conectan correctamente al menos 3 semanas distintas en su respuesta, con vocabulario técnico, no solo nombrando las semanas.</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border); text-align:right;">1</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem;"><strong>Desempeño individual y actitud técnica</strong></td>
+              <td style="padding:0.5rem;">Participación equilibrada de todos, dominio de su propio código, y honestidad al admitir lo que no saben en vez de inventar.</td>
+              <td style="padding:0.5rem; text-align:right;">1</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" style="padding:0.5rem; border-top:2px solid var(--border); font-weight:700; text-align:right;">Total</td>
+              <td style="padding:0.5rem; border-top:2px solid var(--border); font-weight:700; text-align:right;">5</td>
+            </tr>
+          </tfoot>
+        </table>
+        <p style="margin:0.8rem 0 0; font-size:0.8rem; color:var(--text-dim);">
+          Si una cámara reprueba por completo (por ejemplo, el ROLLBACK no revierte nada, o la tabla
+          <code>canciones</code> se borra con la inyección), esos 15 puntos quedan en 0 para ese equipo,
+          sin importar qué tan bien argumenten en la Cámara 4. Cada criterio se califica de 0 a 1; esa nota se multiplica por 20 para obtener su equivalente sobre 100.
+        </p>
+      </div>
+    </div>
+
+    <!-- ===================== NIVELES DE DESEMPEÑO POR CÁMARA ===================== -->
+    <div class="activity-section">
+      <div class="activity-section-header">
+        <h3>Niveles de desempeño por cámara (escala 1 a 5)</h3>
+      </div>
+      <p style="margin-top:0; font-size:0.85rem; color:var(--text-dim);">
+        En vez de una lista de chequeos independientes, cada cámara se califica como un solo nivel de
+        desempeño, del 5 (excelente) al 1 (no cumple). Elige el nivel que mejor describa lo que viste,
+        no sumes puntos sueltos por partes.
+      </p>
+
+      <div class="content-box" style="border-left:4px solid #b33a2e;">
+        <p style="margin:0 0 0.6rem; color:#b33a2e;"><strong>Cámara 1: El Vacío Atómico (1 punto)</strong></p>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <tbody>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 5 (1)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: la falla se induce exactamente en el punto pedido, el ROLLBACK revierte todo por completo (ni el pago ni el estado premium quedan a medias), y el equipo explica el código sin dudar ni leerlo de memoria.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 4 (0.79)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: el ROLLBACK funciona correctamente, pero el equipo duda o necesita ayuda para explicar bien qué hace EXCEPTION.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 3 (0.59)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: el ROLLBACK funciona pero de forma parcial o poco clara, y la explicación es superficial.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 2 (0.39)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: queda algún dato a medias (un registro huérfano), aunque haya algo de manejo de excepción en el código.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; font-weight:700; white-space:nowrap;">Nivel 1 (0.2)</td>
+              <td style="padding:0.4rem 0.5rem;">No cumple: no hay ROLLBACK real, la transacción deja datos corruptos evidentes, o el equipo no sabe explicar qué pasó.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-box" style="border-left:4px solid #7c3aed;">
+        <p style="margin:0 0 0.6rem; color:#7c3aed;"><strong>Cámara 2: El Intento de Infiltración (1 punto)</strong></p>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <tbody>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 5 (1)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: la inyección SQL no tiene ningún efecto (canciones queda intacta), el acceso a datos de otro usuario es bloqueado por RLS (403 o vacío), y el equipo explica con precisión por qué las consultas parametrizadas neutralizan la inyección y cómo funciona su política de RLS.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 4 (0.79)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: ambos ataques son bloqueados correctamente, pero el equipo duda o da una explicación incompleta de por qué funciona (por ejemplo, no saben explicar bien el rol de auth.uid()).</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 3 (0.59)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: uno de los dos ataques es bloqueado sin problema, pero el otro genera dudas o necesita ajustes en vivo para demostrarse con confianza.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 2 (0.39)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: alguno de los ataques tiene un efecto parcial no deseado (un error de sintaxis SQL visible en los logs en vez de un bloqueo limpio, o una política RLS mal configurada que deja pasar algo).</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; font-weight:700; white-space:nowrap;">Nivel 1 (0.2)</td>
+              <td style="padding:0.4rem 0.5rem;">No cumple: la inyección SQL logra afectar la base de datos, o el equipo logra leer datos de otro usuario sin que RLS lo impida.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-box" style="border-left:4px solid #5b7c99;">
+        <p style="margin:0 0 0.6rem; color:#5b7c99;"><strong>Cámara 3: El Oráculo Semántico (1 punto)</strong></p>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <tbody>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 5 (1)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: ante una consulta abstracta o metafórica inventada por el profesor (no probada antes por el equipo), la búsqueda devuelve canciones relevantes por significado, y el equipo explica con precisión cómo funciona la similitud de coseno y el rol del match_threshold.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 4 (0.79)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: los resultados son relevantes semánticamente, pero el equipo duda o da una explicación incompleta de la similitud de coseno o del match_threshold.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 3 (0.59)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: los resultados son parcialmente relevantes (mezclan coincidencia semántica con algo de coincidencia literal), o el equipo necesita ayuda para ubicar la función SQL de búsqueda.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 2 (0.39)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: los resultados son mayormente por coincidencia de palabras, con poca evidencia real de comprensión semántica, aunque el sistema "funciona" técnicamente.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; font-weight:700; white-space:nowrap;">Nivel 1 (0.2)</td>
+              <td style="padding:0.4rem 0.5rem;">No cumple: la búsqueda no devuelve resultados coherentes ante la consulta abstracta, o el equipo no puede mostrar ni explicar dónde está la función de similitud.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-box" style="border-left:4px solid #c99a4e;">
+        <p style="margin:0 0 0.6rem; color:#c99a4e;"><strong>Cámara 4: Prueba de Fuego de Conocimiento (1 punto)</strong></p>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <tbody>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 5 (1)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: conectan correctamente al menos 3 semanas distintas con vocabulario técnico preciso, argumentan con ejemplos concretos de su propia aplicación, y cada integrante responde preguntas de seguimiento sin quedarse en blanco.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 4 (0.79)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: conectan al menos 3 semanas correctamente, pero la argumentación es algo genérica o falta profundizar en el "por qué" de la relación.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 3 (0.59)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: mencionan las semanas relevantes pero la conexión entre ellas es superficial, nombran los conceptos sin explicar realmente cómo se relacionan.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 2 (0.39)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: solo logran conectar 1 o 2 semanas, o cometen errores conceptuales al explicar los temas.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; font-weight:700; white-space:nowrap;">Nivel 1 (0.2)</td>
+              <td style="padding:0.4rem 0.5rem;">No cumple: no logran responder con contenido técnico real, o inventan una respuesta sin relación con lo preguntado.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-box" style="border-left:4px solid var(--accent);">
+        <p style="margin:0 0 0.6rem; color:var(--accent);"><strong>Desempeño individual y actitud técnica (1 punto)</strong></p>
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+          <tbody>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 5 (1)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: todos los integrantes participan de forma equilibrada, cada uno puede explicar cualquier parte de su propio código con seguridad y sin apuntes, y cuando no saben algo lo admiten de inmediato y razonan en voz alta en vez de inventar.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 4 (0.79)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: todos participan pero de forma desigual (unos hablan más que otros), la mayoría domina su código aunque alguno tropiece en detalles puntuales, y son generalmente honestos aunque duden un poco antes de admitir que no saben algo.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 3 (0.59)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: falla notoriamente uno de los tres aspectos: un integrante casi no participa, o entienden el flujo general de su código pero no los detalles de implementación, o evitan admitir que no saben dando respuestas vagas.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 2 (0.39)</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: solo uno o dos integrantes llevan toda la exposición, repiten frases memorizadas sin comprensión real del código, e inventan respuestas que suenan convincentes pero son incorrectas en vez de admitir que no saben.</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem; font-weight:700; white-space:nowrap;">Nivel 1 (0.2)</td>
+              <td style="padding:0.4rem 0.5rem;">No cumple: una sola persona expone todo el trabajo del equipo, no pueden explicar su propio código, e insisten en respuestas claramente erróneas incluso después de ser corregidos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

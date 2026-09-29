@@ -79,18 +79,21 @@ const WEEKS = [
   },
   {
     n: 7,
-    titulo: "",
-    resumen: "",
-    objetivos: "",
+    titulo: "Transacciones ACID, DBaaS (Cloud) y prevención de SQL Injection",
+    tituloClase1: "SoundFlow-AI a prueba de fallos: Transacciones ACID, RLS y SQL Injection",
+    resumen: "Cómo llevar SoundFlow-AI a un estándar de grado industrial: qué es una transacción y las cuatro propiedades ACID (Atomicidad, Consistencia, Aislamiento, Durabilidad), construidas con una función SQL en Supabase que usa BEGIN...EXCEPTION para hacer ROLLBACK automático si un pago falla a mitad de camino. Luego, blindaje de seguridad: cómo prevenir SQL Injection con consultas parametrizadas en vez de f-strings, y cómo activar Row-Level Security (RLS) para que un usuario nunca pueda ver ni modificar los datos de otro. Cierra con gestión de infraestructura en la nube (DBaaS): usar los API Logs y el Health Check de Supabase para detectar y confirmar un intento de acceso bloqueado.",
+    objetivos: "Entender qué es una transacción y explicar las cuatro propiedades ACID con ejemplos reales, construir una función SQL en Supabase que garantice atomicidad entre dos tablas relacionadas (perfiles e historial_pagos) usando BEGIN/EXCEPTION/ROLLBACK, identificar y corregir código vulnerable a SQL Injection reemplazando concatenación de strings por consultas parametrizadas, activar y configurar políticas de Row-Level Security tipo Owner Only, y usar el Dashboard de Supabase (API Logs, Health Check) para verificar que un intento de acceso no autorizado fue detectado y bloqueado.",
     embed: "",
     descarga: "presentaciones/semana-07.pdf",
-    disponible: false
+    disponible: true,
+    disponibleClase2: false
   },
   {
     n: 8,
-    titulo: "",
-    resumen: "",
-    objetivos: "",
+    titulo: "Estación del Éxito: sustentación final",
+    tituloClase1: "The SoundFlow Chaos Challenge",
+    resumen: "Sustentación final grupal, con demo en vivo sobre la propia base de datos y código de cada equipo, sometida a fallos controlados en 4 Cámaras de Prueba: Vacío Atómico (ROLLBACK con ACID), Intento de Infiltración (RLS y SQL Injection), Oráculo Semántico (búsqueda por embeddings) y Prueba de Fuego de Conocimiento (preguntas que conectan varias semanas). Incluye el horario de sustentaciones (martes, 6:15 p.m. a 9:40 p.m., con margen de 5 min por equipo) y una ruleta interactiva para sortear el orden de cada equipo.",
+    objetivos: "Demostrar en vivo, sobre la aplicación real de cada equipo, que las transacciones ACID revierten un fallo a mitad de camino, que RLS y las consultas parametrizadas bloquean intentos de acceso no autorizado o de SQL Injection, y que la búsqueda semántica con embeddings encuentra resultados por significado; además, argumentar con rigor técnico el flujo completo de la aplicación conectando al menos tres semanas del curso, como conclusión del Journey Map del núcleo.",
     embed: "",
     descarga: "presentaciones/semana-08.pdf",
     disponible: false

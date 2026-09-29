@@ -458,3 +458,119 @@ document.addEventListener('click', (e) => {
     p.style.display = p.dataset.panel === target ? '' : 'none';
   });
 });
+
+// Ruleta de sorteo (Semana 8): gira un disco SVG dividido en tantas porciones como equipos.
+// Cada giro elige al azar una porción todavía no usada, calcula cuánto tiene que rotar el disco
+// para que esa porción quede justo bajo el puntero fijo (arriba), y al terminar la animación le
+// asigna su turno real: todos los equipos presentan el martes, en el orden en que van saliendo en
+// la ruleta, y la hora exacta de cada uno se calcula sumando la duración de ese equipo
+// (data-duracion, en minutos) más un margen fijo (RULETA_MARGEN_MIN) a un reloj único que arranca
+// en 6:15 p.m. El margen no es tiempo de exposición, es un colchón por si la cámara anterior se
+// alarga un poco. El botón "Reiniciar ruleta" limpia todo para repetir el sorteo.
+const RULETA_MARGEN_MIN = 5;
+function ruletaFormatoHora(minutosDesdeMedianoche) {
+  const horas = Math.floor(minutosDesdeMedianoche / 60);
+  const mins = minutosDesdeMedianoche % 60;
+  const ampm = horas < 12 ? 'a.m.' : 'p.m.';
+  let horas12 = horas % 12;
+  if (horas12 === 0) horas12 = 12;
+  return `${horas12}:${String(mins).padStart(2, '0')} ${ampm}`;
+}
+
+document.addEventListener('click', (e) => {
+  const spinBtn = e.target.closest('.ruleta-spin-btn');
+  if (spinBtn) {
+    if (spinBtn.disabled) return;
+    const wrap = spinBtn.closest('.ruleta-wrap');
+    const disco = wrap ? wrap.querySelector('.ruleta-disco') : null;
+    if (!wrap || !disco) return;
+
+    const todas = Array.from(wrap.querySelectorAll('.ruleta-slice'));
+    const disponibles = todas.filter(s => !s.dataset.usado);
+    if (!disponibles.length) return;
+
+    // El estado del sorteo (el reloj y cuántos equipos ya se asignaron) vive en wrap.dataset.estado
+    // como JSON, para que sobreviva entre un giro y el siguiente sin depender de variables globales.
+    // "reloj" es la hora absoluta acumulada, en minutos desde medianoche (empieza en 1095 = 6:15 p.m.).
+    if (!wrap.dataset.estado) {
+      wrap.dataset.estado = JSON.stringify({
+        reloj: 1095, // 6:15 p.m., en minutos desde medianoche
+        conteo: 0
+      });
+    }
+    const estado = JSON.parse(wrap.dataset.estado);
+
+    const elegido = disponibles[Math.floor(Math.random() * disponibles.length)];
+    const indice = parseInt(elegido.dataset.index, 10) || 0;
+    const duracion = parseInt(elegido.dataset.duracion, 10) || 20;
+    const anguloPorcion = 360 / todas.length; // reparte el círculo entre el total real de equipos
+    const anguloCentro = indice * anguloPorcion + anguloPorcion / 2;
+
+    const rotacionActual = parseFloat(disco.dataset.rotacion || '0');
+    const vueltas = 4 + Math.floor(Math.random() * 3); // 4 a 6 vueltas completas, solo por efecto
+    let delta = (-anguloCentro - rotacionActual) % 360;
+    if (delta < 0) delta += 360;
+    const nuevaRotacion = rotacionActual + delta + vueltas * 360;
+
+    disco.style.transform = `rotate(${nuevaRotacion}deg)`;
+    disco.dataset.rotacion = String(nuevaRotacion);
+
+    const resetBtn = wrap.querySelector('.ruleta-reset-btn');
+    spinBtn.disabled = true;
+    if (resetBtn) resetBtn.disabled = true;
+
+    setTimeout(() => {
+      const inicio = estado.reloj;
+      estado.reloj = inicio + duracion + RULETA_MARGEN_MIN;
+      estado.conteo += 1;
+      wrap.dataset.estado = JSON.stringify(estado);
+
+      const horaTexto = ruletaFormatoHora(inicio);
+
+      elegido.dataset.usado = 'true';
+      elegido.style.opacity = '0.2';
+
+      const tbody = wrap.querySelector('.ruleta-resultados tbody');
+      if (tbody) {
+        const fila = document.createElement('tr');
+        const celda = (texto, color, nowrap) => `<td style="padding:0.5rem 0.6rem; border-bottom:1px solid var(--border); ${nowrap ? 'white-space:nowrap;' : ''} ${color ? 'color:' + color + ';' : ''}">${texto}</td>`;
+        fila.innerHTML = celda(String(tbody.querySelectorAll('tr').length + 1)) + celda(elegido.dataset.grupo || '') + celda(horaTexto, 'var(--accent)', true);
+        tbody.appendChild(fila);
+      }
+
+      const restantes = wrap.querySelectorAll('.ruleta-slice:not([data-usado])').length;
+      const status = wrap.querySelector('.ruleta-status');
+      if (status) {
+        status.textContent = restantes > 0
+          ? `Quedan ${restantes} equipo${restantes === 1 ? '' : 's'} por sortear.`
+          : '¡Sorteo completo! El orden final quedó en la tabla de arriba.';
+      }
+
+      if (restantes > 0) spinBtn.disabled = false;
+      if (resetBtn) resetBtn.disabled = false;
+    }, 3300);
+    return;
+  }
+
+  const resetBtn = e.target.closest('.ruleta-reset-btn');
+  if (resetBtn) {
+    if (resetBtn.disabled) return;
+    const wrap = resetBtn.closest('.ruleta-wrap');
+    if (!wrap) return;
+
+    wrap.querySelectorAll('.ruleta-slice').forEach(s => {
+      delete s.dataset.usado;
+      s.style.opacity = '1';
+    });
+    delete wrap.dataset.estado;
+    const tbody = wrap.querySelector('.ruleta-resultados tbody');
+    if (tbody) tbody.innerHTML = '';
+
+    const total = wrap.querySelectorAll('.ruleta-slice').length;
+    const status = wrap.querySelector('.ruleta-status');
+    if (status) status.textContent = `Quedan ${total} equipo${total === 1 ? '' : 's'} por sortear.`;
+
+    const spinBtn = wrap.querySelector('.ruleta-spin-btn');
+    if (spinBtn) spinBtn.disabled = false;
+  }
+});
