@@ -389,7 +389,7 @@ EXCEPTION WHEN OTHERS THEN
   -- Si cualquiera de los dos pasos falla, deshace ambos automáticamente
   RAISE EXCEPTION 'El upgrade falló, se revirtió todo: %', SQLERRM;
 END;
-$$ LANGUAGE plpgsql;</code></pre>
+$$ LANGUAGE plpgsql SECURITY DEFINER;</code></pre>
     </div>
     <div class="content-box" style="border-left:4px solid #6f9d7c; margin-top:0.8rem;">
       <p style="margin:0 0 0.5rem;"><strong>Esta función actúa como una transacción real</strong></p>
@@ -399,6 +399,29 @@ $$ LANGUAGE plpgsql;</code></pre>
         bloque <code>EXCEPTION</code> se activa, hace el <strong style="color:#b33a2e;">ROLLBACK</strong> de
         todo lo que la función alcanzó a ejecutar antes de fallar, ambos pasos, no solo el que falló. No
         necesitas escribir <code>BEGIN;</code> / <code>COMMIT;</code> de SQL en ningún lado.
+      </p>
+    </div>
+    <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:0.8rem;">
+      <p style="margin:0 0 0.5rem;"><strong>Por qué lleva <code style="color:#b33a2e;">SECURITY DEFINER</code></strong></p>
+      <p style="margin:0;">
+        En la Semana anterior activaste RLS en <code>historial_pagos</code>, pero solo creaste una política de
+        <code>SELECT</code> (quién puede leer), no de <code>INSERT</code>. Si llamas esta función desde Python
+        (como usuario normal), Postgres aplica RLS y bloquea el <code style="color:#b33a2e;">INSERT</code> con el
+        error <code style="color:#b33a2e;">new row violates row-level security policy</code>, aunque sea tu
+        propio pago. <code>SECURITY DEFINER</code> hace que la función corra con los permisos de quien la creó
+        (tú, el dueño), saltándose esa restricción, igual que un proceso de pagos real: el usuario no inserta
+        directamente en la tabla, es la función de confianza la que lo hace por él.
+      </p>
+    </div>
+    <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:0.8rem;">
+      <p style="margin:0 0 0.5rem;"><strong>Para la sustentación final: el mismo error, pero desde Python</strong></p>
+      <p style="margin:0;">
+        En la Semana 8 vas a demostrar esta atomicidad en vivo, igual que abajo, pero corriendo la función
+        desde tu propio script de Python (con <code>supabase.rpc(...)</code>) en vez del SQL Editor, usando a
+        propósito un <code style="color:#b33a2e;">p_user_id</code> que no existe en
+        <code style="color:#b33a2e;">perfiles</code>. No necesitas matar ningún proceso ni cronometrar nada: el
+        error de Foreign Key ocurre solo, de forma inmediata y 100% repetible, y lo vas a ver salir como una
+        excepción en tu propia terminal.
       </p>
     </div>
     <p style="margin-top:0.8rem;">

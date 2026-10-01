@@ -43,6 +43,39 @@
     border-radius: 4px;
     font-size: 0.9em;
   }
+  pre {
+    background: #2b2f38;
+    color: #e8ecf1;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 0.6rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: 1em;
+  }
+  .code-block { margin: 0.6rem 0; }
+  .code-block pre { margin: 0; border-radius: 0 0 8px 8px; }
+  .code-block-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #1e2128;
+    border-radius: 8px 8px 0 0;
+    padding: 0.5rem 0.8rem;
+  }
+  .code-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .code-filename {
+    margin-left: 0.4rem;
+    color: #aab2c0;
+    font-family: "Consolas", "Monaco", monospace;
+    font-size: 0.8rem;
+  }
   .activity-section {
     margin: 2rem 0;
     padding-top: 1.6rem;
@@ -174,42 +207,114 @@
         Idea general: inducir un fallo a mitad de una transacción de pago y comprobar que no quedan
         datos a medias.
       </p>
+      <div class="content-box" style="border-left:4px solid #b33a2e; background:#fff6f5;">
+        <p style="margin:0 0 0.5rem;"><strong>Por qué no se mata ningún proceso en esta cámara</strong></p>
+        <p style="margin:0;">
+          El <code style="color:#b33a2e;">INSERT</code> y el <code style="color:#b33a2e;">UPDATE</code> de
+          <code>procesar_upgrade_premium</code> ocurren en milisegundos, así que cronometrar un Ctrl+C a mano
+          para que caiga justo entre los dos no es viable, y además matar el proceso de Python no interrumpe
+          la transacción en el servidor (Supabase la sigue corriendo y haciendo COMMIT aunque el cliente ya se
+          haya desconectado). Por eso el protocolo de esta cámara usa, en cambio, un
+          <code style="color:#b33a2e;">user_id</code> que no existe en <code>perfiles</code>: el
+          <code>INSERT</code> viola la <strong>Foreign Key</strong> y dispara el fallo de forma inmediata y
+          100% repetible, sin depender de ningún tiempo de reacción.
+        </p>
+      </div>
       <div class="content-box" style="border-left:4px solid #b33a2e;">
-        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Qué hacer en VS Code</strong></p>
-        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
-          <li>Pide que abran el script donde hacen el pago (ej. <code>pagos.py</code>) y que te muestren
-            la línea donde llaman la función RPC de Supabase.</li>
-          <li>Corre el flujo una vez completo, sin interrupciones, para confirmar que en el caso exitoso
-            sí quedan los dos cambios (pago registrado y usuario premium).</li>
-          <li>Pide que agreguen un <code>print()</code> o un <code>time.sleep(3)</code> justo después de
-            iniciar el pago, para tener tiempo de interrumpir el proceso en el punto exacto que
-            necesitas (justo después del <code>INSERT</code>, antes del <code>UPDATE</code>).</li>
-          <li>Vuelve a correr el script y, en ese punto exacto, mata el proceso con <code>Ctrl+C</code> en
-            la terminal de VS Code (o desconecta el Wi-Fi un segundo).</li>
-        </ul>
-        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Qué hacer en Supabase</strong></p>
-        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
-          <li>Antes de la prueba, ve a Database &gt; Functions y pide que te muestren la función SQL:
-            debe tener <code>BEGIN ... EXCEPTION WHEN OTHERS THEN ROLLBACK</code> envolviendo el
-            <code>INSERT</code> en <code>historial_pagos</code> y el <code>UPDATE</code> en
-            <code>perfiles</code>.</li>
-          <li>Después del fallo inducido, abre el SQL Editor y corre
-            <code>SELECT * FROM historial_pagos ORDER BY created_at DESC LIMIT 5;</code> y
-            <code>SELECT * FROM perfiles WHERE user_id = '...';</code> con el <code>user_id</code> de la
-            prueba.</li>
-          <li>Revisa Logs &gt; Postgres Logs por si quedó registrada la excepción capturada en el momento
-            del fallo.</li>
-        </ul>
+        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Paso a paso en vivo</strong></p>
+        <ol style="margin:0; padding-left:1.2rem; line-height:1.8;">
+          <li>Pide que abran <strong>Database &gt; Functions &gt; procesar_upgrade_premium</strong> en
+            Supabase y confirmen que tiene <code>SECURITY DEFINER</code> al final (ver código abajo).</li>
+          <li>Pide que abran en VS Code el script que llama esa función por RPC (ver código abajo), con un
+            <code>user_id</code> inventado que no exista en <code>perfiles</code>, y que lo ejecuten en la
+            terminal.</li>
+          <li>Debe salir el error de la función (<code>"El upgrade falló, se revirtió todo: ..."</code>) en la
+            misma terminal, de inmediato.</li>
+          <li>Entra al <strong>SQL Editor</strong> y corre las consultas de verificación (ver abajo) para
+            confirmar que no quedó ningún registro suelto.</li>
+        </ol>
+      </div>
+      <div class="content-box" style="border-left:4px solid #b33a2e;">
+        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Código en Supabase (SQL Editor)</strong></p>
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:var(--text-dim);">La función tal como debe
+          quedar en la versión final del proyecto (sin pausas artificiales):</p>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-dot" style="background:#ff5f56;"></span>
+            <span class="code-dot" style="background:#ffbd2e;"></span>
+            <span class="code-dot" style="background:#27c93f;"></span>
+            <span class="code-filename">funcion_upgrade.sql</span>
+          </div>
+        <pre><code>CREATE OR REPLACE FUNCTION procesar_upgrade_premium(p_user_id UUID, p_monto NUMERIC)
+RETURNS void AS $$
+BEGIN
+  -- Paso 1: registrar el pago
+  INSERT INTO historial_pagos (user_id, monto) VALUES (p_user_id, p_monto);
+
+  -- Paso 2: otorgar el plan Premium
+  UPDATE perfiles SET plan = 'premium' WHERE user_id = p_user_id;
+
+EXCEPTION WHEN OTHERS THEN
+  -- Si cualquiera de los dos pasos falla, deshace ambos automáticamente
+  RAISE EXCEPTION 'El upgrade falló, se revirtió todo: %', SQLERRM;
+END;
+$$ LANGUAGE plpgsql <span style="color:#7c3aed;">SECURITY DEFINER</span>;</code></pre>
+        </div>
+        <p style="margin:0.6rem 0 0; font-size:0.85rem; color:var(--text-dim);"><strong>Ojo con
+          <code>SECURITY DEFINER</code>:</strong> en la Semana 7 solo se creó una política RLS de
+          <code>SELECT</code> para <code>historial_pagos</code>, no de <code>INSERT</code>. Si al equipo se le
+          olvida este fragmento, el <code>INSERT</code> falla desde Python con
+          <code>new row violates row-level security policy</code> (aunque desde el SQL Editor sí funcione,
+          porque ahí corres como superusuario). Si ves ese error en vivo, pide que agreguen
+          <code>SECURITY DEFINER</code> y vuelvan a correr la función.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #b33a2e;">
+        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Código en Python (VS Code)</strong></p>
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:var(--text-dim);">El script que el equipo
+          ejecuta en vivo, con un <code>user_id</code> que a propósito no existe en <code>perfiles</code>:</p>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-dot" style="background:#ff5f56;"></span>
+            <span class="code-dot" style="background:#ffbd2e;"></span>
+            <span class="code-dot" style="background:#27c93f;"></span>
+            <span class="code-filename">probar_camara1.py</span>
+          </div>
+        <pre><code>from database import supabase
+
+<span style="color:#7c3aed;">user_id = "00000000-0000-0000-0000-000000000000"</span>  # no existe en perfiles, a propósito
+monto = 29900
+
+print("Enviando pago...")
+supabase.rpc("procesar_upgrade_premium", {
+    "p_user_id": user_id,
+    "p_monto": monto
+}).execute()
+print("Upgrade completado.")</code></pre>
+        </div>
+        <p style="margin:0.6rem 0 0; font-size:0.85rem; color:var(--text-dim);">Si todo está bien, nunca se
+          imprime <code>"Upgrade completado."</code>: el script debe terminar mostrando el error de la
+          función como una excepción, de inmediato, sin que tengas que interrumpir nada a mano.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #b33a2e;">
+        <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Validar en Supabase que hizo ROLLBACK</strong></p>
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:var(--text-dim);">Después del fallo inducido,
+          corre estas consultas con el mismo <code>user_id</code> inventado:</p>
+        <pre><code>SELECT * FROM historial_pagos WHERE user_id = '00000000-0000-0000-0000-000000000000';
+SELECT * FROM historial_pagos ORDER BY fecha DESC LIMIT 5;</code></pre>
+        <p style="margin:0.6rem 0 0; font-size:0.85rem; color:var(--text-dim);">Si la transacción es
+          atómica de verdad, la primera consulta <strong>no debe devolver ninguna fila</strong>: el
+          <code>ROLLBACK</code> deshace también el <code>INSERT</code> que ya se había ejecutado antes del
+          fallo. La segunda es un chequeo general de las últimas filas de
+          <code>historial_pagos</code>, útil para confirmar que tampoco quedó un pago suelto con otro
+          <code>user_id</code> por error.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #b33a2e;">
         <p style="margin:0 0 0.5rem; color:#b33a2e;"><strong>Cómo verificar que cumple</strong></p>
         <ul style="margin:0; padding-left:1.2rem; line-height:1.7;">
           <li>Si aparece un registro en <code>historial_pagos</code> sin el cambio correspondiente en
             <code>perfiles</code> (o viceversa), la transacción NO es atómica: reprueba esta cámara.</li>
-          <li>Pide que expliquen con sus palabras qué hace <code>EXCEPTION</code> y por qué el
-            <code>ROLLBACK</code> deshace todo el bloque, no solo la última instrucción, sin leerlo de
-            memoria.</li>
-          <li>Repite la prueba matando el proceso en un punto distinto (por ejemplo, antes del
-            <code>INSERT</code>) para confirmar que el comportamiento es consistente y no solo
-            "funcionó una vez de casualidad".</li>
+          <li>Pide que expliquen con sus palabras qué es <code>COMMIT</code> y qué es
+            <code>ROLLBACK</code>.</li>
         </ul>
       </div>
     </div>
@@ -217,38 +322,76 @@
     <!-- ===================== CÁMARA 2 ===================== -->
     <div class="activity-section">
       <div class="activity-section-header">
-        <h3 style="color:#7c3aed;">Cámara 2: El Intento de Infiltración (RLS / SQL Injection)</h3>
+        <h3 style="color:#7c3aed;">Cámara 2: El Intento de Infiltración (RLS)</h3>
       </div>
       <p style="margin:0 0 0.8rem;">
-        Idea general: intentar dos ataques distintos (inyección SQL y acceso a datos de otro usuario) y
-        comprobar que ambos son bloqueados.
+        Idea general: intentar leer el perfil de otro usuario y comprobar que RLS lo bloquea. Igual que en
+        la Cámara 1, aquí el equipo mismo actúa como atacante de su propia aplicación: tú les das la orden
+        de cuándo correr el ataque.
       </p>
+      <div class="content-box" style="border-left:4px solid #7c3aed; background:#fff6f5;">
+        <p style="margin:0 0 0.5rem;"><strong>Por qué esta cámara ya no incluye inyección SQL</strong></p>
+        <p style="margin:0;">
+          El buscador de SoundFlow (<code>buscar_musica.py</code>, Semana 6) nunca arma una consulta SQL a
+          partir de lo que escribe el usuario: el texto de búsqueda se convierte en un vector con
+          <code>sentence-transformers</code> y se manda a la función <code>buscar_canciones</code> por RPC,
+          comparando similitud de embeddings. No hay ningún punto donde insertar código SQL, así que un
+          intento de inyección ahí no demuestra nada (ni a favor ni en contra). Por eso esta cámara se queda
+          solo con la prueba de RLS, que sí aplica directamente sobre <code>perfiles</code>.
+        </p>
+      </div>
       <div class="content-box" style="border-left:4px solid #7c3aed;">
-        <p style="margin:0 0 0.5rem; color:#7c3aed;"><strong>Qué hacer en VS Code</strong></p>
-        <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
-          <li>Pide el archivo donde está la función de búsqueda (ej. <code>buscar_musica.py</code>) y
-            revisa la línea exacta de la consulta: debe usar <code>.eq()</code>, <code>.ilike()</code> o
-            similar de la librería de Supabase, nunca f-strings ni concatenación con <code>+</code>.</li>
-          <li>Pide que ejecuten en su terminal una búsqueda usando como texto
-            <code>' ; DROP TABLE canciones; --'</code> (tal cual, con la comilla).</li>
-          <li>Pide que abran o creen <code>probar_rls.py</code> (visto en Semana 7) con el
-            <code>user_id</code> de otro estudiante puesto a mano, y que lo ejecuten frente a ti.</li>
-        </ul>
+        <p style="margin:0 0 0.5rem; color:#7c3aed;"><strong>Paso a paso en vivo</strong></p>
+        <ol style="margin:0; padding-left:1.2rem; line-height:1.7;">
+          <li>Pide que abran <code>probar_rls.py</code> (visto en Semana 7), pongan a mano el
+            <code>user_id</code> de otro estudiante, y lo ejecuten frente a ti (ver código abajo).</li>
+          <li>Con el ataque corrido, entra al Table Editor y a Authentication &gt; Policies para comprobar
+            el resultado (ver "Qué hacer en Supabase" abajo).</li>
+        </ol>
+      </div>
+      <div class="content-box" style="border-left:4px solid #7c3aed;">
+        <p style="margin:0 0 0.5rem; color:#7c3aed;"><strong>Código: leer el perfil de otro usuario</strong></p>
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:var(--text-dim);">El equipo pone a mano el
+          <code>user_id</code> de otro estudiante (tomado del Table Editor) y corre este script,
+          autenticado como un usuario de prueba distinto:</p>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-dot" style="background:#ff5f56;"></span>
+            <span class="code-dot" style="background:#ffbd2e;"></span>
+            <span class="code-dot" style="background:#27c93f;"></span>
+            <span class="code-filename">probar_rls.py</span>
+          </div>
+        <pre><code>from database import supabase
+
+# 1. Inicia sesión como uno de los usuarios de prueba: esto se convierte
+#    en "tú" para el resto del script (auth.uid() pasa a valer su user_id).
+supabase.auth.sign_in_with_password({
+    "email": "usuario1@soundflow.test",
+    "password": "password123"
+})
+
+# 2. Copia de Table Editor > perfiles el user_id de OTRO usuario (no usuario1)
+otro_user_id = "" # agregar aca el usuario que van a consultar
+
+# 3. Ya autenticado como usuario1, intenta pedir el perfil de ese otro usuario
+<span style="color:#7c3aed;">resultado = supabase.table("perfiles").select("*").eq("user_id", otro_user_id).execute()</span>
+
+print("Filas devueltas:", resultado.data)</code></pre>
+        </div>
+        <p style="margin:0.6rem 0 0; font-size:0.85rem; color:var(--text-dim);">Con RLS activo, la
+          consola debe imprimir <code>Filas devueltas: []</code>, aunque el <code>user_id</code> sea
+          real y exista en la tabla: la política filtra la fila antes de que llegue a Python.</p>
+      </div>
+      <div class="content-box" style="border-left:4px solid #7c3aed;">
         <p style="margin:0 0 0.5rem; color:#7c3aed;"><strong>Qué hacer en Supabase</strong></p>
         <ul style="margin:0 0 0.8rem; padding-left:1.2rem; line-height:1.7;">
-          <li>Antes del ataque, en Table Editor confirma que la tabla <code>canciones</code> existe y
-            tiene datos.</li>
-          <li>Después de correr la inyección, refresca la tabla <code>canciones</code> en Table Editor:
-            debe seguir existiendo, intacta.</li>
           <li>Ve a Authentication &gt; Policies y pide que te muestren la política RLS activa de
             <code>perfiles</code>: debe filtrar por <code>auth.uid() = user_id</code> o equivalente.</li>
           <li>Abre Logs &gt; API Logs, filtra por Warning (4xx) y Error (5xx) (ver nota en Semana 7 sobre
-            el filtro de Level), y busca el momento exacto de cada ataque.</li>
+            el filtro de Level), y busca el momento exacto del ataque.</li>
         </ul>
         <p style="margin:0 0 0.5rem; color:#7c3aed;"><strong>Cómo verificar que cumple</strong></p>
         <ul style="margin:0; padding-left:1.2rem; line-height:1.7;">
-          <li>Si la tabla <code>canciones</code> desapareció o quedó vacía después del intento de
-            inyección, el ataque funcionó: reprueba.</li>
           <li>Si <code>probar_rls.py</code> logra imprimir datos de otro <code>user_id</code> (nombre,
             email, etc.), RLS no está protegiendo: reprueba.</li>
           <li>En los API Logs, el intento no autorizado debe aparecer como <code>403</code> o con un
@@ -272,9 +415,10 @@
           <li>Pide que abran el script de búsqueda semántica (ej. <code>buscar_semantica.py</code>) y
             señalen dónde generan el embedding de la consulta con <code>sentence-transformers</code>
             antes de mandarlo a Supabase.</li>
-          <li>Dicta tú (el profesor) una consulta que el equipo no haya usado en sus pruebas, algo
-            abstracto o metafórico, por ejemplo "música que se siente como un atardecer en una ciudad
-            futurista, pero con un poco de tristeza".</li>
+          <li>Pide que el mismo equipo escriba, en el momento, una consulta que no hayan usado en sus
+            pruebas, algo abstracto o metafórico, por ejemplo "música que se siente como un atardecer en
+            una ciudad futurista, pero con un poco de tristeza". Tú solo confirmas que no la hayan
+            ensayado antes.</li>
           <li>Pide que la ejecuten en vivo, en su terminal, sin ajustar nada del código antes.</li>
         </ul>
         <p style="margin:0 0 0.5rem; color:#5b7c99;"><strong>Qué hacer en Supabase</strong></p>
@@ -478,12 +622,12 @@
             </tr>
             <tr>
               <td style="padding:0.5rem; border-bottom:1px solid var(--border);"><strong style="color:#7c3aed;">Cámara 2</strong><br>El Intento de Infiltración</td>
-              <td style="padding:0.5rem; border-bottom:1px solid var(--border);">La inyección SQL no tiene efecto y el acceso no autorizado queda bloqueado por RLS (403 o vacío en los logs).</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);">El acceso no autorizado al perfil de otro usuario queda bloqueado por RLS (403 o vacío en los logs).</td>
               <td style="padding:0.5rem; border-bottom:1px solid var(--border); text-align:right;">1</td>
             </tr>
             <tr>
               <td style="padding:0.5rem; border-bottom:1px solid var(--border);"><strong style="color:#5b7c99;">Cámara 3</strong><br>El Oráculo Semántico</td>
-              <td style="padding:0.5rem; border-bottom:1px solid var(--border);">La búsqueda con una consulta nueva del profesor devuelve resultados semánticamente relevantes, no solo coincidencia de palabras.</td>
+              <td style="padding:0.5rem; border-bottom:1px solid var(--border);">La búsqueda con una consulta nueva del equipo devuelve resultados semánticamente relevantes, no solo coincidencia de palabras.</td>
               <td style="padding:0.5rem; border-bottom:1px solid var(--border); text-align:right;">1</td>
             </tr>
             <tr>
@@ -505,8 +649,8 @@
           </tfoot>
         </table>
         <p style="margin:0.8rem 0 0; font-size:0.8rem; color:var(--text-dim);">
-          Si una cámara reprueba por completo (por ejemplo, el ROLLBACK no revierte nada, o la tabla
-          <code>canciones</code> se borra con la inyección), esos 15 puntos quedan en 0 para ese equipo,
+          Si una cámara reprueba por completo (por ejemplo, el ROLLBACK no revierte nada, o RLS no logra
+          bloquear el acceso a datos de otro usuario), esos 15 puntos quedan en 0 para ese equipo,
           sin importar qué tan bien argumenten en la Cámara 4. Cada criterio se califica de 0 a 1; esa nota se multiplica por 20 para obtener su equivalente sobre 100.
         </p>
       </div>
@@ -557,23 +701,23 @@
           <tbody>
             <tr>
               <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 5 (1)</td>
-              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: la inyección SQL no tiene ningún efecto (canciones queda intacta), el acceso a datos de otro usuario es bloqueado por RLS (403 o vacío), y el equipo explica con precisión por qué las consultas parametrizadas neutralizan la inyección y cómo funciona su política de RLS.</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: el acceso a datos de otro usuario es bloqueado por RLS (403 o vacío), y el equipo explica con precisión cómo funciona su política de RLS y el rol de <code>auth.uid()</code>.</td>
             </tr>
             <tr>
               <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 4 (0.79)</td>
-              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: ambos ataques son bloqueados correctamente, pero el equipo duda o da una explicación incompleta de por qué funciona (por ejemplo, no saben explicar bien el rol de auth.uid()).</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: el ataque es bloqueado correctamente, pero el equipo duda o da una explicación incompleta de por qué funciona (por ejemplo, no saben explicar bien el rol de <code>auth.uid()</code>).</td>
             </tr>
             <tr>
               <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 3 (0.59)</td>
-              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: uno de los dos ataques es bloqueado sin problema, pero el otro genera dudas o necesita ajustes en vivo para demostrarse con confianza.</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: el ataque es bloqueado, pero genera dudas o necesita ajustes en vivo para demostrarse con confianza.</td>
             </tr>
             <tr>
               <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 2 (0.39)</td>
-              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: alguno de los ataques tiene un efecto parcial no deseado (un error de sintaxis SQL visible en los logs en vez de un bloqueo limpio, o una política RLS mal configurada que deja pasar algo).</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: el ataque tiene un efecto parcial no deseado (un error visible en los logs en vez de un bloqueo limpio, o una política RLS mal configurada que deja pasar algo).</td>
             </tr>
             <tr>
               <td style="padding:0.4rem 0.5rem; font-weight:700; white-space:nowrap;">Nivel 1 (0.2)</td>
-              <td style="padding:0.4rem 0.5rem;">No cumple: la inyección SQL logra afectar la base de datos, o el equipo logra leer datos de otro usuario sin que RLS lo impida.</td>
+              <td style="padding:0.4rem 0.5rem;">No cumple: el equipo logra leer datos de otro usuario sin que RLS lo impida.</td>
             </tr>
           </tbody>
         </table>
@@ -585,7 +729,7 @@
           <tbody>
             <tr>
               <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 5 (1)</td>
-              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: ante una consulta abstracta o metafórica inventada por el profesor (no probada antes por el equipo), la búsqueda devuelve canciones relevantes por significado, y el equipo explica con precisión cómo funciona la similitud de coseno y el rol del match_threshold.</td>
+              <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: ante una consulta abstracta o metafórica que el mismo equipo inventa en el momento (no probada antes), la búsqueda devuelve canciones relevantes por significado, y el equipo explica con precisión cómo funciona la similitud de coseno y el rol del match_threshold.</td>
             </tr>
             <tr>
               <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 4 (0.79)</td>

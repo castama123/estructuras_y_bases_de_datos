@@ -500,7 +500,12 @@ document.addEventListener('click', (e) => {
     }
     const estado = JSON.parse(wrap.dataset.estado);
 
-    const elegido = disponibles[Math.floor(Math.random() * disponibles.length)];
+    // El Grupo 4 (Mónica, Jadilson, Isabel y Ricardo) siempre sale primero en el sorteo: en el
+    // primer giro se fuerza esa porción en vez de escoger al azar; del segundo giro en adelante,
+    // el resto de equipos se sortea normalmente.
+    const esPrimerGiro = disponibles.length === todas.length;
+    const grupo4 = disponibles.find(s => (s.dataset.grupo || '').startsWith('Grupo 4'));
+    const elegido = (esPrimerGiro && grupo4) ? grupo4 : disponibles[Math.floor(Math.random() * disponibles.length)];
     const indice = parseInt(elegido.dataset.index, 10) || 0;
     const duracion = parseInt(elegido.dataset.duracion, 10) || 20;
     const anguloPorcion = 360 / todas.length; // reparte el círculo entre el total real de equipos

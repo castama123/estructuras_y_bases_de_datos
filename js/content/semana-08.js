@@ -11,8 +11,8 @@ window.WEEK_CONTENT_8_1 = `
   <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">Estación del Éxito: The SoundFlow Chaos Challenge</h2>
 
   <p style="margin-top:0;">
-    Llegamos a la última estación del Journey Map. Ya no hay una nueva semana de contenido: esta
-    clase es la <strong>sustentación final</strong>, donde cada equipo demuestra, en vivo y sobre su
+    Llegamos a la última estación del Journey Map. Esta clase es la
+    <strong>sustentación final</strong>, donde cada equipo demuestra, en vivo y sobre su
     propia versión de SoundFlow-AI, que su sistema resiste el caos: fallos a mitad de una
     transacción, intentos de ataque, búsquedas que no usan palabras exactas, y preguntas directas
     sobre por qué tomaron cada decisión técnica.
@@ -33,9 +33,9 @@ window.WEEK_CONTENT_8_1 = `
     <div class="content-box" style="border-left:4px solid #b33a2e;">
       <p style="margin:0 0 0.5rem;"><strong style="color:#b33a2e;">Todos deben exponer</strong></p>
       <p style="margin:0;">
-        La nota es grupal, pero la participación es individual: cada integrante del equipo debe tomar
-        la palabra y mostrar al menos una parte de la demo en vivo. No vale que una sola persona
-        presente por todo el equipo.
+        La exposición será grupal: cada integrante del equipo debe tomar la palabra y mostrar al menos
+        una parte de la demo en vivo. Pero la nota será individual, evaluando el conocimiento propio de
+        cada estudiante.
       </p>
     </div>
   </div>
@@ -53,54 +53,79 @@ window.WEEK_CONTENT_8_1 = `
     <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
       <div class="concept-card">
         <h4 style="color:#b33a2e;">Cámara 1: El Vacío Atómico</h4>
-        <p style="margin:0 0 0.4rem; font-size:0.78rem; color:var(--text-dim);">Valida: Semanas 2 y 7</p>
-        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:var(--text-dim);">
-          <strong>El caos:</strong> inicias un "Suscripción Premium" que toca dos tablas, y justo
-          después del primer <code>INSERT</code>, pero antes del <code>UPDATE</code> final, el
-          profesor mata tu proceso de Python (Ctrl+C o desconectando el Wi-Fi).
+        <p style="margin:0 0 0.4rem; font-size:0.78rem; color:#1a1a1a;">Valida: Semanas 2 y 7</p>
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:#1a1a1a;">
+          <strong>El caos:</strong> inicias un "Suscripción Premium" que toca dos tablas, pero usando a
+          propósito un <code style="color:#b33a2e;">user_id</code> que no existe en <code>perfiles</code>. El
+          <code style="color:#b33a2e;">INSERT</code> en <code>historial_pagos</code> viola la
+          <strong>Foreign Key</strong> y dispara el <code style="color:#b33a2e;">EXCEPTION</code> de la función,
+          de forma inmediata y 100% repetible, sin tener que cronometrar ni interrumpir nada a mano.
         </p>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
-          <strong>La prueba:</strong> entras a Supabase y demuestras que la transacción hizo
-          <code style="color:#b33a2e;">ROLLBACK</code> perfecto. Si hay un pago registrado pero el
-          usuario no quedó premium, el caos ganó. Si la base de datos quedó limpia, ganaste tú.
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:#1a1a1a;">
+          <strong>La prueba:</strong> en tu propia terminal ves el error de la función (algo como
+          <code>"El upgrade falló, se revirtió todo: ..."</code>), y entras a Supabase y demuestras que la
+          transacción hizo <code style="color:#b33a2e;">ROLLBACK</code> perfecto: no quedó ningún pago suelto
+          en <code>historial_pagos</code> para ese intento fallido.
+        </p>
+        <ol style="margin:0; padding-left:1.1rem; font-size:0.85rem; color:#1a1a1a; line-height:1.6;">
+          <li>Crea la función en Supabase (<code style="color:#b33a2e;">INSERT</code> &rarr;
+            <code style="color:#b33a2e;">UPDATE</code>, con <code>SECURITY DEFINER</code>).</li>
+          <li>Corre tu script de Python con un <code>user_id</code> inventado, que no exista en
+            <code>perfiles</code>.</li>
+          <li>Valida en los logs que se hizo <code style="color:#b33a2e;">ROLLBACK</code> (deben aparecer el
+            error <code style="color:#b33a2e;">P0001</code> y el <code style="color:#b33a2e;">Warning 400</code>).</li>
+        </ol>
+        <p style="margin:0.6rem 0 0; font-size:0.85rem; color:#1a1a1a;">
+          <strong>Nota:</strong> para que el <code style="color:#b33a2e;">INSERT</code> funcione desde Python
+          necesitas agregar <code style="color:#b33a2e;">SECURITY DEFINER</code> al final de la función. Sin
+          eso, RLS bloquea el <code>INSERT</code> con el error
+          <code style="color:#b33a2e;">new row violates row-level security policy</code>, porque en la Semana 7
+          solo creaste una política de <code>SELECT</code> para <code>historial_pagos</code>, no de
+          <code>INSERT</code>.
         </p>
       </div>
       <div class="concept-card">
         <h4 style="color:#7c3aed;">Cámara 2: El Intento de Infiltración</h4>
-        <p style="margin:0 0 0.4rem; font-size:0.78rem; color:var(--text-dim);">Valida: Semana 7</p>
-        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:var(--text-dim);">
-          <strong>El caos:</strong> el profesor actúa como atacante. Va a intentar inyectar código SQL
-          en tu barra de búsqueda, o va a intentar acceder al <code>user_id</code> de "un vecino"
-          (otro usuario) usando el cliente de API.
+        <p style="margin:0 0 0.4rem; font-size:0.78rem; color:#1a1a1a;">Valida: Semana 7</p>
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:#1a1a1a;">
+          <strong>El caos:</strong> aquí tú actúas como atacante de tu propia aplicación. Ya autenticado
+          como un usuario de prueba, intentas leer el perfil de "un vecino" (otro <code>user_id</code>)
+          usando el cliente de Supabase.
         </p>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
-          <strong>La prueba:</strong> muestras el error <code>403 Forbidden</code> (o la neutralización
-          de la inyección). Eso confirma que tu <strong>RLS</strong> y tus consultas parametrizadas son
-          un escudo real, no solo teoría.
+        <p style="margin:0; font-size:0.85rem; color:#1a1a1a;">
+          <strong>La prueba:</strong> muestras que el intento de leer el perfil ajeno devolvió una lista
+          vacía. Eso confirma que tu <strong>RLS</strong> es un escudo real, no solo teoría.
         </p>
+        <ol style="margin:0.6rem 0 0; padding-left:1.1rem; font-size:0.85rem; color:#1a1a1a; line-height:1.6;">
+          <li>Corre <code>probar_rls.py</code> autenticado como un usuario de prueba, apuntando al
+            <code>user_id</code> de otro.</li>
+          <li>Muestra en consola y en Supabase que el ataque falló: <code>probar_rls.py</code> imprime
+            una lista vacía.</li>
+        </ol>
       </div>
       <div class="concept-card">
         <h4 style="color:#5b7c99;">Cámara 3: El Oráculo Semántico</h4>
-        <p style="margin:0 0 0.4rem; font-size:0.78rem; color:var(--text-dim);">Valida: Semana 6</p>
-        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:var(--text-dim);">
-          <strong>El caos:</strong> en vez de buscar "Rock", el profesor va a escribir un prompt
-          abstracto, metafórico o "ruidoso", por ejemplo "música que se siente como un atardecer en
-          una ciudad futurista, pero con un poco de tristeza".
+        <p style="margin:0 0 0.4rem; font-size:0.78rem; color:#1a1a1a;">Valida: Semana 6</p>
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:#1a1a1a;">
+          <strong>El caos:</strong> en vez de buscar "Rock", tú mismo escribes un prompt abstracto,
+          metafórico o "ruidoso", por ejemplo "música que se siente como un atardecer en una ciudad
+          futurista, pero con un poco de tristeza".
         </p>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
+        <p style="margin:0; font-size:0.85rem; color:#1a1a1a;">
           <strong>La prueba:</strong> demuestras cómo los <strong>embeddings</strong> y la similitud de
           coseno encuentran canciones que coinciden con el sentimiento, no con las palabras. Eso valida
-          la "mente" de tu buscador semántico.
+          la "mente" de tu buscador semántico. Además, juega con el <code style="color:#5b7c99;">match_threshold</code>
+          y explica qué pasa cuando subes o bajas ese umbral.
         </p>
       </div>
       <div class="concept-card">
         <h4 style="color:#c99a4e;">Cámara 4: Prueba de Fuego de Conocimiento</h4>
-        <p style="margin:0 0 0.4rem; font-size:0.78rem; color:var(--text-dim);">Valida: todo el semestre</p>
-        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:var(--text-dim);">
+        <p style="margin:0 0 0.4rem; font-size:0.78rem; color:#1a1a1a;">Valida: todo el semestre</p>
+        <p style="margin:0 0 0.4rem; font-size:0.85rem; color:#1a1a1a;">
           <strong>El caos:</strong> reciben preguntas al azar para poner a prueba su conocimiento real,
           no memorizado.
         </p>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">
+        <p style="margin:0; font-size:0.85rem; color:#1a1a1a;">
           <strong>La prueba:</strong> el equipo explica el flujo completo de su aplicación usando la
           pregunta como eje, conectando <strong>al menos 3 semanas distintas</strong> en la misma
           respuesta.
@@ -108,7 +133,7 @@ window.WEEK_CONTENT_8_1 = `
       </div>
     </div>
     <p style="margin:0.8rem 0 0.3rem;"><strong>Ejemplos de preguntas para la Cámara 4</strong></p>
-    <p style="margin:0 0 0.5rem; font-size:0.85rem; color:var(--text-dim);">
+    <p style="margin:0 0 0.5rem; font-size:0.85rem; color:#1a1a1a;">
       Estúdienlas de verdad: no son para memorizar una respuesta, sino para entender la conexión entre
       semanas y poder explicarla con sus propias palabras el día de la sustentación. Toca cada tarjeta
       para ver qué semanas conecta.
@@ -297,7 +322,7 @@ window.WEEK_CONTENT_8_1 = `
             <td style="padding:0.5rem; border-bottom:1px solid var(--border); text-align:right;">1</td>
           </tr>
           <tr>
-            <td style="padding:0.5rem; border-bottom:1px solid var(--border);"><strong style="color:#7c3aed;">Cámara 2:</strong> El Intento de Infiltración (RLS / SQL Injection)</td>
+            <td style="padding:0.5rem; border-bottom:1px solid var(--border);"><strong style="color:#7c3aed;">Cámara 2:</strong> El Intento de Infiltración (RLS)</td>
             <td style="padding:0.5rem; border-bottom:1px solid var(--border); text-align:right;">1</td>
           </tr>
           <tr>
@@ -322,7 +347,7 @@ window.WEEK_CONTENT_8_1 = `
       </table>
       <p style="margin:0.8rem 0 0; font-size:0.85rem; color:var(--text-dim);">
         Cada cámara se evalúa por separado: si una falla por completo (por ejemplo, el ROLLBACK no
-        revierte nada, o la inyección SQL sí logra afectar la base de datos), esos puntos se pierden
+        revierte nada, o RLS no logra bloquear el acceso a datos de otro usuario), esos puntos se pierden
         para ese equipo sin importar qué tan bien les vaya en las otras cámaras. Cada criterio se califica de 0 a 1; esa nota se multiplica por 20 para obtener su equivalente sobre 100.
       </p>
     </div>
@@ -372,23 +397,23 @@ window.WEEK_CONTENT_8_1 = `
         <tbody>
           <tr>
             <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 5 (1)</td>
-            <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: la inyección SQL no tiene ningún efecto (canciones queda intacta), el acceso a datos de otro usuario es bloqueado por RLS (403 o vacío), y el equipo explica con precisión por qué las consultas parametrizadas neutralizan la inyección y cómo funciona su política de RLS.</td>
+            <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Excelente: el acceso a datos de otro usuario es bloqueado por RLS (lista vacía), y el equipo explica con precisión cómo funciona su política de RLS.</td>
           </tr>
           <tr>
             <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 4 (0.79)</td>
-            <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: ambos ataques son bloqueados correctamente, pero el equipo duda o da una explicación incompleta de por qué funciona.</td>
+            <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Bueno: el ataque es bloqueado correctamente, pero el equipo duda o da una explicación incompleta de por qué funciona.</td>
           </tr>
           <tr>
             <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 3 (0.59)</td>
-            <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: uno de los dos ataques es bloqueado sin problema, pero el otro genera dudas o necesita ajustes en vivo para demostrarse con confianza.</td>
+            <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Aceptable: el ataque es bloqueado pero genera dudas o necesita ajustes en vivo para demostrarse con confianza.</td>
           </tr>
           <tr>
             <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap;">Nivel 2 (0.39)</td>
-            <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: alguno de los ataques tiene un efecto parcial no deseado (un error visible en los logs en vez de un bloqueo limpio, o una política RLS mal configurada).</td>
+            <td style="padding:0.4rem 0.5rem; border-bottom:1px solid var(--border);">Insuficiente: el ataque tiene un efecto parcial no deseado (un error visible en los logs en vez de un bloqueo limpio, o una política RLS mal configurada).</td>
           </tr>
           <tr>
             <td style="padding:0.4rem 0.5rem; font-weight:700; white-space:nowrap;">Nivel 1 (0.2)</td>
-            <td style="padding:0.4rem 0.5rem;">No cumple: la inyección SQL logra afectar la base de datos, o el equipo logra leer datos de otro usuario sin que RLS lo impida.</td>
+            <td style="padding:0.4rem 0.5rem;">No cumple: el equipo logra leer datos de otro usuario sin que RLS lo impida.</td>
           </tr>
         </tbody>
       </table>
