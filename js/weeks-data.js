@@ -96,6 +96,6 @@ const WEEKS = [
     objetivos: "Demostrar en vivo, sobre la aplicación real de cada equipo, que las transacciones ACID revierten un fallo a mitad de camino, que RLS y las consultas parametrizadas bloquean intentos de acceso no autorizado o de SQL Injection, y que la búsqueda semántica con embeddings encuentra resultados por significado; además, argumentar con rigor técnico el flujo completo de la aplicación conectando al menos tres semanas del curso, como conclusión del Journey Map del núcleo.",
     embed: "",
     descarga: "presentaciones/semana-08.pdf",
-    disponible: false
+    disponible: true
   }
 ];
