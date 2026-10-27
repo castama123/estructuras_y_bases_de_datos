@@ -9,23 +9,38 @@ window.WEEK_CONTENT_2_1 = `
     </div>
     <p>
       La actividad de esta semana necesita cuatro tablas nuevas: <code>tbl_artistas</code>,
-      <code>tbl_albumes</code>, <code>tbl_canciones</code> y <code>tbl_reproducciones</code>. Las creamos
-      <strong>antes</strong> de ver DISTINCT, ORDER BY y el resto de cláusulas, para que desde el primer
-      momento trabajes sobre un esquema bien normalizado, igual de bien construido que
+      <code>tbl_albumes</code>, <code>tbl_canciones</code> y <code>tbl_reproducciones</code>, igual de
+      bien construidas que
       <code>tbl_usuarios</code> y <code>tbl_pagos_suscripcion</code> de la Semana 1. Aquí abajo tienes el
       modelo entidad-relación y el script completo de las <strong>seis tablas</strong> de
       <code>soundflow_db</code> hasta ahora.
     </p>
 
     <div class="content-box">
-      <p style="margin:0;">
-        Un artista tiene muchos álbumes, y un álbum tiene muchas canciones: dos relaciones 1:N
-        encadenadas, igual que 1 <code>usuario</code> tiene muchos <code>pagos_suscripcion</code>. Además,
-        un usuario puede reproducir muchas canciones, y una canción puede ser reproducida por muchos
-        usuarios: es una relación N:M, así que necesita una tabla puente,
-        <code>tbl_reproducciones</code>, con una FK hacia <code>tbl_usuarios</code> y otra hacia
-        <code>tbl_canciones</code>. Esa es la tabla que finalmente conecta los dos grupos.
+      <p style="margin:0 0 0.5rem; font-size:0.85rem;">
+        Antes de crear las tablas, mira cómo se relacionan entre sí. Hay dos tipos de relación:
       </p>
+      <ul style="margin:0 0 0.6rem; padding-left:1.2rem; line-height:1.6; font-size:0.85rem;">
+        <li>
+          <strong>Usuario &rarr; Pagos (1:N):</strong> un usuario tiene muchos pagos, y cada pago es de un
+          solo usuario. <code>tbl_pagos_suscripcion</code> lleva una FK hacia <code>tbl_usuarios</code>.
+        </li>
+        <li>
+          <strong>Usuarios &harr; Canciones (N:M):</strong> un usuario reproduce muchas canciones, y una
+          canción la reproducen muchos usuarios. Se resuelve con una <strong>tabla puente</strong>,
+          <code>tbl_reproducciones</code>, con una FK hacia <code>tbl_usuarios</code> y otra hacia
+          <code>tbl_canciones</code>. Cada fila es una reproducción (quién, qué y cuándo) y conecta los dos
+          grupos de tablas.
+        </li>
+        <li>
+          <strong>Artista &rarr; Álbumes (1:N):</strong> un artista tiene muchos álbumes, y cada álbum es de
+          un solo artista. <code>tbl_albumes</code> lleva una FK hacia <code>tbl_artistas</code>.
+        </li>
+        <li>
+          <strong>Álbum &rarr; Canciones (1:N):</strong> un álbum tiene muchas canciones, y cada canción es
+          de un solo álbum. <code>tbl_canciones</code> lleva una FK hacia <code>tbl_albumes</code>.
+        </li>
+      </ul>
       <svg viewBox="0 0 760 580" xmlns="http://www.w3.org/2000/svg" style="max-width:760px; width:100%; height:auto; display:block; margin:1rem auto 0;">
         <!-- tbl_usuarios (6 campos) -->
         <rect x="20" y="10" width="220" height="180" rx="8" fill="#ffffff" stroke="#5b7c99" stroke-width="1.5"/>
@@ -1157,7 +1172,19 @@ HAVING AVG(reproducciones) > 10000000;</code></pre>
       normales</strong>.
     </p>
 
-    <div class="content-box">
+    <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:1rem;">
+      <h4 style="margin:0 0 0.5rem; color:#c99a4e;">¿Por qué aplicar normalización?</h4>
+      <ul style="margin:0 0 0.8rem; padding-left:1.2rem; color:var(--text);">
+        <li><strong>Reducción</strong> de los datos duplicados.</li>
+        <li>Ahorro de <strong>espacio</strong> en disco.</li>
+        <li><strong>Mantenimiento</strong> más sencillo.</li>
+        <li><strong>Integridad</strong> de los datos.</li>
+        <li>Mejora del <strong>rendimiento</strong> de las consultas SQL.</li>
+        <li><strong>Flexibilidad</strong> y <strong>escalabilidad</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="content-box" style="margin-top:1rem;">
       <p style="margin:0 0 0.8rem; text-align:center;"><strong>Así se ve el problema, y así se ve la solución:</strong></p>
       <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
         <div style="flex:1; min-width:220px;">
@@ -1221,25 +1248,23 @@ HAVING AVG(reproducciones) > 10000000;</code></pre>
     </div>
 
     <div class="content-box" style="border-left:4px solid #5b7c99; margin-top:1rem;">
-      <p style="margin:0 0 0.8rem; text-align:center;"><strong style="color:#5b7c99;">Ejemplo de 1FN: sin normalizar &rarr; normalizado</strong></p>
+      <p style="margin:0 0 0.6rem; text-align:center;"><strong style="color:#5b7c99;">Ejemplo de 1FN: sin normalizar &rarr; normalizado</strong></p>
+      <p style="margin:0 0 0.8rem; font-size:0.85rem;">Vamos a seguir <strong>un solo caso</strong> en las tres formas normales: la tabla donde SoundFlow guarda qué usuario escuchó qué canción. Empieza mal hecha y, en cada paso, la arreglamos hasta llegar a las tablas de <code>soundflow_db</code>.</p>
       <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
         <div style="flex:1; min-width:220px;">
           <p style="margin:0 0 0.4rem; font-size:0.8rem; font-weight:700; color:#c44444; text-align:center;">✗ Sin normalizar</p>
-          <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.72rem; width:100%;">
+          <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%;">
             <thead>
-              <tr><th colspan="2" style="padding:0.3rem 0.5rem; background:#8a3030; color:#fff; text-align:left; font-size:0.68rem;">tbl_canciones</th></tr>
-              <tr>
-                <th style="padding:0.3rem 0.5rem; background:#c44444; color:#fff; text-align:left;">titulo</th>
-                <th style="padding:0.3rem 0.5rem; background:#c44444; color:#fff; text-align:left;">generos</th>
-              </tr>
+              <tr><th colspan="3" style="padding:0.3rem 0.4rem; background:#8a3030; color:#fff; text-align:left; font-size:0.68rem;">reproducciones_v1</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_usuario</th><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">nombre_usuario</th><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">canciones_escuchadas</th></tr>
             </thead>
             <tbody>
-              <tr><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">Mi Tierra</td><td style="padding:0.3rem 0.5rem; border:1px solid var(--border); color:#c44444; font-weight:700;">'Salsa, Pop'</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Lucia Marin</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">'Tres Deseos, Rayando el Sol'</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">5</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Andrés Torres</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">'Tres Deseos'</td></tr>
             </tbody>
           </table>
           <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.5rem;">
-            Dos géneros metidos en una sola celda: rompe el <strong>primer paso</strong> (no es un valor
-            atómico) y el <strong>segundo</strong> (es una lista dentro de una columna).
+            La celda de Lucía guarda <strong>dos canciones separadas por coma</strong>: no es un valor atómico y es una lista dentro de una columna. Eso rompe 1FN.
           </p>
         </div>
 
@@ -1247,96 +1272,118 @@ HAVING AVG(reproducciones) > 10000000;</code></pre>
 
         <div style="flex:1; min-width:220px;">
           <p style="margin:0 0 0.4rem; font-size:0.8rem; font-weight:700; color:#5b7c99; text-align:center;">✓ Normalizado</p>
-          <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.72rem; width:100%; margin-bottom:0.5rem;">
+          <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%;">
             <thead>
-              <tr><th colspan="2" style="padding:0.3rem 0.5rem; background:var(--accent); color:#fff; text-align:left;">tbl_canciones</th></tr>
+              <tr><th colspan="4" style="padding:0.3rem 0.4rem; background:#3d5a70; color:#fff; text-align:left; font-size:0.68rem;">reproducciones_v2</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#5b7c99; color:#fff; text-align:left;">id_usuario</th><th style="padding:0.3rem 0.4rem; background:#5b7c99; color:#fff; text-align:left;">nombre_usuario</th><th style="padding:0.3rem 0.4rem; background:#5b7c99; color:#fff; text-align:left;">id_cancion</th><th style="padding:0.3rem 0.4rem; background:#5b7c99; color:#fff; text-align:left;">titulo</th></tr>
             </thead>
             <tbody>
-              <tr><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">id_cancion</td><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">titulo</td></tr>
-              <tr><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">Mi Tierra</td></tr>
-            </tbody>
-          </table>
-          <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.72rem; width:100%;">
-            <thead>
-              <tr><th colspan="2" style="padding:0.3rem 0.5rem; background:#3d5a70; color:#fff; text-align:left; font-size:0.68rem;">cancion_genero</th></tr>
-              <tr><th style="padding:0.3rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">id_cancion (FK)</th><th style="padding:0.3rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">genero</th></tr>
-            </thead>
-            <tbody>
-              <tr><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">Salsa</td></tr>
-              <tr><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.5rem; border:1px solid var(--border);">Pop</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Lucia Marin</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Tres Deseos</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Lucia Marin</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">105</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Rayando el Sol</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">5</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Andrés Torres</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Tres Deseos</td></tr>
             </tbody>
           </table>
           <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.5rem;">
-            Un género por fila: cumple el <strong>primer y segundo paso</strong> (valor atómico, sin
-            listas). <code>cancion_genero</code> conecta con <code>tbl_canciones</code> mediante
-            <code>id_cancion</code> como llave foránea (FK).
+            Una canción por fila: cada celda guarda un solo valor, sin listas. Pero ahora el nombre de Lucía y el título "Tres Deseos" se repiten. De eso se encarga 2FN.
           </p>
         </div>
       </div>
     </div>
 
-    <div class="numbered-grid" style="grid-template-columns: 1fr; max-width:460px; margin:1rem auto 0;">
-      <div class="flip-card" style="min-height:300px;">
-        <div class="flip-card-inner" style="min-height:300px;">
-          <div class="flip-card-front numbered-card">
-            <p style="margin:0 0 0.5rem; font-weight:700; color:#c44444; font-size:0.85rem;">✗ Esto viola 1FN</p>
-            <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.72rem; width:100%;">
-              <thead>
-                <tr><th colspan="2" style="padding:0.3rem 0.4rem; background:#8a3030; color:#fff; text-align:left; font-size:0.68rem;">tbl_canciones</th></tr>
-                <tr>
-                  <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">titulo</th>
-                  <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">generos</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Mi Tierra</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">'Salsa, Pop'</td></tr>
-              </tbody>
-            </table>
-            <span class="flip-hint">Toca para ver cómo se soluciona &rarr;</span>
-          </div>
-          <div class="flip-card-back">
-            <p style="font-weight:700; margin-bottom:0.5rem;">✓ Solución</p>
-            <p>Se crea una tabla puente <code>cancion_genero</code> con una fila por cada combinación
-            canción + género (una para "Mi Tierra" + "Salsa", otra para "Mi Tierra" + "Pop"). Su columna
-            <code>id_cancion</code> es una llave foránea hacia <code>tbl_canciones.id_cancion</code>, esa FK
-            es la que conecta ambas tablas.</p>
-          </div>
-        </div>
-      </div>
+    <div class="content-box" style="border-left:4px solid #5b7c99; margin-top:1rem;">
+      <h4 style="margin:0 0 0.5rem; color:#5b7c99;">¿Nuestro modelo cumple 1FN?</h4>
+      <p style="margin:0 0 0.6rem; font-size:0.85rem;">
+        Revisemos las seis tablas de <code>soundflow_db</code> con las reglas de 1FN: sin filas repetidas
+        (cada fila tiene su llave primaria), valores atómicos y ninguna columna con varios valores
+        separados por comas.
+      </p>
+      <table style="border-collapse:collapse; font-size:0.78rem; width:100%;">
+        <thead>
+          <tr>
+            <th style="padding:0.35rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Tabla</th>
+            <th style="padding:0.35rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Llave primaria</th>
+            <th style="padding:0.35rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Valores atómicos</th>
+            <th style="padding:0.35rem 0.5rem; background:#5b7c99; color:#fff; text-align:center;">1FN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>tbl_usuarios</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>idusuario</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);">Un nombre, un email y un hash por fila.</td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border); text-align:center; color:#6f9d7c; font-weight:700;">✓</td>
+          </tr>
+          <tr>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>tbl_pagos_suscripcion</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>id_pagos_suscripcion</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);">Un monto y una fecha por pago.</td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border); text-align:center; color:#6f9d7c; font-weight:700;">✓</td>
+          </tr>
+          <tr>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>tbl_artistas</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>id_artista</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);">Un nombre y un país por artista.</td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border); text-align:center; color:#6f9d7c; font-weight:700;">✓</td>
+          </tr>
+          <tr>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>tbl_albumes</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>id_album</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);">Un título y un año por álbum; el artista se referencia con <code>id_artista</code>.</td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border); text-align:center; color:#6f9d7c; font-weight:700;">✓</td>
+          </tr>
+          <tr>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>tbl_canciones</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>id_cancion</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);">Un solo género por canción (<code>'Pop'</code>, <code>'Salsa'</code> o <code>'Rock'</code>), nunca una lista.</td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border); text-align:center; color:#6f9d7c; font-weight:700;">✓</td>
+          </tr>
+          <tr>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>tbl_reproducciones</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);"><code>id_reproduccion</code></td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border);">Una fila por cada reproducción, con un usuario y una canción.</td>
+            <td style="padding:0.35rem 0.5rem; border:1px solid var(--border); text-align:center; color:#6f9d7c; font-weight:700;">✓</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="content-box" style="border-left:4px solid #7fa5a3; margin-top:1rem;">
       <h4 style="margin:0 0 0.5rem; color:#5f8582;">Segunda Forma Normal (2FN): Dependencia completa de la llave</h4>
       <ul style="margin:0 0 0.8rem; padding-left:1.2rem; color:var(--text);">
-        <li>Debe cumplir primero con 1FN.</li>
-        <li>Todos los campos que no son clave deben depender por completo de la clave principal.</li>
-        <li>Se deben quitar las dependencias parciales.</li>
+        <li>Cumple con las reglas de 1FN.</li>
+        <li>Todos los atributos que no forman parte de la <strong>clave principal o llave primaria</strong> tienen dependencia funcional completa de ella. Dicho de otra forma: no debe haber dependencias parciales en las columnas no clave.</li>
+        <li>Todas las dependencias parciales se deben eliminar y separar dentro de sus propias tablas.</li>
       </ul>
     </div>
 
     <div class="content-box" style="border-left:4px solid #7fa5a3; margin-top:1rem;">
-      <p style="margin:0 0 0.8rem; text-align:center;"><strong style="color:#5f8582;">Ejemplo de 2FN: sin normalizar &rarr; normalizado</strong></p>
+      <p style="margin:0 0 0.6rem; text-align:center;"><strong style="color:#5f8582;">Ejemplo de 2FN: sin normalizar &rarr; normalizado</strong></p>
+      <p style="margin:0 0 0.8rem; font-size:0.85rem;">Seguimos con la tabla que quedó después de 1FN, ahora para revisar sus dependencias.</p>
       <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
         <div style="flex:1; min-width:220px;">
           <p style="margin:0 0 0.4rem; font-size:0.8rem; font-weight:700; color:#c44444; text-align:center;">✗ Sin normalizar</p>
           <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%;">
             <thead>
-              <tr><th colspan="3" style="padding:0.3rem 0.4rem; background:#8a3030; color:#fff; text-align:left; font-size:0.68rem;">cancion_genero</th></tr>
-              <tr>
-                <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_cancion</th>
-                <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">genero</th>
-                <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">titulo</th>
-              </tr>
+              <tr><th colspan="4" style="padding:0.3rem 0.4rem; background:#8a3030; color:#fff; text-align:left; font-size:0.68rem;">reproducciones_v2</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_usuario</th><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">nombre_usuario</th><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_cancion</th><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">titulo</th></tr>
             </thead>
             <tbody>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Salsa</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Mi Tierra</td></tr>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Pop</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Mi Tierra</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Lucia Marin</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Tres Deseos</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Lucia Marin</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">105</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Rayando el Sol</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">5</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Andrés Torres</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Tres Deseos</td></tr>
             </tbody>
           </table>
           <ol style="margin:0.4rem 0 0; padding-left:1.1rem; font-size:0.72rem; color:var(--text-dim); text-align:left;">
-            <li>Cumple 1FN: cada celda es atómica (un solo valor), sin listas.</li>
-            <li>Cumple el paso 2: <code>id_cancion</code> y <code>genero</code> son la llave compuesta; ninguna de las dos "depende" de la otra, juntas identifican la fila.</li>
-            <li>Rompe el paso 3: ¿<code>titulo</code> depende por completo de la pareja <code>(id_cancion, genero)</code>? No, "Mi Tierra" se repite igual sin importar el género, solo depende de <code>id_cancion</code>.</li>
+            <li>Cumple 1FN: cada celda tiene un solo valor.</li>
+            <li>Paso 2, buscar la llave (lo que identifica <strong>una sola fila</strong>):
+              <ul style="margin:0.2rem 0 0; padding-left:1rem;">
+                <li><code>id_usuario</code> sola no sirve: el 1 aparece en 2 filas.</li>
+                <li><code>id_cancion</code> sola no sirve: el 101 aparece en 2 filas.</li>
+                <li>Juntas sí sirven: (1, 101), (1, 105) y (5, 101) son todas distintas.</li>
+                <li>Dos columnas juntas como llave = <strong>llave compuesta</strong>.</li>
+              </ul>
+            </li>
+            <li>Rompe el paso 3: <code>nombre_usuario</code> depende solo de <code>id_usuario</code>, y <code>titulo</code> solo de <code>id_cancion</code>. Ninguna depende de la pareja completa, y por eso "Lucia Marin" y "Tres Deseos" se repiten (dependencias parciales).</li>
           </ol>
         </div>
 
@@ -1346,61 +1393,38 @@ HAVING AVG(reproducciones) > 10000000;</code></pre>
           <p style="margin:0 0 0.4rem; font-size:0.8rem; font-weight:700; color:#5f8582; text-align:center;">✓ Normalizado</p>
           <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%; margin-bottom:0.5rem;">
             <thead>
-              <tr><th colspan="2" style="padding:0.3rem 0.4rem; background:var(--accent); color:#fff; text-align:left;">tbl_canciones</th></tr>
+              <tr><th colspan="2" style="padding:0.3rem 0.4rem; background:#5f8582; color:#fff; text-align:left; font-size:0.68rem;">tbl_usuarios</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#7fa5a3; color:#fff; text-align:left;">id_usuario</th><th style="padding:0.3rem 0.4rem; background:#7fa5a3; color:#fff; text-align:left;">nombre</th></tr>
             </thead>
             <tbody>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">id_cancion</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">titulo</td></tr>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#5f8582; font-weight:700;">Mi Tierra</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#5f8582; font-weight:700;">Lucia Marin</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">5</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#5f8582; font-weight:700;">Andrés Torres</td></tr>
+            </tbody>
+          </table>
+          <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%; margin-bottom:0.5rem;">
+            <thead>
+              <tr><th colspan="2" style="padding:0.3rem 0.4rem; background:#5f8582; color:#fff; text-align:left; font-size:0.68rem;">tbl_canciones</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#7fa5a3; color:#fff; text-align:left;">id_cancion</th><th style="padding:0.3rem 0.4rem; background:#7fa5a3; color:#fff; text-align:left;">titulo</th></tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#5f8582; font-weight:700;">Tres Deseos</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">105</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#5f8582; font-weight:700;">Rayando el Sol</td></tr>
             </tbody>
           </table>
           <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%;">
             <thead>
-              <tr><th colspan="2" style="padding:0.3rem 0.4rem; background:#5f8582; color:#fff; text-align:left; font-size:0.68rem;">cancion_genero</th></tr>
-              <tr>
-                <th style="padding:0.3rem 0.4rem; background:#7fa5a3; color:#fff; text-align:left;">id_cancion</th>
-                <th style="padding:0.3rem 0.4rem; background:#7fa5a3; color:#fff; text-align:left;">genero</th>
-              </tr>
+              <tr><th colspan="2" style="padding:0.3rem 0.4rem; background:#5f8582; color:#fff; text-align:left; font-size:0.68rem;">tbl_reproducciones</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#7fa5a3; color:#fff; text-align:left;">id_usuario</th><th style="padding:0.3rem 0.4rem; background:#7fa5a3; color:#fff; text-align:left;">id_cancion</th></tr>
             </thead>
             <tbody>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Salsa</td></tr>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Pop</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">105</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">5</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td></tr>
             </tbody>
           </table>
           <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.5rem;">
-            El título vive una sola vez: cumple el <strong>tercer paso</strong>, porque cada columna de
-            <code>cancion_genero</code> (<code>id_cancion</code>, <code>genero</code>) depende de la llave
-            completa.
+            Cada dato vive una sola vez: el nombre en <code>tbl_usuarios</code> y el título en <code>tbl_canciones</code>. <code>tbl_reproducciones</code> solo guarda la pareja que las conecta (tablas simplificadas). En <code>soundflow_db</code> esta última tiene además su propio <code>id_reproduccion</code>, para que un usuario pueda escuchar la misma canción más de una vez.
           </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="numbered-grid" style="grid-template-columns: 1fr; max-width:460px; margin:1rem auto 0;">
-      <div class="flip-card" style="min-height:300px;">
-        <div class="flip-card-inner" style="min-height:300px;">
-          <div class="flip-card-front numbered-card">
-            <p style="margin:0 0 0.5rem; font-weight:700; color:#c44444; font-size:0.85rem;">✗ Esto viola 2FN</p>
-            <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.68rem; width:100%;">
-              <thead>
-                <tr><th colspan="3" style="padding:0.3rem 0.35rem; background:#8a3030; color:#fff; text-align:left; font-size:0.62rem;">cancion_genero</th></tr>
-                <tr>
-                  <th style="padding:0.3rem 0.35rem; background:#c44444; color:#fff; text-align:left;">id_cancion</th>
-                  <th style="padding:0.3rem 0.35rem; background:#c44444; color:#fff; text-align:left;">genero</th>
-                  <th style="padding:0.3rem 0.35rem; background:#c44444; color:#fff; text-align:left;">titulo</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td style="padding:0.3rem 0.35rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.35rem; border:1px solid var(--border);">Salsa</td><td style="padding:0.3rem 0.35rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Mi Tierra</td></tr>
-              </tbody>
-            </table>
-            <span class="flip-hint">Toca para ver cómo se soluciona &rarr;</span>
-          </div>
-          <div class="flip-card-back">
-            <p style="font-weight:700; margin-bottom:0.5rem;">✓ Solución</p>
-            <p><code>titulo</code> se quita de <code>cancion_genero</code> por completo: solo vive en
-            <code>tbl_canciones</code>. Si necesitas el título junto con el género, lo consultas con un
-            <code>JOIN</code> entre las dos tablas, tema de la próxima clase.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -1415,29 +1439,25 @@ HAVING AVG(reproducciones) > 10000000;</code></pre>
     </div>
 
     <div class="content-box" style="border-left:4px solid #8b7fb8; margin-top:1rem;">
-      <p style="margin:0 0 0.8rem; text-align:center;"><strong style="color:#8b7fb8;">Ejemplo de 3FN: sin normalizar &rarr; normalizado</strong></p>
+      <p style="margin:0 0 0.6rem; text-align:center;"><strong style="color:#8b7fb8;">Ejemplo de 3FN: sin normalizar &rarr; normalizado</strong></p>
+      <p style="margin:0 0 0.8rem; font-size:0.85rem;">Ahora miramos <code>tbl_canciones</code>, que ya salió de 2FN.</p>
       <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
         <div style="flex:1; min-width:220px;">
           <p style="margin:0 0 0.4rem; font-size:0.8rem; font-weight:700; color:#c44444; text-align:center;">✗ Sin normalizar</p>
           <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%;">
             <thead>
-              <tr><th colspan="4" style="padding:0.3rem 0.4rem; background:#8a3030; color:#fff; text-align:left; font-size:0.68rem;">tbl_albumes</th></tr>
-              <tr>
-                <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_album</th>
-                <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">titulo_album</th>
-                <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_artista (FK)</th>
-                <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">pais_artista</th>
-              </tr>
+              <tr><th colspan="4" style="padding:0.3rem 0.4rem; background:#8a3030; color:#fff; text-align:left; font-size:0.68rem;">tbl_canciones</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_cancion</th><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">titulo</th><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_album</th><th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">titulo_album</th></tr>
             </thead>
             <tbody>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Abriendo Puertas</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">3</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Cuba</td></tr>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">2</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Alma Caribeña</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">3</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Cuba</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Tres Deseos</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Grandes Éxitos</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Mi Tierra</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Grandes Éxitos</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">108</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Mi Buen Amor</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Grandes Éxitos</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">102</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">La Vida Es un Carnaval</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">2</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Éxitos Eternos</td></tr>
             </tbody>
           </table>
           <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.5rem;">
-            "Cuba" repetido: rompe el <strong>segundo paso</strong>, porque <code>pais_artista</code>
-            depende de <code>id_artista</code> (otra columna no clave), no directamente de
-            <code>id_album</code>. Es una dependencia "transitiva".
+            "Grandes Éxitos" se repite en tres canciones: <code>titulo_album</code> depende de <code>id_album</code> (otra columna no clave), no directamente de <code>id_cancion</code>. Es una dependencia "transitiva": <code>id_cancion</code> &rarr; <code>id_album</code> &rarr; <code>titulo_album</code>.
           </p>
         </div>
 
@@ -1447,72 +1467,39 @@ HAVING AVG(reproducciones) > 10000000;</code></pre>
           <p style="margin:0 0 0.4rem; font-size:0.8rem; font-weight:700; color:#8b7fb8; text-align:center;">✓ Normalizado</p>
           <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%; margin-bottom:0.5rem;">
             <thead>
-              <tr><th colspan="3" style="padding:0.3rem 0.4rem; background:#6b5f96; color:#fff; text-align:left; font-size:0.68rem;">tbl_albumes</th></tr>
-              <tr>
-                <th style="padding:0.3rem 0.4rem; background:#8b7fb8; color:#fff; text-align:left;">id_album</th>
-                <th style="padding:0.3rem 0.4rem; background:#8b7fb8; color:#fff; text-align:left;">titulo_album</th>
-                <th style="padding:0.3rem 0.4rem; background:#8b7fb8; color:#fff; text-align:left;">id_artista (FK)</th>
-              </tr>
+              <tr><th colspan="3" style="padding:0.3rem 0.4rem; background:#6b5f96; color:#fff; text-align:left; font-size:0.68rem;">tbl_canciones</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#8b7fb8; color:#fff; text-align:left;">id_cancion</th><th style="padding:0.3rem 0.4rem; background:#8b7fb8; color:#fff; text-align:left;">titulo</th><th style="padding:0.3rem 0.4rem; background:#8b7fb8; color:#fff; text-align:left;">id_album (FK)</th></tr>
             </thead>
             <tbody>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Abriendo Puertas</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">3</td></tr>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">2</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Alma Caribeña</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">3</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">101</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Tres Deseos</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">103</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Mi Tierra</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">108</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Mi Buen Amor</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">102</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">La Vida Es un Carnaval</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">2</td></tr>
             </tbody>
           </table>
           <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%;">
             <thead>
-              <tr><th colspan="2" style="padding:0.3rem 0.4rem; background:var(--accent); color:#fff; text-align:left;">tbl_artistas</th></tr>
+              <tr><th colspan="2" style="padding:0.3rem 0.4rem; background:#6b5f96; color:#fff; text-align:left; font-size:0.68rem;">tbl_albumes</th></tr>
+              <tr><th style="padding:0.3rem 0.4rem; background:#8b7fb8; color:#fff; text-align:left;">id_album</th><th style="padding:0.3rem 0.4rem; background:#8b7fb8; color:#fff; text-align:left;">titulo_album</th></tr>
             </thead>
             <tbody>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">id_artista</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">pais</td></tr>
-              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">3</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#8b7fb8; font-weight:700;">Cuba</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#8b7fb8; font-weight:700;">Grandes Éxitos</td></tr>
+              <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">2</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#8b7fb8; font-weight:700;">Éxitos Eternos</td></tr>
             </tbody>
           </table>
           <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.5rem;">
-            El país vive una sola vez, junto al artista: cumple el <strong>segundo y tercer paso</strong>,
-            porque <code>pais</code> depende directamente de <code>id_artista</code>, su llave primaria.
+            El título del álbum vive una sola vez, junto a su álbum: <code>titulo_album</code> depende directamente de <code>id_album</code>, su llave primaria (tablas simplificadas).
           </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="numbered-grid" style="grid-template-columns: 1fr; max-width:460px; margin:1rem auto 0;">
-      <div class="flip-card" style="min-height:300px;">
-        <div class="flip-card-inner" style="min-height:300px;">
-          <div class="flip-card-front numbered-card">
-            <p style="margin:0 0 0.5rem; font-weight:700; color:#c44444; font-size:0.85rem;">✗ Esto viola 3FN</p>
-            <table style="border-collapse:collapse; font-family:Consolas, monospace; font-size:0.7rem; width:100%;">
-              <thead>
-                <tr><th colspan="4" style="padding:0.3rem 0.4rem; background:#8a3030; color:#fff; text-align:left; font-size:0.65rem;">tbl_albumes</th></tr>
-                <tr>
-                  <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_album</th>
-                  <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">titulo_album</th>
-                  <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">id_artista (FK)</th>
-                  <th style="padding:0.3rem 0.4rem; background:#c44444; color:#fff; text-align:left;">pais_artista</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">1</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">Abriendo Puertas</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border);">3</td><td style="padding:0.3rem 0.4rem; border:1px solid var(--border); color:#c44444; font-weight:700;">Cuba</td></tr>
-              </tbody>
-            </table>
-            <span class="flip-hint">Toca para ver cómo se soluciona &rarr;</span>
-          </div>
-          <div class="flip-card-back">
-            <p style="font-weight:700; margin-bottom:0.5rem;">✓ Solución</p>
-            <p><code>pais_artista</code> se quita de <code>tbl_albumes</code>: el país ya vive en
-            <code>tbl_artistas.pais</code>, porque depende del artista, no del álbum. Para consultarlo
-            junto con el álbum, se usa un <code>JOIN</code> hasta <code>tbl_artistas</code>.</p>
-          </div>
         </div>
       </div>
     </div>
 
     <div class="content-box" style="margin-top:1rem;">
       <p style="margin:0;">
-        Las tres reglas juntas dicen lo mismo desde ángulos distintos: <strong>cada dato debe vivir en un
-        solo lugar, y ese lugar debe ser el correcto según de qué depende realmente ese dato.</strong>
-        <code>tbl_artistas</code>, <code>tbl_albumes</code> y <code>tbl_canciones</code> cumplen las tres a
-        la vez.
+        Así, la tabla del principio terminó convertida en las tablas de <code>soundflow_db</code>: 1FN dejó una
+        canción por fila, 2FN separó usuarios, canciones y reproducciones, y 3FN separó álbumes y artistas.
+        Las tres reglas dicen lo mismo desde ángulos distintos: <strong>cada dato debe vivir en un solo lugar,
+        y ese lugar debe ser el correcto según de qué depende realmente ese dato.</strong>
       </p>
     </div>
   </div>
@@ -1594,31 +1581,31 @@ HAVING AVG(reproducciones) > 10000000;</code></pre>
       </div>
 
       <div class="quiz-question">
-        <p>8. Una tabla <code>canciones</code> tiene una columna <code>generos</code> con el valor <code>'Salsa, Pop'</code> en una sola celda. ¿Qué regla de normalización viola?</p>
+        <p>8. Una tabla de reproducciones tiene una columna <code>canciones_escuchadas</code> con el valor <code>'Tres Deseos, Rayando el Sol'</code> en una sola celda. ¿Qué regla de normalización viola?</p>
         <div class="quiz-options">
           <button type="button" class="quiz-option" data-correct="true">1FN, porque la columna no guarda un valor atómico</button>
           <button type="button" class="quiz-option" data-correct="false">2FN, porque la llave primaria no es compuesta</button>
-          <button type="button" class="quiz-option" data-correct="false">Ninguna, es una forma válida de guardar varios géneros</button>
+          <button type="button" class="quiz-option" data-correct="false">Ninguna, es una forma válida de guardar varias canciones</button>
         </div>
         <p class="quiz-feedback"></p>
       </div>
 
       <div class="quiz-question">
-        <p>9. En <code>cancion_genero</code> (PK compuesta: id_cancion + genero), ¿por qué agregar una columna <code>titulo</code> violaría 2FN?</p>
+        <p>9. Una tabla guarda <code>id_usuario</code>, <code>id_cancion</code> y <code>nombre_usuario</code>, con llave compuesta (<code>id_usuario</code> + <code>id_cancion</code>). El <code>nombre_usuario</code> depende solo de <code>id_usuario</code>. ¿Qué forma normal viola?</p>
         <div class="quiz-options">
-          <button type="button" class="quiz-option" data-correct="false">Porque los títulos no se pueden repetir en SQL</button>
-          <button type="button" class="quiz-option" data-correct="true">Porque titulo depende solo de id_cancion, no de la llave completa (id_cancion + genero)</button>
-          <button type="button" class="quiz-option" data-correct="false">Porque esa tabla no puede tener más de dos columnas</button>
+          <button type="button" class="quiz-option" data-correct="false">1FN</button>
+          <button type="button" class="quiz-option" data-correct="true">2FN</button>
+          <button type="button" class="quiz-option" data-correct="false">3FN</button>
         </div>
         <p class="quiz-feedback"></p>
       </div>
 
       <div class="quiz-question">
-        <p>10. Si <code>tbl_albumes</code> tuviera una columna <code>pais_artista</code>, ¿qué regla violaría y por qué?</p>
+        <p>10. Una tabla de pagos guarda <code>id_pago</code>, <code>id_usuario</code> y <code>email_usuario</code>. El email depende de <code>id_usuario</code>, que no es la llave primaria. ¿Qué forma normal viola?</p>
         <div class="quiz-options">
-          <button type="button" class="quiz-option" data-correct="false">1FN, porque pais_artista no es un valor atómico</button>
-          <button type="button" class="quiz-option" data-correct="true">3FN, porque pais_artista depende de id_artista (otra columna no clave), no de id_album</button>
-          <button type="button" class="quiz-option" data-correct="false">No viola ninguna regla, es información útil de tener ahí</button>
+          <button type="button" class="quiz-option" data-correct="false">1FN</button>
+          <button type="button" class="quiz-option" data-correct="false">2FN</button>
+          <button type="button" class="quiz-option" data-correct="true">3FN</button>
         </div>
         <p class="quiz-feedback"></p>
       </div>
