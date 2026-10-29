@@ -2203,6 +2203,60 @@ console.log(tablero[0][4]); // "R", el Rey: fila 0, columna 4</code></pre>
 
   </div>
 
+  <!-- ===================== NOTACIÓN O GRANDE: RESUMEN ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Antes de seguir: resumen de O(1), O(log n) y O(n)</h3>
+    </div>
+    <p>
+      La <strong>notación O grande</strong> describe cuánto crece el trabajo de un algoritmo cuando crece la
+      cantidad de datos. Con ella vamos a comparar arreglos y listas enlazadas.
+    </p>
+
+    <div class="content-box" style="border-left:4px solid #5b7c99; margin-top:1rem;">
+      <table style="border-collapse:collapse; font-size:0.8rem; width:100%;">
+        <thead>
+          <tr>
+            <th style="padding:0.4rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Notación</th>
+            <th style="padding:0.4rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Nombre</th>
+            <th style="padding:0.4rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Qué significa</th>
+            <th style="padding:0.4rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);"><strong>O(1)</strong></td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Constante</td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Siempre los mismos pasos, sin importar el tamaño de los datos.</td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Leer <code>canciones[3]</code>, insertar al final de un arreglo.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);"><strong>O(log n)</strong></td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Logarítmica</td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Descarta la mitad de los datos en cada paso, así que crece muy poco.</td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Búsqueda binaria en un arreglo ordenado.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);"><strong>O(n)</strong></td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Lineal</td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Los pasos crecen en proporción a los datos.</td>
+            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Buscar recorriendo uno por uno un arreglo desordenado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:1rem;">
+      <h4 style="margin:0 0 0.5rem; color:#c99a4e;">Con 1.000.000 de datos, en el peor caso</h4>
+      <ul style="margin:0 0 0.6rem; padding-left:1.2rem; color:var(--text);">
+        <li><strong>O(1):</strong> 1 paso.</li>
+        <li><strong>O(log n):</strong> unos 20 pasos.</li>
+        <li><strong>O(n):</strong> 1.000.000 de pasos.</li>
+      </ul>
+      <p style="margin:0;"><strong>Orden de rapidez:</strong> O(1) &lt; O(log n) &lt; O(n).</p>
+    </div>
+  </div>
+
   <!-- ===================== 2. LISTAS ENLAZADAS: ASÍ SE VEN EN MEMORIA ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
