@@ -62,7 +62,7 @@ window.WEEK_CONTENT_3_1 = `
         <text x="300" y="114" font-family="Consolas, monospace" font-size="10" fill="#33404f">genero</text>
         <text x="300" y="134" font-family="Consolas, monospace" font-size="10" fill="#33404f">duracion_seg</text>
         <text x="300" y="154" font-family="Consolas, monospace" font-size="10" fill="#33404f">reproducciones</text>
-        <text x="300" y="174" font-family="Consolas, monospace" font-size="10" fill="#7fa5a3" font-weight="700">FK  id_album</text>
+        <text x="300" y="174" font-family="Consolas, monospace" font-size="10" fill="#8aae3f" font-weight="700">FK  id_album</text>
 
         <!-- tbl_reproducciones -->
         <rect x="560" y="20" width="250" height="140" rx="8" fill="#ffffff" stroke="#c9714e" stroke-width="1.5"/>
@@ -76,9 +76,9 @@ window.WEEK_CONTENT_3_1 = `
         <text x="570" y="134" font-family="Consolas, monospace" font-size="10" fill="#5b9aa0" font-weight="700">FK  id_cancion</text>
 
         <!-- tbl_albumes -->
-        <rect x="20" y="290" width="250" height="140" rx="8" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.5"/>
-        <rect x="20" y="290" width="250" height="34" rx="8" fill="#7fa5a3"/>
-        <rect x="20" y="314" width="250" height="10" fill="#7fa5a3"/>
+        <rect x="20" y="290" width="250" height="140" rx="8" fill="#ffffff" stroke="#8aae3f" stroke-width="1.5"/>
+        <rect x="20" y="290" width="250" height="34" rx="8" fill="#8aae3f"/>
+        <rect x="20" y="314" width="250" height="10" fill="#8aae3f"/>
         <text x="30" y="312" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700">tbl_albumes</text>
         <text x="30" y="344" font-family="Segoe UI, sans-serif" font-size="11" fill="#a83a3a">🔑</text>
         <text x="46" y="344" font-family="Consolas, monospace" font-size="10" fill="#a83a3a" font-weight="700">PK  id_album</text>
@@ -118,11 +118,11 @@ window.WEEK_CONTENT_3_1 = `
         <text x="153" y="284" font-family="Consolas, monospace" font-size="12" fill="#8b7fb8" font-weight="700">N</text>
 
         <!-- albumes (PK) → canciones (FK id_album): diagonal -->
-        <line x1="270" y1="344" x2="290" y2="174" stroke="#7fa5a3" stroke-width="2"/>
-        <circle cx="270" cy="344" r="4" fill="#7fa5a3"/>
-        <circle cx="290" cy="174" r="4" fill="#7fa5a3"/>
-        <text x="245" y="340" font-family="Consolas, monospace" font-size="12" fill="#7fa5a3" font-weight="700">1</text>
-        <text x="296" y="180" font-family="Consolas, monospace" font-size="12" fill="#7fa5a3" font-weight="700">N</text>
+        <line x1="270" y1="344" x2="290" y2="174" stroke="#8aae3f" stroke-width="2"/>
+        <circle cx="270" cy="344" r="4" fill="#8aae3f"/>
+        <circle cx="290" cy="174" r="4" fill="#8aae3f"/>
+        <text x="245" y="340" font-family="Consolas, monospace" font-size="12" fill="#8aae3f" font-weight="700">1</text>
+        <text x="296" y="180" font-family="Consolas, monospace" font-size="12" fill="#8aae3f" font-weight="700">N</text>
 
         <!-- canciones (PK) → reproducciones (FK id_cancion): misma fila -->
         <line x1="540" y1="74" x2="560" y2="134" stroke="#5b9aa0" stroke-width="2"/>
@@ -179,9 +179,9 @@ window.WEEK_CONTENT_3_1 = `
       <p style="margin:0;">
         <strong>Sintaxis general:</strong>
       </p>
-      <div class="sql" style="margin-top:0.4rem;">SELECT columnas
-FROM tablaA
-INNER JOIN tablaB ON tablaA.columna = tablaB.columna;</div>
+      <div class="sql" style="margin-top:0.4rem;"><span class="sql-kw-p">SELECT</span> columnas
+<span class="sql-kw-p">FROM</span> tablaA
+<span class="sql-kw-p">INNER</span> <span class="sql-kw-p">JOIN</span> tablaB <span class="sql-kw-p">ON</span> tablaA.columna = tablaB.columna;</div>
     </div>
 
     <p style="margin-top:1rem;">
@@ -196,11 +196,13 @@ INNER JOIN tablaB ON tablaA.columna = tablaB.columna;</div>
         <strong>Antes de la consulta, recordemos de dónde sale cada columna y cómo se conectan estas dos
         tablas:</strong>
       </p>
-      <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:500px; width:100%; height:auto; display:block; margin:0.6rem auto 0;">
+            <div style="display:flex; gap:1.2rem; flex-wrap:wrap; align-items:flex-start; margin-top:0.6rem;">
+        <div style="flex:1 1 420px; min-width:280px;">
+        <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block; margin:0;">
         <!-- tbl_albumes -->
-        <rect x="20" y="20" width="210" height="140" rx="8" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.5"/>
-        <rect x="20" y="20" width="210" height="34" rx="8" fill="#7fa5a3"/>
-        <rect x="20" y="44" width="210" height="10" fill="#7fa5a3"/>
+        <rect x="20" y="20" width="210" height="140" rx="8" fill="#ffffff" stroke="#8aae3f" stroke-width="1.5"/>
+        <rect x="20" y="20" width="210" height="34" rx="8" fill="#8aae3f"/>
+        <rect x="20" y="44" width="210" height="10" fill="#8aae3f"/>
         <text x="30" y="42" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700">tbl_albumes</text>
         <text x="30" y="74" font-family="Segoe UI, sans-serif" font-size="11" fill="#a83a3a">🔑</text>
         <text x="46" y="74" font-family="Consolas, monospace" font-size="10" fill="#a83a3a" font-weight="700">PK  id_album</text>
@@ -219,25 +221,32 @@ INNER JOIN tablaB ON tablaA.columna = tablaB.columna;</div>
         <text x="330" y="114" font-family="Consolas, monospace" font-size="10" fill="#33404f">genero</text>
         <text x="330" y="134" font-family="Consolas, monospace" font-size="10" fill="#33404f">duracion_seg</text>
         <text x="330" y="154" font-family="Consolas, monospace" font-size="10" fill="#33404f">reproducciones</text>
-        <text x="330" y="174" font-family="Consolas, monospace" font-size="10" fill="#7fa5a3" font-weight="700">FK  id_album</text>
+        <text x="330" y="174" font-family="Consolas, monospace" font-size="10" fill="#8aae3f" font-weight="700">FK  id_album</text>
 
         <!-- albumes (PK) → canciones (FK id_album) -->
-        <line x1="230" y1="74" x2="320" y2="174" stroke="#7fa5a3" stroke-width="2"/>
-        <circle cx="230" cy="74" r="4" fill="#7fa5a3"/>
-        <circle cx="320" cy="174" r="4" fill="#7fa5a3"/>
-        <text x="237" y="70" font-family="Consolas, monospace" font-size="12" fill="#7fa5a3" font-weight="700">1</text>
-        <text x="298" y="170" font-family="Consolas, monospace" font-size="12" fill="#7fa5a3" font-weight="700">N</text>
+        <line x1="230" y1="74" x2="320" y2="174" stroke="#8aae3f" stroke-width="2"/>
+        <circle cx="230" cy="74" r="4" fill="#8aae3f"/>
+        <circle cx="320" cy="174" r="4" fill="#8aae3f"/>
+        <text x="237" y="70" font-family="Consolas, monospace" font-size="12" fill="#8aae3f" font-weight="700">1</text>
+        <text x="298" y="170" font-family="Consolas, monospace" font-size="12" fill="#8aae3f" font-weight="700">N</text>
 
         <text x="280" y="200" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" font-style="italic" fill="var(--text-dim)">1 álbum tiene N canciones</text>
       </svg>
-      <p style="margin:0.6rem 0 0; font-style:italic; color:#a83a3a;">
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; font-size:0.88rem;">
+      <p style="margin:0; font-style:italic; color:#a83a3a;">
         Consulta: listar el título de cada canción junto con el título de su álbum, ordenado por título de canción.
       </p>
       <p style="margin:0.6rem 0 0;">
-        <code>c.titulo</code> sale de <code>tbl_canciones</code>; <code>al.titulo_album</code> sale de
-        <code>tbl_albumes</code>. Estas dos tablas se unen por el <code>id</code> de cada una:
-        <code>tbl_albumes</code> con <code>tbl_canciones</code>, por <code>id_album</code>.
+        De dónde sale cada columna y cómo se unen las tablas:
       </p>
+      <ul style="margin:0.3rem 0 0; padding-left:1.2rem;">
+        <li><code style="color:#5b9aa0; font-weight:700;">c.titulo</code> sale de <code style="color:#5b9aa0; font-weight:700;">tbl_canciones</code>.</li>
+        <li><code style="color:#8aae3f; font-weight:700;">al.titulo_album</code> sale de <code style="color:#8aae3f; font-weight:700;">tbl_albumes</code>.</li>
+        <li>Las dos tablas se unen por el <code>id</code> de cada una: <code style="color:#8aae3f; font-weight:700;">tbl_albumes</code> con <code style="color:#5b9aa0; font-weight:700;">tbl_canciones</code>, por <code>id_album</code>.</li>
+      </ul>
+        </div>
+      </div>
     </div>
 
     <p style="margin-top:0.8rem;">
@@ -252,10 +261,10 @@ INNER JOIN tablaB ON tablaA.columna = tablaB.columna;</div>
         <span class="code-filename">01_inner_join_sin_alias.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT tbl_canciones.titulo, tbl_albumes.titulo_album
-FROM tbl_canciones
-INNER JOIN tbl_albumes ON tbl_canciones.id_album = tbl_albumes.id_album
-ORDER BY tbl_canciones.titulo;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> tbl_canciones.titulo, tbl_albumes.titulo_album
+<span class="sql-kw-p">FROM</span> tbl_canciones
+<span class="sql-kw-p">INNER</span> <span class="sql-kw-p">JOIN</span> tbl_albumes <span class="sql-kw-p">ON</span> tbl_canciones.id_album = tbl_albumes.id_album
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> tbl_canciones.titulo;</code></pre>
     </div>
     <p style="margin-top:0.8rem;">
       Y así queda usando <strong>alias de tabla</strong> (<code>c</code>, <code>al</code>): mismo resultado,
@@ -269,10 +278,10 @@ ORDER BY tbl_canciones.titulo;</code></pre>
         <span class="code-filename">01_inner_join.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT c.titulo, al.titulo_album
-FROM tbl_canciones c
-INNER JOIN tbl_albumes al ON c.id_album = al.id_album
-ORDER BY c.titulo;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> c.titulo, al.titulo_album
+<span class="sql-kw-p">FROM</span> tbl_canciones c
+<span class="sql-kw-p">INNER</span> <span class="sql-kw-p">JOIN</span> tbl_albumes al <span class="sql-kw-p">ON</span> c.id_album = al.id_album
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> c.titulo;</code></pre>
     </div>
 
     <div class="content-box" style="margin-top:0.8rem;">
@@ -313,7 +322,9 @@ ORDER BY c.titulo;</code></pre>
       <p style="margin:0 0 0.6rem;">
         <strong>Así se conectan ahora las tres tablas:</strong>
       </p>
-      <svg viewBox="0 0 780 260" xmlns="http://www.w3.org/2000/svg" style="max-width:720px; width:100%; height:auto; display:block; margin:0.6rem auto 0;">
+            <div style="display:flex; gap:1.2rem; flex-wrap:wrap; align-items:flex-start; margin-top:0.6rem;">
+        <div style="flex:1 1 420px; min-width:280px;">
+        <svg viewBox="0 0 780 260" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block; margin:0;">
         <!-- tbl_artistas -->
         <rect x="20" y="20" width="200" height="140" rx="8" fill="#ffffff" stroke="#8b7fb8" stroke-width="1.5"/>
         <rect x="20" y="20" width="200" height="34" rx="8" fill="#8b7fb8"/>
@@ -326,9 +337,9 @@ ORDER BY c.titulo;</code></pre>
         <text x="30" y="134" font-family="Consolas, monospace" font-size="10" fill="#33404f">fecha_registro</text>
 
         <!-- tbl_albumes -->
-        <rect x="290" y="20" width="200" height="140" rx="8" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.5"/>
-        <rect x="290" y="20" width="200" height="34" rx="8" fill="#7fa5a3"/>
-        <rect x="290" y="44" width="200" height="10" fill="#7fa5a3"/>
+        <rect x="290" y="20" width="200" height="140" rx="8" fill="#ffffff" stroke="#8aae3f" stroke-width="1.5"/>
+        <rect x="290" y="20" width="200" height="34" rx="8" fill="#8aae3f"/>
+        <rect x="290" y="44" width="200" height="10" fill="#8aae3f"/>
         <text x="300" y="42" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700">tbl_albumes</text>
         <text x="300" y="74" font-family="Segoe UI, sans-serif" font-size="11" fill="#a83a3a">🔑</text>
         <text x="316" y="74" font-family="Consolas, monospace" font-size="10" fill="#a83a3a" font-weight="700">PK  id_album</text>
@@ -347,7 +358,7 @@ ORDER BY c.titulo;</code></pre>
         <text x="570" y="114" font-family="Consolas, monospace" font-size="10" fill="#33404f">genero</text>
         <text x="570" y="134" font-family="Consolas, monospace" font-size="10" fill="#33404f">duracion_seg</text>
         <text x="570" y="154" font-family="Consolas, monospace" font-size="10" fill="#33404f">reproducciones</text>
-        <text x="570" y="174" font-family="Consolas, monospace" font-size="10" fill="#7fa5a3" font-weight="700">FK  id_album</text>
+        <text x="570" y="174" font-family="Consolas, monospace" font-size="10" fill="#8aae3f" font-weight="700">FK  id_album</text>
 
         <!-- artistas (PK) → albumes (FK id_artista) -->
         <line x1="220" y1="70" x2="290" y2="134" stroke="#8b7fb8" stroke-width="2"/>
@@ -357,24 +368,30 @@ ORDER BY c.titulo;</code></pre>
         <text x="258" y="130" font-family="Consolas, monospace" font-size="12" fill="#8b7fb8" font-weight="700">N</text>
 
         <!-- albumes (PK) → canciones (FK id_album) -->
-        <line x1="490" y1="70" x2="560" y2="174" stroke="#7fa5a3" stroke-width="2"/>
-        <circle cx="490" cy="70" r="4" fill="#7fa5a3"/>
-        <circle cx="560" cy="174" r="4" fill="#7fa5a3"/>
-        <text x="497" y="66" font-family="Consolas, monospace" font-size="12" fill="#7fa5a3" font-weight="700">1</text>
-        <text x="528" y="170" font-family="Consolas, monospace" font-size="12" fill="#7fa5a3" font-weight="700">N</text>
+        <line x1="490" y1="70" x2="560" y2="174" stroke="#8aae3f" stroke-width="2"/>
+        <circle cx="490" cy="70" r="4" fill="#8aae3f"/>
+        <circle cx="560" cy="174" r="4" fill="#8aae3f"/>
+        <text x="497" y="66" font-family="Consolas, monospace" font-size="12" fill="#8aae3f" font-weight="700">1</text>
+        <text x="528" y="170" font-family="Consolas, monospace" font-size="12" fill="#8aae3f" font-weight="700">N</text>
 
         <text x="390" y="220" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" font-style="italic" fill="var(--text-dim)">1 artista tiene N álbumes; 1 álbum tiene N canciones</text>
       </svg>
-      <p style="margin:0.6rem 0 0; font-style:italic; color:#a83a3a;">
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; font-size:0.88rem;">
+      <p style="margin:0; font-style:italic; color:#a83a3a;">
         Consulta: listar el título de cada canción junto con el título de su álbum y el nombre de su artista, ordenado por título de canción.
       </p>
       <p style="margin:0.6rem 0 0;">
-        <code>c.titulo</code> sale de <code>tbl_canciones</code>; <code>al.titulo_album</code> sale de
-        <code>tbl_albumes</code>; <code>ar.nombre_artista</code> sale de <code>tbl_artistas</code>. Las
-        tres tablas se unen por el <code>id</code> de cada una: <code>tbl_artistas</code> con
-        <code>tbl_albumes</code> por <code>id_artista</code>, y <code>tbl_albumes</code> con
-        <code>tbl_canciones</code> por <code>id_album</code>.
+        De dónde sale cada columna y cómo se unen las tablas:
       </p>
+      <ul style="margin:0.3rem 0 0; padding-left:1.2rem;">
+        <li><code style="color:#5b9aa0; font-weight:700;">c.titulo</code> sale de <code style="color:#5b9aa0; font-weight:700;">tbl_canciones</code>.</li>
+        <li><code style="color:#8aae3f; font-weight:700;">al.titulo_album</code> sale de <code style="color:#8aae3f; font-weight:700;">tbl_albumes</code>.</li>
+        <li><code style="color:#8b7fb8; font-weight:700;">ar.nombre_artista</code> sale de <code style="color:#8b7fb8; font-weight:700;">tbl_artistas</code>.</li>
+        <li>Las tres tablas se unen por el <code>id</code> de cada una:<ul style="margin:0.2rem 0 0; padding-left:1.2rem;"><li><code style="color:#8b7fb8; font-weight:700;">tbl_artistas</code> con <code style="color:#8aae3f; font-weight:700;">tbl_albumes</code>, por <code>id_artista</code>.</li><li><code style="color:#8aae3f; font-weight:700;">tbl_albumes</code> con <code style="color:#5b9aa0; font-weight:700;">tbl_canciones</code>, por <code>id_album</code>.</li></ul></li>
+      </ul>
+        </div>
+      </div>
     </div>
 
     <div class="code-block" style="margin-top:0.6rem;">
@@ -385,11 +402,11 @@ ORDER BY c.titulo;</code></pre>
         <span class="code-filename">02_inner_join_tres_tablas.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT c.titulo, al.titulo_album, ar.nombre_artista
-FROM tbl_canciones c
-INNER JOIN tbl_albumes al ON c.id_album = al.id_album
-INNER JOIN tbl_artistas ar ON al.id_artista = ar.id_artista
-ORDER BY c.titulo;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> c.titulo, al.titulo_album, ar.nombre_artista
+<span class="sql-kw-p">FROM</span> tbl_canciones c
+<span class="sql-kw-p">INNER</span> <span class="sql-kw-p">JOIN</span> tbl_albumes al <span class="sql-kw-p">ON</span> c.id_album = al.id_album
+<span class="sql-kw-p">INNER</span> <span class="sql-kw-p">JOIN</span> tbl_artistas ar <span class="sql-kw-p">ON</span> al.id_artista = ar.id_artista
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> c.titulo;</code></pre>
     </div>
 
     <div class="content-box" style="margin-top:0.8rem;">
@@ -465,7 +482,9 @@ ORDER BY c.titulo;</code></pre>
       <p style="margin:0 0 0.6rem;">
         <strong>Antes de la consulta, recordemos cómo se conectan estas dos tablas:</strong>
       </p>
-      <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:500px; width:100%; height:auto; display:block; margin:0.6rem auto 0;">
+            <div style="display:flex; gap:1.2rem; flex-wrap:wrap; align-items:flex-start; margin-top:0.6rem;">
+        <div style="flex:1 1 420px; min-width:280px;">
+        <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block; margin:0;">
         <!-- tbl_usuarios -->
         <rect x="20" y="20" width="210" height="180" rx="8" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.5"/>
         <rect x="20" y="20" width="210" height="34" rx="8" fill="#4a7c9e"/>
@@ -499,14 +518,21 @@ ORDER BY c.titulo;</code></pre>
 
         <text x="280" y="200" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" font-style="italic" fill="var(--text-dim)">1 usuario puede tener N reproducciones, o ninguna (Sofía Herrera)</text>
       </svg>
-      <p style="margin:0.6rem 0 0; font-style:italic; color:#a83a3a;">
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; font-size:0.88rem;">
+      <p style="margin:0; font-style:italic; color:#a83a3a;">
         Consulta: listar el nombre de cada usuario junto con el id de cada canción que reprodujo, incluyendo a los usuarios que no han reproducido nada.
       </p>
       <p style="margin:0.6rem 0 0;">
-        <code>u.nombre</code> sale de <code>tbl_usuarios</code>; <code>r.id_cancion</code> sale de
-        <code>tbl_reproducciones</code>. La condición del <code>ON</code> es la misma línea del diagrama:
-        <code>u.idusuario = r.id_usuario</code>.
+        De dónde sale cada columna y cómo se unen las tablas:
       </p>
+      <ul style="margin:0.3rem 0 0; padding-left:1.2rem;">
+        <li><code style="color:#4a7c9e; font-weight:700;">u.nombre</code> sale de <code style="color:#4a7c9e; font-weight:700;">tbl_usuarios</code>.</li>
+        <li><code style="color:#c9714e; font-weight:700;">r.id_cancion</code> sale de <code style="color:#c9714e; font-weight:700;">tbl_reproducciones</code>.</li>
+        <li>La condición del <code>ON</code> es la misma línea del diagrama: <code><span style="color:#4a7c9e; font-weight:700;">u.idusuario</span> = <span style="color:#c9714e; font-weight:700;">r.id_usuario</span></code>.</li>
+      </ul>
+        </div>
+      </div>
     </div>
 
     <div class="code-block" style="margin-top:0.8rem;">
@@ -517,10 +543,10 @@ ORDER BY c.titulo;</code></pre>
         <span class="code-filename">02_left_join.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT u.nombre, r.id_cancion
-FROM tbl_usuarios u
-LEFT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario
-ORDER BY u.nombre;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> u.nombre, r.id_cancion
+<span class="sql-kw-p">FROM</span> tbl_usuarios u
+<span class="sql-kw-p">LEFT</span> <span class="sql-kw-p">JOIN</span> tbl_reproducciones r <span class="sql-kw-p">ON</span> u.idusuario = r.id_usuario
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> u.nombre;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -547,10 +573,10 @@ ORDER BY u.nombre;</code></pre>
         <strong>huérfanos</strong>, las filas de la izquierda que <em>no</em> tienen pareja. Para eso se
         agrega un filtro por la columna de la derecha:
       </p>
-      <div class="sql">SELECT u.nombre
-FROM tbl_usuarios u
-LEFT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario
-WHERE r.id_reproduccion IS NULL;</div>
+      <div class="sql"><span class="sql-kw-p">SELECT</span> u.nombre
+<span class="sql-kw-p">FROM</span> tbl_usuarios u
+<span class="sql-kw-p">LEFT</span> <span class="sql-kw-p">JOIN</span> tbl_reproducciones r <span class="sql-kw-p">ON</span> u.idusuario = r.id_usuario
+<span class="sql-kw-p">WHERE</span> r.id_reproduccion <span class="sql-kw-b">IS</span> <span class="sql-kw-b">NULL</span>;</div>
       <p style="margin:0.6rem 0 0;">
         Esta consulta responde directamente "¿qué usuarios nunca han reproducido nada?": <strong>Sofía
         Herrera</strong>, una sola fila. Fíjate que el filtro va sobre <code>r.id_reproduccion</code> (una
@@ -603,7 +629,9 @@ WHERE r.id_reproduccion IS NULL;</div>
       <p style="margin:0 0 0.6rem;">
         <strong>Antes de la consulta, recordemos cómo se conectan estas dos tablas:</strong>
       </p>
-      <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:500px; width:100%; height:auto; display:block; margin:0.6rem auto 0;">
+            <div style="display:flex; gap:1.2rem; flex-wrap:wrap; align-items:flex-start; margin-top:0.6rem;">
+        <div style="flex:1 1 420px; min-width:280px;">
+        <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block; margin:0;">
         <!-- tbl_canciones -->
         <rect x="20" y="20" width="210" height="180" rx="8" fill="#ffffff" stroke="#5b9aa0" stroke-width="1.5"/>
         <rect x="20" y="20" width="210" height="34" rx="8" fill="#5b9aa0"/>
@@ -615,12 +643,12 @@ WHERE r.id_reproduccion IS NULL;</div>
         <text x="30" y="114" font-family="Consolas, monospace" font-size="10" fill="#33404f">genero</text>
         <text x="30" y="134" font-family="Consolas, monospace" font-size="10" fill="#33404f">duracion_seg</text>
         <text x="30" y="154" font-family="Consolas, monospace" font-size="10" fill="#33404f">reproducciones</text>
-        <text x="30" y="174" font-family="Consolas, monospace" font-size="10" fill="#7fa5a3" font-weight="700">FK  id_album</text>
+        <text x="30" y="174" font-family="Consolas, monospace" font-size="10" fill="#8aae3f" font-weight="700">FK  id_album</text>
 
         <!-- tbl_albumes -->
-        <rect x="320" y="20" width="220" height="140" rx="8" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.5"/>
-        <rect x="320" y="20" width="220" height="34" rx="8" fill="#7fa5a3"/>
-        <rect x="320" y="44" width="220" height="10" fill="#7fa5a3"/>
+        <rect x="320" y="20" width="220" height="140" rx="8" fill="#ffffff" stroke="#8aae3f" stroke-width="1.5"/>
+        <rect x="320" y="20" width="220" height="34" rx="8" fill="#8aae3f"/>
+        <rect x="320" y="44" width="220" height="10" fill="#8aae3f"/>
         <text x="330" y="42" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700">tbl_albumes</text>
         <text x="330" y="74" font-family="Segoe UI, sans-serif" font-size="11" fill="#a83a3a">🔑</text>
         <text x="346" y="74" font-family="Consolas, monospace" font-size="10" fill="#a83a3a" font-weight="700">PK  id_album</text>
@@ -629,22 +657,29 @@ WHERE r.id_reproduccion IS NULL;</div>
         <text x="330" y="134" font-family="Consolas, monospace" font-size="10" fill="#8b7fb8" font-weight="700">FK  id_artista</text>
 
         <!-- canciones (FK id_album) → albumes (PK) -->
-        <line x1="230" y1="174" x2="320" y2="70" stroke="#7fa5a3" stroke-width="2"/>
-        <circle cx="230" cy="174" r="4" fill="#7fa5a3"/>
-        <circle cx="320" cy="70" r="4" fill="#7fa5a3"/>
-        <text x="237" y="170" font-family="Consolas, monospace" font-size="12" fill="#7fa5a3" font-weight="700">N</text>
-        <text x="298" y="66" font-family="Consolas, monospace" font-size="12" fill="#7fa5a3" font-weight="700">1</text>
+        <line x1="230" y1="174" x2="320" y2="70" stroke="#8aae3f" stroke-width="2"/>
+        <circle cx="230" cy="174" r="4" fill="#8aae3f"/>
+        <circle cx="320" cy="70" r="4" fill="#8aae3f"/>
+        <text x="237" y="170" font-family="Consolas, monospace" font-size="12" fill="#8aae3f" font-weight="700">N</text>
+        <text x="298" y="66" font-family="Consolas, monospace" font-size="12" fill="#8aae3f" font-weight="700">1</text>
 
         <text x="280" y="200" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" font-style="italic" fill="var(--text-dim)">1 álbum puede tener N canciones, o ninguna (álbumes 5 a 10)</text>
       </svg>
-      <p style="margin:0.6rem 0 0; font-style:italic; color:#a83a3a;">
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; font-size:0.88rem;">
+      <p style="margin:0; font-style:italic; color:#a83a3a;">
         Consulta: listar el título de cada álbum junto con el título de cada canción que tiene, incluyendo los álbumes que no tienen ninguna canción.
       </p>
       <p style="margin:0.6rem 0 0;">
-        <code>al.titulo_album</code> sale de <code>tbl_albumes</code>; <code>c.titulo</code> sale de
-        <code>tbl_canciones</code>. Aquí <code>tbl_albumes</code> es la tabla "derecha", así que
-        <code>RIGHT JOIN</code> conserva sus 10 filas completas, tengan o no canciones.
+        De dónde sale cada columna y qué conserva el <code>RIGHT JOIN</code>:
       </p>
+      <ul style="margin:0.3rem 0 0; padding-left:1.2rem;">
+        <li><code style="color:#8aae3f; font-weight:700;">al.titulo_album</code> sale de <code style="color:#8aae3f; font-weight:700;">tbl_albumes</code>.</li>
+        <li><code style="color:#5b9aa0; font-weight:700;">c.titulo</code> sale de <code style="color:#5b9aa0; font-weight:700;">tbl_canciones</code>.</li>
+        <li>Aquí <code style="color:#8aae3f; font-weight:700;">tbl_albumes</code> es la tabla "derecha", así que <code>RIGHT JOIN</code> conserva sus 10 filas completas, tengan o no canciones.</li>
+      </ul>
+        </div>
+      </div>
     </div>
 
     <div class="code-block" style="margin-top:0.8rem;">
@@ -655,10 +690,10 @@ WHERE r.id_reproduccion IS NULL;</div>
         <span class="code-filename">03_right_join.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT al.titulo_album, c.titulo
-FROM tbl_canciones c
-RIGHT JOIN tbl_albumes al ON c.id_album = al.id_album
-ORDER BY al.id_album;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> al.titulo_album, c.titulo
+<span class="sql-kw-p">FROM</span> tbl_canciones c
+<span class="sql-kw-p">RIGHT</span> <span class="sql-kw-p">JOIN</span> tbl_albumes al <span class="sql-kw-p">ON</span> c.id_album = al.id_album
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> al.id_album;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -735,7 +770,9 @@ ORDER BY al.id_album;</code></pre>
       <p style="margin:0 0 0.6rem;">
         <strong>Usamos las mismas dos tablas que en LEFT JOIN:</strong>
       </p>
-      <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:500px; width:100%; height:auto; display:block; margin:0.6rem auto 0;">
+            <div style="display:flex; gap:1.2rem; flex-wrap:wrap; align-items:flex-start; margin-top:0.6rem;">
+        <div style="flex:1 1 420px; min-width:280px;">
+        <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block; margin:0;">
         <!-- tbl_usuarios -->
         <rect x="20" y="20" width="210" height="180" rx="8" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.5"/>
         <rect x="20" y="20" width="210" height="34" rx="8" fill="#4a7c9e"/>
@@ -769,9 +806,13 @@ ORDER BY al.id_album;</code></pre>
 
         <text x="280" y="200" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" font-style="italic" fill="var(--text-dim)">El LEFT JOIN y el RIGHT JOIN de abajo usan esta misma relación</text>
       </svg>
-      <p style="margin:0.6rem 0 0; font-style:italic; color:#a83a3a;">
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; font-size:0.88rem;">
+      <p style="margin:0; font-style:italic; color:#a83a3a;">
         Consulta: listar el nombre de cada usuario junto con el id de cada canción que reprodujo, trayendo también los usuarios sin reproducciones y las reproducciones sin usuario.
       </p>
+        </div>
+      </div>
     </div>
 
     <div class="code-block" style="margin-top:0.8rem;">
@@ -782,13 +823,13 @@ ORDER BY al.id_album;</code></pre>
         <span class="code-filename">04_full_outer_join_mysql.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT u.nombre, r.id_cancion
-FROM tbl_usuarios u
-LEFT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario
-UNION
-SELECT u.nombre, r.id_cancion
-FROM tbl_usuarios u
-RIGHT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> u.nombre, r.id_cancion
+<span class="sql-kw-p">FROM</span> tbl_usuarios u
+<span class="sql-kw-p">LEFT</span> <span class="sql-kw-p">JOIN</span> tbl_reproducciones r <span class="sql-kw-p">ON</span> u.idusuario = r.id_usuario
+<span class="sql-kw-p">UNION</span>
+<span class="sql-kw-p">SELECT</span> u.nombre, r.id_cancion
+<span class="sql-kw-p">FROM</span> tbl_usuarios u
+<span class="sql-kw-p">RIGHT</span> <span class="sql-kw-p">JOIN</span> tbl_reproducciones r <span class="sql-kw-p">ON</span> u.idusuario = r.id_usuario;</code></pre>
     </div>
 
     <div class="content-box" style="margin-top:0.8rem;">
@@ -853,7 +894,9 @@ RIGHT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario;</code></pre>
       <p style="margin:0 0 0.6rem;">
         <strong>Estas dos tablas no tienen ninguna relación por llave foránea entre sí:</strong>
       </p>
-      <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:500px; width:100%; height:auto; display:block; margin:0.6rem auto 0;">
+            <div style="display:flex; gap:1.2rem; flex-wrap:wrap; align-items:flex-start; margin-top:0.6rem;">
+        <div style="flex:1 1 420px; min-width:280px;">
+        <svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block; margin:0;">
         <!-- tbl_artistas -->
         <rect x="20" y="20" width="210" height="140" rx="8" fill="#ffffff" stroke="#8b7fb8" stroke-width="1.5"/>
         <rect x="20" y="20" width="210" height="34" rx="8" fill="#8b7fb8"/>
@@ -884,14 +927,21 @@ RIGHT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario;</code></pre>
 
         <text x="280" y="200" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" font-style="italic" fill="var(--text-dim)">Sin FK entre ellas: CROSS JOIN no la necesita</text>
       </svg>
-      <p style="margin:0.6rem 0 0; font-style:italic; color:#a83a3a;">
+        </div>
+        <div style="flex:1 1 260px; min-width:240px; font-size:0.88rem;">
+      <p style="margin:0; font-style:italic; color:#a83a3a;">
         Consulta: listar todas las combinaciones posibles entre nombre de artista y nombre de usuario, ordenadas por artista y luego por usuario.
       </p>
       <p style="margin:0.6rem 0 0;">
-        <code>ar.nombre_artista</code> sale de <code>tbl_artistas</code>; <code>u.nombre</code> sale de
-        <code>tbl_usuarios</code>. Como no hay ningún <code>ON</code>, MySQL no compara nada: simplemente
-        empareja cada artista con cada usuario, sin importar si esa combinación significa algo.
+        De dónde sale cada columna y cómo se combinan las tablas:
       </p>
+      <ul style="margin:0.3rem 0 0; padding-left:1.2rem;">
+        <li><code style="color:#8b7fb8; font-weight:700;">ar.nombre_artista</code> sale de <code style="color:#8b7fb8; font-weight:700;">tbl_artistas</code>.</li>
+        <li><code style="color:#4a7c9e; font-weight:700;">u.nombre</code> sale de <code style="color:#4a7c9e; font-weight:700;">tbl_usuarios</code>.</li>
+        <li>Como no hay ningún <code>ON</code>, MySQL no compara nada: simplemente empareja cada artista con cada usuario, sin importar si esa combinación significa algo.</li>
+      </ul>
+        </div>
+      </div>
     </div>
 
     <div class="code-block" style="margin-top:0.8rem;">
@@ -902,10 +952,10 @@ RIGHT JOIN tbl_reproducciones r ON u.idusuario = r.id_usuario;</code></pre>
         <span class="code-filename">05_cross_join.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT ar.nombre_artista, u.nombre
-FROM tbl_artistas ar
-CROSS JOIN tbl_usuarios u
-ORDER BY ar.nombre_artista, u.nombre;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> ar.nombre_artista, u.nombre
+<span class="sql-kw-p">FROM</span> tbl_artistas ar
+<span class="sql-kw-p">CROSS</span> <span class="sql-kw-p">JOIN</span> tbl_usuarios u
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> ar.nombre_artista, u.nombre;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -973,7 +1023,7 @@ ORDER BY ar.nombre_artista, u.nombre;</code></pre>
         <p style="font-size:0.85rem;">Apila los resultados y <strong>elimina las filas duplicadas</strong>.</p>
       </div>
       <div class="concept-card">
-        <h4 style="color:#7fa5a3;">UNION ALL</h4>
+        <h4 style="color:#8aae3f;">UNION ALL</h4>
         <p style="font-size:0.85rem;">Apila los resultados y <strong>conserva los duplicados</strong>. Es más rápido, porque no compara filas.</p>
       </div>
     </div>
@@ -994,14 +1044,14 @@ ORDER BY ar.nombre_artista, u.nombre;</code></pre>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code>-- UNION ALL: conserva todo, incluidos los repetidos
-SELECT titulo, genero, duracion_seg, reproducciones FROM tbl_canciones WHERE duracion_seg > 200
-UNION ALL
-SELECT titulo, genero, duracion_seg, reproducciones FROM tbl_canciones WHERE reproducciones > 5000000;
+<span class="sql-kw-p">SELECT</span> titulo, genero, duracion_seg, reproducciones <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> duracion_seg > 200
+<span class="sql-kw-p">UNION</span> <span class="sql-kw-p">ALL</span>
+<span class="sql-kw-p">SELECT</span> titulo, genero, duracion_seg, reproducciones <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> reproducciones > 5000000;
 
 -- UNION: el mismo par de consultas, pero elimina duplicados
-SELECT titulo, genero, duracion_seg, reproducciones FROM tbl_canciones WHERE duracion_seg > 200
-UNION
-SELECT titulo, genero, duracion_seg, reproducciones FROM tbl_canciones WHERE reproducciones > 5000000;</code></pre>
+<span class="sql-kw-p">SELECT</span> titulo, genero, duracion_seg, reproducciones <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> duracion_seg > 200
+<span class="sql-kw-p">UNION</span>
+<span class="sql-kw-p">SELECT</span> titulo, genero, duracion_seg, reproducciones <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> reproducciones > 5000000;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -1084,6 +1134,16 @@ SELECT titulo, genero, duracion_seg, reproducciones FROM tbl_canciones WHERE rep
         </tbody>
       </table>
     </div>
+    <div class="content-box" style="margin-top:1rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.5rem;"><strong>Conclusión: la tabla de la izquierda y la de la derecha</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li><strong>Izquierda</strong> es la tabla que escribes primero, después de <code>FROM</code>. <strong>Derecha</strong> es la que escribes después de <code>JOIN</code>. Tú decides cuál es cuál; no hay una tabla que sea "A" por naturaleza.</li>
+        <li>En <code>INNER JOIN</code>, <code>FULL OUTER JOIN</code> y <code>CROSS JOIN</code> el orden no cambia el resultado.</li>
+        <li>En <code>LEFT JOIN</code> y <code>RIGHT JOIN</code> el orden sí importa: <code>A RIGHT JOIN B</code> equivale a <code>B LEFT JOIN A</code>. Por eso se suele usar solo LEFT y reordenar las tablas.</li>
+        <li>Para elegir la izquierda pregúntate: "¿de qué tabla quiero ver todas las filas, aunque no tengan pareja?". Esa va a la izquierda en un LEFT JOIN.</li>
+        <li>Sí hay que conocer la base de datos: qué tablas y columnas existen, y qué llave foránea apunta a qué llave primaria, porque eso es lo que se escribe en el <code>ON</code>. Por eso el diagrama del modelo es la herramienta de trabajo.</li>
+      </ul>
+    </div>
   </div>
 
   <!-- ===================== 9. SUBCONSULTAS ===================== -->
@@ -1096,9 +1156,7 @@ SELECT titulo, genero, duracion_seg, reproducciones FROM tbl_canciones WHERE rep
       usar en tres lugares distintos, y cada uno resuelve un problema diferente.
     </p>
 
-    <p style="margin-top:1rem;"><strong>1. Subconsulta en <code>WHERE</code>:</strong> filtrar usando el
-    resultado de otra consulta. Cuando la subconsulta devuelve <strong>varios</strong> valores se usa
-    <code>IN</code>. Ejemplo: canciones que pertenecen a álbumes lanzados antes de 1995.</p>
+    <p style="margin-top:1rem;"><strong>1. Subconsulta en <code>WHERE</code>:</strong> Se usa cuando necesitas filtrar con un dato que aún no tienes. La subconsulta devuelve un valor o una lista de valores, y la consulta de afuera los usa como condición. Cuando devuelve <strong>varios</strong> valores se usa <code>IN</code>. Idea: "primero averiguo el dato, luego filtro con él". Ejemplo: canciones que pertenecen a álbumes lanzados antes de 1995.</p>
     <p style="margin-top:0.5rem; font-style:italic; color:#a83a3a;">
       Consulta: listar el título y el álbum de las canciones que pertenecen a álbumes lanzados antes de 1995.
     </p>
@@ -1110,10 +1168,10 @@ SELECT titulo, genero, duracion_seg, reproducciones FROM tbl_canciones WHERE rep
         <span class="code-filename">13_subconsulta_where.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT titulo, id_album
-FROM tbl_canciones
-WHERE id_album IN (SELECT id_album FROM tbl_albumes WHERE anio_lanzamiento &lt; 1995)
-ORDER BY titulo;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> titulo, id_album
+<span class="sql-kw-p">FROM</span> tbl_canciones
+<span class="sql-kw-p">WHERE</span> id_album <span class="sql-kw-b">IN</span> (<span class="sql-kw-p">SELECT</span> id_album <span class="sql-kw-p">FROM</span> tbl_albumes <span class="sql-kw-p">WHERE</span> anio_lanzamiento &lt; 1995)
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> titulo;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -1149,10 +1207,10 @@ ORDER BY titulo;</code></pre>
         <span class="code-filename">13b_subconsulta_where_avg.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT titulo, reproducciones
-FROM tbl_canciones
-WHERE reproducciones > (SELECT AVG(reproducciones) FROM tbl_canciones)
-ORDER BY reproducciones DESC;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> titulo, reproducciones
+<span class="sql-kw-p">FROM</span> tbl_canciones
+<span class="sql-kw-p">WHERE</span> reproducciones > (<span class="sql-kw-p">SELECT</span> <span class="sql-kw-b">AVG</span>(reproducciones) <span class="sql-kw-p">FROM</span> tbl_canciones)
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> reproducciones <span class="sql-kw-b">DESC</span>;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -1166,31 +1224,7 @@ ORDER BY reproducciones DESC;</code></pre>
       </div>
     </div>
 
-    <p style="margin-top:1rem;">Tercer ejemplo, con <code>EXISTS</code> en vez de <code>IN</code> o un
-    operador de comparación: <code>EXISTS</code> solo revisa si la subconsulta devuelve al menos una fila,
-    sin importar cuántas ni cuáles. Es el complemento exacto del <code>LEFT JOIN ... WHERE ... IS NULL</code>
-    que ya usaste para encontrar a Sofía Herrera: en vez de buscar quién NO tiene reproducciones, busca
-    quién SÍ las tiene.</p>
-    <p style="margin-top:0.5rem; font-style:italic; color:#a83a3a;">
-      Consulta: listar el nombre de los usuarios que sí han reproducido al menos una canción.
-    </p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">13c_subconsulta_where_exists.sql</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>-- Usuarios que SÍ han reproducido algo (lo opuesto a Sofía Herrera)
-SELECT nombre FROM tbl_usuarios u
-WHERE EXISTS (SELECT 1 FROM tbl_reproducciones r WHERE r.id_usuario = u.idusuario);</code></pre>
-    </div>
-
-    <p style="margin-top:1rem;"><strong>2. Subconsulta en <code>SELECT</code>:</strong> calcular un valor
-    por cada fila, casi siempre referenciando la fila externa (esto se llama <strong>subconsulta
-    correlacionada</strong>). Ejemplo: cada canción, junto con cuántas veces aparece en el log de
-    reproducciones:</p>
+    <p style="margin-top:1rem;"><strong>2. Subconsulta en <code>SELECT</code>:</strong> Se usa cuando necesitas un dato extra en cada fila del resultado. La subconsulta devuelve <strong>un solo valor por fila</strong> y aparece como una columna más; casi siempre referencia la fila externa (esto se llama <strong>subconsulta correlacionada</strong>). Idea: "a cada fila le pego un cálculo propio". Ejemplo: cada canción, junto con cuántas veces aparece en el log de reproducciones:</p>
     <p style="margin-top:0.5rem; font-style:italic; color:#a83a3a;">
       Consulta: listar el título de cada canción junto con cuántas veces aparece en el log de reproducciones.
     </p>
@@ -1202,10 +1236,10 @@ WHERE EXISTS (SELECT 1 FROM tbl_reproducciones r WHERE r.id_usuario = u.idusuari
         <span class="code-filename">14_subconsulta_select.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT c.titulo,
-  (SELECT COUNT(*) FROM tbl_reproducciones r WHERE r.id_cancion = c.id_cancion) AS veces_en_el_log
-FROM tbl_canciones c
-ORDER BY c.titulo;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> c.titulo,
+  (<span class="sql-kw-p">SELECT</span> <span class="sql-kw-b">COUNT</span>(*) <span class="sql-kw-p">FROM</span> tbl_reproducciones r <span class="sql-kw-p">WHERE</span> r.id_cancion = c.id_cancion) <span class="sql-kw-b">AS</span> veces_en_el_log
+<span class="sql-kw-p">FROM</span> tbl_canciones c
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> c.titulo;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -1225,17 +1259,19 @@ ORDER BY c.titulo;</code></pre>
       </div>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        MySQL recorre <code>tbl_canciones</code> fila por fila, y para cada canción resuelve la subconsulta
-        reemplazando por el ID de esa canción específica.
-        Por ejemplo, para <strong>Tres Deseos</strong> (<code>id_cancion</code> 101), la subconsulta busca
-        en <code>tbl_reproducciones</code> las filas con <code>id_cancion = 101</code>, encuentra 2 (dos
-        usuarios distintos la reprodujeron), y ese <code>2</code> es el valor que queda en
-        <code>veces_en_el_log</code>. Para <strong>Mi Tierra</strong> (<code>id_cancion</code> 103), no
-        encuentra ninguna fila, así que el conteo da <code>0</code>. Al final, cuando ya se resolvió la
-        subconsulta para las 10 canciones, <code>ORDER BY c.titulo</code> ordena todo el resultado
-        alfabéticamente.
-      </p>
+      <p style="margin:0 0 0.4rem;"><strong>Cómo se resuelve, paso a paso:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>MySQL recorre <code>tbl_canciones</code> <strong>fila por fila</strong>.</li>
+        <li>Para cada canción, toma su <code>id_cancion</code> y lo reemplaza dentro de la subconsulta.</li>
+        <li>La subconsulta busca en <code>tbl_reproducciones</code> las filas con ese <code>id_cancion</code> y las cuenta.</li>
+        <li>Ese número queda en la columna <code>veces_en_el_log</code> de esa fila.</li>
+        <li>Cuando ya se resolvió para las 10 canciones, <code>ORDER BY c.titulo</code> ordena todo el resultado alfabéticamente.</li>
+      </ol>
+      <p style="margin:0.6rem 0 0.3rem;"><strong>Dos ejemplos:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li><strong>Tres Deseos</strong> (<code>id_cancion</code> 101): la subconsulta busca <code>id_cancion = 101</code>, encuentra 2 filas (dos usuarios distintos la reprodujeron) y <code>veces_en_el_log</code> queda en <code>2</code>.</li>
+        <li><strong>Mi Tierra</strong> (<code>id_cancion</code> 103): no encuentra ninguna fila, así que el conteo da <code>0</code>.</li>
+      </ul>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -1258,10 +1294,10 @@ ORDER BY c.titulo;</code></pre>
         <span class="code-filename">14b_subconsulta_select_usuarios.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT u.nombre,
-  (SELECT COUNT(*) FROM tbl_reproducciones r WHERE r.id_usuario = u.idusuario) AS total_reproducciones
-FROM tbl_usuarios u
-ORDER BY u.nombre;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> u.nombre,
+  (<span class="sql-kw-p">SELECT</span> <span class="sql-kw-b">COUNT</span>(*) <span class="sql-kw-p">FROM</span> tbl_reproducciones r <span class="sql-kw-p">WHERE</span> r.id_usuario = u.idusuario) <span class="sql-kw-b">AS</span> total_reproducciones
+<span class="sql-kw-p">FROM</span> tbl_usuarios u
+<span class="sql-kw-p">ORDER</span> <span class="sql-kw-p">BY</span> u.nombre;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -1287,9 +1323,7 @@ ORDER BY u.nombre;</code></pre>
       </div>
     </div>
 
-    <p style="margin-top:1rem;"><strong>3. Subconsulta en <code>FROM</code>:</strong> usar el resultado de
-    una consulta como si fuera una tabla temporal. Por ejemplo, cuántas canciones tiene cada álbum,
-    filtrando después solo los álbumes con 3 o más:</p>
+    <p style="margin-top:1rem;"><strong>3. Subconsulta en <code>FROM</code>:</strong> Se usa cuando necesitas consultar una tabla que primero hay que construir. El resultado de la subconsulta funciona como una tabla temporal y debe llevar alias. Idea: "primero armo una tabla resumen, luego la consulto". Por ejemplo, cuántas canciones tiene cada álbum, filtrando después solo los álbumes con 3 o más:</p>
     <p style="margin-top:0.5rem; font-style:italic; color:#a83a3a;">
       Consulta: listar el id y la cantidad de canciones de los álbumes que tienen 3 canciones o más.
     </p>
@@ -1301,13 +1335,13 @@ ORDER BY u.nombre;</code></pre>
         <span class="code-filename">15b_subconsulta_from_albumes.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT id_album, cantidad_canciones
-FROM (
-  SELECT id_album, COUNT(*) AS cantidad_canciones
-  FROM tbl_canciones
-  GROUP BY id_album
-) AS canciones_por_album
-WHERE cantidad_canciones >= 3;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> id_album, cantidad_canciones
+<span class="sql-kw-p">FROM</span> (
+  <span class="sql-kw-p">SELECT</span> id_album, <span class="sql-kw-b">COUNT</span>(*) <span class="sql-kw-b">AS</span> cantidad_canciones
+  <span class="sql-kw-p">FROM</span> tbl_canciones
+  <span class="sql-kw-p">GROUP</span> <span class="sql-kw-p">BY</span> id_album
+) <span class="sql-kw-b">AS</span> canciones_por_album
+<span class="sql-kw-p">WHERE</span> cantidad_canciones >= 3;</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -1323,6 +1357,15 @@ WHERE cantidad_canciones >= 3;</code></pre>
           álbumes 1 y 3.
         </p>
       </div>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Cómo se resuelve, paso a paso:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>MySQL ejecuta <strong>primero la subconsulta de adentro</strong>, completa y una sola vez. No depende de ninguna fila de la consulta de afuera.</li>
+        <li>Con su resultado arma una <strong>tabla temporal</strong> en memoria, a la que se le pone el alias <code>canciones_por_album</code>.</li>
+        <li>La consulta de afuera toma esa tabla temporal como si fuera una tabla normal y le aplica el <code>WHERE cantidad_canciones &gt;= 3</code>.</li>
+        <li>Solo las filas que cumplen la condición llegan al resultado final.</li>
+      </ol>
     </div>
 
     <p style="margin-top:1.2rem;"><strong>WHERE vs. SELECT vs. FROM:</strong> las tres son subconsultas,
@@ -1344,6 +1387,9 @@ WHERE cantidad_canciones >= 3;</code></pre>
         </tbody>
       </table>
     </div>
+    <div class="content-box" style="margin-top:1rem; font-size:0.88rem;">
+      <p style="margin:0;"><strong>Truco para decidir:</strong> si la pregunta dice "que sean mayores que / que estén en", va en <code>WHERE</code>; si dice "junto con cuántos / el total de", va en <code>SELECT</code>; si dice "de los que ya agrupé / sobre el resumen de", va en <code>FROM</code>.</p>
+    </div>
 
   </div>
 
@@ -1359,7 +1405,7 @@ WHERE cantidad_canciones >= 3;</code></pre>
     </p>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;"><strong>Sintaxis general:</strong></p>
-      <div class="sql" style="margin-top:0.4rem;">CREATE INDEX nombre_indice ON tabla (columna);</div>
+      <div class="sql" style="margin-top:0.4rem;"><span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">INDEX</span> nombre_indice <span class="sql-kw-p">ON</span> tabla (columna);</div>
     </div>
     <p style="margin-top:1rem;">
       Ejemplo: si consultas seguido las canciones por género, un índice ahí evita que MySQL revise las 10,
@@ -1373,7 +1419,7 @@ WHERE cantidad_canciones >= 3;</code></pre>
         <span class="code-filename">17_indice.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>CREATE INDEX idx_canciones_genero ON tbl_canciones (genero);</code></pre>
+      <pre><code><span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">INDEX</span> idx_canciones_genero <span class="sql-kw-p">ON</span> tbl_canciones (genero);</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -1383,6 +1429,26 @@ WHERE cantidad_canciones >= 3;</code></pre>
         disco. Por eso no se indexa cada columna "por si acaso", solo las que de verdad se usan seguido para
         filtrar o unir tablas.
       </p>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Aquí ya estás usando una estructura de datos</strong></p>
+      <p style="margin:0 0 0.4rem;">
+        El índice <code>idx_canciones_genero</code> no es magia: MySQL lo guarda como un
+        <strong>árbol B+ (B+Tree)</strong>, el mismo tipo de árbol que vimos en la Semana 2. Así funciona:
+      </p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Al crear el índice, MySQL toma los valores de <code>genero</code> y los guarda <strong>ordenados</strong> dentro del árbol. Cada valor apunta a la fila real de <code>tbl_canciones</code>.</li>
+        <li>Con <code>WHERE genero = 'Pop'</code>, la búsqueda empieza en la <strong>raíz</strong> del árbol y compara.</li>
+        <li>En cada nivel baja solo por la rama correcta y <strong>descarta todas las demás</strong>, como en un árbol de búsqueda binaria.</li>
+        <li>Al llegar a la <strong>hoja</strong> donde está <code>'Pop'</code>, MySQL salta directo a esas filas de la tabla, sin revisar las demás.</li>
+      </ol>
+      <p style="margin:0.6rem 0 0.3rem;"><strong>Por qué importa:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li><strong>Sin índice</strong> la búsqueda recorre fila por fila, como un arreglo desordenado: O(n).</li>
+        <li><strong>Con índice</strong> baja por el árbol: O(log n). Con millones de filas son 3 o 4 pasos en vez de millones.</li>
+        <li>Las hojas del árbol están <strong>enlazadas entre sí</strong>, como una lista enlazada. Por eso los rangos y el <code>ORDER BY</code> también son rápidos: se recorren las hojas una tras otra.</li>
+        <li>Por eso escribir cuesta más: cada <code>INSERT</code> debe acomodar el nuevo valor en su lugar dentro del árbol.</li>
+      </ul>
     </div>
   </div>
 
@@ -1398,10 +1464,10 @@ WHERE cantidad_canciones >= 3;</code></pre>
     </p>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;"><strong>Sintaxis general:</strong></p>
-      <div class="sql" style="margin-top:0.4rem;">CREATE VIEW nombre_vista AS
-SELECT columnas
-FROM tabla
-WHERE condicion;</div>
+      <div class="sql" style="margin-top:0.4rem;"><span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">VIEW</span> nombre_vista <span class="sql-kw-b">AS</span>
+<span class="sql-kw-p">SELECT</span> columnas
+<span class="sql-kw-p">FROM</span> tabla
+<span class="sql-kw-p">WHERE</span> condicion;</div>
     </div>
 
     <p style="margin-top:1rem;"><strong>Uso 1: reutilizar una consulta que usas seguido.</strong> El
@@ -1415,14 +1481,14 @@ WHERE condicion;</div>
         <span class="code-filename">18_vista_catalogo.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>CREATE VIEW vista_catalogo_completo AS
-SELECT c.titulo, al.titulo_album, ar.nombre_artista
-FROM tbl_canciones c
-INNER JOIN tbl_albumes al ON c.id_album = al.id_album
-INNER JOIN tbl_artistas ar ON al.id_artista = ar.id_artista;
+      <pre><code><span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">VIEW</span> vista_catalogo_completo <span class="sql-kw-b">AS</span>
+<span class="sql-kw-p">SELECT</span> c.titulo, al.titulo_album, ar.nombre_artista
+<span class="sql-kw-p">FROM</span> tbl_canciones c
+<span class="sql-kw-p">INNER</span> <span class="sql-kw-p">JOIN</span> tbl_albumes al <span class="sql-kw-p">ON</span> c.id_album = al.id_album
+<span class="sql-kw-p">INNER</span> <span class="sql-kw-p">JOIN</span> tbl_artistas ar <span class="sql-kw-p">ON</span> al.id_artista = ar.id_artista;
 
 -- Y a partir de ahora, en vez de repetir el JOIN, solo escribes:
-SELECT * FROM vista_catalogo_completo WHERE nombre_artista = 'Maná';</code></pre>
+<span class="sql-kw-p">SELECT</span> * <span class="sql-kw-p">FROM</span> vista_catalogo_completo <span class="sql-kw-p">WHERE</span> nombre_artista = 'Maná';</code></pre>
     </div>
     <div class="query-result-block">
       <div class="query-result-item" style="flex:1 1 100%;">
@@ -1445,11 +1511,11 @@ SELECT * FROM vista_catalogo_completo WHERE nombre_artista = 'Maná';</code></pr
         <span class="code-filename">19_vista_seguridad.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>CREATE VIEW vista_usuarios_publica AS
-SELECT idusuario, nombre, email, estado_activo
-FROM tbl_usuarios;
+      <pre><code><span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">VIEW</span> vista_usuarios_publica <span class="sql-kw-b">AS</span>
+<span class="sql-kw-p">SELECT</span> idusuario, nombre, email, estado_activo
+<span class="sql-kw-p">FROM</span> tbl_usuarios;
 
-SELECT * FROM vista_usuarios_publica WHERE idusuario = 10;</code></pre>
+<span class="sql-kw-p">SELECT</span> * <span class="sql-kw-p">FROM</span> vista_usuarios_publica <span class="sql-kw-p">WHERE</span> idusuario = 10;</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -1459,6 +1525,109 @@ SELECT * FROM vista_usuarios_publica WHERE idusuario = 10;</code></pre>
         el <code>password_hash</code> de nadie: esa columna ni siquiera existe en la vista.
       </p>
     </div>
+
+    <p style="margin-top:1rem;"><strong>Cómo accede un usuario a la vista.</strong> Para compartir la vista
+    sin mostrar las tablas, se crea un usuario de la base de datos y se le dan permisos solo sobre la vista:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">19b_usuario_vista.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>-- 1. Crear un usuario para el equipo de análisis
+<span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">USER</span> 'analista'@'localhost' <span class="sql-kw-p">IDENTIFIED</span> <span class="sql-kw-p">BY</span> 'clave_segura';
+
+-- 2. Darle permiso de lectura (SELECT) solo sobre la vista
+<span class="sql-kw-p">GRANT</span> <span class="sql-kw-p">SELECT</span> <span class="sql-kw-p">ON</span> soundflow_db.vista_usuarios_publica <span class="sql-kw-p">TO</span> 'analista'@'localhost';
+
+-- 3. Verificar qué permisos tiene el usuario
+<span class="sql-kw-p">SHOW</span> <span class="sql-kw-p">GRANTS</span> <span class="sql-kw-p">FOR</span> 'analista'@'localhost';
+
+-- 4. Conectarse como 'analista' en una nueva conexión de Workbench
+--    (usuario analista, host 127.0.0.1, puerto 3306)
+
+-- 5. Lo que ese usuario puede y no puede hacer:
+<span class="sql-kw-p">SELECT</span> * <span class="sql-kw-p">FROM</span> vista_usuarios_publica;   -- funciona
+<span class="sql-kw-p">SELECT</span> * <span class="sql-kw-p">FROM</span> tbl_usuarios;             -- error: acceso denegado</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>¿Por qué solo se le dan ciertos permisos?</strong> Es el principio de <strong>mínimo privilegio</strong>: cada usuario recibe únicamente lo que necesita para su trabajo, nada más.</p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li><strong>Solo sobre la vista, no sobre <code>tbl_usuarios</code>:</strong> el usuario puede consultar <code>vista_usuarios_publica</code>, pero si intenta leer la tabla real recibe "acceso denegado". Así el <code>password_hash</code> queda fuera de su alcance.</li>
+        <li><strong>Solo <code>SELECT</code>:</strong> puede leer, pero no <code>INSERT</code>, <code>UPDATE</code> ni <code>DELETE</code>. No puede cambiar ni borrar datos, ni por error ni a propósito.</li>
+        <li><strong>Sin ver la consulta interna:</strong> al no tener el permiso <code>SHOW VIEW</code>, no puede leer cómo está escrita la vista. Solo ve las columnas que devuelve.</li>
+        <li><strong>Menos daño si algo sale mal:</strong> si su clave se filtra o comete un error, lo máximo que se expone es lo que la vista deja ver.</li>
+        <li><strong>Se puede retirar cuando ya no haga falta:</strong> <code>REVOKE SELECT ON soundflow_db.vista_usuarios_publica FROM 'analista'@'localhost';</code></li>
+      </ul>
+    </div>
+    <p style="margin-top:1.2rem;"><strong>Pruébalo tú mismo, paso a paso.</strong> Así lo verificas en tu propio equipo, con tu conexión de administrador (<code>root</code>) y una segunda conexión para el usuario nuevo:</p>
+    <p style="margin-top:0.6rem;"><strong>Paso 1.</strong> Con <code>root</code>, asegúrate de que la vista exista:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">19c_paso1_vista.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="sql-kw-p">USE</span> soundflow_db;
+
+<span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">OR</span> <span class="sql-kw-p">REPLACE</span> <span class="sql-kw-p">VIEW</span> vista_usuarios_publica <span class="sql-kw-p">AS</span>
+<span class="sql-kw-p">SELECT</span> idusuario, nombre, email, estado_activo
+<span class="sql-kw-p">FROM</span> tbl_usuarios;</code></pre>
+    </div>
+    <p style="margin-top:1rem;"><strong>Paso 2.</strong> Ejecuta los pasos 1 y 2 del bloque anterior (<code>19b_usuario_vista.sql</code>): el <code>CREATE USER</code> y el <code>GRANT</code>. Cambia la clave por la que prefieras.</p>
+    <p style="margin-top:1rem;"><strong>Paso 3.</strong> Comprueba que el permiso quedó guardado:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">19d_paso3_grants.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="sql-kw-p">SHOW</span> <span class="sql-kw-p">GRANTS</span> <span class="sql-kw-p">FOR</span> 'analista'@'localhost';</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0;">Debe aparecer un único permiso: <code>GRANT SELECT ON soundflow_db.vista_usuarios_publica</code>. Si aparecen más, el usuario tiene más acceso del que debería.</p>
+    </div>
+    <p style="margin-top:1rem;"><strong>Paso 4.</strong> Conéctate como ese usuario en MySQL Workbench:</p>
+    <ol style="margin:0.3rem 0 0; padding-left:1.3rem; font-size:0.88rem;">
+      <li>Haz clic en el <strong>+</strong> junto a "MySQL Connections".</li>
+      <li>Ponle de nombre <code>analista</code>, usuario <code>analista</code>, host <code>127.0.0.1</code> y puerto <code>3306</code>.</li>
+      <li>Abre la conexión e ingresa la clave que definiste en el paso 2.</li>
+    </ol>
+    <p style="margin-top:1rem;"><strong>Paso 5.</strong> Dentro de esa conexión, haz las dos pruebas:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">19e_paso5_probar.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="sql-kw-p">SELECT</span> * <span class="sql-kw-p">FROM</span> soundflow_db.vista_usuarios_publica;   -- funciona
+<span class="sql-kw-p">SELECT</span> * <span class="sql-kw-p">FROM</span> soundflow_db.tbl_usuarios;             -- error: acceso denegado</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0;">La segunda consulta debe fallar con un mensaje parecido a: <em>SELECT command denied to user 'analista'@'localhost' for table 'tbl_usuarios'</em>. Eso confirma que el usuario ve la vista, pero no la tabla real.</p>
+    </div>
+    <p style="margin-top:1rem;"><strong>Paso 6.</strong> Cuando termines, vuelve a <code>root</code> y elimina el usuario de práctica:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">19f_paso6_limpiar.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="sql-kw-p">DROP</span> <span class="sql-kw-p">USER</span> 'analista'@'localhost';</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0;">Si <code>CREATE USER</code> da error de permisos, es porque tu conexión no es <code>root</code> ni tiene el privilegio <code>CREATE USER</code>.</p>
+    </div>
   </div>
 
   <!-- ===================== 12. TRIGGERS ===================== -->
@@ -1467,11 +1636,70 @@ SELECT * FROM vista_usuarios_publica WHERE idusuario = 10;</code></pre>
       <h3>11. Disparadores (TRIGGERS)</h3>
     </div>
     <p>
-      Un <strong>trigger</strong> es un procedimiento especial que se dispara <strong>automáticamente</strong>
-      cuando ocurre un evento sobre una tabla (<code>INSERT</code>, <code>UPDATE</code> o
-      <code>DELETE</code>), ya sea <code>BEFORE</code> (antes del evento) o <code>AFTER</code> (después).
-      Nadie lo llama a mano, como sí pasa con un procedimiento.
+      Un <strong>trigger</strong> (disparador) es código SQL que la base de datos ejecuta
+      <strong>automáticamente</strong> cuando ocurre un evento en una tabla: un <code>INSERT</code>, un
+      <code>UPDATE</code> o un <code>DELETE</code>. Nadie lo llama; se dispara solo.
     </p>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Para qué sirven en concreto:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li><strong>Mantener datos derivados al día.</strong> En soundflow_db, cada vez que se inserta una reproducción, el trigger le suma 1 al contador de esa canción en <code>tbl_canciones</code>. Nadie se acuerda de actualizarlo a mano.</li>
+        <li><strong>Auditoría (historial de cambios).</strong> Guardar quién cambió qué y cuándo. Por ejemplo, copiar la fila anterior a una tabla <code>log_cambios</code> antes de cada <code>UPDATE</code> o <code>DELETE</code>.</li>
+        <li><strong>Validar o corregir datos antes de guardarlos.</strong> Con un trigger <code>BEFORE INSERT</code> puedes rechazar un valor inválido (un precio negativo) o limpiar uno (pasar el correo a minúsculas).</li>
+        <li><strong>Reglas de negocio automáticas.</strong> Por ejemplo, impedir borrar un artista con álbumes, o marcar un pago como vencido cuando cambia una fecha.</li>
+        <li><strong>Mantener copias o resúmenes sincronizados.</strong> Actualizar una tabla de totales o de estadísticas cuando cambia la tabla original.</li>
+      </ol>
+      <p style="margin:0.7rem 0 0.3rem;"><strong>Cuándo se dispara:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li><code>BEFORE</code>: antes de <code>INSERT</code>, <code>UPDATE</code> o <code>DELETE</code>. Sirve para validar o modificar el dato.</li>
+        <li><code>AFTER</code>: después del cambio. Sirve para actualizar otras tablas o guardar el historial.</li>
+        <li>Dentro del trigger puedes usar <code>NEW.columna</code> (el valor nuevo) y <code>OLD.columna</code> (el valor anterior).</li>
+      </ul>
+      <p style="margin:0.7rem 0 0.3rem;"><strong>La diferencia con un procedimiento:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li>El <strong>procedimiento</strong> se ejecuta cuando alguien lo llama con <code>CALL</code>.</li>
+        <li>El <strong>trigger</strong> se ejecuta solo, cuando ocurre el evento. Quien hace el <code>INSERT</code> ni siquiera sabe que existe.</li>
+      </ul>
+      <p style="margin:0.7rem 0 0.3rem;"><strong>Cuidados:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li>Son "invisibles": si algo cambia inesperadamente en una tabla, el culpable puede ser un trigger que nadie recuerda.</li>
+        <li>Hacen más lenta cada escritura.</li>
+        <li>Los triggers que modifican otras tablas pueden encadenarse con otros triggers y volverse difíciles de seguir.</li>
+        <li>Úsalos para reglas que <strong>siempre</strong> deben cumplirse, sin importar desde qué aplicación se escriba.</li>
+      </ul>
+      <p style="margin:0.7rem 0 0;"><strong>En una frase:</strong> un trigger es un guardia que vigila una tabla: cuando entra, cambia o sale una fila, ejecuta automáticamente la tarea que le asignaste.</p>
+    </div>
+
+    <p style="margin-top:1rem;"><strong>Cómo crear un trigger.</strong> Esta es la estructura general en MySQL:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">20a_trigger_sintaxis.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="sql-kw-p">DELIMITER</span> //
+
+<span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">TRIGGER</span> nombre_trigger
+<span class="sql-kw-p">BEFORE</span> | <span class="sql-kw-p">AFTER</span>  <span class="sql-kw-p">INSERT</span> | <span class="sql-kw-p">UPDATE</span> | <span class="sql-kw-p">DELETE</span>  <span class="sql-kw-p">ON</span> nombre_tabla
+<span class="sql-kw-p">FOR</span> <span class="sql-kw-p">EACH</span> <span class="sql-kw-p">ROW</span>
+<span class="sql-kw-p">BEGIN</span>
+  -- sentencias SQL que se ejecutan cuando ocurre el evento
+<span class="sql-kw-p">END</span> //
+
+<span class="sql-kw-p">DELIMITER</span> ;</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Pasos para crearlo:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Decide la tabla que vigila, el evento (<code>INSERT</code>, <code>UPDATE</code> o <code>DELETE</code>) y si corre antes (<code>BEFORE</code>) o después (<code>AFTER</code>).</li>
+        <li>Escribe qué debe hacer, usando <code>NEW</code> y <code>OLD</code> si necesitas los valores de la fila.</li>
+        <li>Ejecuta el bloque completo en Workbench, incluido el <code>DELIMITER</code>.</li>
+        <li>Compruébalo con <code>SHOW TRIGGERS;</code> y pruébalo haciendo un <code>INSERT</code>, <code>UPDATE</code> o <code>DELETE</code>.</li>
+        <li>Si ya no lo necesitas, bórralo con <code>DROP TRIGGER IF EXISTS nombre_trigger;</code></li>
+      </ol>
+    </div>
 
     <p style="margin-top:1rem;">
       Ejemplo: cada vez que se inserta una fila en <code>tbl_reproducciones</code>, sumar 1 automáticamente
@@ -1486,18 +1714,33 @@ SELECT * FROM vista_usuarios_publica WHERE idusuario = 10;</code></pre>
         <span class="code-filename">20_trigger_contador.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>DELIMITER //
+      <pre><code><span class="sql-kw-p">DELIMITER</span> //
 
-CREATE TRIGGER trg_after_insert_reproduccion
-AFTER INSERT ON tbl_reproducciones
-FOR EACH ROW
-BEGIN
-  UPDATE tbl_canciones
-  SET reproducciones = reproducciones + 1
-  WHERE id_cancion = NEW.id_cancion;
-END //
+<span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">TRIGGER</span> trg_after_insert_reproduccion
+<span class="sql-kw-p">AFTER</span> <span class="sql-kw-p">INSERT</span> <span class="sql-kw-p">ON</span> tbl_reproducciones
+<span class="sql-kw-p">FOR</span> <span class="sql-kw-p">EACH</span> <span class="sql-kw-p">ROW</span>
+<span class="sql-kw-p">BEGIN</span>
+  <span class="sql-kw-p">UPDATE</span> tbl_canciones
+  <span class="sql-kw-p">SET</span> reproducciones = reproducciones + 1
+  <span class="sql-kw-p">WHERE</span> id_cancion = <span class="sql-kw-b">NEW</span>.id_cancion;
+<span class="sql-kw-p">END</span> //
 
-DELIMITER ;</code></pre>
+<span class="sql-kw-p">DELIMITER</span> ;</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Explicación línea por línea:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li><code>DELIMITER //</code>: cambia temporalmente el símbolo que cierra una sentencia, de <code>;</code> a <code>//</code>. Así MySQL no corta el trigger en el primer <code>;</code> que aparece dentro.</li>
+        <li><code>CREATE TRIGGER trg_after_insert_reproduccion</code>: crea el trigger y le pone nombre. El patrón <code>trg_momento_evento_tabla</code> ayuda a reconocerlo después.</li>
+        <li><code>AFTER INSERT ON tbl_reproducciones</code>: define cuándo se dispara. Aquí, <strong>después de</strong> insertar una fila en <code>tbl_reproducciones</code>.</li>
+        <li><code>FOR EACH ROW</code>: se ejecuta una vez por cada fila afectada. Si un <code>INSERT</code> agrega 3 filas, el trigger corre 3 veces. En MySQL es obligatorio.</li>
+        <li><code>BEGIN</code>: abre el cuerpo del trigger, lo que va a hacer.</li>
+        <li><code>UPDATE tbl_canciones</code>: el trigger actualiza otra tabla, la de canciones.</li>
+        <li><code>SET reproducciones = reproducciones + 1</code>: le suma 1 al contador actual.</li>
+        <li><code>WHERE id_cancion = NEW.id_cancion;</code>: limita el cambio a la canción que se reprodujo. <code>NEW.id_cancion</code> es el <code>id_cancion</code> de la fila recién insertada. Sin este <code>WHERE</code> se actualizarían todas las canciones.</li>
+        <li><code>END //</code>: cierra el cuerpo del trigger. Usa <code>//</code> porque es el delimitador temporal que definimos.</li>
+        <li><code>DELIMITER ;</code>: devuelve el delimitador normal.</li>
+      </ol>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -1522,7 +1765,7 @@ DELIMITER ;</code></pre>
         <span class="code-filename">20b_validar_trigger.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>SELECT titulo, reproducciones FROM tbl_canciones WHERE id_cancion = 103;</code></pre>
+      <pre><code><span class="sql-kw-p">SELECT</span> titulo, reproducciones <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> id_cancion = 103;</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -1539,60 +1782,133 @@ DELIMITER ;</code></pre>
       <h3>12. Procedimientos almacenados (STORED PROCEDURES)</h3>
     </div>
     <p>
-      Un procedimiento almacenado es un bloque de código SQL con nombre que puede contener cualquier
-      combinación de sentencias, no solo <code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>.
-      También puede hacer <code>SELECT</code>, usar variables, condicionales (<code>IF</code>), bucles, y
-      hasta llamar a otros procedimientos. Simplemente agrupa lógica que quieres reutilizar bajo un solo
-      nombre, con parámetros de entrada y/o salida. Se define con <code>CREATE PROCEDURE</code> y se
-      ejecuta con <code>CALL</code>.
+      Un <strong>procedimiento almacenado</strong> es un bloque de código SQL guardado en la base de datos,
+      con un nombre, que <strong>se ejecuta cuando alguien lo llama</strong> con <code>CALL</code>. Puede
+      contener cualquier combinación de sentencias: <code>INSERT</code>, <code>UPDATE</code>,
+      <code>DELETE</code>, <code>SELECT</code>, variables, condicionales (<code>IF</code>), bucles, y hasta
+      llamar a otros procedimientos. Se define con <code>CREATE PROCEDURE</code> y admite parámetros de
+      entrada y/o salida.
     </p>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Cuándo usarlos:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li><strong>Tareas de varios pasos que van juntas:</strong> <code>sp_registrar_reproduccion</code> valida, inserta y deja que el trigger actualice el contador, todo con un solo <code>CALL</code>.</li>
+        <li><strong>Lógica que se repite en varios sistemas:</strong> web, app y reportes llaman al mismo procedimiento.</li>
+        <li><strong>Validar antes de escribir y operaciones "todo o nada":</strong> con <code>IF</code> y transacciones, si algo falla no se guarda nada.</li>
+        <li><strong>Mantenimiento y procesos por lotes:</strong> limpiar registros viejos o recalcular totales.</li>
+        <li><strong>Controlar el acceso:</strong> un usuario puede ejecutar el procedimiento (<code>EXECUTE</code>) sin tocar las tablas.</li>
+      </ol>
+      <p style="margin:0.7rem 0 0.3rem;"><strong>Por qué conviene:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li><strong>Reutilización:</strong> se escribe una vez y se llama muchas veces.</li>
+        <li><strong>Consistencia:</strong> todos los sistemas aplican las mismas reglas. Si cambia la regla, se corrige en un solo lugar.</li>
+        <li><strong>Menos tráfico:</strong> la aplicación envía un solo <code>CALL</code> en vez de varias consultas.</li>
+        <li><strong>Seguridad:</strong> los usuarios ejecutan la operación sin tocar las tablas. También ayuda contra la inyección SQL, porque los parámetros no se mezclan con el código.</li>
+        <li><strong>Mantenimiento:</strong> la lógica queda cerca de los datos, no repartida entre aplicaciones.</li>
+      </ul>
+      <p style="margin:0.7rem 0 0.3rem;"><strong>Cuándo no conviene:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li>Si la lógica es muy compleja o cambia mucho, suele ser más fácil de probar y versionar en el código de la aplicación.</li>
+        <li>Son más difíciles de depurar que el código normal.</li>
+        <li>Atan la lógica al motor de base de datos: si cambias de MySQL a otro motor, hay que reescribirlos.</li>
+      </ul>
+      <p style="margin:0.7rem 0 0;"><strong>En una frase:</strong> un procedimiento es una receta guardada con nombre: en vez de repetir los pasos cada vez, la llamas con <code>CALL</code> y la base de datos los ejecuta todos.</p>
+    </div>
+
+    <p style="margin-top:1rem;"><strong>Cómo crear un procedimiento.</strong> Esta es la estructura general en MySQL:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">21a_procedimiento_sintaxis.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="sql-kw-p">DELIMITER</span> //
+
+<span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">PROCEDURE</span> nombre_procedimiento(
+  <span class="sql-kw-b">IN</span> parametro_entrada TIPO,
+  <span class="sql-kw-b">OUT</span> parametro_salida TIPO
+)
+<span class="sql-kw-p">BEGIN</span>
+  -- sentencias SQL que se ejecutan al llamarlo
+<span class="sql-kw-p">END</span> //
+
+<span class="sql-kw-p">DELIMITER</span> ;
+
+-- Para ejecutarlo:
+<span class="sql-kw-p">CALL</span> nombre_procedimiento(valor, @resultado);</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Pasos para crearlo:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Decide qué tarea va a hacer y qué datos necesita. Los de entrada se declaran con <code>IN</code> y los de salida con <code>OUT</code>.</li>
+        <li>Escribe el cuerpo entre <code>BEGIN</code> y <code>END</code>: las sentencias, los <code>IF</code> y las validaciones que necesites.</li>
+        <li>Ejecuta el bloque completo en una pestaña SQL de Workbench, incluido el <code>DELIMITER</code>.</li>
+        <li>Compruébalo con <code>SHOW PROCEDURE STATUS WHERE Db = 'soundflow_db';</code> y pruébalo con <code>CALL</code>.</li>
+        <li>Si ya no lo necesitas, bórralo con <code>DROP PROCEDURE IF EXISTS nombre_procedimiento;</code></li>
+      </ol>
+    </div>
 
     <p style="margin-top:1rem;">
       Ejemplo: registrar una reproducción, pero solo si el usuario y la canción realmente existen (usando
       <code>IF</code> para controlar el flujo, y <code>EXISTS</code> para validar que los campos sí existan
       antes de hacer la inserción).
     </p>
-    <div class="content-box" style="margin-top:0.6rem;">
-      <p style="margin:0 0 0.4rem;"><strong>Se lee así:</strong></p>
-      <ul style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li><code>DELIMITER //</code> / <code>DELIMITER ;</code>: cambia y después restaura el símbolo de
-          fin de bloque, para que los <code>;</code> de adentro no corten el procedimiento antes de tiempo.</li>
-        <li><code>CREATE PROCEDURE sp_registrar_reproduccion(IN p_usuario INT, IN p_cancion INT) BEGIN ...
-          END</code>: crea el procedimiento con dos parámetros de entrada y el bloque de instrucciones que
-          se ejecuta al llamarlo.</li>
-        <li><code>IF EXISTS (...) AND EXISTS (...) THEN ... ELSE ... END IF</code>: si el usuario y la
-          canción existen, inserta la reproducción; si no, devuelve un mensaje de aviso.</li>
-        <li><code>CALL sp_registrar_reproduccion(10, 103)</code>: ejecuta el procedimiento con esos dos
-          valores.</li>
-      </ul>
+    <p style="margin-top:1rem;"><strong>Cómo crearlo en Workbench (clic derecho).</strong> El editor ya maneja el delimitador por ti, así que el código va sin <code>DELIMITER</code>:</p>
+    <div class="content-box" style="margin-top:0.6rem; font-size:0.88rem;">
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>En el panel izquierdo (Navigator), abre <code>soundflow_db</code>.</li>
+        <li>Clic derecho sobre <strong>Stored Procedures</strong> y elige <strong>Create Stored Procedure...</strong></li>
+        <li>Borra la plantilla y pega el código de abajo.</li>
+        <li>Pulsa <strong>Apply</strong>, revisa el script que muestra, vuelve a pulsar <strong>Apply</strong> y luego <strong>Finish</strong>.</li>
+        <li>Para ejecutarlo, abre una pestaña SQL y corre el <code>CALL</code>.</li>
+      </ol>
     </div>
     <div class="code-block" style="margin-top:0.8rem;">
       <div class="code-block-header">
         <span class="code-dot" style="background:#ff5f56"></span>
         <span class="code-dot" style="background:#ffbd2e"></span>
         <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">21_sp_registrar_reproduccion.sql</span>
+        <span class="code-filename">21b_sp_clic_derecho.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>DELIMITER //
-
-CREATE PROCEDURE sp_registrar_reproduccion(
-  IN p_usuario INT,
-  IN p_cancion INT
+      <pre><code>-- Crea el procedimiento con nombre y dos parámetros de entrada
+<span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">PROCEDURE</span> sp_registrar_reproduccion(
+  -- p_usuario: el id del usuario que reproduce
+  <span class="sql-kw-b">IN</span> p_usuario <span class="sql-kw-b">INT</span>,
+  -- p_cancion: el id de la canción reproducida
+  <span class="sql-kw-b">IN</span> p_cancion <span class="sql-kw-b">INT</span>
 )
-BEGIN
-  IF EXISTS (SELECT 1 FROM tbl_usuarios WHERE idusuario = p_usuario)
-     AND EXISTS (SELECT 1 FROM tbl_canciones WHERE id_cancion = p_cancion) THEN
-    INSERT INTO tbl_reproducciones (id_usuario, id_cancion) VALUES (p_usuario, p_cancion);
-  ELSE
-    SELECT 'Usuario o canción no existen' AS mensaje;
-  END IF;
-END //
-
-DELIMITER ;
-
--- Para usarlo:
-CALL sp_registrar_reproduccion(10, 103);</code></pre>
+-- Abre el cuerpo del procedimiento
+<span class="sql-kw-p">BEGIN</span>
+  -- Primero valida: ¿existe el usuario?
+  <span class="sql-kw-p">IF</span> <span class="sql-kw-b">EXISTS</span> (<span class="sql-kw-p">SELECT</span> 1 <span class="sql-kw-p">FROM</span> tbl_usuarios <span class="sql-kw-p">WHERE</span> idusuario = p_usuario)
+     -- ...y además, ¿existe la canción?
+     <span class="sql-kw-b">AND</span> <span class="sql-kw-b">EXISTS</span> (<span class="sql-kw-p">SELECT</span> 1 <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> id_cancion = p_cancion) <span class="sql-kw-p">THEN</span>
+    -- Si ambos existen, registra la reproducción (el trigger sumará 1 al contador)
+    <span class="sql-kw-p">INSERT</span> <span class="sql-kw-p">INTO</span> tbl_reproducciones (id_usuario, id_cancion) <span class="sql-kw-p">VALUES</span> (p_usuario, p_cancion);
+  -- Si alguno no existe, no inserta nada
+  <span class="sql-kw-p">ELSE</span>
+    -- y devuelve un mensaje de aviso
+    <span class="sql-kw-p">SELECT</span> 'Usuario o canción no existen' <span class="sql-kw-b">AS</span> mensaje;
+  -- Cierra el IF
+  <span class="sql-kw-p">END</span> <span class="sql-kw-p">IF</span>;
+<span class="sql-kw-p">END</span></code></pre>
+    </div>
+    <p style="margin-top:1rem;">Y para ejecutarlo, en una pestaña SQL:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">21c_call_sp.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>-- Ejecuta el procedimiento con el usuario 10 y la canción 103
+<span class="sql-kw-p">CALL</span> sp_registrar_reproduccion(10, 103);
+--                             │    └── p_cancion = 103
+--                             └─────── p_usuario  = 10</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -1611,6 +1927,42 @@ CALL sp_registrar_reproduccion(10, 103);</code></pre>
         que saber que ese trigger existe.
       </p>
     </div>
+    <p style="margin-top:1.2rem;"><strong>Comparando antes y después de la ejecución.</strong> Para comprobar que el trigger se disparó, mira el contador de la canción antes y después del <code>CALL</code>:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">21d_comparar_antes_despues.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>-- ANTES: anota el valor del contador
+<span class="sql-kw-p">SELECT</span> titulo, reproducciones <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> id_cancion = 103;
+
+-- EJECUCIÓN: llama al procedimiento
+<span class="sql-kw-p">CALL</span> sp_registrar_reproduccion(10, 103);
+
+-- DESPUÉS: repite la misma consulta y compara
+<span class="sql-kw-p">SELECT</span> titulo, reproducciones <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> id_cancion = 103;</code></pre>
+    </div>
+    <div style="overflow-x:auto; margin-top:0.6rem;">
+      <table style="border-collapse:collapse; width:100%; font-size:0.82rem;">
+        <thead>
+          <tr style="background:#232830;">
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Momento</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">reproducciones de Mi Tierra</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Qué lo explica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Antes del <code>CALL</code></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><code>3200000</code></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Valor inicial.</td></tr>
+          <tr><td style="padding:0.4rem 0.7rem;">Después del <code>CALL</code></td><td style="padding:0.4rem 0.7rem;"><code>3200001</code></td><td style="padding:0.4rem 0.7rem;">El procedimiento hizo el <code>INSERT</code> y el trigger sumó 1 por su cuenta.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0;">Si el valor sube en 1, el trigger funcionó. Si no cambia, revisa que el trigger exista con <code>SHOW TRIGGERS;</code> y que el procedimiento no haya devuelto el mensaje "Usuario o canción no existen". Si ya habías ejecutado el <code>CALL</code> antes, compara siempre con el valor justo antes de la nueva ejecución.</p>
+    </div>
   </div>
 
   <!-- ===================== 14. FUNCIONES ===================== -->
@@ -1619,36 +1971,126 @@ CALL sp_registrar_reproduccion(10, 103);</code></pre>
       <h3>13. Funciones almacenadas (STORED FUNCTIONS)</h3>
     </div>
     <p>
-      Una <strong>función almacenada</strong> se parece a un procedimiento, pero con una diferencia clave:
-      siempre <strong>devuelve un valor</strong>, y ese valor se puede usar directo dentro de un
-      <code>SELECT</code>, igual que usarías <code>COUNT()</code> o <code>NOW()</code>. Se define con
-      <code>CREATE FUNCTION</code> en vez de <code>CREATE PROCEDURE</code>, y no se ejecuta con
-      <code>CALL</code>: se llama como cualquier otra función, dentro de una consulta.
+      Una <strong>función almacenada</strong> es un bloque de código guardado en la base de datos que
+      <strong>calcula y devuelve un valor</strong>, y se usa <strong>dentro de una consulta</strong>, igual
+      que <code>COUNT()</code>, <code>UPPER()</code> o <code>NOW()</code>. Se define con
+      <code>CREATE FUNCTION</code> y no se ejecuta con <code>CALL</code>.
     </p>
-    <p style="margin-top:1rem;">
-      Ejemplo: una función que cuenta cuántas veces se ha reproducido una canción, el mismo cálculo que ya
-      hiciste con la subconsulta correlacionada de la sección de Subconsultas, pero empaquetado para
-      reutilizarlo:
-    </p>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Cuándo usarlas:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li><strong>Un cálculo que repites en muchas consultas:</strong> <code>fn_total_reproducciones(id_cancion)</code> cuenta cuántas veces se reprodujo una canción. En vez de repetir la subconsulta, la llamas con el id.</li>
+        <li><strong>Dar formato o limpiar valores:</strong> convertir una duración en segundos a <code>mm:ss</code>, o armar un nombre completo.</li>
+        <li><strong>Reglas de cálculo del negocio:</strong> un descuento, un impuesto, la edad a partir de una fecha. Así todos los reportes calculan lo mismo.</li>
+        <li><strong>Usar el resultado en <code>SELECT</code>, <code>WHERE</code> u <code>ORDER BY</code>:</strong> eso un procedimiento no lo permite.</li>
+      </ol>
+      <p style="margin:0.7rem 0 0.3rem;"><strong>Por qué conviene:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li><strong>Reutilización:</strong> se escribe una vez y se usa en cualquier consulta.</li>
+        <li><strong>Consistencia:</strong> todos calculan igual. Si cambia la regla, se corrige en un solo lugar.</li>
+        <li><strong>Consultas más cortas:</strong> el <code>SELECT</code> queda legible, sin subconsultas repetidas.</li>
+      </ul>
+      <p style="margin:0.7rem 0 0.3rem;"><strong>Cuándo no conviene:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li>En tablas muy grandes: una función que consulta otra tabla se ejecuta por <strong>cada fila</strong> y puede volver lenta la consulta.</li>
+        <li>Para operaciones que modifican datos (<code>INSERT</code>, <code>UPDATE</code>): para eso están los procedimientos.</li>
+        <li>Si el cálculo cabe en una expresión simple, no hace falta una función.</li>
+      </ul>
+      <p style="margin:0.7rem 0 0;"><strong>En una frase:</strong> una función es una calculadora con nombre: le das un dato, te devuelve un resultado, y la puedes usar dentro de cualquier consulta.</p>
+    </div>
+    <p style="margin-top:1rem;"><strong>Cómo crear una función.</strong> Esta es la estructura general en MySQL:</p>
     <div class="code-block" style="margin-top:0.6rem;">
       <div class="code-block-header">
         <span class="code-dot" style="background:#ff5f56"></span>
         <span class="code-dot" style="background:#ffbd2e"></span>
         <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">22_fn_total_reproducciones.sql</span>
+        <span class="code-filename">22a_funcion_sintaxis.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>CREATE FUNCTION fn_total_reproducciones(p_cancion INT) RETURNS INT
-DETERMINISTIC
-BEGIN
-  DECLARE total INT;
-  SELECT COUNT(*) INTO total FROM tbl_reproducciones WHERE id_cancion = p_cancion;
-  RETURN total;
-END;
+      <pre><code><span class="sql-kw-p">DELIMITER</span> //
 
--- Se usa dentro de un SELECT, como cualquier otra función:
-SELECT titulo, fn_total_reproducciones(id_cancion) AS veces_en_el_log
-FROM tbl_canciones;</code></pre>
+<span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">FUNCTION</span> nombre_funcion(parametro TIPO)
+<span class="sql-kw-b">RETURNS</span> TIPO_RETORNO
+<span class="sql-kw-b">DETERMINISTIC</span>
+<span class="sql-kw-p">BEGIN</span>
+  <span class="sql-kw-p">DECLARE</span> variable TIPO;
+  -- sentencias que calculan el valor
+  <span class="sql-kw-p">RETURN</span> variable;
+<span class="sql-kw-p">END</span> //
+
+<span class="sql-kw-p">DELIMITER</span> ;
+
+-- Para usarla, dentro de una consulta:
+<span class="sql-kw-p">SELECT</span> nombre_funcion(valor);</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Pasos para crearla:</strong></p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Decide qué va a calcular, qué datos recibe y de qué tipo es el valor que devuelve (<code>RETURNS</code>).</li>
+        <li>Escribe el cuerpo entre <code>BEGIN</code> y <code>END</code>. Siempre debe terminar con un <code>RETURN</code> que entregue el valor.</li>
+        <li>Agrega <code>DETERMINISTIC</code> si, con los mismos datos de entrada, siempre devuelve el mismo resultado.</li>
+        <li>Ejecuta el bloque completo en una pestaña SQL de Workbench, incluido el <code>DELIMITER</code>.</li>
+        <li>Compruébala con <code>SHOW FUNCTION STATUS WHERE Db = 'soundflow_db';</code> y pruébala dentro de un <code>SELECT</code>.</li>
+        <li>Si ya no la necesitas, bórrala con <code>DROP FUNCTION IF EXISTS nombre_funcion;</code></li>
+      </ol>
+    </div>
+
+    <p style="margin-top:1rem;">
+      Ejemplo: una función que cuenta cuántas veces se ha reproducido una canción, el mismo cálculo que ya
+      hiciste con la subconsulta correlacionada de la sección de Subconsultas, pero empaquetado para
+      reutilizarlo:
+    </p>
+    <p style="margin-top:1rem;"><strong>Cómo crearla en Workbench (clic derecho).</strong> El editor ya maneja el delimitador por ti, así que el código va sin <code>DELIMITER</code>:</p>
+    <div class="content-box" style="margin-top:0.6rem; font-size:0.88rem;">
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>En el panel izquierdo (Navigator), abre <code>soundflow_db</code>.</li>
+        <li>Clic derecho sobre <strong>Functions</strong> y elige <strong>Create Function...</strong></li>
+        <li>Borra la plantilla y pega el código de abajo.</li>
+        <li>Pulsa <strong>Apply</strong>, revisa el script que muestra, vuelve a pulsar <strong>Apply</strong> y luego <strong>Finish</strong>.</li>
+        <li>Para usarla, abre una pestaña SQL y corre el <code>SELECT</code>.</li>
+      </ol>
+    </div>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">22b_fn_clic_derecho.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>-- Crea la función con nombre y un parámetro de entrada
+<span class="sql-kw-p">CREATE</span> <span class="sql-kw-p">FUNCTION</span> fn_total_reproducciones(p_cancion <span class="sql-kw-b">INT</span>)
+-- Declara que devuelve un número entero
+<span class="sql-kw-b">RETURNS</span> <span class="sql-kw-b">INT</span>
+-- Con el mismo dato de entrada, siempre da el mismo resultado
+<span class="sql-kw-b">DETERMINISTIC</span>
+-- Abre el cuerpo de la función
+<span class="sql-kw-p">BEGIN</span>
+  -- Variable local para guardar el conteo
+  <span class="sql-kw-p">DECLARE</span> total <span class="sql-kw-b">INT</span>;
+  -- Cuenta las reproducciones de la canción y guarda el resultado en total
+  <span class="sql-kw-p">SELECT</span> <span class="sql-kw-b">COUNT</span>(*) INTO total <span class="sql-kw-p">FROM</span> tbl_reproducciones <span class="sql-kw-p">WHERE</span> id_cancion = p_cancion;
+  -- Devuelve el valor calculado
+  <span class="sql-kw-p">RETURN</span> total;
+<span class="sql-kw-p">END</span></code></pre>
+    </div>
+    <p style="margin-top:1rem;">Y para usarla, en una pestaña SQL:</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">22c_usar_fn.sql</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>-- Se usa dentro de un SELECT, como cualquier otra función:
+-- Pide el título de cada canción
+<span class="sql-kw-p">SELECT</span> titulo,
+  -- Llama a la función con el id de cada canción; el número que devuelve
+  -- queda en la columna veces_en_el_log
+  fn_total_reproducciones(id_cancion) <span class="sql-kw-b">AS</span> veces_en_el_log
+-- Recorre todas las canciones; la función se ejecuta una vez por cada fila
+<span class="sql-kw-p">FROM</span> tbl_canciones;</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0 0 0.4rem;"><strong>Se lee así:</strong></p>
@@ -1670,6 +2112,33 @@ FROM tbl_canciones;</code></pre>
         aparte con <code>CALL</code>; una función siempre devuelve un valor y se usa dentro de una consulta,
         no aparte.
       </p>
+    </div>
+    <p style="margin-top:1.2rem;"><strong>Diferencia entre una vista y una función.</strong> Las dos guardan una consulta, pero lo que devuelven es distinto: la vista devuelve una <strong>tabla</strong> y la función devuelve <strong>un solo valor</strong>.</p>
+    <div style="overflow-x:auto; margin-top:0.6rem;">
+      <table style="border-collapse:collapse; width:100%; font-size:0.82rem;">
+        <thead>
+          <tr style="background:#232830;">
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;"></th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Vista</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Función</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Devuelve</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">una tabla (varias filas y columnas)</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">un solo valor</td></tr>
+          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Va en</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><code>FROM</code></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><code>SELECT</code>, <code>WHERE</code>, <code>ORDER BY</code></td></tr>
+          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Recibe parámetros</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">No</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Sí (por ejemplo <code>p_cancion</code>)</td></tr>
+          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Para qué sirve</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">reutilizar una consulta completa o mostrar solo ciertas columnas</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">reutilizar un cálculo</td></tr>
+          <tr><td style="padding:0.4rem 0.7rem;"><strong>Ejemplo del curso</strong></td><td style="padding:0.4rem 0.7rem;"><code>vista_catalogo_completo</code></td><td style="padding:0.4rem 0.7rem;"><code>fn_total_reproducciones</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Cuál usar:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li><strong>Vista</strong>, si necesitas un resultado con varias columnas (canción, álbum y artista) o quieres ocultar columnas sensibles a otros usuarios.</li>
+        <li><strong>Función</strong>, si necesitas un número o un texto calculado para cada fila, a partir de un dato que le pasas.</li>
+      </ul>
+      <p style="margin:0.7rem 0 0;"><strong>En una frase:</strong> si quiero una tabla ya armada, uso una vista; si quiero un valor calculado, uso una función.</p>
     </div>
   </div>
 
@@ -1703,21 +2172,33 @@ FROM tbl_canciones;</code></pre>
       <h3>¿Cuándo usar vista, procedimiento, función o trigger?</h3>
     </div>
     <div style="overflow-x:auto;">
-      <table style="border-collapse:collapse; width:100%; font-size:0.82rem;">
+      <table style="border-collapse:collapse; width:100%; font-size:0.8rem;">
         <thead>
           <tr style="background:#232830;">
-            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Herramienta</th>
-            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Qué es</th>
-            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Cuándo usarla</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff; white-space:nowrap;">Herramienta</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff; white-space:nowrap;">Qué es</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff; white-space:nowrap;">Cómo se activa</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff; white-space:nowrap;">Qué devuelve</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff; white-space:nowrap;">Cuándo usarla</th>
+            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff; white-space:nowrap;">Ejemplo en soundflow_db</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><code>VIEW</code></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Un SELECT guardado, se consulta como una tabla</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Reutilizar consultas repetidas, u ocultar columnas sensibles</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><code>PROCEDURE</code></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Lógica con nombre, parámetros, varias sentencias</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Encapsular una acción que se repite (registrar una reproducción)</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><code>FUNCTION</code></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Como un procedimiento, pero devuelve un valor</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Usar el resultado directo dentro de un SELECT</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem;"><code>TRIGGER</code></td><td style="padding:0.4rem 0.7rem;">Código que se dispara solo, ante INSERT/UPDATE/DELETE</td><td style="padding:0.4rem 0.7rem;">Mantener datos derivados sincronizados automáticamente (contadores)</td></tr>
+          <tr><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);"><code style="color:#6cb6ff; font-weight:700;">VIEW</code></td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Un <code>SELECT</code> guardado con nombre</td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Se consulta en el <code>FROM</code>, como una tabla</td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Una <strong>tabla</strong> (filas y columnas)</td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Reutilizar una consulta que repites, u ocultar columnas sensibles a otros usuarios</td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);" ><code>SELECT * FROM vista_catalogo_completo</code></td></tr>
+          <tr><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);"><code style="color:#c792ea; font-weight:700;">PROCEDURE</code></td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Bloque de lógica con nombre y parámetros, con varias sentencias</td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Alguien lo llama con <code>CALL</code></td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Nada, o parámetros de salida</td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Agrupar una acción de varios pasos que se repite, con validaciones</td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);" ><code>CALL sp_registrar_reproduccion(10, 103)</code></td></tr>
+          <tr><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);"><code style="color:#8fd6c4; font-weight:700;">FUNCTION</code></td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Como un procedimiento, pero siempre devuelve un valor</td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Se usa dentro de una consulta, como <code>COUNT()</code></td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Un solo <strong>valor</strong></td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);">Reutilizar un cálculo y usar su resultado en un <code>SELECT</code> o <code>WHERE</code></td><td style="padding:0.5rem 0.7rem; vertical-align:top; border-bottom:1px solid var(--border);" ><code>SELECT fn_total_reproducciones(id_cancion)</code></td></tr>
+          <tr><td style="padding:0.5rem 0.7rem; vertical-align:top;"><code style="color:#f0c47e; font-weight:700;">TRIGGER</code></td><td style="padding:0.5rem 0.7rem; vertical-align:top;">Código asociado a una tabla</td><td style="padding:0.5rem 0.7rem; vertical-align:top;">Se dispara <strong>solo</strong> ante <code>INSERT</code>, <code>UPDATE</code> o <code>DELETE</code></td><td style="padding:0.5rem 0.7rem; vertical-align:top;">Nada</td><td style="padding:0.5rem 0.7rem; vertical-align:top;">Mantener datos derivados al día, auditar cambios o validar datos automáticamente</td><td style="padding:0.5rem 0.7rem; vertical-align:top;" ><code>trg_after_insert_reproduccion</code> suma 1 al contador</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0 0 0.4rem;"><strong>Cómo decidir rápido:</strong></p>
+      <ul style="margin:0; padding-left:1.2rem;">
+        <li>¿Quiero ver una <strong>tabla ya armada</strong>? Vista.</li>
+        <li>¿Quiero <strong>ejecutar una tarea</strong> de varios pasos cuando yo lo decida? Procedimiento.</li>
+        <li>¿Quiero <strong>calcular un valor</strong> para usarlo dentro de una consulta? Función.</li>
+        <li>¿Quiero que algo ocurra <strong>automáticamente</strong> cuando cambian los datos? Trigger.</li>
+      </ul>
     </div>
   </div>
 
@@ -2039,14 +2520,14 @@ window.WEEK_CONTENT_3_2 = `
         <span class="code-filename">05_transaccion.sql</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>START TRANSACTION;
+      <pre><code><span class="sql-kw-p">START</span> <span class="sql-kw-p">TRANSACTION</span>;
 
-INSERT INTO tbl_reproducciones (id_usuario, id_cancion) VALUES (6, 108);
-INSERT INTO tbl_reproducciones (id_usuario, id_cancion) VALUES (7, 999); -- id_cancion 999 no existe
+<span class="sql-kw-p">INSERT</span> <span class="sql-kw-p">INTO</span> tbl_reproducciones (id_usuario, id_cancion) <span class="sql-kw-p">VALUES</span> (6, 108);
+<span class="sql-kw-p">INSERT</span> <span class="sql-kw-p">INTO</span> tbl_reproducciones (id_usuario, id_cancion) <span class="sql-kw-p">VALUES</span> (7, 999); -- id_cancion 999 no existe
 
 -- Esta segunda sentencia falla: viola la FK hacia tbl_canciones.
 -- Si ya hubieras insertado algo antes en esta misma transacción y quieres deshacer todo:
-ROLLBACK;
+<span class="sql-kw-p">ROLLBACK</span>;
 
 -- Si en cambio las dos sentencias hubieran salido bien, confirmarías con:
 -- COMMIT;</code></pre>
@@ -2096,13 +2577,13 @@ ROLLBACK;
         <text x="482" y="95" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#4a7c9e">ejecuta la consulta</text>
 
         <!-- Base de datos -->
-        <rect x="530" y="35" width="140" height="140" rx="10" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.5"/>
-        <rect x="530" y="35" width="140" height="30" rx="10" fill="#7fa5a3"/>
-        <rect x="530" y="55" width="140" height="10" fill="#7fa5a3"/>
+        <rect x="530" y="35" width="140" height="140" rx="10" fill="#ffffff" stroke="#8aae3f" stroke-width="1.5"/>
+        <rect x="530" y="35" width="140" height="30" rx="10" fill="#8aae3f"/>
+        <rect x="530" y="55" width="140" height="10" fill="#8aae3f"/>
         <text x="600" y="55" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700">MySQL</text>
-        <path d="M583 76 v18 c0 2.8 7.6 5 17 5 s17 -2.2 17 -5 v-18" fill="#eaf5f4" stroke="#7fa5a3" stroke-width="1.2"/>
-        <ellipse cx="600" cy="94" rx="17" ry="5" fill="#eaf5f4" stroke="#7fa5a3" stroke-width="1.2"/>
-        <ellipse cx="600" cy="76" rx="17" ry="5" fill="#eaf5f4" stroke="#7fa5a3" stroke-width="1.2"/>
+        <path d="M583 76 v18 c0 2.8 7.6 5 17 5 s17 -2.2 17 -5 v-18" fill="#eaf5f4" stroke="#8aae3f" stroke-width="1.2"/>
+        <ellipse cx="600" cy="94" rx="17" ry="5" fill="#eaf5f4" stroke="#8aae3f" stroke-width="1.2"/>
+        <ellipse cx="600" cy="76" rx="17" ry="5" fill="#eaf5f4" stroke="#8aae3f" stroke-width="1.2"/>
         <text x="600" y="118" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">soundflow_db</text>
         <text x="600" y="138" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#a83a3a">devuelve datos sin</text>
         <text x="600" y="153" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#a83a3a">autorización real</text>
@@ -2196,7 +2677,7 @@ cursor.execute(query)</code></pre>
         <code style="color:#a83a3a; font-weight:700;">Pop' OR '1'='1</code>, el texto final que le llega a
         MySQL queda así:
       </p>
-      <div class="sql" style="margin-top:0.5rem;">SELECT titulo FROM tbl_canciones WHERE genero = 'Pop' OR '1'='1'</div>
+      <div class="sql" style="margin-top:0.5rem;"><span class="sql-kw-p">SELECT</span> titulo <span class="sql-kw-p">FROM</span> tbl_canciones <span class="sql-kw-p">WHERE</span> genero = 'Pop' <span class="sql-kw-b">OR</span> '1'='1'</div>
       <p style="margin:0.6rem 0 0;">
         Como <code>'1'='1'</code> siempre es verdadero, el <code>WHERE</code> deja de filtrar: la consulta
         devuelve <strong>todas</strong> las canciones de la tabla, sin importar el género. Esto es
@@ -2226,7 +2707,7 @@ cursor.execute(query)</code></pre>
         Si alguien escribe como usuario <code style="color:#a83a3a; font-weight:700;">admin' -- </code> (con
         espacio al final), la consulta queda:
       </p>
-      <div class="sql" style="margin-top:0.5rem;">SELECT * FROM tbl_usuarios WHERE nombre = 'admin' -- ' AND password_hash = '...'</div>
+      <div class="sql" style="margin-top:0.5rem;"><span class="sql-kw-p">SELECT</span> * <span class="sql-kw-p">FROM</span> tbl_usuarios <span class="sql-kw-p">WHERE</span> nombre = 'admin' -- ' AND password_hash = '...'</div>
       <p style="margin:0.6rem 0 0;">
         En SQL, <code>--</code> inicia un comentario: todo lo que sigue en esa línea se ignora. La
         verificación de la contraseña <strong>nunca se ejecuta</strong>, y quien escribió esto entraría como

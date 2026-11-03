@@ -1728,3 +1728,15 @@ footer {
 
 .query-log-counter.query-log-malo { color: #e0605a; }
 .query-log-counter.query-log-bueno { color: #6f9d7c; }
+
+
+/* ---------- Palabras reservadas SQL: morado (comandos y cláusulas) y azul (operadores y funciones) ---------- */
+.sql-kw-p {
+  color: #c792ea;
+  font-weight: 600;
+}
+
+.sql-kw-b {
+  color: #6cb6ff;
+  font-weight: 600;
+}
