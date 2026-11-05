@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block titulo %}Iniciar sesión{% endblock %}
+{% block contenido %}
+  <section class="tarjeta tarjeta-auth">
+    <h1>Bienvenido</h1>
+    <p class="sub">Inicia sesión para ver tu música.</p>
+    <form method="POST" class="formulario">
+      <label>Correo <input type="email" name="email" required></label>
+      <label>Contraseña <input type="password" name="password" required></label>
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+    <p class="pie">¿No tienes cuenta? <a href="{{ url_for('registro') }}">Regístrate</a></p>
+  </section>
+{% endblock %}

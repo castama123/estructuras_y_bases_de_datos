@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block titulo %}Crear cuenta{% endblock %}
+{% block contenido %}
+  <section class="tarjeta tarjeta-auth">
+    <h1>Crea tu cuenta</h1>
+    <p class="sub">Empieza a escuchar sin límites.</p>
+    <form method="POST" class="formulario">
+      <label>Nombre <input type="text" name="nombre" required></label>
+      <label>Correo <input type="email" name="email" required></label>
+      <label>Contraseña <input type="password" name="password" required></label>
+      <button type="submit" class="btn">Crear cuenta</button>
+    </form>
+    <p class="pie">¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a></p>
+  </section>
+{% endblock %}

@@ -30,9 +30,9 @@ const WEEKS = [
   {
     n: 3,
     titulo: "Joins, vistas, procedimientos, triggers, transacciones y despliegue",
-    tituloClase1: "Joins, UNION, subconsultas, índices, vistas, procedimientos y triggers",
-    tituloClase2: "Conexión segura, SQL injection, transacciones y despliegue",
-    resumen: "INNER, LEFT, RIGHT, FULL OUTER, CROSS y SELF JOIN, UNION, subconsultas, índices, vistas, procedimientos y triggers; luego conexión desde Python, SQL injection, transacciones, despliegue y diseño de BD.",
+    tituloClase1: "Joins, UNION, subconsultas e índices",
+    tituloClase2: "Vistas, procedimientos, triggers y funciones; transacciones y una aplicación Flask conectada a MySQL",
+    resumen: "INNER, LEFT, RIGHT, FULL OUTER, CROSS y SELF JOIN, UNION, subconsultas, índices, vistas, procedimientos y triggers; luego transacciones, una aplicación Flask conectada a MySQL y diseño de BD.",
     objetivos: "Combinar múltiples tablas con distintos tipos de JOIN y UNION, usar subconsultas e índices, empaquetar lógica con vistas, procedimientos y triggers, y llevar una aplicación a producción de forma segura.",
     embed: "",
     descarga: "presentaciones/semana-03.pdf",

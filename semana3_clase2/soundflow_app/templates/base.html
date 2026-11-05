@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}SoundFlow{% endblock %}</title>
+  <!-- Aquí se llama al CSS que está en la carpeta static -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="barra">
+    <a class="logo" href="{{ url_for('inicio') }}">♪ SoundFlow</a>
+    {% if session.get('usuario_nombre') %}
+      <div class="barra-usuario">
+        <span>{{ session['usuario_nombre'] }}</span>
+        <a class="btn-link" href="{{ url_for('logout') }}">Cerrar sesión</a>
+      </div>
+    {% endif %}
+  </header>
+  <main class="contenedor">
+    {% for m in get_flashed_messages() %}
+      <div class="aviso">{{ m }}</div>
+    {% endfor %}
+    {% block contenido %}{% endblock %}
+  </main>
+</body>
+</html>
