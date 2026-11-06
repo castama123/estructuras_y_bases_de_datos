@@ -20,7 +20,7 @@ const WEEKS = [
     n: 2,
     titulo: "Consultas SQL avanzadas y normalización",
     tituloClase1: "Consultas SQL avanzadas y normalización",
-    tituloClase2: "Estructuras de datos lineales y no lineales",
+    tituloClase2: "Estructuras de datos: arreglos, listas, pilas, colas, grafos, árboles y tries",
     resumen: "DISTINCT, ORDER BY, operadores, LIKE, IN, BETWEEN, LIMIT y funciones de agregación; normalización y estructuras no lineales.",
     objetivos: "Refinar consultas SQL con filtros, patrones y funciones de agregación, como base para normalización y modelado con grafos.",
     embed: "",

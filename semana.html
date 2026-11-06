@@ -31,6 +31,9 @@
 
 <main>
   <div class="week-detail">
+    <div class="pdf-bar">
+      <button type="button" class="btn-pdf" id="pdfBtn">&#11015; Descarga tu clase acá en PDF</button>
+    </div>
     <h2 id="detailTitulo"></h2>
     <p class="objetivos" id="detailObjetivos"></p>
 
@@ -153,6 +156,33 @@
   const nextEl = document.getElementById('nextWeek');
   if (prev) { prevEl.href = `semana.html?n=${prev.n}`; } else { prevEl.style.visibility = 'hidden'; }
   if (next) { nextEl.href = `semana.html?n=${next.n}`; } else { nextEl.style.visibility = 'hidden'; }
+</script>
+
+<script>
+  // Descargar la clase abierta como PDF: abre el diálogo de impresión del navegador
+  // (opción "Guardar como PDF"). Así el PDF siempre refleja el contenido actual.
+  document.getElementById('pdfBtn').addEventListener('click', () => {
+    const tabs = document.getElementById('classTabs');
+    const activeTab = tabs.querySelector('.class-tab.active');
+    const hayClases = tabs.style.display !== 'none' && activeTab;
+    const cls = hayClases ? activeTab.dataset.class : null;
+    const titulo = (cls === '2' ? week.tituloClase2 : week.tituloClase1) || week.titulo;
+    const tituloAnterior = document.title;
+    document.title = 'Semana ' + week.n + (cls ? ' - Clase ' + cls : '') + ' - ' + titulo;
+
+    // Abre las preguntas frecuentes (details) para que salgan completas en el PDF
+    const details = Array.from(document.querySelectorAll('#weekContent details, #weekContent2 details'));
+    const estado = details.map(d => d.open);
+    details.forEach(d => { d.open = true; });
+
+    const restaurar = () => {
+      document.title = tituloAnterior;
+      details.forEach((d, i) => { d.open = estado[i]; });
+      window.removeEventListener('afterprint', restaurar);
+    };
+    window.addEventListener('afterprint', restaurar);
+    window.print();
+  });
 </script>
 
 </body>

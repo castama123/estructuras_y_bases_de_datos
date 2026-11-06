@@ -1668,9 +1668,8 @@ HAVING AVG(reproducciones) > 10000000;</code></pre>
 
 window.WEEK_CONTENT_2_2 = `
 
-  <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">¿Qué es una estructura de datos?</h2>
+  <h2 style="color:var(--accent); font-size:1.4rem; margin:0 0 1.2rem; text-align:center;">Guía de estructuras de datos</h2>
 
-  <!-- ===================== 0. ¿QUÉ ES UNA ESTRUCTURA DE DATOS? ===================== -->
   <div class="activity-section" style="border-top:none; padding-top:0;">
     <p>
       Una <strong>estructura de datos</strong> es una forma de organizar y guardar datos en la memoria de
@@ -1680,1974 +1679,530 @@ window.WEEK_CONTENT_2_2 = `
     </p>
     <p>
       Piénsalo como organizar un clóset: puedes tirar toda la ropa en un montón (funciona, pero buscar algo
-      es lento), o puedes colgarla por tipo y color (toma más trabajo organizarla, pero encontrar lo que
-      necesitas es inmediato). Las estructuras de datos son justamente eso: distintas formas de "acomodar
-      el clóset" según qué necesites hacer con la información después.
+      es lento), o colgarla por tipo y color (toma más trabajo organizarla, pero encontrar lo que necesitas
+      es inmediato). En esta clase ves siete estructuras, qué hace cada una, dónde se usa y
+      <strong>cómo se escribe en Python</strong>.
     </p>
-
-    <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" style="max-width:700px; width:100%; height:auto; display:block; margin:1rem auto 0;">
-      <rect x="10" y="10" width="320" height="320" rx="12" fill="none" stroke="#c44444" stroke-width="2" stroke-dasharray="6,4"/>
-      <text x="170" y="40" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#c44444">Montón desordenado</text>
-
-      <rect x="60" y="65" width="50" height="35" rx="6" fill="#c99a4e" transform="rotate(15 85 82)"/>
-      <rect x="150" y="55" width="45" height="40" rx="6" fill="#5b7c99" transform="rotate(-20 172 75)"/>
-      <rect x="220" y="85" width="55" height="30" rx="6" fill="#7fa5a3" transform="rotate(10 247 100)"/>
-      <rect x="90" y="125" width="48" height="38" rx="6" fill="#8b7fb8" transform="rotate(-8 114 144)"/>
-      <rect x="180" y="135" width="50" height="35" rx="6" fill="#c44444" transform="rotate(25 205 152)"/>
-      <rect x="50" y="185" width="45" height="40" rx="6" fill="#5b9aa0" transform="rotate(-15 72 205)"/>
-      <rect x="140" y="195" width="55" height="30" rx="6" fill="#c99a4e" transform="rotate(18 167 210)"/>
-      <rect x="220" y="175" width="48" height="38" rx="6" fill="#5b7c99" transform="rotate(-12 244 194)"/>
-      <rect x="80" y="245" width="50" height="35" rx="6" fill="#8b7fb8" transform="rotate(8 105 262)"/>
-      <rect x="180" y="250" width="45" height="40" rx="6" fill="#7fa5a3" transform="rotate(-22 202 270)"/>
-      <text x="170" y="320" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-style="italic" fill="var(--text-dim)">buscar algo aquí: lento</text>
-
-      <text x="350" y="180" text-anchor="middle" font-size="26" fill="var(--text-dim)">&rarr;</text>
-
-      <rect x="370" y="10" width="320" height="320" rx="12" fill="none" stroke="#6f9d7c" stroke-width="2"/>
-      <text x="530" y="40" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#6f9d7c">Organizado por tipo y color</text>
-
-      <rect x="395" y="65" width="40" height="30" rx="6" fill="#5b7c99"/>
-      <rect x="445" y="65" width="40" height="30" rx="6" fill="#5b7c99"/>
-      <rect x="495" y="65" width="40" height="30" rx="6" fill="#5b7c99"/>
-      <rect x="545" y="65" width="40" height="30" rx="6" fill="#5b7c99"/>
-      <rect x="595" y="65" width="40" height="30" rx="6" fill="#5b7c99"/>
-
-      <rect x="395" y="110" width="40" height="30" rx="6" fill="#7fa5a3"/>
-      <rect x="445" y="110" width="40" height="30" rx="6" fill="#7fa5a3"/>
-      <rect x="495" y="110" width="40" height="30" rx="6" fill="#7fa5a3"/>
-      <rect x="545" y="110" width="40" height="30" rx="6" fill="#7fa5a3"/>
-
-      <rect x="395" y="155" width="40" height="30" rx="6" fill="#8b7fb8"/>
-      <rect x="445" y="155" width="40" height="30" rx="6" fill="#8b7fb8"/>
-      <rect x="495" y="155" width="40" height="30" rx="6" fill="#8b7fb8"/>
-
-      <rect x="395" y="200" width="40" height="30" rx="6" fill="#c99a4e"/>
-      <rect x="445" y="200" width="40" height="30" rx="6" fill="#c99a4e"/>
-      <rect x="495" y="200" width="40" height="30" rx="6" fill="#c99a4e"/>
-      <rect x="545" y="200" width="40" height="30" rx="6" fill="#c99a4e"/>
-
-      <rect x="395" y="245" width="40" height="30" rx="6" fill="#c44444"/>
-      <rect x="445" y="245" width="40" height="30" rx="6" fill="#c44444"/>
-
-      <text x="530" y="320" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-style="italic" fill="var(--text-dim)">buscar algo aquí: inmediato</text>
-    </svg>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Ya usaste estructuras de datos sin llamarlas así: un <code>arreglo</code> o una <code>lista</code>
-        (las filas de una tabla SQL, por ejemplo) es una estructura de datos <strong>lineal</strong>. Hoy
-        vamos a profundizar en varias estructuras lineales, arreglos, listas enlazadas, pilas y colas, y a
-        conocer varias <strong>no lineales</strong>: grafos, árboles y tries.
-      </p>
-    </div>
   </div>
 
-  <!-- ===================== 1. ARREGLOS ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>1. Arreglos</h3>
+  <div class="activity-section" style="border-top:none; padding-top:0;">
+    <div class="activity-section-header"><h3>Antes de empezar: ¿las construyo yo o ya vienen hechas?</h3></div>
+    <p>
+      Esta es la duda más común, así que va primero: <strong>casi siempre ya vienen hechas</strong>.
+      Python, Java y las bases de datos ya traen estas estructuras: en un lenguaje las <strong>llamas</strong>
+      con el nombre correcto, y en una base de datos las usa el motor por dentro. <strong>Que no las construyas no significa que no las uses</strong>: las usas todo el tiempo.
+      Escribir una lista enlazada o un árbol desde cero se hace en clase para entender cómo funcionan,
+      no porque lo vayas a repetir en cada proyecto.
+    </p>
+    <p>
+      Entonces, ¿para qué estudiarlas? Para <strong>elegir bien</strong>. Usar una <code>list</code> como cola funciona,
+      pero se vuelve lenta con muchos datos; con un <code>deque</code> no. Saber por qué un índice acelera un
+      <code>WHERE</code> o por qué un <code>LIKE '%Amor%'</code> no lo aprovecha también sale de aquí.
+    </p>
+    <div class="content-box" style="overflow-x:auto;">
+<table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Estructura</th><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">En Python la llamas...</th><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">En SQL / bases de datos</th><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">¿La uso o la construyo?</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><a href="#arreglos">Arreglo</a></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>list</code>, <code>tuple</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Filas de una tabla</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">La usas: ya viene hecha</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><a href="#listas">Lista enlazada</a></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>collections.deque</code> (por dentro)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Hojas enlazadas de un índice B+Tree</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">La usas con <code>deque</code>; la construyes solo para aprender</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><a href="#pilas">Pila</a></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>list</code> con <code>append()</code> y <code>pop()</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>SAVEPOINT</code> (se parece)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">La usas: ya viene hecha</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><a href="#colas">Cola</a></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>collections.deque</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Tabla de tareas pendientes</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">La usas: ya viene hecha</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><a href="#grafos">Grafo</a></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>dict</code> de listas o <code>networkx</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Tabla de relaciones + <code>JOIN</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">La usas: armas el <code>dict</code> o usas <code>networkx</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><a href="#arboles">Árbol</a></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Clases propias, <code>heapq</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Índices B-Tree y B+Tree</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">La usas con índices y librerías; rara vez la construyes</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><a href="#tries">Trie</a></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>dict</code> de <code>dict</code> o librería</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>LIKE 'prefijo%'</code> con índice</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">La usas con un <code>dict</code> propio o una librería</td></tr></tbody></table>
     </div>
-    <p>
-      Un <strong>arreglo</strong> (o <em>array</em>) es una estructura de datos que guarda varios elementos
-      del mismo tipo, uno junto al otro, identificados por un <strong>índice</strong> numérico que siempre
-      empieza en 0.
-    </p>
-    <p>
-      Por ejemplo, las 3 canciones "Tres Deseos", "Mi Tierra" y "Mi Buen Amor" guardadas en orden, donde
-      "Tres Deseos" es el índice 0, "Mi Tierra" el índice 1 y "Mi Buen Amor" el índice 2.
-    </p>
-
-    <h4 style="color:#6f9d7c; font-size:1rem; margin:1.4rem 0 0.4rem;">Arreglo: memoria contigua</h4>
-    <p>
-      Un arreglo guarda sus elementos uno junto al otro, sin huecos, así que el programa puede calcular la
-      dirección de cualquier posición directamente.
-    </p>
-
-    <div style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:flex-start; margin-top:1rem;">
-      <div style="flex:1 1 320px; min-width:280px;">
-        <svg viewBox="0 0 320 185" xmlns="http://www.w3.org/2000/svg" style="max-width:320px; width:100%; height:auto; display:block; margin:0 auto;">
-          <defs>
-            <marker id="flechaContiguo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="#6f9d7c"/>
-            </marker>
-          </defs>
-
-          <text x="245" y="18" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#6f9d7c" font-weight="700">arr[2]</text>
-          <line x1="245" y1="24" x2="245" y2="78" stroke="#6f9d7c" stroke-width="2" marker-end="url(#flechaContiguo)"/>
-
-          <rect x="20" y="80" width="90" height="55" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-          <text x="65" y="112" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">Tres Deseos</text>
-
-          <rect x="110" y="80" width="90" height="55" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-          <text x="155" y="112" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">Mi Tierra</text>
-
-          <rect x="200" y="80" width="90" height="55" fill="none" stroke="#6f9d7c" stroke-width="3"/>
-          <text x="245" y="112" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">Mi Buen Amor</text>
-
-          <text x="65" y="152" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">0</text>
-          <text x="155" y="152" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">1</text>
-          <text x="245" y="152" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#6f9d7c" font-weight="700">2</text>
-
-          <text x="65" y="168" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">dir: 100</text>
-          <text x="155" y="168" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">dir: 104</text>
-          <text x="245" y="168" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text-dim)">dir: 108</text>
-        </svg>
+    <h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5b7c99;">En un lenguaje las llamas; en una base de datos las usa el motor por dentro</h3>
+    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+      <div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #5b7c99;">
+        <p style="margin:0 0 0.4rem; font-weight:700; color:#5b7c99;">En un lenguaje (Python, JavaScript, Java)</p>
+        <p style="margin:0; font-size:0.9rem;"><strong>Las llamas tú.</strong> Escribes <code>lista = []</code>, <code>deque()</code> o <code>{}</code>
+        y tú decides cuál estructura usar. Si eliges mal, el programa se vuelve lento.</p>
       </div>
-
-      <div style="flex:1 1 280px; min-width:260px;">
-        <svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" style="max-width:260px; width:100%; height:auto; display:block; margin:0 auto;">
-          <defs>
-            <marker id="flechaChipArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="#6f9d7c"/>
-            </marker>
-          </defs>
-
-          <text x="120" y="16" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#6f9d7c" font-weight="700">arr[2]</text>
-          <line x1="120" y1="22" x2="120" y2="38" stroke="#6f9d7c" stroke-width="2" marker-end="url(#flechaChipArr)"/>
-
-          <!-- Rejilla del chip: 5 columnas x 3 filas -->
-          <line x1="20" y1="40" x2="20" y2="160" stroke="var(--border)"/>
-          <line x1="60" y1="40" x2="60" y2="160" stroke="var(--border)"/>
-          <line x1="100" y1="40" x2="100" y2="160" stroke="var(--border)"/>
-          <line x1="140" y1="40" x2="140" y2="160" stroke="var(--border)"/>
-          <line x1="180" y1="40" x2="180" y2="160" stroke="var(--border)"/>
-          <line x1="220" y1="40" x2="220" y2="160" stroke="var(--border)"/>
-          <line x1="20" y1="40" x2="220" y2="40" stroke="var(--border)"/>
-          <line x1="20" y1="80" x2="220" y2="80" stroke="var(--border)"/>
-          <line x1="20" y1="120" x2="220" y2="120" stroke="var(--border)"/>
-          <line x1="20" y1="160" x2="220" y2="160" stroke="var(--border)"/>
-
-          <rect x="21" y="41" width="38" height="38" fill="#6f9d7c"/>
-          <text x="40" y="65" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#fff" font-weight="700">0</text>
-          <rect x="61" y="41" width="38" height="38" fill="#6f9d7c"/>
-          <text x="80" y="65" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#fff" font-weight="700">1</text>
-          <rect x="101" y="41" width="38" height="38" fill="#6f9d7c"/>
-          <text x="120" y="65" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#fff" font-weight="700">2</text>
-        </svg>
-        <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-          Y así se ve dentro del microchip de memoria (RAM): las 3 casillas quedan una junto a otra, sin
-          espacios ni saltos.
-        </p>
+      <div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #7fa5a3;">
+        <p style="margin:0 0 0.4rem; font-weight:700; color:#5f8582;">En una base de datos (MySQL, PostgreSQL)</p>
+        <p style="margin:0; font-size:0.9rem;"><strong>No las llamas.</strong> Escribes SQL (<code>SELECT</code>, <code>CREATE INDEX</code>) y el motor trabaja con
+        árboles, listas enlazadas, tablas hash y colas por dentro. Lo que tú decides es el diseño (tablas e índices); la estructura
+        la elige el motor.</p>
       </div>
     </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0 0 0.5rem;">
-        <strong>¿Cómo llega directo a <code>arr[2]</code>?</strong>
-      </p>
-      <p style="margin:0 0 0.3rem; text-align:center; color:var(--text-dim);">
-        <code>base + índice &times; tamaño = dirección</code>
-      </p>
-      <p style="margin:0 0 0.6rem; font-size:1.05rem; text-align:center;">
-        <code>100 + (2 &times; 4) = 108</code>
-      </p>
-      <ol style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li><code>100</code> es la dirección donde empieza el arreglo en memoria, ahí vive el índice 0.</li>
-        <li><code>2</code> es el índice que buscas, el tercer elemento (los índices empiezan en 0).</li>
-        <li>El programa multiplica el índice por el tamaño de cada casilla, para saber cuántos bytes debe
-          saltarse desde el inicio: <code>2 &times; 4 = 8</code>.</li>
-        <li>Suma ese salto a la dirección base: <code>100 + 8 = 108</code>. Ahí está exactamente
-          "Mi Buen Amor", sin pasar por el índice 0 ni el 1.</li>
-      </ol>
+    <div class="content-box" style="margin-top:1rem; overflow-x:auto;">
+<table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Tú escribes...</th><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Por dentro el motor...</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>CREATE INDEX idx_titulo ON tbl_canciones (titulo);</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Construye y mantiene un árbol B+Tree.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>SELECT ... WHERE reproducciones BETWEEN ...</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Puede recorrer las hojas enlazadas del índice.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>JOIN</code> entre dos tablas</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Puede usar una tabla hash u otro método interno, según lo que decida el optimizador.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>START TRANSACTION</code> y <code>ROLLBACK</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Usa registros y colas de bloqueos para deshacer y ordenar los cambios.</td></tr></tbody></table>
     </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Por qué el tamaño de casilla es 4?</strong></p>
-      <p style="margin:0 0 0.6rem;">
-        En memoria, todo se mide en bytes, y cada tipo de dato ocupa una cantidad fija de bytes. Por
-        ejemplo:
-      </p>
-      <ul style="margin:0 0 0.6rem; padding-left:1.2rem; color:var(--text);">
-        <li>Un número entero (<code>int</code>) suele ocupar <strong>4 bytes</strong>.</li>
-        <li>Un carácter (<code>char</code>) ocupa <strong>1 byte</strong>.</li>
-        <li>Un número decimal (<code>double</code>) ocupa <strong>8 bytes</strong>.</li>
-      </ul>
-      <p style="margin:0 0 0.6rem;">
-        Usamos 4 en el ejemplo porque representa un entero, el caso más común. En un arreglo de canciones
-        (texto, de largo variable) lo que en realidad se guarda en cada casilla no es el texto completo,
-        sino una <strong>referencia</strong> de tamaño fijo (un puntero) hacia donde vive ese texto; esa
-        referencia sí mide siempre lo mismo, así que la fórmula funciona igual.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Esta operación la hace el programador a mano?</strong></p>
-      <p style="margin:0;">
-        No, es completamente automática e interna. Tú solo escribes <code>arr[2]</code>, y por debajo
-        pasan tres capas sin que las veas: tu código (<code>arr[2]</code>), el <strong>compilador o
-        intérprete</strong> (traduce eso a la fórmula de dirección: <code>base + índice &times; tamaño</code>),
-        y el <strong>hardware</strong> (el procesador ejecuta el salto real a esa dirección de memoria RAM
-        y trae el dato). Nosotros solo vemos el resultado: el dato que pediste, de forma instantánea.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0;">
-        <strong>En resumen:</strong> un arreglo (vector) <strong>funciona mejor para acceso rápido</strong>,
-        ir directo a cualquier posición sin recorrer nada.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;"><strong>¿Cómo se busca un valor en un arreglo?</strong></p>
-    </div>
-
-    <p>
-      Para ver bien la diferencia entre las tres formas de buscar, ampliemos el arreglo a 8 canciones:
-    </p>
-
-    <p style="margin-top:1.2rem;"><strong>1. Arreglo con O(1) (notación Big O)</strong></p>
-    <p>
-      Para el caso de <code>arr[7]</code>, siempre es O(1), esté el arreglo ordenado o no, porque la
-      fórmula de dirección no le importa el orden de los valores ni la posición.
-    </p>
-    <div class="code-block" style="margin-top:0.8rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">acceso_indice.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>const canciones = ["Tres Deseos", "Rayando el Sol", "La Vida Es un Carnaval",
-  "Persiana Americana", "Oye Mi Amor", "Mi Tierra", "Cuando Pase el Temblor", "Mi Buen Amor"];
-
-console.log(canciones[7]); // "Mi Buen Amor"</code></pre>
-    </div>
-
-    <div class="tree-demo">
-    <svg viewBox="0 0 800 210" xmlns="http://www.w3.org/2000/svg" style="max-width:720px; width:100%; height:auto; display:block; margin:0.8rem auto 0;">
-      <defs>
-        <marker id="flechaBusq1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="#6f9d7c"/>
-        </marker>
-      </defs>
-      <text x="732" y="16" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#6f9d7c" font-weight="700">arr[7]</text>
-      <line x1="732" y1="22" x2="732" y2="68" stroke="#6f9d7c" stroke-width="2" marker-end="url(#flechaBusq1)"/>
-
-      <g class="tree-nodo" data-nodo="a0" data-nombre="Tres Deseos">
-        <rect x="20" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="67" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Tres Deseos</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a1" data-nombre="Rayando el Sol">
-        <rect x="115" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="162" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Rayando el Sol</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a2" data-nombre="La Vida Es un Carnaval">
-        <rect x="210" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="257" y="98" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">La Vida Es</text>
-        <text x="257" y="110" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">un Carnaval</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a3" data-nombre="Persiana Americana">
-        <rect x="305" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="352" y="98" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Persiana</text>
-        <text x="352" y="110" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Americana</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a4" data-nombre="Oye Mi Amor">
-        <rect x="400" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="447" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Oye Mi Amor</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a5" data-nombre="Mi Tierra">
-        <rect x="495" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="542" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Mi Tierra</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a6" data-nombre="Cuando Pase el Temblor">
-        <rect x="590" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="637" y="98" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Cuando Pase</text>
-        <text x="637" y="110" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">el Temblor</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a7" data-nombre="Mi Buen Amor">
-        <rect x="685" y="70" width="95" height="60" fill="none" stroke="#6f9d7c" stroke-width="3"/>
-        <text x="732" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Mi Buen Amor</text>
-      </g>
-
-      <text x="67" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">0</text>
-      <text x="162" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">1</text>
-      <text x="257" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">2</text>
-      <text x="352" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">3</text>
-      <text x="447" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">4</text>
-      <text x="542" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">5</text>
-      <text x="637" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">6</text>
-      <text x="732" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#6f9d7c" font-weight="700">7</text>
-
-      <text x="732" y="168" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="#6f9d7c" font-weight="700">¡encontrada! (1 salto)</text>
-    </svg>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira el acceso en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="a7">Ejecutar arr[7]</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Haz clic para ver el salto directo a la casilla 7, sin tocar ninguna otra.
-      </p>
-    </div>
-    </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Por qué un solo salto?</strong></p>
-      <p style="margin:0;">
-        Porque el sistema no revisa nada antes de llegar: calcula la dirección exacta con la fórmula
-        <code>base + índice &times; tamaño</code> y salta directo ahí. Da igual si "Mi Buen Amor" estuviera en
-        el índice 0 o en el 2.999: siempre es un cálculo y un salto, nunca una revisión de las posiciones
-        anteriores.
-      </p>
-    </div>
-
-    <p style="margin-top:1.6rem;"><strong>2. Arreglo desordenado, búsqueda lineal, O(n) (notación Big O)</strong></p>
-    <p>
-      Aquí ya no buscas por índice, sino por valor: no sabes en qué posición está "Mi Buen Amor", solo sabes
-      el nombre y quieres encontrarlo. Sin orden, no hay atajo: revisas canción por canción desde la
-      posición 0, hasta encontrarla o llegar al final. En este arreglo, "Mi Buen Amor" quedó justo en la
-      última posición, el peor caso posible: hay que revisar las 8 antes de encontrarla. El trabajo crece
-      igual que los datos: con 8 canciones, hasta 8 revisiones; con 3.000, hasta 3.000.
-    </p>
-
-    <div class="tree-demo">
-    <svg viewBox="0 0 800 190" xmlns="http://www.w3.org/2000/svg" style="max-width:720px; width:100%; height:auto; display:block; margin:0.8rem auto 0;">
-      <g class="tree-nodo" data-nodo="a0" data-nombre="Tres Deseos">
-        <rect x="20" y="50" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="67" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Tres Deseos</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a1" data-nombre="Rayando el Sol">
-        <rect x="115" y="50" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="162" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Rayando el Sol</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a2" data-nombre="La Vida Es un Carnaval">
-        <rect x="210" y="50" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="257" y="78" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">La Vida Es</text>
-        <text x="257" y="90" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">un Carnaval</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a3" data-nombre="Persiana Americana">
-        <rect x="305" y="50" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="352" y="78" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Persiana</text>
-        <text x="352" y="90" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Americana</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a4" data-nombre="Oye Mi Amor">
-        <rect x="400" y="50" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="447" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Oye Mi Amor</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a5" data-nombre="Mi Tierra">
-        <rect x="495" y="50" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="542" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Mi Tierra</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a6" data-nombre="Cuando Pase el Temblor">
-        <rect x="590" y="50" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="637" y="78" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Cuando Pase</text>
-        <text x="637" y="90" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">el Temblor</text>
-      </g>
-      <g class="tree-nodo" data-nodo="a7" data-nombre="Mi Buen Amor">
-        <rect x="685" y="50" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="732" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Mi Buen Amor</text>
-      </g>
-
-      <text x="67" y="130" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">0</text>
-      <text x="162" y="130" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">1</text>
-      <text x="257" y="130" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">2</text>
-      <text x="352" y="130" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">3</text>
-      <text x="447" y="130" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">4</text>
-      <text x="542" y="130" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">5</text>
-      <text x="637" y="130" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">6</text>
-      <text x="732" y="130" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">7</text>
-
-      <text x="400" y="152" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Peor caso: revisa las 8, una por una, en orden</text>
-    </svg>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira la búsqueda lineal en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="a0,a1,a2,a3,a4,a5,a6,a7">Buscar "Mi Buen Amor"</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Haz clic para ver, casilla por casilla, las 8 revisiones hasta encontrarla.
-      </p>
-    </div>
-    </div>
-
-    <p style="margin-top:1.6rem;"><strong>3. Arreglo ordenado, búsqueda binaria, O(log n) (notación Big O)</strong></p>
-    <p>
-      Igual que en la lineal, aquí buscas por valor y no por índice: no sabes en qué posición está "Mi Buen
-      Amor", solo el dato. La diferencia es cómo lo buscas: con las canciones ordenadas, comparas con la de
-      la mitad y descartas la mitad donde no puede estar, repitiendo sobre lo que queda. Con nuestras 8
-      canciones ordenadas, bastan 3 comparaciones en vez de 8; con 3.000 canciones ordenadas, bastan 12, no
-      3.000.
-    </p>
-    <p>
-      Lo importante es que cada comparación no elimina un elemento, elimina la mitad de lo que quedaba. Con
-      nuestras 8 canciones, la secuencia es <code>8 &rarr; 4 &rarr; 2 &rarr; 1</code>: 3 saltos, 3
-      comparaciones. Con 3.000 canciones, el mismo principio se repite varias veces más: el conteo de cuántas
-      veces se puede partir 3.000 a la mitad hasta llegar a 1 es exactamente 12:
-      <code>3000 &rarr; 1500 &rarr; 750 &rarr; 375 &rarr; 188 &rarr; 94 &rarr; 47 &rarr; 24 &rarr; 12 &rarr; 6
-      &rarr; 3 &rarr; 2 &rarr; 1</code>. Contando los saltos, son 12.
-    </p>
-
-    <div class="tree-demo">
-    <svg viewBox="0 0 800 190" xmlns="http://www.w3.org/2000/svg" style="max-width:720px; width:100%; height:auto; display:block; margin:0.8rem auto 0;">
-      <text x="400" y="16" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">(ya ordenadas alfabéticamente)</text>
-
-      <g class="tree-nodo" data-nodo="b0" data-nombre="Cuando Pase el Temblor">
-        <rect x="20" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="67" y="98" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Cuando Pase</text>
-        <text x="67" y="110" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">el Temblor</text>
-      </g>
-      <g class="tree-nodo" data-nodo="b1" data-nombre="La Vida Es un Carnaval">
-        <rect x="115" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="162" y="98" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">La Vida Es</text>
-        <text x="162" y="110" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">un Carnaval</text>
-      </g>
-      <g class="tree-nodo" data-nodo="b2" data-nombre="Mi Buen Amor">
-        <rect x="210" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="257" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Mi Buen Amor</text>
-      </g>
-      <g class="tree-nodo" data-nodo="b3" data-nombre="Mi Tierra">
-        <rect x="305" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="352" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Mi Tierra</text>
-      </g>
-      <g class="tree-nodo" data-nodo="b4" data-nombre="Oye Mi Amor">
-        <rect x="400" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="447" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Oye Mi Amor</text>
-      </g>
-      <g class="tree-nodo" data-nodo="b5" data-nombre="Persiana Americana">
-        <rect x="495" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="542" y="98" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Persiana</text>
-        <text x="542" y="110" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Americana</text>
-      </g>
-      <g class="tree-nodo" data-nodo="b6" data-nombre="Rayando el Sol">
-        <rect x="590" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="637" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Rayando el Sol</text>
-      </g>
-      <g class="tree-nodo" data-nodo="b7" data-nombre="Tres Deseos">
-        <rect x="685" y="70" width="95" height="60" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="732" y="104" text-anchor="middle" font-family="Consolas, monospace" font-size="8" fill="var(--text)">Tres Deseos</text>
-      </g>
-
-      <text x="67" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">0</text>
-      <text x="162" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">1</text>
-      <text x="257" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">2</text>
-      <text x="352" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">3</text>
-      <text x="447" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">4</text>
-      <text x="542" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">5</text>
-      <text x="637" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">6</text>
-      <text x="732" y="150" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text-dim)">7</text>
-
-      <text x="400" y="172" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Compara con la de la mitad y descarta la mitad donde no puede estar</text>
-    </svg>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira la búsqueda binaria en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="b3,b1,b2">Buscar "Mi Buen Amor"</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Haz clic para ver las 3 comparaciones: mitad, mitad de lo que quedó, y encontrada.
-      </p>
-    </div>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;"><strong>¿Cuándo se usa un arreglo en programación real?</strong></p>
-    </div>
-
-    <p style="margin-top:1rem;"><strong>1. Cuando el tamaño es conocido o cambia poco</strong></p>
-    <p>
-      Como los días de la semana o los meses del año: siempre son 7 o 12, así que un arreglo de tamaño fijo
-      es la opción natural.
-    </p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">dias_semana.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-
-console.log(diasSemana[2]); // "Miércoles", acceso directo por índice</code></pre>
-    </div>
-
-    <p style="margin-top:1.2rem;"><strong>2. Coordenadas, matrices y tableros</strong></p>
-    <p>
-      Un tablero de ajedrez o los píxeles de una imagen son "arreglos de arreglos" (matrices): filas y
-      columnas, donde acceder a una posición (fila, columna) es tan directo como con un solo índice.
-    </p>
-    <div class="code-block" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">tablero_ajedrez.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>// Matriz 8x8: un arreglo de arreglos
-const tablero = [
-  ["T", "C", "A", "Q", "R", "A", "C", "T"],
-  ["P", "P", "P", "P", "P", "P", "P", "P"],
-  // ... filas intermedias vacías ...
-];
-
-console.log(tablero[0][4]); // "R", el Rey: fila 0, columna 4</code></pre>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Ejemplos reales de arreglos en aplicaciones que usas todos los días:</strong></p>
-      <ul style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li><strong>Videojuegos:</strong> las tablas de puntuaciones más altas ("top 10") son un arreglo
-          ordenado de tamaño fijo; el tablero de un juego como ajedrez o Sudoku es un arreglo de casillas.</li>
-        <li><strong>Google Maps / apps de navegación:</strong> la ruta calculada entre dos puntos se guarda
-          como un arreglo de coordenadas (latitud, longitud), en el orden exacto en que hay que recorrerlas.</li>
-        <li><strong>SoundFlow:</strong> las canciones de un álbum, mostradas siempre en el mismo orden de
-          pista (1, 2, 3...), se guardan como un arreglo.</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- ===================== NOTACIÓN O GRANDE: RESUMEN ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>Antes de seguir: resumen de O(1), O(log n) y O(n)</h3>
-    </div>
-    <p>
-      La <strong>notación O grande</strong> describe cuánto crece el trabajo de un algoritmo cuando crece la
-      cantidad de datos. Con ella vamos a comparar arreglos y listas enlazadas.
-    </p>
-
-    <div class="content-box" style="border-left:4px solid #5b7c99; margin-top:1rem;">
-      <table style="border-collapse:collapse; font-size:0.8rem; width:100%;">
-        <thead>
-          <tr>
-            <th style="padding:0.4rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Notación</th>
-            <th style="padding:0.4rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Nombre</th>
-            <th style="padding:0.4rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Qué significa</th>
-            <th style="padding:0.4rem 0.5rem; background:#5b7c99; color:#fff; text-align:left;">Ejemplo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);"><strong>O(1)</strong></td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Constante</td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Siempre los mismos pasos, sin importar el tamaño de los datos.</td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Leer <code>canciones[3]</code>, insertar al final de un arreglo.</td>
-          </tr>
-          <tr>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);"><strong>O(log n)</strong></td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Logarítmica</td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Descarta la mitad de los datos en cada paso, así que crece muy poco.</td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Búsqueda binaria en un arreglo ordenado.</td>
-          </tr>
-          <tr>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);"><strong>O(n)</strong></td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Lineal</td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Los pasos crecen en proporción a los datos.</td>
-            <td style="padding:0.4rem 0.5rem; border:1px solid var(--border);">Buscar recorriendo uno por uno un arreglo desordenado.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
+    <p style="font-size:0.9rem;"><strong>Una excepción:</strong> bases como Redis sí te dejan llamar la estructura directamente, con comandos como
+    <code>LPUSH</code> (listas) o <code>SADD</code> (conjuntos). Ahí eliges la estructura tú, igual que en un lenguaje.</p>
     <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:1rem;">
-      <h4 style="margin:0 0 0.5rem; color:#c99a4e;">Con 1.000.000 de datos, en el peor caso</h4>
-      <ul style="margin:0 0 0.6rem; padding-left:1.2rem; color:var(--text);">
-        <li><strong>O(1):</strong> 1 paso.</li>
-        <li><strong>O(log n):</strong> unos 20 pasos.</li>
-        <li><strong>O(n):</strong> 1.000.000 de pasos.</li>
-      </ul>
-      <p style="margin:0;"><strong>Orden de rapidez:</strong> O(1) &lt; O(log n) &lt; O(n).</p>
+      <p style="margin:0;"><strong>Dos que usarás todo el tiempo aunque no estén en la lista:</strong>
+      el <code>dict</code> (diccionario, una tabla hash: busca por clave en O(1) en promedio) y el <code>set</code>
+      (conjunto, sin repetidos). Redis, de la Semana 4, se basa en ideas parecidas.</p>
     </div>
   </div>
 
-  <!-- ===================== 2. LISTAS ENLAZADAS: ASÍ SE VEN EN MEMORIA ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>2. Listas enlazadas</h3>
-    </div>
-    <p>
-      Una <strong>lista enlazada</strong> es una estructura de datos que guarda sus elementos en
-      <strong>nodos</strong> separados, donde cada nodo tiene el dato y un <strong>puntero</strong> que
-      indica dónde está el siguiente nodo. A diferencia del arreglo, los nodos no tienen por qué estar uno
-      junto al otro en memoria: pueden vivir en cualquier casilla libre, y lo único que los mantiene
-      conectados en orden es esa cadena de punteros.
-    </p>
+  <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.2rem 0 0;">
+    <a href="#arreglos" style="text-decoration:none; background:#5b7c99; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">Arreglos</a>
+    <a href="#listas" style="text-decoration:none; background:#8b7fb8; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">Listas enlazadas</a>
+    <a href="#pilas" style="text-decoration:none; background:#c99a4e; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">Pilas</a>
+    <a href="#colas" style="text-decoration:none; background:#7fa5a3; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">Colas</a>
+    <a href="#grafos" style="text-decoration:none; background:#6f9d7c; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">Grafos</a>
+    <a href="#arboles" style="text-decoration:none; background:#5f8582; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">Árboles</a>
+    <a href="#tries" style="text-decoration:none; background:#b8704f; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">Tries</a>
+    <a href="#elegir" style="text-decoration:none; background:#33404f; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">¿Cuál elijo?</a>
+    <a href="#faq" style="text-decoration:none; background:#33404f; color:#fff; padding:0.3rem 0.8rem; border-radius:999px; font-size:0.82rem;">Preguntas frecuentes</a>
+  </div>
+<div class="activity-section" id="arreglos" style="border-left:5px solid #5b7c99; padding-left:1.2rem;">
+  <div class="activity-section-header"><h3 style="color:#5b7c99;">1. Arreglos</h3></div>
+  <p style="font-size:1rem;"><strong>Una fila de casillas numeradas, una al lado de la otra.</strong></p>
+  <p>Es la estructura más simple y la base de casi todas las demás.</p>
+<svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg" style="max-width:560px; width:100%; height:auto; display:block; margin:0.8rem auto;"><defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5b7c99"/></marker></defs><rect x="20" y="60" width="104" height="46" rx="0" fill="#ffffff" stroke="#5b7c99" stroke-width="1.6"/><text x="72" y="88" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Tres Deseos</text><text x="72" y="126" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#5b7c99" font-weight="700">[0]</text><rect x="124" y="60" width="104" height="46" rx="0" fill="#e7edf2" stroke="#5b7c99" stroke-width="1.6"/><text x="176" y="88" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Mi Tierra</text><text x="176" y="126" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#5b7c99" font-weight="700">[1]</text><rect x="228" y="60" width="104" height="46" rx="0" fill="#ffffff" stroke="#5b7c99" stroke-width="1.6"/><text x="280" y="88" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Mi Buen Amor</text><text x="280" y="126" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#5b7c99" font-weight="700">[2]</text><rect x="332" y="60" width="104" height="46" rx="0" fill="#ffffff" stroke="#5b7c99" stroke-width="1.6"/><text x="384" y="88" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Oye Mi Amor</text><text x="384" y="126" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#5b7c99" font-weight="700">[3]</text><rect x="436" y="60" width="104" height="46" rx="0" fill="#ffffff" stroke="#5b7c99" stroke-width="1.6"/><text x="488" y="88" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Rayando el Sol</text><text x="488" y="126" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#5b7c99" font-weight="700">[4]</text><text x="280" y="150" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#5b7c99" font-style="italic">casillas contiguas en memoria: cada una tiene su número de posición (índice)</text><text x="176" y="30" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#c44444" font-weight="700">canciones[1]</text><line x1="176" y1="36" x2="176" y2="56" stroke="#c44444" stroke-width="2" marker-end="url(#ah1)"/></svg>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5b7c99;">Qué operaciones tiene y cuánto cuestan</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Operación</th><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Costo</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Leer <code>canciones[1]</code> por posición</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Agregar al final</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1) en promedio</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Insertar al inicio o en medio</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n): hay que correr los demás</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Buscar un valor (desordenado)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Buscar un valor (ordenado)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(log n) con búsqueda binaria</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Eliminar en medio</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n)</td></tr></tbody></table></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5b7c99;">¿Cuándo usarla y cuándo evitarla?</h3>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;"><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #3f7f55;"><p style="margin:0 0 0.4rem; font-weight:700; color:#3f7f55;">✓ Úsala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Necesitas leer por posición muy seguido ("la canción número 3").</li><li style="margin-bottom:0.35rem;">Tienes una colección de tamaño casi fijo que casi no cambia: un top 10, un tablero, los días de la semana.</li><li style="margin-bottom:0.35rem;">Vas a <strong>buscar mucho y modificar poco</strong>: ordénalo una vez y usa búsqueda binaria.</li><li style="margin-bottom:0.35rem;">Procesas muchos números seguidos: píxeles, embeddings, mediciones.</li></ul></div><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #a83a3a;"><p style="margin:0 0 0.4rem; font-weight:700; color:#a83a3a;">✗ Evítala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Insertas o eliminas mucho al inicio o en medio: cada cambio corre todos los demás elementos.</li><li style="margin-bottom:0.35rem;">Buscas muchas veces por valor en un arreglo grande y desordenado: usa un <code>set</code> o un <code>dict</code>.</li><li style="margin-bottom:0.35rem;">Cada elemento es un registro con varios campos (nombre, email, plan): usa una clase, un <code>dict</code> o una tabla.</li></ul></div></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5b7c99;">¿Dónde se usa en aplicaciones y sistemas?</h3>
+<div class="content-box" style="margin:0;"><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Hojas de cálculo: las filas y columnas son una matriz.</li><li style="margin-bottom:0.35rem;">Imágenes y video: una imagen es un arreglo de píxeles (lo procesan librerías como NumPy y OpenCV).</li><li style="margin-bottom:0.35rem;">Videojuegos: el tablero de ajedrez o de Sudoku, y las tablas de puntuaciones.</li><li style="margin-bottom:0.35rem;">Inteligencia artificial: los <strong>embeddings</strong> son arreglos de números (los que usa pgvector en SoundFlow).</li></ul></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5b7c99;">¿Cómo la usas en un lenguaje de programación?</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Lenguaje</th><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Cómo se llama</th><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Cómo se escribe</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Python</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>list</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>canciones = ["Tres Deseos", "Mi Tierra"]</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">JavaScript</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>Array</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>const canciones = ["Tres Deseos", "Mi Tierra"];</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Java</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>ArrayList</code> o arreglo <code>[]</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>List&lt;String&gt; canciones = new ArrayList&lt;&gt;();</code></td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">arreglos.py</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code>canciones = ["Tres Deseos", "Mi Tierra", "Mi Buen Amor"]   <span class="code-com"># list: así se crea un arreglo</span>
 
-    <h4 style="color:var(--accent); font-size:1rem; margin:0.4rem 0 0.4rem;">Lista enlazada: memoria dispersa</h4>
-    <p>
-      Una lista enlazada guarda las mismas 3 canciones, pero cada nodo puede vivir en cualquier casilla
-      libre de la memoria. Solo el puntero guardado en cada nodo conecta uno con el siguiente.
-    </p>
+print(canciones[1])                       <span class="code-com"># "Mi Tierra"  -&gt; acceso por posición, O(1)</span>
+canciones.append("Oye Mi Amor")           <span class="code-com"># agrega al final, O(1)</span>
+canciones.insert(1, "Rayando el Sol")     <span class="code-com"># inserta en medio, O(n): corre los demás</span>
+print("Mi Tierra" in canciones)           <span class="code-com"># True -&gt; busca uno por uno, O(n)</span>
 
-    <div style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:flex-start; margin-top:1rem;">
-      <div style="flex:1 1 320px; min-width:280px;">
-        <svg viewBox="0 0 320 290" xmlns="http://www.w3.org/2000/svg" style="max-width:320px; width:100%; height:auto; display:block; margin:0 auto;">
-          <defs>
-            <marker id="flechaCabeza" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
-            </marker>
-            <marker id="flechaN1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="#7fa5a3"/>
-            </marker>
-            <marker id="flechaN2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="#c99a4e"/>
-            </marker>
-          </defs>
+<span class="code-com"># Arreglo ordenado + búsqueda binaria (el módulo bisect ya viene en Python)</span>
+from bisect import bisect_left
+ordenadas = sorted(canciones)
+pos = bisect_left(ordenadas, "Mi Tierra")                 <span class="code-com"># O(log n)</span>
+existe = pos &lt; len(ordenadas) and ordenadas[pos] == "Mi Tierra"
+print(existe)                             <span class="code-com"># True</span></code></pre>
+</div>
+<p style="font-size:0.9rem;">No construyes nada: <code>list</code> ya es el arreglo. Tú decides si lo mantienes ordenado (buscas rápido) o desordenado (insertas rápido).</p>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5b7c99;">¿Cómo se usa en una base de datos? (casi siempre por dentro)</h3>
+<p style="font-size:0.9rem;">En una base de datos casi nunca <strong>llamas</strong> a la estructura: escribes SQL y el motor decide cuándo usarla por dentro. La columna "Qué haces tú" es lo único que escribes.</p>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Dónde</th><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Cómo aparece</th><th style="padding:0.4rem 0.6rem; background:#5b7c99; color:#fff; text-align:left;">Qué haces tú</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">MySQL</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No tiene tipo arreglo: una "lista" es una tabla con una fila por elemento.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Creas la tabla y usas <code>SELECT ... ORDER BY</code>.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">PostgreSQL</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Permite columnas arreglo, por ejemplo <code>TEXT[]</code>.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Declaras la columna, pero el diseño relacional lo evita (1FN).</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">MongoDB</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Un documento puede tener un campo arreglo, como <code>generos: ["Salsa", "Pop"]</code>.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Lo escribes dentro del documento (lo viste en la Semana 4).</td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">consulta_arreglo.sql</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code><span class="code-com">-- En MySQL una "lista de canciones" es una tabla: una fila por canción, nunca una columna con varias.</span>
+SELECT titulo
+FROM tbl_canciones
+WHERE id_album = 3
+ORDER BY id_cancion;   <span class="code-com">-- el ORDER BY pone las filas en el orden que pides</span></code></pre>
+</div>
+<p style="font-size:0.9rem;">Así se resuelve en una base relacional lo que en Python sería una lista: filas dentro de una tabla. Guardar <code>'Mi Tierra, Tres Deseos'</code> dentro de una sola celda rompería la 1FN.</p>
+<div class="content-box" style="border-left:4px solid #5b7c99; margin-top:1rem;"><p style="margin:0 0 0.4rem;"><strong>¿La uso o la tengo que construir?</strong> La usas: casi siempre <strong>ya viene hecha</strong> (<code>list</code>).</p><p style="margin:0; color:#a83a3a;"><strong>Ojo:</strong> insertar o eliminar al inicio de una <code>list</code> grande es lento. Si lo haces seguido, usa un <code>deque</code> (ver Colas).</p></div>
+</div>
+<div class="activity-section" id="listas" style="border-left:5px solid #8b7fb8; padding-left:1.2rem;">
+  <div class="activity-section-header"><h3 style="color:#8b7fb8;">2. Listas enlazadas</h3></div>
+  <p style="font-size:1rem;"><strong>Una cadena de cajas: cada caja guarda un dato y dice dónde está la siguiente.</strong></p>
+  <p>Gana cuando insertas o eliminas mucho en medio de los datos, porque solo se cambian unos punteros.</p>
+<svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg" style="max-width:560px; width:100%; height:auto; display:block; margin:0.8rem auto;"><defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8b7fb8"/></marker></defs><text x="78" y="24" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#c44444" font-weight="700">cabeza</text><line x1="78" y1="30" x2="78" y2="58" stroke="#c44444" stroke-width="2" marker-end="url(#ah2)"/><rect x="60" y="60" width="100" height="44" rx="0" fill="#ffffff" stroke="#8b7fb8" stroke-width="1.6"/><text x="110" y="87" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Tres Deseos</text><rect x="160" y="60" width="36" height="44" rx="0" fill="#f3eef9" stroke="#8b7fb8" stroke-width="1.6"/><text x="178" y="87" text-anchor="middle" font-family="Consolas, monospace" font-size="16" fill="#8b7fb8" font-weight="700">•</text><line x1="178" y1="82" x2="230" y2="82" stroke="#8b7fb8" stroke-width="2" marker-end="url(#ah2)"/><rect x="230" y="60" width="100" height="44" rx="0" fill="#ffffff" stroke="#8b7fb8" stroke-width="1.6"/><text x="280" y="87" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Mi Tierra</text><rect x="330" y="60" width="36" height="44" rx="0" fill="#f3eef9" stroke="#8b7fb8" stroke-width="1.6"/><text x="348" y="87" text-anchor="middle" font-family="Consolas, monospace" font-size="16" fill="#8b7fb8" font-weight="700">•</text><line x1="348" y1="82" x2="400" y2="82" stroke="#8b7fb8" stroke-width="2" marker-end="url(#ah2)"/><rect x="400" y="60" width="100" height="44" rx="0" fill="#ffffff" stroke="#8b7fb8" stroke-width="1.6"/><text x="450" y="87" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Mi Buen Amor</text><rect x="500" y="60" width="36" height="44" rx="0" fill="#fbeaea" stroke="#8b7fb8" stroke-width="1.6"/><text x="518" y="87" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#c44444" font-weight="700">null</text><text x="280" y="132" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#8b7fb8" font-style="italic">cada nodo guarda un dato y un puntero al siguiente; el último apunta a null</text></svg>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#8b7fb8;">Qué operaciones tiene y cuánto cuestan</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#8b7fb8; color:#fff; text-align:left;">Operación</th><th style="padding:0.4rem 0.6rem; background:#8b7fb8; color:#fff; text-align:left;">Costo</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Leer el elemento número k</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n): hay que recorrer desde la cabeza</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Insertar al inicio</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Insertar al final</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n), o O(1) si guardas un puntero a la cola</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Eliminar un nodo que ya tienes en la mano</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Buscar un valor</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n)</td></tr></tbody></table></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#8b7fb8;">¿Cuándo usarla y cuándo evitarla?</h3>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;"><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #3f7f55;"><p style="margin:0 0 0.4rem; font-weight:700; color:#3f7f55;">✓ Úsala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Insertas o eliminas mucho al inicio o en medio, y ya tienes el nodo en la mano.</li><li style="margin-bottom:0.35rem;">Necesitas moverte hacia adelante y hacia atrás (lista doblemente enlazada): una playlist.</li><li style="margin-bottom:0.35rem;">No sabes cuántos datos habrá y la cantidad sube y baja todo el tiempo.</li><li style="margin-bottom:0.35rem;">Vas a construir otras estructuras encima: pilas, colas o tablas hash con colisiones.</li></ul></div><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #a83a3a;"><p style="margin:0 0 0.4rem; font-weight:700; color:#a83a3a;">✗ Evítala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Necesitas acceso por posición: llegar al elemento 100 obliga a pasar por los 99 anteriores.</li><li style="margin-bottom:0.35rem;">Buscas mucho por valor: recorrer la cadena es O(n).</li><li style="margin-bottom:0.35rem;">En Python, para casi todo: <code>list</code> o <code>deque</code> hacen el trabajo sin que escribas una clase.</li></ul></div></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#8b7fb8;">¿Dónde se usa en aplicaciones y sistemas?</h3>
+<div class="content-box" style="margin:0;"><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Reproductores de música: "anterior" y "siguiente" funcionan con una lista doblemente enlazada.</li><li style="margin-bottom:0.35rem;">Navegadores y editores: historial de páginas y de cambios encadenados.</li><li style="margin-bottom:0.35rem;">Sistemas operativos: el núcleo de Linux usa listas enlazadas para procesos y bloques libres de memoria.</li><li style="margin-bottom:0.35rem;">Cachés LRU: una tabla hash más una lista doblemente enlazada para sacar lo menos usado.</li></ul></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#8b7fb8;">¿Cómo la usas en un lenguaje de programación?</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#8b7fb8; color:#fff; text-align:left;">Lenguaje</th><th style="padding:0.4rem 0.6rem; background:#8b7fb8; color:#fff; text-align:left;">Cómo se llama</th><th style="padding:0.4rem 0.6rem; background:#8b7fb8; color:#fff; text-align:left;">Cómo se escribe</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Python</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No trae lista enlazada general. Usa <code>deque</code>.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>from collections import deque</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">JavaScript</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No la trae. Se arma con objetos que apuntan al siguiente.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>{ dato: "Tres Deseos", siguiente: null }</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Java</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>LinkedList</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>LinkedList&lt;String&gt; lista = new LinkedList&lt;&gt;();</code></td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">lista_enlazada.py</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code>class Nodo:
+    def __init__(self, cancion):
+        self.cancion = cancion      <span class="code-com"># el dato de este nodo</span>
+        self.siguiente = None       <span class="code-com"># todavía no apunta a nadie</span>
 
-          <text x="240" y="18" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="var(--accent)" font-weight="700">cabeza</text>
-          <line x1="240" y1="24" x2="240" y2="36" stroke="var(--accent)" stroke-width="2" marker-end="url(#flechaCabeza)"/>
+class ListaEnlazada:
+    def __init__(self):
+        self.cabeza = None          <span class="code-com"># lista vacía</span>
 
-          <!-- Nodo cabeza: Tres Deseos, dir 212, next 100 -->
-          <rect x="180" y="38" width="120" height="58" rx="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-          <text x="240" y="58" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="var(--text)">Tres Deseos</text>
-          <text x="240" y="73" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="var(--text-dim)">dir: 212</text>
-          <text x="240" y="88" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="var(--text-dim)">next: 100</text>
+    def agregar(self, cancion):     <span class="code-com"># agrega al final</span>
+        nuevo = Nodo(cancion)
+        if self.cabeza is None:
+            self.cabeza = nuevo
+            return
+        actual = self.cabeza
+        while actual.siguiente:     <span class="code-com"># avanza hasta el último nodo</span>
+            actual = actual.siguiente
+        actual.siguiente = nuevo    <span class="code-com"># lo conecta</span>
 
-          <!-- Nodo: Mi Tierra, dir 100, next 226 -->
-          <rect x="20" y="38" width="120" height="58" rx="6" fill="none" stroke="#7fa5a3" stroke-width="2.5"/>
-          <text x="80" y="58" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="var(--text)">Mi Tierra</text>
-          <text x="80" y="73" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="var(--text-dim)">dir: 100</text>
-          <text x="80" y="88" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="var(--text-dim)">next: 226</text>
+    def recorrer(self):
+        actual = self.cabeza
+        while actual:
+            print(actual.cancion)
+            actual = actual.siguiente
 
-          <!-- Casilla vacía, dir 156 -->
-          <rect x="20" y="148" width="120" height="58" rx="6" fill="none" stroke="var(--border)" stroke-width="2" stroke-dasharray="4,3"/>
-          <text x="80" y="172" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="var(--text-dim)" font-style="italic">memoria libre</text>
-          <text x="80" y="190" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="var(--text-dim)">dir: 156</text>
+historial = ListaEnlazada()
+historial.agregar("Tres Deseos")
+historial.agregar("Mi Tierra")
+historial.agregar("Mi Buen Amor")
+historial.recorrer()                <span class="code-com"># imprime las tres, en orden</span></code></pre>
+</div>
+<p style="font-size:0.9rem;">En un proyecto real normalmente usarías <code>from collections import deque</code> en vez de escribir esta clase. La clase se programa para aprender cómo funcionan los punteros.</p>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#8b7fb8;">¿Cómo se usa en una base de datos? (casi siempre por dentro)</h3>
+<p style="font-size:0.9rem;">En una base de datos casi nunca <strong>llamas</strong> a la estructura: escribes SQL y el motor decide cuándo usarla por dentro. La columna "Qué haces tú" es lo único que escribes.</p>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#8b7fb8; color:#fff; text-align:left;">Dónde</th><th style="padding:0.4rem 0.6rem; background:#8b7fb8; color:#fff; text-align:left;">Cómo aparece</th><th style="padding:0.4rem 0.6rem; background:#8b7fb8; color:#fff; text-align:left;">Qué haces tú</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Redis</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">El tipo <code>LIST</code> está hecho con listas enlazadas.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Usas comandos como <code>RPUSH</code> y <code>LRANGE</code> (Semana 4).</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Índices (MySQL, PostgreSQL)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Las hojas del B+Tree están enlazadas entre sí.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Solo creas el índice con <code>CREATE INDEX</code>: el motor hace el resto.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Versiones de una fila</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Algunos motores encadenan las versiones anteriores de una fila.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No haces nada: es interno del motor.</td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">indice_con_hojas_enlazadas.sql</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code><span class="code-com">-- Crear un índice: el motor lo guarda como un B+Tree.</span>
+CREATE INDEX idx_reproducciones ON tbl_canciones (reproducciones);
 
-          <!-- Nodo: Mi Buen Amor, dir 226, next NULL -->
-          <rect x="180" y="148" width="120" height="58" rx="6" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-          <text x="240" y="168" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="var(--text)">Mi Buen Amor</text>
-          <text x="240" y="183" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="var(--text-dim)">dir: 226</text>
-          <text x="240" y="198" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="var(--text-dim)">next: NULL</text>
+<span class="code-com">-- Un rango como este puede recorrer las hojas enlazadas del índice, una tras otra.</span>
+SELECT titulo, reproducciones
+FROM tbl_canciones
+WHERE reproducciones BETWEEN 5000000 AND 15000000;</code></pre>
+</div>
+<p style="font-size:0.9rem;">Tú no ves la lista enlazada: el motor la usa por dentro para recorrer rangos sin volver a empezar desde la raíz. Si el optimizador la usa o no depende del motor y de cuántas filas tenga la tabla.</p>
+<div class="content-box" style="border-left:4px solid #8b7fb8; margin-top:1rem;"><p style="margin:0 0 0.4rem;"><strong>¿La uso o la tengo que construir?</strong> La usas con <code>deque</code>. Casi nunca la construyes: eso se hace para aprender, o en casos muy especiales de bajo nivel.</p><p style="margin:0; color:#a83a3a;"><strong>Ojo:</strong> no hay acceso directo por posición. Para llegar al nodo 100 tienes que pasar por los 99 anteriores. Y si pierdes la cabeza, pierdes toda la lista.</p></div>
+</div>
+<div class="activity-section" id="pilas" style="border-left:5px solid #c99a4e; padding-left:1.2rem;">
+  <div class="activity-section-header"><h3 style="color:#c99a4e;">3. Pilas (LIFO)</h3></div>
+  <p style="font-size:1rem;"><strong>Una pila de platos: el último que pones es el primero que sacas.</strong></p>
+  <p>Úsala cuando importe el orden inverso: lo último que entró es lo primero que necesitas.</p>
+<svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" style="max-width:380px; width:100%; height:auto; display:block; margin:0.8rem auto;"><defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c99a4e"/></marker></defs><rect x="120" y="70" width="140" height="46" rx="0" fill="#fbf3e4" stroke="#c99a4e" stroke-width="1.6"/><text x="190" y="98" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Mi Buen Amor</text><rect x="120" y="116" width="140" height="46" rx="0" fill="#ffffff" stroke="#c99a4e" stroke-width="1.6"/><text x="190" y="144" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Mi Tierra</text><rect x="120" y="162" width="140" height="46" rx="0" fill="#ffffff" stroke="#c99a4e" stroke-width="1.6"/><text x="190" y="190" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Tres Deseos</text><text x="60" y="100" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#c44444" font-weight="700">tope</text><line x1="86" y1="96" x2="116" y2="96" stroke="#c44444" stroke-width="2" marker-end="url(#ah3)"/><text x="150" y="22" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#6f9d7c" font-weight="700">push</text><line x1="150" y1="28" x2="150" y2="64" stroke="#6f9d7c" stroke-width="2" marker-end="url(#ah3)"/><text x="232" y="22" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#c99a4e" font-weight="700">pop</text><line x1="232" y1="64" x2="232" y2="28" stroke="#c99a4e" stroke-width="2" marker-end="url(#ah3)"/><text x="190" y="222" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#c99a4e" font-style="italic">base</text><text x="320" y="140" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#c99a4e" font-style="italic">último en</text><text x="320" y="154" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#c99a4e" font-style="italic">entrar,</text><text x="320" y="168" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#c99a4e" font-style="italic">primero en</text><text x="320" y="182" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#c99a4e" font-style="italic">salir (LIFO)</text></svg>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#c99a4e;">Qué operaciones tiene y cuánto cuestan</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#c99a4e; color:#fff; text-align:left;">Operación</th><th style="padding:0.4rem 0.6rem; background:#c99a4e; color:#fff; text-align:left;">Costo</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>push</code>: poner encima</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>pop</code>: sacar el de encima</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>peek</code>: mirar el de encima sin sacarlo</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Buscar algo en la pila</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n)</td></tr></tbody></table></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#c99a4e;">¿Cuándo usarla y cuándo evitarla?</h3>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;"><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #3f7f55;"><p style="margin:0 0 0.4rem; font-weight:700; color:#3f7f55;">✓ Úsala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Hay que deshacer en <strong>orden inverso</strong>: lo último que hiciste se revierte primero.</li><li style="margin-bottom:0.35rem;">Vuelves atrás por donde viniste: backtracking, recursión, el botón "atrás".</li><li style="margin-bottom:0.35rem;">Validas cosas anidadas: paréntesis, llaves, etiquetas HTML.</li><li style="margin-bottom:0.35rem;">Recorres un grafo o un árbol en profundidad (DFS) sin recursión.</li></ul></div><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #a83a3a;"><p style="margin:0 0 0.4rem; font-weight:700; color:#a83a3a;">✗ Evítala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Necesitas atender por orden de llegada: eso es una cola.</li><li style="margin-bottom:0.35rem;">Necesitas llegar a un elemento del medio: una pila solo deja ver el de encima.</li><li style="margin-bottom:0.35rem;">Necesitas recorrer en el orden en que se guardaron.</li></ul></div></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#c99a4e;">¿Dónde se usa en aplicaciones y sistemas?</h3>
+<div class="content-box" style="margin:0;"><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Deshacer y rehacer: Word, Photoshop y VS Code guardan tus acciones en una pila.</li><li style="margin-bottom:0.35rem;">Botón "atrás" del navegador.</li><li style="margin-bottom:0.35rem;">Cada lenguaje tiene una pila de llamadas: cuando una función llama a otra, se apila.</li><li style="margin-bottom:0.35rem;">Validar paréntesis o etiquetas HTML, evaluar expresiones y resolver Sudokus (backtracking).</li></ul></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#c99a4e;">¿Cómo la usas en un lenguaje de programación?</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#c99a4e; color:#fff; text-align:left;">Lenguaje</th><th style="padding:0.4rem 0.6rem; background:#c99a4e; color:#fff; text-align:left;">Cómo se llama</th><th style="padding:0.4rem 0.6rem; background:#c99a4e; color:#fff; text-align:left;">Cómo se escribe</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Python</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>list</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>pila.append(x)</code> y <code>pila.pop()</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">JavaScript</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>Array</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>pila.push(x)</code> y <code>pila.pop()</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Java</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>Deque</code> (por ejemplo <code>ArrayDeque</code>)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>pila.push(x)</code> y <code>pila.pop()</code></td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">pila.py</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code>pila = []                         <span class="code-com"># una list sirve como pila</span>
 
-          <!-- Flechas del recorrido: cabeza(212) -> Mi Tierra(100) -> Mi Buen Amor(226) -> NULL -->
-          <line x1="180" y1="67" x2="140" y2="67" stroke="var(--accent)" stroke-width="2" marker-end="url(#flechaCabeza)"/>
-          <path d="M 80 96 C 80 125, 200 125, 240 146" fill="none" stroke="#7fa5a3" stroke-width="2" marker-end="url(#flechaN1)"/>
-          <line x1="240" y1="206" x2="240" y2="222" stroke="#c99a4e" stroke-width="2" marker-end="url(#flechaN2)"/>
-          <text x="240" y="238" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="var(--text-dim)">NULL</text>
+pila.append("Tres Deseos")        <span class="code-com"># push</span>
+pila.append("Mi Tierra")          <span class="code-com"># push</span>
+pila.append("Mi Buen Amor")       <span class="code-com"># push</span>
 
-          <text x="160" y="270" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="var(--text-dim)">Cada nodo puede vivir en cualquier casilla libre.</text>
-        </svg>
-        <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-          Para llegar a "Mi Buen Amor" no hay atajo: hay que empezar en la cabeza (212), leer su puntero
-          para saltar a "Mi Tierra" (100), y desde ahí leer su puntero para saltar a "Mi Buen Amor" (226).
-        </p>
-      </div>
+print(pila[-1])                   <span class="code-com"># peek -&gt; "Mi Buen Amor" (el de encima)</span>
+print(pila.pop())                 <span class="code-com"># pop  -&gt; "Mi Buen Amor" (último en entrar, primero en salir)</span>
+print(pila.pop())                 <span class="code-com"># pop  -&gt; "Mi Tierra"</span>
 
-      <div style="flex:1 1 280px; min-width:260px;">
-        <svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" style="max-width:260px; width:100%; height:auto; display:block; margin:0 auto;">
-          <defs>
-            <marker id="flechaChipCabeza" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
-            </marker>
-            <marker id="flechaChipN1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="#7fa5a3"/>
-            </marker>
-            <marker id="flechaChipN2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="#c99a4e"/>
-            </marker>
-          </defs>
+<span class="code-com"># Recorrido en profundidad (DFS) iterativo: usa una pila</span>
+<span class="code-com"># pila = [inicio]; mientras haya elementos: sacar uno y apilar sus vecinos</span></code></pre>
+</div>
+<p style="font-size:0.9rem;">Tampoco la construyes: la <code>list</code> de Python ya hace de pila.</p>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#c99a4e;">¿Cómo se usa en una base de datos? (casi siempre por dentro)</h3>
+<p style="font-size:0.9rem;">En una base de datos casi nunca <strong>llamas</strong> a la estructura: escribes SQL y el motor decide cuándo usarla por dentro. La columna "Qué haces tú" es lo único que escribes.</p>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#c99a4e; color:#fff; text-align:left;">Dónde</th><th style="padding:0.4rem 0.6rem; background:#c99a4e; color:#fff; text-align:left;">Cómo aparece</th><th style="padding:0.4rem 0.6rem; background:#c99a4e; color:#fff; text-align:left;">Qué haces tú</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">SQL (transacciones)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>SAVEPOINT</code> y <code>ROLLBACK TO</code> se comportan parecido a una pila.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Marcas puntos con <code>SAVEPOINT</code> y vuelves con <code>ROLLBACK TO</code>.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Redis</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Un <code>LIST</code> usado por un solo extremo.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>LPUSH</code> para apilar y <code>LPOP</code> para sacar.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">El motor de consultas</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Usa pilas al analizar consultas SQL anidadas.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No haces nada: es interno.</td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">savepoint.sql</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code>START TRANSACTION;
+INSERT INTO tbl_pagos_suscripcion (monto, id_usuario) VALUES (25000, 1);
+SAVEPOINT despues_del_pago;
 
-          <text x="160" y="16" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="var(--accent)" font-weight="700">cabeza</text>
-          <line x1="160" y1="22" x2="160" y2="38" stroke="var(--accent)" stroke-width="2" marker-end="url(#flechaChipCabeza)"/>
+UPDATE tbl_usuarios SET estado_activo = 0 WHERE idusuario = 1;
+ROLLBACK TO despues_del_pago;     <span class="code-com">-- deshace solo el UPDATE; el INSERT sigue en pie</span>
+COMMIT;</code></pre>
+</div>
+<p style="font-size:0.9rem;">Es una comparación, no una pila literal: los savepoints permiten volver a un punto anterior, y lo último que hiciste se deshace primero. Tiene que ver con el <code>ROLLBACK</code> que viste en las transacciones.</p>
+<div class="content-box" style="border-left:4px solid #c99a4e; margin-top:1rem;"><p style="margin:0 0 0.4rem;"><strong>¿La uso o la tengo que construir?</strong> La usas tal cual: <code>list</code> ya es una pila.</p><p style="margin:0; color:#a83a3a;"><strong>Ojo:</strong> <code>pop()</code> sobre una pila vacía lanza <code>IndexError</code>. Revisa <code>if pila:</code> antes de sacar.</p></div>
+</div>
+<div class="activity-section" id="colas" style="border-left:5px solid #7fa5a3; padding-left:1.2rem;">
+  <div class="activity-section-header"><h3 style="color:#7fa5a3;">4. Colas (FIFO)</h3></div>
+  <p style="font-size:1rem;"><strong>La fila del banco: el primero en llegar es el primero en ser atendido.</strong></p>
+  <p>Úsala cuando importe el orden de llegada.</p>
+<svg viewBox="0 0 620 160" xmlns="http://www.w3.org/2000/svg" style="max-width:620px; width:100%; height:auto; display:block; margin:0.8rem auto;"><defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7fa5a3"/></marker></defs><rect x="150" y="50" width="120" height="46" rx="0" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.6"/><text x="210" y="78" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Tres Deseos</text><rect x="270" y="50" width="120" height="46" rx="0" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.6"/><text x="330" y="78" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Mi Tierra</text><rect x="390" y="50" width="120" height="46" rx="0" fill="#ffffff" stroke="#7fa5a3" stroke-width="1.6"/><text x="450" y="78" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" fill="#33404f">Mi Buen Amor</text><line x1="146" y1="73" x2="36" y2="73" stroke="#c44444" stroke-width="2" marker-end="url(#ah4)"/><text x="86" y="64" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#c44444" font-weight="700">sale</text><line x1="600" y1="73" x2="514" y2="73" stroke="#6f9d7c" stroke-width="2" marker-end="url(#ah4)"/><text x="560" y="64" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#6f9d7c" font-weight="700">entra</text><text x="210" y="116" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7fa5a3" font-weight="700">frente</text><text x="450" y="116" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7fa5a3" font-weight="700">final</text><text x="310" y="146" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#7fa5a3" font-style="italic">el primero en entrar es el primero en salir (FIFO)</text></svg>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#7fa5a3;">Qué operaciones tiene y cuánto cuestan</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Operación</th><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Costo</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Encolar (entrar por el final)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Desencolar (salir por el frente)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1) con <code>deque</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Ver quién está de primero</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Desencolar con <code>list.pop(0)</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n): evítalo</td></tr></tbody></table></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#7fa5a3;">¿Cuándo usarla y cuándo evitarla?</h3>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;"><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #3f7f55;"><p style="margin:0 0 0.4rem; font-weight:700; color:#3f7f55;">✓ Úsala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Hay que atender por <strong>orden de llegada</strong>: turnos, pedidos, peticiones.</li><li style="margin-bottom:0.35rem;">Tienes tareas pendientes que otro proceso va a ir sacando una por una.</li><li style="margin-bottom:0.35rem;">Recorres un grafo por niveles (BFS) o procesas "primero los más cercanos".</li><li style="margin-bottom:0.35rem;">Quieres amortiguar picos: guardar lo que llega mientras algo más lento lo procesa.</li></ul></div><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #a83a3a;"><p style="margin:0 0 0.4rem; font-weight:700; color:#a83a3a;">✗ Evítala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Lo último que entra debe salir primero: eso es una pila.</li><li style="margin-bottom:0.35rem;">Algunos elementos son más urgentes que otros: necesitas una cola de prioridad (<code>heapq</code>).</li><li style="margin-bottom:0.35rem;">Necesitas buscar un elemento que está en medio de la fila.</li></ul></div></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#7fa5a3;">¿Dónde se usa en aplicaciones y sistemas?</h3>
+<div class="content-box" style="margin:0;"><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Colas de tareas en segundo plano: Celery en Python, RabbitMQ, Amazon SQS.</li><li style="margin-bottom:0.35rem;">Kafka: registra eventos en orden, y varios consumidores los leen en ese orden.</li><li style="margin-bottom:0.35rem;">Cola de impresión, peticiones a un servidor web y buffer de streaming de música o video.</li><li style="margin-bottom:0.35rem;">Planificador de procesos de un sistema operativo.</li></ul></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#7fa5a3;">¿Cómo la usas en un lenguaje de programación?</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Lenguaje</th><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Cómo se llama</th><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Cómo se escribe</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Python</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>collections.deque</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>cola.append(x)</code> y <code>cola.popleft()</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">JavaScript</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>Array</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>cola.push(x)</code> y <code>cola.shift()</code> (sirve; con colas muy grandes conviene otra estructura)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Java</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>Queue</code> (por ejemplo <code>ArrayDeque</code>)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>cola.offer(x)</code> y <code>cola.poll()</code></td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">cola.py</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code>from collections import deque
 
-          <!-- Rejilla del chip: 5 columnas x 3 filas -->
-          <line x1="20" y1="40" x2="20" y2="160" stroke="var(--border)"/>
-          <line x1="60" y1="40" x2="60" y2="160" stroke="var(--border)"/>
-          <line x1="100" y1="40" x2="100" y2="160" stroke="var(--border)"/>
-          <line x1="140" y1="40" x2="140" y2="160" stroke="var(--border)"/>
-          <line x1="180" y1="40" x2="180" y2="160" stroke="var(--border)"/>
-          <line x1="220" y1="40" x2="220" y2="160" stroke="var(--border)"/>
-          <line x1="20" y1="40" x2="220" y2="40" stroke="var(--border)"/>
-          <line x1="20" y1="80" x2="220" y2="80" stroke="var(--border)"/>
-          <line x1="20" y1="120" x2="220" y2="120" stroke="var(--border)"/>
-          <line x1="20" y1="160" x2="220" y2="160" stroke="var(--border)"/>
+cola = deque()
+cola.append("Tres Deseos")        <span class="code-com"># encolar</span>
+cola.append("Mi Tierra")
+cola.append("Mi Buen Amor")
 
-          <!-- nodo 0 (cabeza), fila 0 columna 3 -->
-          <rect x="141" y="41" width="38" height="38" fill="var(--accent)"/>
-          <text x="160" y="65" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#fff" font-weight="700">0</text>
+print(cola.popleft())             <span class="code-com"># desencolar -&gt; "Tres Deseos" (el primero que entró)</span>
+print(cola[0])                    <span class="code-com"># frente    -&gt; "Mi Tierra"</span>
+print(len(cola))                  <span class="code-com"># 2</span>
 
-          <!-- nodo 1, fila 2 columna 0 -->
-          <rect x="21" y="121" width="38" height="38" fill="#7fa5a3"/>
-          <text x="40" y="145" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#fff" font-weight="700">1</text>
+<span class="code-com"># Cuidado: lista.pop(0) también funciona, pero es O(n) porque corre todos los elementos.</span></code></pre>
+</div>
+<p style="font-size:0.9rem;">La cola también viene hecha, y la usas con <code>deque</code>. Es la estructura que usa el BFS.</p>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#7fa5a3;">¿Cómo se usa en una base de datos? (casi siempre por dentro)</h3>
+<p style="font-size:0.9rem;">En una base de datos casi nunca <strong>llamas</strong> a la estructura: escribes SQL y el motor decide cuándo usarla por dentro. La columna "Qué haces tú" es lo único que escribes.</p>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Dónde</th><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Cómo aparece</th><th style="padding:0.4rem 0.6rem; background:#7fa5a3; color:#fff; text-align:left;">Qué haces tú</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">MySQL y PostgreSQL</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No tienen un tipo cola: una tabla de tareas pendientes hace ese papel.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>SELECT ... ORDER BY creada_at LIMIT 1</code>, con <code>FOR UPDATE SKIP LOCKED</code> si hay varios procesos.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Redis</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Un <code>LIST</code> usado por los dos extremos.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>LPUSH</code> para encolar y <code>RPOP</code> para desencolar.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">RabbitMQ, Kafka, SQS</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No son bases de datos tradicionales: son sistemas hechos para colas y eventos.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Publicas mensajes y otro programa los consume.</td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">cola_de_tareas.sql</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code><span class="code-com">-- Ejemplo inventado: una tabla de tareas usada como cola (el más antiguo primero).</span>
+SELECT id_tarea, detalle
+FROM tbl_tareas
+WHERE estado = 'pendiente'
+ORDER BY creada_at ASC
+LIMIT 1;</code></pre>
+</div>
+<p style="font-size:0.9rem;"><code>tbl_tareas</code> no existe en SoundFlow: es un ejemplo del patrón. Muchas aplicaciones guardan trabajos pendientes así. Si varios procesos leen a la vez, se combina con <code>FOR UPDATE SKIP LOCKED</code> (disponible en PostgreSQL y en MySQL 8).</p>
+<div class="content-box" style="border-left:4px solid #7fa5a3; margin-top:1rem;"><p style="margin:0 0 0.4rem;"><strong>¿La uso o la tengo que construir?</strong> La usas tal cual: <code>deque</code> ya es una cola.</p><p style="margin:0; color:#a83a3a;"><strong>Ojo:</strong> <code>popleft()</code> sobre un <code>deque</code> vacío lanza <code>IndexError</code>. Y no uses <code>list.pop(0)</code> en colas grandes.</p></div>
+</div>
+<div class="activity-section" id="grafos" style="border-left:5px solid #6f9d7c; padding-left:1.2rem;">
+  <div class="activity-section-header"><h3 style="color:#6f9d7c;">5. Grafos</h3></div>
+  <p style="font-size:1rem;"><strong>Cosas (nodos) conectadas por relaciones (aristas).</strong></p>
+  <p>Úsalo cuando lo importante son las relaciones entre las cosas.</p>
+<svg viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" style="max-width:560px; width:100%; height:auto; display:block; margin:0.8rem auto;"><defs><marker id="ah5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6f9d7c"/></marker></defs><line x1="230" y1="50" x2="140" y2="50" stroke="#8aa99a" stroke-width="2"/><line x1="140" y1="50" x2="50" y2="50" stroke="#8aa99a" stroke-width="2"/><line x1="320" y1="50" x2="230" y2="50" stroke="#8aa99a" stroke-width="2"/><line x1="320" y1="50" x2="320" y2="130" stroke="#8aa99a" stroke-width="2"/><line x1="320" y1="130" x2="430" y2="90" stroke="#8aa99a" stroke-width="2"/><line x1="430" y1="90" x2="430" y2="170" stroke="#8aa99a" stroke-width="2"/><line x1="320" y1="130" x2="430" y2="170" stroke="#8aa99a" stroke-width="2"/><line x1="430" y1="170" x2="520" y2="170" stroke="#8aa99a" stroke-width="2"/><line x1="320" y1="210" x2="320" y2="130" stroke="#8aa99a" stroke-width="2"/><line x1="320" y1="210" x2="430" y2="215" stroke="#8aa99a" stroke-width="2"/><circle cx="50" cy="50" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="50" y="54" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">QUE</text><circle cx="140" cy="50" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="140" y="54" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">BIZ</text><circle cx="230" cy="50" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="230" y="54" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">SHA</text><circle cx="320" cy="50" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="320" y="54" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">KAR</text><circle cx="320" cy="130" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="320" y="134" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">JBA</text><circle cx="430" cy="90" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="430" y="94" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">BAD</text><circle cx="430" cy="170" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="430" y="174" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">DUA</text><circle cx="520" cy="170" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="520" y="174" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">ELT</text><circle cx="320" cy="210" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="320" y="214" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">ROS</text><circle cx="430" cy="215" r="19" fill="#ffffff" stroke="#6f9d7c" stroke-width="2"/><text x="430" y="219" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#33404f" font-weight="700">RAU</text><text x="110" y="120" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#6f9d7c" font-style="italic">nodo = artista</text><text x="110" y="136" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#6f9d7c" font-style="italic">arista = colaboración</text><text x="110" y="152" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#6f9d7c" font-style="italic">(sin dirección)</text></svg>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#6f9d7c;">Qué operaciones tiene y cuánto cuestan</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Operación</th><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Costo</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Agregar un nodo o una arista (lista de adyacencia)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Ver los vecinos de un nodo</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(grado del nodo)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Saber si dos nodos están conectados (lista)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(grado); con matriz O(1)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Recorrer todo (BFS o DFS)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(V + E): nodos más aristas</td></tr></tbody></table></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#6f9d7c;">¿Cuándo usarla y cuándo evitarla?</h3>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;"><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #3f7f55;"><p style="margin:0 0 0.4rem; font-weight:700; color:#3f7f55;">✓ Úsala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Lo importante son las <strong>relaciones</strong> entre las cosas: amigos, colaboraciones, rutas, dependencias.</li><li style="margin-bottom:0.35rem;">Preguntas como "¿cómo llego de A a B?" o "¿quién está conectado con quién?".</li><li style="margin-bottom:0.35rem;">Las relaciones son muchos a muchos y te interesan los caminos de varios saltos.</li><li style="margin-bottom:0.35rem;">Quieres recomendar algo a partir de lo que hicieron usuarios parecidos.</li></ul></div><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #a83a3a;"><p style="margin:0 0 0.4rem; font-weight:700; color:#a83a3a;">✗ Evítala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Los datos son independientes y no se relacionan: una tabla o una lista basta.</li><li style="margin-bottom:0.35rem;">La relación es de un solo nivel: un <code>JOIN</code> lo resuelve sin armar un grafo.</li><li style="margin-bottom:0.35rem;">Es una jerarquía estricta (cada elemento tiene un solo padre): eso es un árbol.</li></ul></div></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#6f9d7c;">¿Dónde se usa en aplicaciones y sistemas?</h3>
+<div class="content-box" style="margin:0;"><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Redes sociales: LinkedIn, Facebook e Instagram modelan personas conectadas por amistades o seguidores.</li><li style="margin-bottom:0.35rem;">Mapas y rutas: Google Maps y Waze buscan el camino más corto sobre un grafo de calles.</li><li style="margin-bottom:0.35rem;">Git: el historial de commits es un grafo. Los gestores de paquetes (npm, pip) resuelven dependencias con grafos.</li><li style="margin-bottom:0.35rem;">Detección de fraude y recomendaciones: relacionan usuarios con lo que compran o escuchan.</li></ul></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#6f9d7c;">¿Cómo la usas en un lenguaje de programación?</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Lenguaje</th><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Cómo se llama</th><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Cómo se escribe</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Python</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>dict</code> de listas, o la librería <code>networkx</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>grafo = {"SHA": ["BIZ", "KAR"]}</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">JavaScript</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Objeto o <code>Map</code> de arreglos</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>const grafo = { SHA: ["BIZ", "KAR"] };</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Java</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>Map</code> de listas</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>Map&lt;String, List&lt;String&gt;&gt; grafo = new HashMap&lt;&gt;();</code></td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">grafo.py</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code>from collections import deque
 
-          <!-- nodo 2, fila 1 columna 4 -->
-          <rect x="181" y="81" width="38" height="38" fill="#c99a4e"/>
-          <text x="200" y="105" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#fff" font-weight="700">2</text>
-
-          <!-- Flechas del recorrido, saltando por toda la rejilla -->
-          <path d="M 160 79 C 120 110, 70 95, 40 119" fill="none" stroke="#7fa5a3" stroke-width="2" marker-end="url(#flechaChipN1)"/>
-          <path d="M 59 138 C 110 155, 150 128, 180 106" fill="none" stroke="#c99a4e" stroke-width="2" marker-end="url(#flechaChipN2)"/>
-          <line x1="219" y1="100" x2="238" y2="100" stroke="#c99a4e" stroke-width="2"/>
-          <text x="248" y="104" font-family="Consolas, monospace" font-size="10" fill="var(--text-dim)">NULL</text>
-        </svg>
-        <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-          Y así se ve dentro del microchip de memoria (RAM): las 3 casillas quedan sueltas, repartidas por
-          toda la cuadrícula, conectadas solo por punteros.
-        </p>
-      </div>
-    </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0;">
-        <strong>En resumen:</strong> una lista enlazada <strong>funciona mejor para inserción y eliminación
-        rápida</strong>, agregar o quitar un elemento sin tener que mover nada más, solo cambiar un par de
-        punteros.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Cómo se busca un valor en una lista enlazada?</strong></p>
-      <p style="margin:0 0 0.6rem;">
-        No hay atajo posible: como los nodos no están en posiciones calculables, la búsqueda siempre se hace
-        así, paso por paso:
-      </p>
-      <ul style="margin:0 0 0.6rem; padding-left:1.2rem; color:var(--text);">
-        <li>Empieza en la <strong>cabeza</strong> de la lista, el único punto de entrada que existe.</li>
-        <li>Compara el dato del nodo actual con lo que estás buscando.</li>
-        <li>Si coincide, ya lo encontraste y ahí termina la búsqueda.</li>
-        <li>Si no coincide, sigue el <strong>puntero</strong> del nodo actual para saltar al siguiente nodo.</li>
-        <li>Repite la comparación en ese nuevo nodo, y así sucesivamente, hasta encontrar el dato o llegar a
-          <code>NULL</code> (el final de la lista, sin encontrarlo).</li>
-      </ul>
-    </div>
-
-    <p>
-      Veámoslo con una lista más larga, de 6 canciones, buscando "Mi Buen Amor":
-    </p>
-
-    <div class="tree-demo">
-    <svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" style="max-width:760px; width:100%; height:auto; display:block; margin:0.8rem auto 0;">
-      <defs>
-        <marker id="flechaListaDemo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="var(--text-dim)"/>
-        </marker>
-      </defs>
-
-      <text x="75" y="20" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="var(--accent)" font-weight="700">cabeza</text>
-      <line x1="75" y1="26" x2="75" y2="38" stroke="var(--accent)" stroke-width="2" marker-end="url(#flechaListaDemo)"/>
-
-      <!-- Nodos en filas alternadas (arriba/abajo), simulando casillas sueltas en memoria -->
-      <g class="tree-nodo" data-nodo="n0" data-nombre="Tres Deseos">
-        <rect x="20" y="40" width="110" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="75" y="72" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">Tres Deseos</text>
-      </g>
-      <path d="M 75 95 C 75 137, 225 137, 225 178" fill="none" stroke="var(--text-dim)" stroke-width="2" marker-end="url(#flechaListaDemo)"/>
-
-      <g class="tree-nodo" data-nodo="n1" data-nombre="Mi Tierra">
-        <rect x="170" y="180" width="110" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="225" y="212" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">Mi Tierra</text>
-      </g>
-      <path d="M 225 180 C 225 138, 375 138, 375 97" fill="none" stroke="var(--text-dim)" stroke-width="2" marker-end="url(#flechaListaDemo)"/>
-
-      <g class="tree-nodo" data-nodo="n2" data-nombre="Rayando el Sol">
-        <rect x="320" y="40" width="110" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="375" y="72" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">Rayando el Sol</text>
-      </g>
-      <path d="M 375 95 C 375 137, 525 137, 525 178" fill="none" stroke="var(--text-dim)" stroke-width="2" marker-end="url(#flechaListaDemo)"/>
-
-      <g class="tree-nodo" data-nodo="n3" data-nombre="Persiana Americana">
-        <rect x="470" y="180" width="110" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="525" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">Persiana</text>
-        <text x="525" y="218" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">Americana</text>
-      </g>
-      <path d="M 525 180 C 525 138, 675 138, 675 97" fill="none" stroke="var(--text-dim)" stroke-width="2" marker-end="url(#flechaListaDemo)"/>
-
-      <g class="tree-nodo" data-nodo="n4" data-nombre="Oye Mi Amor">
-        <rect x="620" y="40" width="110" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="675" y="72" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">Oye Mi Amor</text>
-      </g>
-      <path d="M 675 95 C 675 137, 825 137, 825 178" fill="none" stroke="var(--text-dim)" stroke-width="2" marker-end="url(#flechaListaDemo)"/>
-
-      <g class="tree-nodo" data-nodo="n5" data-nombre="Mi Buen Amor">
-        <rect x="770" y="180" width="110" height="55" rx="6" fill="none" stroke="#6f9d7c" stroke-width="3"/>
-        <text x="825" y="212" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">Mi Buen Amor</text>
-      </g>
-      <line x1="825" y1="235" x2="825" y2="251" stroke="var(--text-dim)" stroke-width="2" marker-end="url(#flechaListaDemo)"/>
-      <text x="825" y="266" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="var(--text-dim)">NULL</text>
-
-      <text x="450" y="292" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Cada nodo vive en una casilla distinta de memoria, sin orden espacial.</text>
-      <text x="450" y="310" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">No hay atajo: solo el puntero de cada nodo dice dónde sigue la cadena.</text>
-    </svg>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira la búsqueda en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="n0,n1,n2,n3,n4,n5">Buscar "Mi Buen Amor"</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Haz clic para ver, nodo por nodo, cómo la búsqueda avanza siguiendo los punteros.
-      </p>
-    </div>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Cuándo se usa una lista enlazada en programación real?</strong></p>
-      <ul style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li>Cuando no sabes de antemano cuántos elementos vas a tener, y esa cantidad va a crecer o achicarse
-          todo el tiempo, como un historial de reproducción que se arma sobre la marcha.</li>
-        <li>En sistemas de deshacer/rehacer o listas de tareas, donde insertar y eliminar en cualquier punto
-          debe ser barato.</li>
-      </ul>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Ejemplo: historial de reproducción con lista enlazada</strong></p>
-      <p style="margin:0 0 0.6rem;">
-        No sabes de antemano cuántas canciones va a escuchar un usuario en una sesión, así que en vez de un
-        arreglo de tamaño fijo, cada vez que reproduce una canción se agrega un nuevo nodo al final,
-        enlazado al anterior.
-      </p>
-      <div class="code-block" style="margin-top:0.6rem;">
-        <div class="code-block-header">
-          <span class="code-dot" style="background:#ff5f56"></span>
-          <span class="code-dot" style="background:#ffbd2e"></span>
-          <span class="code-dot" style="background:#27c93f"></span>
-          <span class="code-filename">historial_reproduccion.js</span>
-          <button class="code-copy-btn" type="button">Copiar</button>
-        </div>
-        <pre><code><span class="code-com">// Representa un nodo individual: guarda un dato y un puntero al siguiente nodo</span>
-<span class="code-kw">class</span> <span class="code-fn">Nodo</span> {
-  <span class="code-kw">constructor</span>(cancion) {
-    <span class="code-kw">this</span>.cancion = cancion;     <span class="code-com">// el dato que guarda este nodo</span>
-    <span class="code-kw">this</span>.siguiente = <span class="code-kw">null</span>;      <span class="code-com">// todavía no apunta a ningún otro nodo</span>
-  }
+<span class="code-com"># Lista de adyacencia: cada artista con la lista de quienes colaboraron con él</span>
+grafo = {
+    "SHA": ["BIZ", "KAR"],
+    "BIZ": ["SHA", "QUE"],
+    "QUE": ["BIZ"],
+    "KAR": ["SHA", "JBA"],
+    "JBA": ["KAR", "BAD", "DUA", "ROS"],
+    "BAD": ["JBA", "DUA"],
+    "DUA": ["BAD", "JBA", "ELT"],
+    "ELT": ["DUA"],
+    "ROS": ["JBA", "RAU"],
+    "RAU": ["ROS"],
 }
 
-<span class="code-com">// Representa la lista enlazada completa</span>
-<span class="code-kw">class</span> <span class="code-fn">ListaEnlazada</span> {
-  <span class="code-kw">constructor</span>() {
-    <span class="code-kw">this</span>.cabeza = <span class="code-kw">null</span>;         <span class="code-com">// al inicio, la lista está vacía</span>
-  }
+def bfs(grafo, inicio):                 <span class="code-com"># recorrido en anchura: usa una COLA</span>
+    visitados = {inicio}
+    cola = deque([inicio])
+    while cola:
+        nodo = cola.popleft()
+        print(nodo, end=" ")
+        for vecino in grafo[nodo]:
+            if vecino not in visitados:
+                visitados.add(vecino)
+                cola.append(vecino)
 
-  <span class="code-com">// Agrega una canción nueva al final de la lista</span>
-  <span class="code-fn">agregar</span>(cancion) {
-    <span class="code-kw">const</span> nuevoNodo = <span class="code-kw">new</span> <span class="code-fn">Nodo</span>(cancion); <span class="code-com">// crea el nodo para la nueva canción</span>
+bfs(grafo, "SHA")     <span class="code-com"># SHA BIZ KAR QUE JBA BAD DUA ROS ELT RAU</span>
 
-    <span class="code-kw">if</span> (!<span class="code-kw">this</span>.cabeza) {
-      <span class="code-kw">this</span>.cabeza = nuevoNodo;  <span class="code-com">// si la lista está vacía, el nuevo nodo es la cabeza</span>
-      <span class="code-kw">return</span>;
-    }
-
-    <span class="code-kw">let</span> actual = <span class="code-kw">this</span>.cabeza;   <span class="code-com">// empieza a recorrer desde la cabeza</span>
-    <span class="code-kw">while</span> (actual.siguiente) {  <span class="code-com">// avanza mientras haya un "siguiente"</span>
-      actual = actual.siguiente;
-    }
-    actual.siguiente = nuevoNodo; <span class="code-com">// conecta el último nodo con el nuevo</span>
-  }
-}
-
-<span class="code-kw">const</span> historial = <span class="code-kw">new</span> <span class="code-fn">ListaEnlazada</span>();
-historial.<span class="code-fn">agregar</span>(<span class="code-str">"Tres Deseos"</span>);  <span class="code-com">// se crea el primer nodo (la cabeza)</span>
-historial.<span class="code-fn">agregar</span>(<span class="code-str">"Mi Tierra"</span>);    <span class="code-com">// se enlaza después de "Tres Deseos"</span>
-historial.<span class="code-fn">agregar</span>(<span class="code-str">"Mi Buen Amor"</span>); <span class="code-com">// se enlaza después de "Mi Tierra"</span></code></pre>
-      </div>
-      <p style="margin:0.6rem 0 0;">
-        Cada vez que el usuario reproduce otra canción, se llama <code>agregar()</code> de nuevo: se crea un
-        nodo y se conecta al final de la cadena, sin mover ni recalcular nada de lo que ya estaba guardado.
-      </p>
-    </div>
-
+<span class="code-com"># Con la librería networkx (pip install networkx):</span>
+import networkx as nx
+G = nx.Graph(grafo)                     <span class="code-com"># acepta el dict directamente</span>
+print(nx.shortest_path(G, "SHA", "ELT"))   <span class="code-com"># ['SHA', 'KAR', 'JBA', 'DUA', 'ELT']</span>
+print(G.degree("JBA"))                  <span class="code-com"># 4</span></code></pre>
+</div>
+<p style="font-size:0.9rem;">Normalmente <strong>tú armas la estructura</strong> (el <code>dict</code>) y el recorrido, o dejas que <code>networkx</code> lo haga. BFS usa una cola y DFS usa una pila.</p>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#6f9d7c;">¿Cómo se usa en una base de datos? (casi siempre por dentro)</h3>
+<p style="font-size:0.9rem;">En una base de datos casi nunca <strong>llamas</strong> a la estructura: escribes SQL y el motor decide cuándo usarla por dentro. La columna "Qué haces tú" es lo único que escribes.</p>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Dónde</th><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Cómo aparece</th><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Qué haces tú</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">MySQL y PostgreSQL</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Una tabla de relaciones, como <code>tbl_reproducciones</code>, representa las aristas.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Consultas con <code>JOIN</code>; para varios saltos, <code>WITH RECURSIVE</code> (MySQL 8.0+).</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Neo4j</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Base de datos de grafos, con su propio lenguaje (Cypher).</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>MATCH (a:Artista)-[:COLABORA_CON]-(b:Artista) RETURN a, b</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Amazon Neptune</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Otra base de datos de grafos, administrada en la nube.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Cargas nodos y aristas y consultas los caminos.</td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">grafo_de_reproducciones.sql</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
   </div>
+  <pre><code><span class="code-com">-- Cada fila de tbl_reproducciones es una arista: usuario -&gt; canción.</span>
+SELECT id_usuario, id_cancion
+FROM tbl_reproducciones;
 
-
-  <!-- ===================== 3. PILAS ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>3. Pilas: LIFO, el último en entrar es el primero en salir</h3>
-    </div>
-    <p>
-      Una <strong>pila</strong> (stack) solo permite agregar y quitar elementos por un extremo, llamado el
-      "tope". Sigue la lógica <strong>LIFO</strong> (Last In, First Out): lo último que entró es lo primero
-      que sale, como una pila de platos.
-    </p>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Operaciones con pila</h4>
-    <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin-top:0.8rem;">
-      <div class="concept-card">
-        <h4 style="color:var(--accent);">push</h4>
-        <p style="font-size:0.85rem;">Agrega un elemento en el tope de la pila.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#7fa5a3;">pop</h4>
-        <p style="font-size:0.85rem;">Quita y devuelve el elemento del tope, el último que entró.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#8b7fb8;">peek / top</h4>
-        <p style="font-size:0.85rem;">Consulta el elemento del tope sin quitarlo.</p>
-      </div>
-    </div>
-
-    <div class="tree-demo">
-    <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg" style="max-width:340px; width:100%; height:auto; display:block; margin:1rem auto 0;">
-      <defs>
-        <marker id="flechaPila" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="var(--text-dim)"/>
-        </marker>
-      </defs>
-
-      <text x="120" y="30" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#6f9d7c" font-weight="700">push</text>
-      <line x1="120" y1="38" x2="120" y2="88" stroke="#6f9d7c" stroke-width="2" marker-end="url(#flechaPila)"/>
-
-      <text x="260" y="30" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#c44444" font-weight="700">pop</text>
-      <line x1="260" y1="88" x2="260" y2="38" stroke="#c44444" stroke-width="2" marker-end="url(#flechaPila)"/>
-
-      <g class="tree-nodo" data-nodo="p0" data-nombre="Rayando el Sol">
-        <rect x="60" y="90" width="160" height="55" rx="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-        <text x="140" y="123" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Rayando el Sol</text>
-      </g>
-      <text x="240" y="123" font-family="Segoe UI, sans-serif" font-size="11" fill="var(--text-dim)">&larr; tope</text>
-
-      <g class="tree-nodo" data-nodo="p1" data-nombre="Tres Deseos">
-        <rect x="60" y="150" width="160" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="140" y="183" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Tres Deseos</text>
-      </g>
-
-      <g class="tree-nodo" data-nodo="p2" data-nombre="Mi Tierra">
-        <rect x="60" y="210" width="160" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="140" y="243" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Mi Tierra</text>
-      </g>
-
-      <g class="tree-nodo" data-nodo="p3" data-nombre="La Vida Es un Carnaval">
-        <rect x="60" y="270" width="160" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="140" y="303" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="var(--text)">La Vida Es un Carnaval</text>
-      </g>
-
-      <g class="tree-nodo" data-nodo="p4" data-nombre="Cuando Pase el Temblor">
-        <rect x="60" y="330" width="160" height="55" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="140" y="363" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="var(--text)">Cuando Pase el Temblor</text>
-      </g>
-
-      <line x1="50" y1="387" x2="230" y2="387" stroke="var(--text-dim)" stroke-width="3"/>
-      <text x="140" y="410" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="var(--text-dim)">fondo de la pila</text>
-    </svg>
-    <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-      "Rayando el Sol" entró de último con <code>push</code>, así que queda en el tope, y es lo primero que
-      sale con <code>pop</code>.
-    </p>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira el acceso en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="p0,p1,p2,p3,p4">Buscar "Cuando Pase el Temblor" con pop()</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Haz clic para ver cómo hay que sacar los 4 de encima, uno por uno, para llegar al fondo.
-      </p>
-    </div>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Cómo se recorre una pila?</strong></p>
-      <p style="margin:0;">
-        No se recorre libremente: solo puedes acceder al elemento del tope con <code>peek</code>. Para
-        llegar a cualquier otro elemento, tienes que ir sacando los de encima uno por uno con
-        <code>pop()</code>, en orden, y se pierden en el proceso a menos que los guardes en otro lado. Por
-        eso una pila no sirve para "buscar" un dato en el medio: solo te da acceso ordenado desde el tope
-        hacia el fondo.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Cada vez que reproduces una canción nueva, se apila. Cuando presionas "anterior", la app hace
-        <code>pop()</code> y te devuelve la última que escuchaste, no la primera. Así funciona también el
-        botón "deshacer" en la mayoría de aplicaciones.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Otras aplicaciones reales de las pilas:</strong></p>
-      <ul style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li><strong>Deshacer / rehacer</strong> en editores de texto o de imágenes: cada acción se apila, y
-          "deshacer" es un <code>pop()</code> sobre la última acción realizada.</li>
-        <li><strong>Botón "atrás" del navegador:</strong> cada página que visitas se apila en el historial.
-          Al presionar "atrás", el navegador hace <code>pop()</code> y te lleva a la última página que
-          visitaste, no a la primera.</li>
-      </ul>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Ejemplo en código: pila de reproducción reciente</strong></p>
-      <div class="code-block" style="margin-top:0.6rem;">
-        <div class="code-block-header">
-          <span class="code-dot" style="background:#ff5f56"></span>
-          <span class="code-dot" style="background:#ffbd2e"></span>
-          <span class="code-dot" style="background:#27c93f"></span>
-          <span class="code-filename">pila_reproduccion.js</span>
-          <button class="code-copy-btn" type="button">Copiar</button>
-        </div>
-        <pre><code><span class="code-kw">class</span> <span class="code-fn">Pila</span> {
-  <span class="code-kw">constructor</span>() {
-    <span class="code-kw">this</span>.elementos = []; <span class="code-com">// arreglo vacío para guardar las canciones</span>
-  }
-
-  <span class="code-fn">push</span>(cancion) {
-    <span class="code-kw">this</span>.elementos.<span class="code-fn">push</span>(cancion); <span class="code-com">// agrega la canción en el tope</span>
-  }
-
-  <span class="code-fn">pop</span>() {
-    <span class="code-kw">return</span> <span class="code-kw">this</span>.elementos.<span class="code-fn">pop</span>(); <span class="code-com">// quita y devuelve la del tope</span>
-  }
-}
-
-<span class="code-kw">const</span> historialReciente = <span class="code-kw">new</span> <span class="code-fn">Pila</span>();
-historialReciente.<span class="code-fn">push</span>(<span class="code-str">"Tres Deseos"</span>);   <span class="code-com">// se apila primero</span>
-historialReciente.<span class="code-fn">push</span>(<span class="code-str">"Mi Tierra"</span>);     <span class="code-com">// queda encima de "Tres Deseos"</span>
-historialReciente.<span class="code-fn">push</span>(<span class="code-str">"Rayando el Sol"</span>); <span class="code-com">// queda en el tope</span>
-
-historialReciente.<span class="code-fn">pop</span>(); <span class="code-com">// devuelve "Rayando el Sol", la última en entrar</span></code></pre>
-      </div>
-    </div>
+<span class="code-com">-- Grado de cada canción: a cuántos usuarios está conectada.</span>
+SELECT id_cancion, COUNT(*) AS grado
+FROM tbl_reproducciones
+GROUP BY id_cancion
+ORDER BY grado DESC;</code></pre>
+</div>
+<p style="font-size:0.9rem;">Es el mismo grafo de la práctica: los usuarios y las canciones son los nodos, y cada fila de la tabla es una arista. En SQL no se "dibuja" el grafo, se consulta la tabla que lo representa.</p>
+<div class="content-box" style="border-left:4px solid #6f9d7c; margin-top:1rem;"><p style="margin:0 0 0.4rem;"><strong>¿La uso o la tengo que construir?</strong> La usas: armas la estructura tú (un <code>dict</code> basta) o usas una librería como <code>networkx</code>.</p><p style="margin:0; color:#a83a3a;"><strong>Ojo:</strong> si no marcas los nodos visitados, el recorrido da vueltas para siempre en los ciclos. Y en un grafo sin dirección, cada conexión se guarda en las dos listas (A tiene a B y B tiene a A).</p></div>
+</div>
+<div class="activity-section" id="arboles" style="border-left:5px solid #5f8582; padding-left:1.2rem;">
+  <div class="activity-section-header"><h3 style="color:#5f8582;">6. Árboles</h3></div>
+  <p style="font-size:1rem;"><strong>Una jerarquía: una raíz de la que salen ramas, y cada rama puede tener más ramas.</strong></p>
+  <p>Úsalo para jerarquías y para buscar rápido en datos ordenados.</p>
+<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="max-width:420px; width:100%; height:auto; display:block; margin:0.8rem auto;"><defs><marker id="ah6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5f8582"/></marker></defs><line x1="210" y1="30" x2="120" y2="95" stroke="#8aa9a7" stroke-width="2"/><line x1="210" y1="30" x2="300" y2="95" stroke="#8aa9a7" stroke-width="2"/><line x1="120" y1="95" x2="70" y2="165" stroke="#8aa9a7" stroke-width="2"/><line x1="120" y1="95" x2="170" y2="165" stroke="#8aa9a7" stroke-width="2"/><line x1="300" y1="95" x2="250" y2="165" stroke="#8aa9a7" stroke-width="2"/><line x1="300" y1="95" x2="350" y2="165" stroke="#8aa9a7" stroke-width="2"/><circle cx="210" cy="30" r="19" fill="#ffffff" stroke="#5f8582" stroke-width="2"/><text x="210" y="35" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#33404f" font-weight="700">50</text><circle cx="120" cy="95" r="19" fill="#ffffff" stroke="#5f8582" stroke-width="2"/><text x="120" y="100" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#33404f" font-weight="700">30</text><circle cx="300" cy="95" r="19" fill="#ffffff" stroke="#5f8582" stroke-width="2"/><text x="300" y="100" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#33404f" font-weight="700">70</text><circle cx="70" cy="165" r="19" fill="#e6f1f0" stroke="#5f8582" stroke-width="2"/><text x="70" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#33404f" font-weight="700">20</text><circle cx="170" cy="165" r="19" fill="#e6f1f0" stroke="#5f8582" stroke-width="2"/><text x="170" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#33404f" font-weight="700">40</text><circle cx="250" cy="165" r="19" fill="#e6f1f0" stroke="#5f8582" stroke-width="2"/><text x="250" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#33404f" font-weight="700">60</text><circle cx="350" cy="165" r="19" fill="#e6f1f0" stroke="#5f8582" stroke-width="2"/><text x="350" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#33404f" font-weight="700">80</text><text x="262" y="34" text-anchor="start" font-family="Segoe UI, sans-serif" font-size="11" fill="#5f8582" font-style="italic">raíz</text><text x="375" y="168" text-anchor="start" font-family="Segoe UI, sans-serif" font-size="11" fill="#5f8582" font-style="italic">hojas</text><text x="210" y="212" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#5f8582" font-style="italic">menores a la izquierda, mayores a la derecha:</text><text x="210" y="227" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#5f8582" font-style="italic">buscar descarta media rama en cada paso</text></svg>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5f8582;">Qué operaciones tiene y cuánto cuestan</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#5f8582; color:#fff; text-align:left;">Operación</th><th style="padding:0.4rem 0.6rem; background:#5f8582; color:#fff; text-align:left;">Costo</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Buscar, insertar o eliminar (árbol balanceado)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(log n)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Lo mismo en un árbol desbalanceado (peor caso)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n)</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Recorrer todos los nodos</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(n)</td></tr></tbody></table></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5f8582;">¿Cuándo usarla y cuándo evitarla?</h3>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;"><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #3f7f55;"><p style="margin:0 0 0.4rem; font-weight:700; color:#3f7f55;">✓ Úsala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Tus datos son una <strong>jerarquía</strong>: carpetas, categorías, organigramas, comentarios con respuestas.</li><li style="margin-bottom:0.35rem;">Necesitas buscar rápido en datos ordenados y que se insertan seguido.</li><li style="margin-bottom:0.35rem;">Necesitas recorrer en orden o por rangos (<code>BETWEEN</code>, "los mayores que 50").</li><li style="margin-bottom:0.35rem;">Necesitas siempre el menor o el mayor elemento (montículo, <code>heapq</code>).</li></ul></div><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #a83a3a;"><p style="margin:0 0 0.4rem; font-weight:700; color:#a83a3a;">✗ Evítala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Tienes pocos datos: una lista ordenada basta.</li><li style="margin-bottom:0.35rem;">Los datos no tienen jerarquía ni orden que aprovechar.</li><li style="margin-bottom:0.35rem;">Un elemento puede tener varios padres o formar ciclos: eso es un grafo.</li></ul></div></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5f8582;">¿Dónde se usa en aplicaciones y sistemas?</h3>
+<div class="content-box" style="margin:0;"><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Sistemas de archivos: las carpetas de Windows y Linux forman un árbol.</li><li style="margin-bottom:0.35rem;">Páginas web: el DOM de HTML es un árbol de etiquetas. JSON y XML también.</li><li style="margin-bottom:0.35rem;">Organigramas, categorías de una tienda y comentarios anidados.</li><li style="margin-bottom:0.35rem;">Compiladores e intérpretes: convierten tu código en un árbol (AST) antes de ejecutarlo.</li></ul></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5f8582;">¿Cómo la usas en un lenguaje de programación?</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#5f8582; color:#fff; text-align:left;">Lenguaje</th><th style="padding:0.4rem 0.6rem; background:#5f8582; color:#fff; text-align:left;">Cómo se llama</th><th style="padding:0.4rem 0.6rem; background:#5f8582; color:#fff; text-align:left;">Cómo se escribe</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Python</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Clases propias; <code>heapq</code> para montículos; <code>bisect</code> sobre una lista ordenada</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>class NodoArbol: ...</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">JavaScript</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Clases u objetos anidados</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>{ valor: 50, izquierdo: null, derecho: null }</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Java</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>TreeMap</code> y <code>TreeSet</code> (árbol balanceado)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>TreeMap&lt;Integer, String&gt; mapa = new TreeMap&lt;&gt;();</code></td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">arbol.py</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
   </div>
+  <pre><code>class NodoArbol:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None       <span class="code-com"># hijos menores</span>
+        self.derecho = None         <span class="code-com"># hijos mayores</span>
 
-  <!-- ===================== 4. COLAS ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>4. Colas: FIFO, el primero en entrar es el primero en salir</h3>
-    </div>
-    <p>
-      Una <strong>cola</strong> (queue) también restringe por dónde entran y salen los elementos, pero al
-      revés que la pila: sigue la lógica <strong>FIFO</strong> (First In, First Out), como una fila para
-      pagar en una caja.
-    </p>
+def insertar(raiz, valor):
+    if raiz is None:
+        return NodoArbol(valor)
+    if valor &lt; raiz.valor:
+        raiz.izquierdo = insertar(raiz.izquierdo, valor)
+    else:
+        raiz.derecho = insertar(raiz.derecho, valor)
+    return raiz
 
-    <div class="tree-demo">
-    <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" style="max-width:520px; width:100%; height:auto; display:block; margin:1rem auto 0;">
-      <defs>
-        <marker id="flechaCola" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="var(--text-dim)"/>
-        </marker>
-      </defs>
+def buscar(raiz, valor):
+    if raiz is None:
+        return False
+    if valor == raiz.valor:
+        return True
+    siguiente = raiz.izquierdo if valor &lt; raiz.valor else raiz.derecho
+    return buscar(siguiente, valor)  <span class="code-com"># descarta la mitad de los nodos en cada paso</span>
 
-      <text x="60" y="30" font-family="Segoe UI, sans-serif" font-size="12" fill="#c44444" font-weight="700">desencolar</text>
-      <line x1="60" y1="38" x2="60" y2="68" stroke="#c44444" stroke-width="2" marker-end="url(#flechaCola)"/>
+raiz = None
+for v in [50, 30, 70, 20, 40, 60, 80]:
+    raiz = insertar(raiz, v)
 
-      <text x="480" y="30" font-family="Segoe UI, sans-serif" font-size="12" fill="#6f9d7c" font-weight="700">encolar</text>
-      <line x1="490" y1="68" x2="490" y2="38" stroke="#6f9d7c" stroke-width="2" marker-end="url(#flechaCola)"/>
+print(buscar(raiz, 60))             <span class="code-com"># True</span>
+print(buscar(raiz, 65))             <span class="code-com"># False</span></code></pre>
+</div>
+<p style="font-size:0.9rem;">Solo la programas si tu problema es jerárquico. Para buscar rápido en una base de datos no escribes un árbol: creas un índice y el motor ya lo usa.</p>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#5f8582;">¿Cómo se usa en una base de datos? (casi siempre por dentro)</h3>
+<p style="font-size:0.9rem;">En una base de datos casi nunca <strong>llamas</strong> a la estructura: escribes SQL y el motor decide cuándo usarla por dentro. La columna "Qué haces tú" es lo único que escribes.</p>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#5f8582; color:#fff; text-align:left;">Dónde</th><th style="padding:0.4rem 0.6rem; background:#5f8582; color:#fff; text-align:left;">Cómo aparece</th><th style="padding:0.4rem 0.6rem; background:#5f8582; color:#fff; text-align:left;">Qué haces tú</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">MySQL y PostgreSQL</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Los índices son árboles B-Tree o B+Tree.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>CREATE INDEX idx_titulo ON tbl_canciones (titulo);</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Jerarquías en tablas</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Una columna <code>id_padre</code> en la misma tabla representa un árbol.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Se recorre con <code>WITH RECURSIVE</code>.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Planes de ejecución</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">El plan de una consulta es un árbol de operaciones.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Lo miras con <code>EXPLAIN</code>.</td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">indice_btree.sql</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code><span class="code-com">-- El índice es un B+Tree que el motor construye y mantiene por ti.</span>
+CREATE INDEX idx_titulo ON tbl_canciones (titulo);
 
-      <g class="tree-nodo" data-nodo="c0" data-nombre="Persiana Americana">
-        <rect x="20" y="70" width="150" height="60" rx="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-        <text x="95" y="105" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Persiana Americana</text>
-      </g>
+<span class="code-com">-- EXPLAIN muestra cómo piensa ejecutar la consulta.</span>
+EXPLAIN SELECT * FROM tbl_canciones WHERE titulo = 'Mi Tierra';</code></pre>
+</div>
+<p style="font-size:0.9rem;">Con un índice, el motor baja por el árbol hasta la fila en vez de leer toda la tabla. Con solo 10 filas, el motor puede preferir leer la tabla completa, y el beneficio se nota con miles o millones de filas.</p>
+<div class="content-box" style="border-left:4px solid #5f8582; margin-top:1rem;"><p style="margin:0 0 0.4rem;"><strong>¿La uso o la tengo que construir?</strong> Rara vez la construyes: la usas con índices o con las librerías y estructuras del lenguaje.</p><p style="margin:0; color:#a83a3a;"><strong>Ojo:</strong> un árbol desbalanceado se degrada. Si insertas 10, 20, 30, 40... ya ordenados, queda como una lista y buscar cuesta O(n). Por eso existen los árboles balanceados (AVL, B-Tree).</p></div>
+</div>
+<div class="activity-section" id="tries" style="border-left:5px solid #b8704f; padding-left:1.2rem;">
+  <div class="activity-section-header"><h3 style="color:#b8704f;">7. Tries (árboles de prefijos)</h3></div>
+  <p style="font-size:1rem;"><strong>Un árbol donde cada nivel es una letra y cada camino de la raíz forma una palabra.</strong></p>
+  <p>Úsalo cuando necesites buscar o autocompletar por prefijo en muchas palabras.</p>
+<svg viewBox="0 0 540 290" xmlns="http://www.w3.org/2000/svg" style="max-width:540px; width:100%; height:auto; display:block; margin:0.8rem auto;"><defs><marker id="ah7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b8704f"/></marker></defs><line x1="230" y1="28" x2="130" y2="88" stroke="#d1a58f" stroke-width="2"/><line x1="230" y1="28" x2="330" y2="88" stroke="#d1a58f" stroke-width="2"/><line x1="130" y1="88" x2="130" y2="148" stroke="#d1a58f" stroke-width="2"/><line x1="330" y1="88" x2="330" y2="148" stroke="#d1a58f" stroke-width="2"/><line x1="130" y1="148" x2="80" y2="208" stroke="#d1a58f" stroke-width="2"/><line x1="130" y1="148" x2="180" y2="208" stroke="#d1a58f" stroke-width="2"/><line x1="330" y1="148" x2="330" y2="208" stroke="#d1a58f" stroke-width="2"/><circle cx="230" cy="28" r="16" fill="#fbeee8" stroke="#b8704f" stroke-width="2"/><text x="230" y="32" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="16" fill="#b8704f" font-weight="700">·</text><circle cx="130" cy="88" r="18" fill="#ffffff" stroke="#b8704f" stroke-width="2"/><text x="130" y="93" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#33404f" font-weight="700">S</text><circle cx="330" cy="88" r="18" fill="#ffffff" stroke="#b8704f" stroke-width="2"/><text x="330" y="93" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#33404f" font-weight="700">M</text><circle cx="130" cy="148" r="18" fill="#ffffff" stroke="#b8704f" stroke-width="2"/><text x="130" y="153" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#33404f" font-weight="700">O</text><circle cx="330" cy="148" r="18" fill="#ffffff" stroke="#b8704f" stroke-width="2"/><text x="330" y="153" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#33404f" font-weight="700">A</text><circle cx="80" cy="208" r="23" fill="#ffffff" stroke="#b8704f" stroke-width="1.4"/><circle cx="80" cy="208" r="18" fill="#fbeee8" stroke="#b8704f" stroke-width="2"/><text x="80" y="213" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#33404f" font-weight="700">L</text><circle cx="180" cy="208" r="23" fill="#ffffff" stroke="#b8704f" stroke-width="1.4"/><circle cx="180" cy="208" r="18" fill="#fbeee8" stroke="#b8704f" stroke-width="2"/><text x="180" y="213" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#33404f" font-weight="700">N</text><circle cx="330" cy="208" r="23" fill="#ffffff" stroke="#b8704f" stroke-width="1.4"/><circle cx="330" cy="208" r="18" fill="#fbeee8" stroke="#b8704f" stroke-width="2"/><text x="330" y="213" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#33404f" font-weight="700">R</text><text x="256" y="32" text-anchor="start" font-family="Segoe UI, sans-serif" font-size="11" fill="#b8704f" font-style="italic">raíz (vacía)</text><text x="375" y="204" text-anchor="start" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#b8704f" font-style="italic">círculo doble: aquí</text><text x="375" y="218" text-anchor="start" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#b8704f" font-style="italic">termina una palabra</text><text x="270" y="258" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#b8704f" font-style="italic">palabras guardadas: SOL, SON, MAR</text><text x="270" y="274" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="#b8704f" font-style="italic">(SOL y SON comparten el camino S, O)</text></svg>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#b8704f;">Qué operaciones tiene y cuánto cuestan</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#b8704f; color:#fff; text-align:left;">Operación</th><th style="padding:0.4rem 0.6rem; background:#b8704f; color:#fff; text-align:left;">Costo</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Insertar una palabra</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(L), con L = largo de la palabra</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Buscar una palabra</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(L), sin importar cuántas palabras haya</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Buscar todo lo que empieza con un prefijo</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">O(L) para llegar al prefijo, más lo que devuelva</td></tr></tbody></table></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#b8704f;">¿Cuándo usarla y cuándo evitarla?</h3>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;"><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #3f7f55;"><p style="margin:0 0 0.4rem; font-weight:700; color:#3f7f55;">✓ Úsala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Necesitas <strong>autocompletar</strong> o buscar por prefijo en muchas palabras.</li><li style="margin-bottom:0.35rem;">Quieres saber rápido si una palabra existe en un diccionario grande.</li><li style="margin-bottom:0.35rem;">Enrutas por prefijos: direcciones IP, rutas de URL.</li><li style="margin-bottom:0.35rem;">Muchas palabras comparten el mismo comienzo, y por eso el trie ahorra comparaciones.</li></ul></div><div class="content-box" style="flex:1; min-width:260px; margin:0; border-left:4px solid #a83a3a;"><p style="margin:0 0 0.4rem; font-weight:700; color:#a83a3a;">✗ Evítala cuando...</p><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Tienes pocas palabras: una lista con <code>startswith()</code> es más simple.</li><li style="margin-bottom:0.35rem;">Buscas texto que "contenga" algo en cualquier parte: el prefijo no ayuda.</li><li style="margin-bottom:0.35rem;">La memoria es limitada: el trie guarda un nodo por letra.</li></ul></div></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#b8704f;">¿Dónde se usa en aplicaciones y sistemas?</h3>
+<div class="content-box" style="margin:0;"><ul style="margin:0; padding-left:1.2rem; font-size:0.9rem;"><li style="margin-bottom:0.35rem;">Autocompletado del buscador y teclado predictivo del celular.</li><li style="margin-bottom:0.35rem;">Correctores ortográficos y diccionarios.</li><li style="margin-bottom:0.35rem;">Tablas de enrutamiento de IP: los routers buscan el prefijo de red más largo.</li><li style="margin-bottom:0.35rem;">Algunos frameworks web buscan la ruta de una URL con árboles de prefijos.</li></ul></div>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#b8704f;">¿Cómo la usas en un lenguaje de programación?</h3>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#b8704f; color:#fff; text-align:left;">Lenguaje</th><th style="padding:0.4rem 0.6rem; background:#b8704f; color:#fff; text-align:left;">Cómo se llama</th><th style="padding:0.4rem 0.6rem; background:#b8704f; color:#fff; text-align:left;">Cómo se escribe</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Python</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No lo trae. <code>dict</code> anidado, o librerías como <code>pygtrie</code></td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>nodo.hijos["M"]</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">JavaScript</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No lo trae. Objeto o <code>Map</code> anidado</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>nodo.hijos.get("M")</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Java</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No lo trae. <code>HashMap</code> anidado</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>nodo.hijos.get('M')</code></td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">trie.py</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code>class NodoTrie:
+    def __init__(self):
+        self.hijos = {}           <span class="code-com"># letra -&gt; NodoTrie</span>
+        self.es_final = False     <span class="code-com"># ¿aquí termina una palabra?</span>
 
-      <g class="tree-nodo" data-nodo="c1" data-nombre="Mi Buen Amor">
-        <rect x="200" y="70" width="150" height="60" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="275" y="105" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Mi Buen Amor</text>
-      </g>
+class Trie:
+    def __init__(self):
+        self.raiz = NodoTrie()
 
-      <g class="tree-nodo" data-nodo="c2" data-nombre="Oye Mi Amor">
-        <rect x="380" y="70" width="150" height="60" rx="6" fill="none" stroke="var(--text-dim)" stroke-width="2"/>
-        <text x="455" y="105" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Oye Mi Amor</text>
-      </g>
+    def insertar(self, palabra):
+        nodo = self.raiz
+        for letra in palabra:
+            nodo = nodo.hijos.setdefault(letra, NodoTrie())
+        nodo.es_final = True
 
-      <text x="95" y="155" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="var(--text-dim)">frente (sale primero)</text>
-      <text x="455" y="155" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="var(--text-dim)">final (entra aquí)</text>
-    </svg>
-    <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-      "Persiana Americana" entró primero, así que queda al frente, y es la primera en salir con
-      <code>desencolar</code>.
-    </p>
+    def autocompletar(self, prefijo):
+        nodo = self.raiz
+        for letra in prefijo:         <span class="code-com"># baja siguiendo el prefijo</span>
+            if letra not in nodo.hijos:
+                return []
+            nodo = nodo.hijos[letra]
+        resultados = []
+        def recorrer(n, camino):
+            if n.es_final:
+                resultados.append(camino)
+            for letra, hijo in n.hijos.items():
+                recorrer(hijo, camino + letra)
+        recorrer(nodo, prefijo)
+        return resultados
 
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira el acceso en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="c0,c1,c2">Buscar "Oye Mi Amor" con desencolar()</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Haz clic para ver cómo hay que desencolar los 2 de adelante para llegar al final.
-      </p>
-    </div>
-    </div>
+t = Trie()
+for titulo in ["Mi Tierra", "Mi Buen Amor", "Oye Mi Amor", "Tres Deseos"]:
+    t.insertar(titulo)
 
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Cómo se recorre una cola?</strong></p>
-      <p style="margin:0;">
-        Igual que la pila, no se recorre libremente: solo puedes ver el elemento del frente. Para llegar a
-        cualquier otro elemento, tienes que ir sacando los que están adelante uno por uno con
-        <code>desencolar()</code>, respetando el orden de llegada, y se pierden del frente en el proceso.
-        Tampoco sirve para "buscar" un dato en el medio: solo da acceso ordenado desde el frente hacia el
-        final.
-      </p>
-    </div>
+print(t.autocompletar("Mi "))        <span class="code-com"># ['Mi Tierra', 'Mi Buen Amor']</span></code></pre>
+</div>
+<p style="font-size:0.9rem;">Con pocos datos no hace falta: una <code>list</code> con <code>startswith()</code> resuelve el autocompletado. El trie vale la pena con muchas palabras y muchas búsquedas.</p>
+<h3 style="margin:1.6rem 0 0.4rem; font-size:1.02rem; color:#b8704f;">¿Cómo se usa en una base de datos? (casi siempre por dentro)</h3>
+<p style="font-size:0.9rem;">En una base de datos casi nunca <strong>llamas</strong> a la estructura: escribes SQL y el motor decide cuándo usarla por dentro. La columna "Qué haces tú" es lo único que escribes.</p>
+<div class="content-box" style="overflow-x:auto;"><table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#b8704f; color:#fff; text-align:left;">Dónde</th><th style="padding:0.4rem 0.6rem; background:#b8704f; color:#fff; text-align:left;">Cómo aparece</th><th style="padding:0.4rem 0.6rem; background:#b8704f; color:#fff; text-align:left;">Qué haces tú</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">MySQL y PostgreSQL</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">No existe un tipo trie. Un índice B-Tree ayuda con <code>LIKE 'Mi%'</code>.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Escribes la consulta con el prefijo al inicio.</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Texto completo</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>FULLTEXT</code> en MySQL y búsqueda de texto en PostgreSQL, para buscar palabras dentro del texto.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Creas el índice de texto y usas <code>MATCH ... AGAINST</code> (MySQL).</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Lucene, Elasticsearch</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Motores de búsqueda con estructuras emparentadas con los tries.</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Indexas documentos y buscas por texto.</td></tr></tbody></table></div>
+<div class="code-block">
+  <div class="code-block-header">
+    <span class="code-dot" style="background:#ff5f56"></span><span class="code-dot" style="background:#ffbd2e"></span><span class="code-dot" style="background:#27c93f"></span>
+    <span class="code-filename">busqueda_por_prefijo.sql</span>
+    <button class="code-copy-btn" type="button">Copiar</button>
+  </div>
+  <pre><code><span class="code-com">-- Prefijo al inicio: un índice B-Tree sobre titulo puede ayudar.</span>
+SELECT titulo FROM tbl_canciones WHERE titulo LIKE 'Mi %';
 
-    <div class="numbered-grid" style="grid-template-columns: 1fr; max-width:460px; margin:1rem auto 0;">
-      <div class="flip-card" style="min-height:200px;">
-        <div class="flip-card-inner" style="min-height:200px;">
-          <div class="flip-card-front numbered-card">
-            <p style="margin:0 0 0.5rem; font-weight:700; font-size:0.85rem;">Pila vs. cola: ¿en qué se diferencian?</p>
-            <p style="font-size:0.85rem; color:var(--text-dim);">Toca para ver &rarr;</p>
-            <span class="flip-hint">Toca para ver &rarr;</span>
-          </div>
-          <div class="flip-card-back">
-            <p><strong>Pila (LIFO):</strong> el botón "anterior" te devuelve la última canción que
-            escuchaste.</p>
-            <p style="margin-top:0.5rem;"><strong>Cola (FIFO):</strong> la playlist "reproducir después"
-            te da la primera canción que agregaste a la fila, respetando el orden en que las fuiste
-            metiendo.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+<span class="code-com">-- Comodín al inicio: el índice no sirve, el motor revisa fila por fila.</span>
+SELECT titulo FROM tbl_canciones WHERE titulo LIKE '%Amor%';</code></pre>
+</div>
+<p style="font-size:0.9rem;">Es la misma idea del trie: buscar por prefijo es rápido, buscar "que contenga" en cualquier parte no lo es. Para buscadores de texto grandes se usan motores especializados.</p>
+<div class="content-box" style="border-left:4px solid #b8704f; margin-top:1rem;"><p style="margin:0 0 0.4rem;"><strong>¿La uso o la tengo que construir?</strong> Depende: la usas armándola con un <code>dict</code> o con una librería. En una base de datos, el motor decide cómo buscar los prefijos.</p><p style="margin:0; color:#a83a3a;"><strong>Ojo:</strong> un trie gasta mucha memoria (un nodo por letra). Con pocas palabras, una lista es más simple y suficiente.</p></div>
+</div>
 
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Otras aplicaciones reales de las colas:</strong></p>
-      <ul style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li><strong>Cola de impresión de documentos:</strong> el primero que envías a imprimir es el primero
-          en salir.</li>
-        <li><strong>Fila de espera de un call center:</strong> el primer cliente que llama es el primero en
-          ser atendido.</li>
-      </ul>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Ejemplo en código: cola de reproducción</strong></p>
-      <div class="code-block" style="margin-top:0.6rem;">
-        <div class="code-block-header">
-          <span class="code-dot" style="background:#ff5f56"></span>
-          <span class="code-dot" style="background:#ffbd2e"></span>
-          <span class="code-dot" style="background:#27c93f"></span>
-          <span class="code-filename">cola_reproduccion.js</span>
-          <button class="code-copy-btn" type="button">Copiar</button>
-        </div>
-        <pre><code><span class="code-kw">class</span> <span class="code-fn">Cola</span> {
-  <span class="code-kw">constructor</span>() {
-    <span class="code-kw">this</span>.elementos = []; <span class="code-com">// arreglo vacío para guardar las canciones</span>
-  }
-
-  <span class="code-fn">encolar</span>(cancion) {
-    <span class="code-kw">this</span>.elementos.<span class="code-fn">push</span>(cancion); <span class="code-com">// agrega la canción al final</span>
-  }
-
-  <span class="code-fn">desencolar</span>() {
-    <span class="code-kw">return</span> <span class="code-kw">this</span>.elementos.<span class="code-fn">shift</span>(); <span class="code-com">// quita y devuelve la del frente</span>
-  }
-}
-
-<span class="code-kw">const</span> colaReproduccion = <span class="code-kw">new</span> <span class="code-fn">Cola</span>();
-colaReproduccion.<span class="code-fn">encolar</span>(<span class="code-str">"Persiana Americana"</span>); <span class="code-com">// se encola primero</span>
-colaReproduccion.<span class="code-fn">encolar</span>(<span class="code-str">"Mi Buen Amor"</span>);       <span class="code-com">// queda detrás de "Persiana Americana"</span>
-colaReproduccion.<span class="code-fn">encolar</span>(<span class="code-str">"Oye Mi Amor"</span>);        <span class="code-com">// queda al final</span>
-
-colaReproduccion.<span class="code-fn">desencolar</span>(); <span class="code-com">// devuelve "Persiana Americana", la primera en entrar</span></code></pre>
-      </div>
+  <div class="activity-section" id="elegir">
+    <div class="activity-section-header"><h3>¿Cuál elijo según lo que necesito?</h3></div>
+    <div class="content-box" style="overflow-x:auto;">
+<table style="border-collapse:collapse; font-size:0.85rem; width:100%;"><thead><tr><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Si lo que necesito es...</th><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">Uso</th><th style="padding:0.4rem 0.6rem; background:#6f9d7c; color:#fff; text-align:left;">En Python</th></tr></thead><tbody><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Leer por posición o guardar una colección simple</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Arreglo</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>list</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Buscar mucho y modificar poco</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Arreglo ordenado</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>sorted()</code> + <code>bisect</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Insertar o eliminar mucho en medio de los datos</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Lista enlazada</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>deque</code> o clase propia</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Deshacer, "atrás", recursión, DFS</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Pila</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>list</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Atender por orden de llegada, tareas pendientes, BFS</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Cola</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>deque</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Modelar relaciones entre cosas (amigos, rutas, colaboraciones)</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Grafo</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>dict</code> de listas, <code>networkx</code></td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Jerarquías, carpetas, buscar rápido en datos ordenados</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Árbol</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Clases propias, índices en la BD</td></tr><tr><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Autocompletar o buscar por prefijo</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);">Trie</td><td style="padding:0.4rem 0.6rem; border:1px solid var(--border);"><code>dict</code> de <code>dict</code></td></tr></tbody></table>
     </div>
   </div>
 
-  <!-- ===================== 5. TEORÍA DE GRAFOS ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>5. Teoría de grafos: nodos y aristas</h3>
-    </div>
-    <p>
-      Un <strong>grafo</strong> es un conjunto de <strong>nodos</strong> (también llamados vértices)
-      conectados entre sí por <strong>aristas</strong> (también llamadas conexiones o enlaces). Un nodo
-      representa una entidad: un usuario, una canción, un artista. Una arista representa una
-      <strong>relación</strong> entre dos nodos: quién reprodujo qué, quién sigue a quién, qué canciones
-      pertenecen al mismo álbum.
-    </p>
-
-    <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" style="max-width:600px; width:100%; height:auto; display:block; margin:1rem auto 0;">
-      <line x1="350" y1="90" x2="160" y2="220" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="350" y1="90" x2="540" y2="220" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="160" y1="220" x2="350" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="540" y1="220" x2="350" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="160" y1="220" x2="540" y2="220" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <text x="270" y="145" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#6f9d7c" font-weight="700">arista</text>
-
-      <circle cx="350" cy="90" r="55" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-      <text x="350" y="87" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="var(--text)">
-        <tspan x="350" dy="0">Tres</tspan>
-        <tspan x="350" dy="16">Deseos</tspan>
-      </text>
-
-      <circle cx="160" cy="220" r="55" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-      <text x="160" y="217" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="var(--text)">
-        <tspan x="160" dy="0">Mi</tspan>
-        <tspan x="160" dy="16">Tierra</tspan>
-      </text>
-
-      <circle cx="540" cy="220" r="55" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-      <text x="540" y="217" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="var(--text)">
-        <tspan x="540" dy="0">Rayando</tspan>
-        <tspan x="540" dy="16">el Sol</tspan>
-      </text>
-
-      <circle cx="350" cy="320" r="55" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-      <text x="350" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="var(--text)">
-        <tspan x="350" dy="0">Mi Buen</tspan>
-        <tspan x="350" dy="16">Amor</tspan>
-      </text>
-
-      <text x="350" y="24" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="var(--accent)" font-weight="700">nodo</text>
-    </svg>
-    <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-      4 nodos ("Tres Deseos", "Mi Tierra", "Rayando el Sol", "Mi Buen Amor") conectados por 5 aristas. Cada
-      círculo es una entidad; cada línea, una relación entre dos entidades.
-    </p>
-
-    <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top:0.8rem;">
-      <div class="concept-card">
-        <h4 style="color:var(--accent);">Nodo (vértice)</h4>
-        <p style="font-size:0.85rem;">La entidad en sí: un usuario, una canción, un artista. Es el "qué".</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#7fa5a3;">Arista (conexión)</h4>
-        <p style="font-size:0.85rem;">La relación entre dos nodos: quién reprodujo qué. Es el "cómo se conectan".</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#8b7fb8;">Grado</h4>
-        <p style="font-size:0.85rem;">Cuántas aristas tocan a un nodo. Un nodo con grado 0 está aislado, sin conexiones.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#c99a4e;">Camino</h4>
-        <p style="font-size:0.85rem;">Una secuencia de aristas que conecta un nodo con otro, pasando por nodos intermedios.</p>
-      </div>
-    </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0;">
-        <strong>El dato importante:</strong> ya construiste un grafo sin saberlo. <code>tbl_reproducciones</code>
-        (la tabla puente de la Semana 2, Clase 1) conecta <code>tbl_usuarios</code> con <code>tbl_canciones</code>.
-        En términos de grafos: los <strong>nodos</strong> son los usuarios y las canciones, y cada fila de
-        <code>tbl_reproducciones</code> es una <strong>arista</strong> que dice "este usuario reprodujo esta
-        canción".
-      </p>
-    </div>
-
-    <div class="code-block" style="margin-top:1rem;">
-      <div class="code-block-header">
-        <span class="code-dot" style="background:#ff5f56"></span>
-        <span class="code-dot" style="background:#ffbd2e"></span>
-        <span class="code-dot" style="background:#27c93f"></span>
-        <span class="code-filename">grafo_reproducciones.txt</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span style="color:var(--text-dim);">-- Las 10 filas de tbl_reproducciones, vistas como aristas de un grafo</span>
-<span style="color:#c44444; font-weight:700;">U1 (Lucia)</span>     <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#8b7fb8; font-weight:700;">C101 (Tres Deseos)</span> <span style="color:var(--text-dim);">-- U1 (Lucia) tiene grado 2</span>
-<span style="color:#c44444; font-weight:700;">U1 (Lucia)</span>     <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#5b9aa0; font-weight:700;">C105 (Rayando el Sol)</span>
-<span style="color:#5b7c99; font-weight:700;">U2 (Camilo)</span>    <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#5b9aa0; font-weight:700;">C102 (La Vida Es un Carnaval)</span>
-<span style="color:#5b7c99; font-weight:700;">U3 (Santiago)</span>  <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#5b9aa0; font-weight:700;">C104 (De Música Ligera)</span>
-<span style="color:#5b7c99; font-weight:700;">U4 (Valentina)</span> <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#5b9aa0; font-weight:700;">C106 (La Negra Tiene Tumbao)</span>
-<span style="color:#5b7c99; font-weight:700;">U5 (Andrés)</span>    <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#8b7fb8; font-weight:700;">C101 (Tres Deseos)</span> <span style="color:var(--text-dim);">-- C101 (Tres Deseos) tiene grado 2</span>
-<span style="color:#5b7c99; font-weight:700;">U6 (Mariana)</span>   <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#5b9aa0; font-weight:700;">C107 (Persiana Americana)</span>
-<span style="color:#5b7c99; font-weight:700;">U7 (Felipe)</span>    <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#5b9aa0; font-weight:700;">C108 (Mi Buen Amor)</span>
-<span style="color:#5b7c99; font-weight:700;">U8 (Daniela)</span>   <span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#5b9aa0; font-weight:700;">C109 (Oye Mi Amor)</span>
-<span style="color:#5b7c99; font-weight:700;">U9 (Juan Pablo)</span><span style="color:var(--text-dim);">---- reprodujo ----></span> <span style="color:#5b9aa0; font-weight:700;">C110 (Cuando Pase el Temblor)</span>
-
-<span style="color:var(--text-dim);">-- Nodos aislados: existen en la base de datos, pero no tienen ninguna arista</span>
-<span style="color:#c99a4e; font-weight:700;">U10 (Sofía)</span>      <span style="color:var(--text-dim);">-- grado 0, no ha reproducido nada</span>
-<span style="color:#c99a4e; font-weight:700;">C103 (Mi Tierra)</span> <span style="color:var(--text-dim);">-- grado 0, nadie la ha reproducido</span></code></pre>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Fíjate en los grados: <strong>U1 (Lucia)</strong> tiene grado 2, porque reprodujo dos canciones.
-        <strong>C101 (Tres Deseos)</strong> también tiene grado 2, porque dos usuarios distintos la
-        reprodujeron (U1 y U5). En cambio, <strong>U10 (Sofía)</strong> y <strong>C103 (Mi Tierra)</strong>
-        tienen grado 0: ningún usuario ha reproducido "Mi Tierra" todavía, y Sofía no ha reproducido nada.
-        Son nodos aislados dentro de este grafo.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;">
-        <strong>El grafo completo y su lista de adyacencia, lado a lado:</strong> los 10 usuarios a la
-        izquierda, las 10 canciones a la derecha, y una línea por cada arista (cada fila de
-        <code>tbl_reproducciones</code>). A la derecha, la misma información escrita como lista de vecinos
-        por nodo.
-      </p>
-      <div style="display:flex; flex-wrap:wrap; gap:1.2rem; align-items:flex-start; margin-top:0.6rem;">
-      <div style="flex:2 1 380px; min-width:300px;">
-      <svg viewBox="0 -25 600 585" xmlns="http://www.w3.org/2000/svg" style="max-width:480px; width:100%; height:auto; display:block; margin:0 auto;">
-        <line x1="90" y1="34"  x2="510" y2="34"  stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="34"  x2="510" y2="250" stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="88"  x2="510" y2="88"  stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="142" x2="510" y2="196" stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="196" x2="510" y2="304" stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="250" x2="510" y2="34"  stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="304" x2="510" y2="358" stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="358" x2="510" y2="412" stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="412" x2="510" y2="466" stroke="var(--text-dim)" stroke-width="1.5"/>
-        <line x1="90" y1="466" x2="510" y2="520" stroke="var(--text-dim)" stroke-width="1.5"/>
-
-        <circle cx="90" cy="34"  r="25" fill="none" stroke="#c44444" stroke-width="3"/>
-        <text x="90" y="39"  text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U1</text>
-        <circle cx="90" cy="88"  r="25" fill="none" stroke="#5b7c99" stroke-width="3"/>
-        <text x="90" y="93"  text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U2</text>
-        <circle cx="90" cy="142" r="25" fill="none" stroke="#5b7c99" stroke-width="3"/>
-        <text x="90" y="147" text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U3</text>
-        <circle cx="90" cy="196" r="25" fill="none" stroke="#5b7c99" stroke-width="3"/>
-        <text x="90" y="201" text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U4</text>
-        <circle cx="90" cy="250" r="25" fill="none" stroke="#5b7c99" stroke-width="3"/>
-        <text x="90" y="255" text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U5</text>
-        <circle cx="90" cy="304" r="25" fill="none" stroke="#5b7c99" stroke-width="3"/>
-        <text x="90" y="309" text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U6</text>
-        <circle cx="90" cy="358" r="25" fill="none" stroke="#5b7c99" stroke-width="3"/>
-        <text x="90" y="363" text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U7</text>
-        <circle cx="90" cy="412" r="25" fill="none" stroke="#5b7c99" stroke-width="3"/>
-        <text x="90" y="417" text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U8</text>
-        <circle cx="90" cy="466" r="25" fill="none" stroke="#5b7c99" stroke-width="3"/>
-        <text x="90" y="471" text-anchor="middle" font-family="Consolas, monospace" font-size="13.5" fill="var(--text)">U9</text>
-        <circle cx="90" cy="520" r="25" fill="none" stroke="#c99a4e" stroke-width="3"/>
-        <text x="90" y="525" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">U10</text>
-
-        <circle cx="510" cy="34"  r="25" fill="none" stroke="#8b7fb8" stroke-width="3"/>
-        <text x="510" y="39"  text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C101</text>
-        <circle cx="510" cy="88"  r="25" fill="none" stroke="#5b9aa0" stroke-width="3"/>
-        <text x="510" y="93"  text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C102</text>
-        <circle cx="510" cy="142" r="25" fill="none" stroke="#c99a4e" stroke-width="3"/>
-        <text x="510" y="147" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C103</text>
-        <circle cx="510" cy="196" r="25" fill="none" stroke="#5b9aa0" stroke-width="3"/>
-        <text x="510" y="201" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C104</text>
-        <circle cx="510" cy="250" r="25" fill="none" stroke="#5b9aa0" stroke-width="3"/>
-        <text x="510" y="255" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C105</text>
-        <circle cx="510" cy="304" r="25" fill="none" stroke="#5b9aa0" stroke-width="3"/>
-        <text x="510" y="309" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C106</text>
-        <circle cx="510" cy="358" r="25" fill="none" stroke="#5b9aa0" stroke-width="3"/>
-        <text x="510" y="363" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C107</text>
-        <circle cx="510" cy="412" r="25" fill="none" stroke="#5b9aa0" stroke-width="3"/>
-        <text x="510" y="417" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C108</text>
-        <circle cx="510" cy="466" r="25" fill="none" stroke="#5b9aa0" stroke-width="3"/>
-        <text x="510" y="471" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C109</text>
-        <circle cx="510" cy="520" r="25" fill="none" stroke="#5b9aa0" stroke-width="3"/>
-        <text x="510" y="525" text-anchor="middle" font-family="Consolas, monospace" font-size="12.5" fill="var(--text)">C110</text>
-
-        <text x="90" y="-8" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" fill="var(--text-dim)" font-weight="700">Usuarios</text>
-        <text x="510" y="-8" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" fill="var(--text-dim)" font-weight="700">Canciones</text>
-      </svg>
-      <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.5rem;">
-        Rojo y morado: U1 y C101, los de grado 2. Dorado: U10 y C103, aislados, sin ninguna línea que
-        llegue a ellos. Los demás, grado 1: una sola línea.
-      </p>
-      </div>
-
-      <div style="flex:1 1 260px; min-width:260px;">
-      <div class="code-block">
-        <div class="code-block-header">
-          <span class="code-dot" style="background:#ff5f56"></span>
-          <span class="code-dot" style="background:#ffbd2e"></span>
-          <span class="code-dot" style="background:#27c93f"></span>
-          <span class="code-filename">lista_adyacencia.txt</span>
-          <button class="code-copy-btn" type="button">Copiar</button>
-        </div>
-        <pre style="line-height:1;"><code style="font-size:0.72rem; line-height:1;">U1:  [C101, C105]
-U2:  [C102]
-U3:  [C104]
-U4:  [C106]
-U5:  [C101]
-U6:  [C107]
-U7:  [C108]
-U8:  [C109]
-U9:  [C110]
-U10: []
-
-C101: [U1, U5]
-C102: [U2]
-C103: []
-C104: [U3]
-C105: [U1]
-C106: [U4]
-C107: [U6]
-C108: [U7]
-C109: [U8]
-C110: [U9]</code></pre>
-      </div>
-      <p style="font-size:0.78rem; color:var(--text-dim); margin-top:0.5rem;">
-        U1 y C101 son los únicos con más de un vecino en su lista (grado 2), y U10 y C103 quedan con la
-        lista vacía, coherente con que son los nodos aislados de grado 0.
-      </p>
-      </div>
-      </div>
-    </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Ejemplo en código: grafo de reproducciones</strong></p>
-      <div class="code-block" style="margin-top:0.6rem;">
-        <div class="code-block-header">
-          <span class="code-dot" style="background:#ff5f56"></span>
-          <span class="code-dot" style="background:#ffbd2e"></span>
-          <span class="code-dot" style="background:#27c93f"></span>
-          <span class="code-filename">grafo_reproducciones.js</span>
-          <button class="code-copy-btn" type="button">Copiar</button>
-        </div>
-        <pre><code><span class="code-kw">class</span> <span class="code-fn">Grafo</span> {
-  <span class="code-kw">constructor</span>() {
-    <span class="code-kw">this</span>.adyacencia = {}; <span class="code-com">// cada clave es un nodo; su valor, la lista de vecinos</span>
-  }
-
-  <span class="code-fn">agregarNodo</span>(nodo) {
-    <span class="code-kw">if</span> (!<span class="code-kw">this</span>.adyacencia[nodo]) {
-      <span class="code-kw">this</span>.adyacencia[nodo] = []; <span class="code-com">// crea la lista vacía si el nodo no existía</span>
-    }
-  }
-
-  <span class="code-fn">agregarArista</span>(nodoA, nodoB) {
-    <span class="code-kw">this</span>.<span class="code-fn">agregarNodo</span>(nodoA);
-    <span class="code-kw">this</span>.<span class="code-fn">agregarNodo</span>(nodoB);
-    <span class="code-kw">this</span>.adyacencia[nodoA].<span class="code-fn">push</span>(nodoB); <span class="code-com">// conecta A -> B</span>
-    <span class="code-kw">this</span>.adyacencia[nodoB].<span class="code-fn">push</span>(nodoA); <span class="code-com">// y B -> A, en ambos sentidos</span>
-  }
-}
-
-<span class="code-kw">const</span> grafo = <span class="code-kw">new</span> <span class="code-fn">Grafo</span>();
-grafo.<span class="code-fn">agregarArista</span>(<span class="code-str">"U1"</span>, <span class="code-str">"C101"</span>); <span class="code-com">// Lucia reprodujo "Tres Deseos"</span>
-grafo.<span class="code-fn">agregarArista</span>(<span class="code-str">"U1"</span>, <span class="code-str">"C105"</span>); <span class="code-com">// Lucia reprodujo "Rayando el Sol"</span>
-grafo.<span class="code-fn">agregarArista</span>(<span class="code-str">"U5"</span>, <span class="code-str">"C101"</span>); <span class="code-com">// Andrés también reprodujo "Tres Deseos"</span>
-
-console.<span class="code-fn">log</span>(grafo.adyacencia[<span class="code-str">"C101"</span>]); <span class="code-com">// ["U1", "U5"], los vecinos de "Tres Deseos"</span></code></pre>
-      </div>
-    </div>
-
+  <div class="activity-section" id="faq">
+    <div class="activity-section-header"><h3>Preguntas frecuentes</h3></div>
+    <details style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:0.7rem 1rem; margin-top:0.6rem;"><summary style="cursor:pointer; font-weight:700; color:var(--accent);">¿Tengo que programar estas estructuras desde cero en un trabajo real?</summary><p style="margin:0.6rem 0 0;">Casi nunca. Los lenguajes y las bases de datos ya las traen. Se programan en clase para que entiendas cómo funcionan por dentro y puedas elegir bien la que ya existe.</p></details>
+    <details style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:0.7rem 1rem; margin-top:0.6rem;"><summary style="cursor:pointer; font-weight:700; color:var(--accent);">¿Python tiene lista enlazada?</summary><p style="margin:0.6rem 0 0;">No como un tipo de uso general. <code>collections.deque</code> usa por dentro una lista doblemente enlazada de bloques, y es lo que se usa en la práctica. La clase <code>Nodo</code> de la guía sirve para aprender.</p></details>
+    <details style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:0.7rem 1rem; margin-top:0.6rem;"><summary style="cursor:pointer; font-weight:700; color:var(--accent);">¿SQL tiene pilas, colas o grafos?</summary><p style="margin:0.6rem 0 0;">No como tipos. Se representan: un grafo es una tabla de relaciones, una cola puede ser una tabla de tareas pendientes, y <code>SAVEPOINT</code> se parece a una pila. Redis sí tiene listas que sirven como pila o cola.</p></details>
+    <details style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:0.7rem 1rem; margin-top:0.6rem;"><summary style="cursor:pointer; font-weight:700; color:var(--accent);">Mi programa se vuelve lento con listas grandes, ¿qué reviso?</summary><p style="margin:0.6rem 0 0;">Tres cosas: buscar con <code>in</code> sobre una lista es O(n) (usa un <code>set</code> o un <code>dict</code>); <code>list.pop(0)</code> es O(n) (usa un <code>deque</code>); e insertar en medio de una lista grande corre todos los elementos.</p></details>
+    <details style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:0.7rem 1rem; margin-top:0.6rem;"><summary style="cursor:pointer; font-weight:700; color:var(--accent);">¿Una base de datos es una tabla, un árbol o qué?</summary><p style="margin:0.6rem 0 0;">Una tabla es el modelo lógico que tú ves. Por dentro, el motor usa otras estructuras: árboles B+Tree para los índices, páginas de datos en disco, listas enlazadas, tablas hash, colas de transacciones. Tú pides con SQL y el motor decide cómo guardarlo.</p></details>
   </div>
 
-  <!-- ===================== 6. RECORRIDOS DE GRAFOS ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>6. Recorridos de grafos: BFS y DFS</h3>
-    </div>
-    <p>
-      Recorrer un grafo significa visitar sus nodos siguiendo las aristas, para responder preguntas como
-      "¿a quién puedo llegar desde aquí?". Los dos recorridos más comunes son <strong>BFS</strong>
-      (Breadth-First Search, por niveles) y <strong>DFS</strong> (Depth-First Search, por profundidad).
-    </p>
-
-    <div class="tree-demo">
-    <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:460px; width:100%; height:auto; display:block; margin:1rem auto 0;">
-      <text x="20" y="65" font-family="Segoe UI, sans-serif" font-size="12" fill="var(--text-dim)">Nivel 0</text>
-      <text x="20" y="175" font-family="Segoe UI, sans-serif" font-size="12" fill="var(--text-dim)">Nivel 1</text>
-      <text x="20" y="285" font-family="Segoe UI, sans-serif" font-size="12" fill="var(--text-dim)">Nivel 2</text>
-
-      <line x1="280" y1="90" x2="180" y2="145" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="280" y1="90" x2="380" y2="145" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="160" y1="200" x2="160" y2="250" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <g data-nodo="u1" data-nombre="U1 (Lucia)" class="tree-nodo">
-        <circle cx="280" cy="60" r="30" fill="none" stroke="#c44444" stroke-width="2.5"/>
-        <text x="280" y="65" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">U1</text>
-      </g>
-
-      <g data-nodo="c101" data-nombre="C101 (Tres Deseos)" class="tree-nodo">
-        <circle cx="160" cy="170" r="30" fill="none" stroke="#8b7fb8" stroke-width="2.5"/>
-        <text x="160" y="175" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">C101</text>
-      </g>
-
-      <g data-nodo="c105" data-nombre="C105 (Rayando el Sol)" class="tree-nodo">
-        <circle cx="400" cy="170" r="30" fill="none" stroke="#5b9aa0" stroke-width="2.5"/>
-        <text x="400" y="175" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">C105</text>
-      </g>
-
-      <g data-nodo="u5" data-nombre="U5 (Andrés)" class="tree-nodo">
-        <circle cx="160" cy="280" r="30" fill="none" stroke="#5b7c99" stroke-width="2.5"/>
-        <text x="160" y="285" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">U5</text>
-      </g>
-    </svg>
-    <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-      U1 (Lucia) reprodujo C101 y C105; C101 también fue reproducida por U5 (Andrés).
-    </p>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira el recorrido en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="u1,c101,c105,u5">Recorrer por niveles (BFS)</button>
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="u1,c101,u5,c105">Recorrer en profundidad (DFS)</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Elige un recorrido para ver, paso a paso, el orden en que se visita cada nodo.
-      </p>
-    </div>
-    </div>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Búsqueda por BFS</h4>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        <strong>Aplicado a SoundFlow:</strong> para este recorrido tratamos las aristas como si se pudieran
-        recorrer en ambos sentidos (no solo usuario &rarr; canción, también canción &rarr; usuario). Así se
-        ve el BFS paso a paso, empezando desde <strong>U1 (Lucia)</strong>:
-      </p>
-      <ol style="margin:0.6rem 0 0; padding-left:1.2rem; color:var(--text);">
-        <li><strong>Nivel 0:</strong> el punto de partida, U1 (Lucia).</li>
-        <li><strong>Nivel 1:</strong> las canciones que Lucia reprodujo directamente, C101 (Tres Deseos) y
-          C105 (Rayando el Sol).</li>
-        <li><strong>Nivel 2:</strong> los usuarios que también reprodujeron esas mismas canciones. Aquí
-          aparece U5 (Andrés), porque también escuchó "Tres Deseos" (C101).</li>
-      </ol>
-    </div>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Búsqueda por DFS</h4>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        <strong>El mismo grafo, con DFS:</strong> en vez de ir nivel por nivel, DFS se mete a fondo por una
-        rama completa antes de devolverse (backtrack) a explorar la siguiente. Desde <strong>U1 (Lucia)</strong>:
-      </p>
-      <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-        Mismo grafo, otro orden: 1 (U1), 2 (C101), 3 (U5), 4 (C105). Se mete por la rama de C101 hasta el
-        final antes de pasar a C105. Usa el botón "Recorrer en profundidad (DFS)" del simulador de arriba
-        para verlo animado sobre el mismo diagrama.
-      </p>
-
-      <ol style="margin:0.6rem 0 0; padding-left:1.2rem; color:var(--text);">
-        <li>Visita <strong>U1</strong>, y elige un vecino, por ejemplo <strong>C101</strong> (Tres Deseos).</li>
-        <li>En vez de volver por la otra canción de U1, sigue profundizando desde C101 y llega a
-          <strong>U5</strong> (Andrés).</li>
-        <li>U5 ya no tiene vecinos nuevos, así que se devuelve hasta C101, y de ahí hasta U1.</li>
-        <li>Solo entonces visita la canción que faltaba, <strong>C105</strong> (Rayando el Sol).</li>
-      </ol>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        <strong>Analogía:</strong> buscar en una fiesta a alguien que le guste la misma música que a ti.
-      </p>
-      <ul style="margin:0.6rem 0 0; padding-left:1.2rem; color:var(--text);">
-        <li><strong>BFS:</strong> le preguntas primero a tus amigos más cercanos (nivel 1). Si ninguno
-          coincide, le preguntas a los amigos de tus amigos (nivel 2), y así vas ampliando el círculo poco
-          a poco. Nunca te alejas más de lo necesario, por eso siempre encuentra el camino más corto.</li>
-        <li><strong>DFS:</strong> agarras a un solo amigo y le sigues la cadena completa, te lleva donde su
-          amigo, ese te lleva donde el amigo de su amigo, y sigues por esa cadena hasta el final o hasta un
-          callejón sin salida. Solo entonces te devuelves y pruebas por otro amigo tuyo.</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- ===================== 7. ÁRBOLES ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>7. Árboles</h3>
-    </div>
-    <p>
-      Un <strong>árbol</strong> es una estructura de datos jerárquica: un conjunto de nodos conectados de
-      forma que cada uno tiene un único "padre" (excepto el primero) y puede tener varios "hijos".
-    </p>
-
-    <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin-top:0.8rem;">
-      <div class="concept-card">
-        <h4 style="color:var(--accent);">Raíz</h4>
-        <p style="font-size:0.85rem;">El único nodo sin padre, el punto de partida de todo el árbol.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#7fa5a3;">Hijo</h4>
-        <p style="font-size:0.85rem;">Un nodo conectado directamente hacia abajo desde otro nodo (su padre).</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#c99a4e;">Hoja</h4>
-        <p style="font-size:0.85rem;">Un nodo sin hijos, el final de una rama.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#8b7fb8;">Altura</h4>
-        <p style="font-size:0.85rem;">Cuántos niveles hay desde la raíz hasta la hoja más lejana.</p>
-      </div>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Cómo se recorre un árbol?</strong></p>
-      <p style="margin:0 0 0.6rem;">
-        Siempre se empieza en la <strong>raíz</strong> y se baja por los hijos. Para encontrar "Rayando el
-        Sol":
-      </p>
-      <ul style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li>Entras a la raíz, "SoundFlow".</li>
-        <li>Eliges la rama del género correspondiente, "Rock", sin revisar "Pop" ni "Salsa".</li>
-        <li>Bajas a esa rama y revisas sus hojas hasta encontrar "Rayando el Sol".</li>
-        <li>Si el árbol está bien organizado por categorías, cada nivel descarta las ramas que no sirven,
-          igual que la búsqueda binaria descarta mitades en un arreglo ordenado.</li>
-      </ul>
-    </div>
-
-    <div class="tree-demo">
-    <svg viewBox="0 -25 900 445" xmlns="http://www.w3.org/2000/svg" style="max-width:700px; width:100%; height:auto; display:block; margin:1rem auto 0;">
-      <line x1="450" y1="60" x2="122" y2="180" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="450" y1="60" x2="409" y2="180" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="450" y1="60" x2="737" y2="180" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <line x1="122" y1="180" x2="81" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="122" y1="180" x2="163" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <line x1="409" y1="180" x2="245" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="409" y1="180" x2="327" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="409" y1="180" x2="409" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="409" y1="180" x2="491" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="409" y1="180" x2="573" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <line x1="737" y1="180" x2="655" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="737" y1="180" x2="737" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="737" y1="180" x2="819" y2="320" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <text x="450" y="-8" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="var(--accent)" font-weight="700">raíz</text>
-      <g data-nodo="raiz" data-nombre="SoundFlow" class="tree-nodo">
-        <circle cx="450" cy="60" r="45" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-        <text x="450" y="65" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="var(--text)">SoundFlow</text>
-      </g>
-
-      <g data-nodo="pop" data-nombre="Pop" class="tree-nodo">
-        <circle cx="122" cy="180" r="34" fill="none" stroke="#7fa5a3" stroke-width="2.5"/>
-        <text x="122" y="185" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Pop</text>
-      </g>
-
-      <g data-nodo="rock" data-nombre="Rock" class="tree-nodo">
-        <circle cx="409" cy="180" r="34" fill="none" stroke="#7fa5a3" stroke-width="2.5"/>
-        <text x="409" y="185" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Rock</text>
-      </g>
-
-      <g data-nodo="salsa" data-nombre="Salsa" class="tree-nodo">
-        <circle cx="737" cy="180" r="34" fill="none" stroke="#7fa5a3" stroke-width="2.5"/>
-        <text x="737" y="185" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">Salsa</text>
-      </g>
-
-      <text x="81" y="278" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" fill="#c99a4e" font-weight="700">hoja</text>
-      <g data-nodo="tresdeseos" data-nombre="Tres Deseos" class="tree-nodo">
-        <circle cx="81" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="81" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="81" dy="0">Tres</tspan>
-          <tspan x="81" dy="13">Deseos</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="mibuenamor" data-nombre="Mi Buen Amor" class="tree-nodo">
-        <circle cx="163" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="163" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="163" dy="0">Mi Buen</tspan>
-          <tspan x="163" dy="13">Amor</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="rayandoelsol" data-nombre="Rayando el Sol" class="tree-nodo">
-        <circle cx="245" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="245" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="245" dy="0">Rayando</tspan>
-          <tspan x="245" dy="13">el Sol</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="demusicaligera" data-nombre="De Música Ligera" class="tree-nodo">
-        <circle cx="327" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="327" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="327" dy="0">De Música</tspan>
-          <tspan x="327" dy="13">Ligera</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="persianaamericana" data-nombre="Persiana Americana" class="tree-nodo">
-        <circle cx="409" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="409" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="409" dy="0">Persiana</tspan>
-          <tspan x="409" dy="13">Americana</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="oyemiamor" data-nombre="Oye Mi Amor" class="tree-nodo">
-        <circle cx="491" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="491" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="491" dy="0">Oye Mi</tspan>
-          <tspan x="491" dy="13">Amor</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="cuandopaseeltemblor" data-nombre="Cuando Pase el Temblor" class="tree-nodo">
-        <circle cx="573" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="573" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="573" dy="0">Cuando Pase</tspan>
-          <tspan x="573" dy="13">el Temblor</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="lavidaesuncarnaval" data-nombre="La Vida Es un Carnaval" class="tree-nodo">
-        <circle cx="655" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="655" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="655" dy="0">La Vida Es</tspan>
-          <tspan x="655" dy="13">un Carnaval</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="mitierra" data-nombre="Mi Tierra" class="tree-nodo">
-        <circle cx="737" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="737" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="737" dy="0">Mi</tspan>
-          <tspan x="737" dy="13">Tierra</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="lanegratienetumbao" data-nombre="La Negra Tiene Tumbao" class="tree-nodo">
-        <circle cx="819" cy="320" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="819" y="317" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="var(--text)">
-          <tspan x="819" dy="0">La Negra</tspan>
-          <tspan x="819" dy="13">Tiene Tumbao</tspan>
-        </text>
-      </g>
-    </svg>
-    <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-      "SoundFlow" es la raíz; los géneros ("Pop", "Rock", "Salsa") son hijos de la raíz; las canciones son
-      hojas, nodos sin hijos propios, con la misma cantidad por género que en la base de datos: 2 en Pop, 5
-      en Rock, 3 en Salsa.
-    </p>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira el recorrido en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="raiz,pop,rock,salsa,tresdeseos,mibuenamor,rayandoelsol,demusicaligera,persianaamericana,oyemiamor,cuandopaseeltemblor,lavidaesuncarnaval,mitierra,lanegratienetumbao">Recorrer por niveles (BFS)</button>
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="raiz,pop,tresdeseos,mibuenamor,rock,rayandoelsol,demusicaligera,persianaamericana,oyemiamor,cuandopaseeltemblor,salsa,lavidaesuncarnaval,mitierra,lanegratienetumbao">Recorrer en profundidad (DFS)</button>
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="raiz,rock,rayandoelsol">Buscar "Rayando el Sol" por categoría</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Elige un recorrido para ver, paso a paso, qué nodo se visita primero.
-      </p>
-    </div>
-    </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0;">
-        <strong>Aplicado a SoundFlow:</strong> así se organiza el catálogo por categorías: la raíz es la
-        app, sus hijos son los géneros, y las hojas son las canciones. Los menús de carpetas y categorías de
-        casi cualquier aplicación (playlists dentro de carpetas, categorías de una tienda, comentarios con
-        respuestas anidadas) se modelan con esta misma estructura.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Ejemplo en código: árbol de géneros</strong></p>
-      <div class="code-block" style="margin-top:0.6rem;">
-        <div class="code-block-header">
-          <span class="code-dot" style="background:#ff5f56"></span>
-          <span class="code-dot" style="background:#ffbd2e"></span>
-          <span class="code-dot" style="background:#27c93f"></span>
-          <span class="code-filename">arbol_generos.js</span>
-          <button class="code-copy-btn" type="button">Copiar</button>
-        </div>
-        <pre><code><span class="code-kw">class</span> <span class="code-fn">NodoArbol</span> {
-  <span class="code-kw">constructor</span>(valor) {
-    <span class="code-kw">this</span>.valor = valor; <span class="code-com">// el dato: una categoría o una canción</span>
-    <span class="code-kw">this</span>.hijos = [];   <span class="code-com">// lista de nodos hijos, empieza vacía</span>
-  }
-
-  <span class="code-fn">agregarHijo</span>(nodo) {
-    <span class="code-kw">this</span>.hijos.<span class="code-fn">push</span>(nodo); <span class="code-com">// conecta un nuevo hijo a este nodo</span>
-  }
-}
-
-<span class="code-kw">const</span> raiz = <span class="code-kw">new</span> <span class="code-fn">NodoArbol</span>(<span class="code-str">"SoundFlow"</span>); <span class="code-com">// nodo raíz</span>
-<span class="code-kw">const</span> pop = <span class="code-kw">new</span> <span class="code-fn">NodoArbol</span>(<span class="code-str">"Pop"</span>);
-<span class="code-kw">const</span> rock = <span class="code-kw">new</span> <span class="code-fn">NodoArbol</span>(<span class="code-str">"Rock"</span>);
-
-raiz.<span class="code-fn">agregarHijo</span>(pop);  <span class="code-com">// "Pop" es hijo de "SoundFlow"</span>
-raiz.<span class="code-fn">agregarHijo</span>(rock); <span class="code-com">// "Rock" es hijo de "SoundFlow"</span>
-
-pop.<span class="code-fn">agregarHijo</span>(<span class="code-kw">new</span> <span class="code-fn">NodoArbol</span>(<span class="code-str">"Tres Deseos"</span>));   <span class="code-com">// hoja bajo "Pop"</span>
-rock.<span class="code-fn">agregarHijo</span>(<span class="code-kw">new</span> <span class="code-fn">NodoArbol</span>(<span class="code-str">"Rayando el Sol"</span>)); <span class="code-com">// hoja bajo "Rock"</span></code></pre>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===================== 8. TRIES ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>8. Tries (árboles de prefijos)</h3>
-    </div>
-    <p>
-      Un <strong>trie</strong> (árbol de prefijos) es un tipo especial de árbol diseñado para guardar y
-      buscar texto letra por letra: cada nodo representa un carácter, y el camino desde la raíz hasta un
-      nodo marcado como "fin de palabra" forma una palabra completa. Las palabras que comparten las mismas
-      primeras letras comparten también el mismo camino inicial, sin duplicar nodos.
-    </p>
-
-    <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top:0.8rem;">
-      <div class="concept-card">
-        <h4 style="color:var(--accent);">Nodo-carácter</h4>
-        <p style="font-size:0.85rem;">Cada nodo guarda una sola letra del camino recorrido hasta ahí.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#7fa5a3;">Fin de palabra</h4>
-        <p style="font-size:0.85rem;">Una marca especial que indica que el camino desde la raíz hasta aquí forma una palabra válida.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#c99a4e;">Prefijo compartido</h4>
-        <p style="font-size:0.85rem;">Palabras con las mismas primeras letras reutilizan los mismos nodos iniciales.</p>
-      </div>
-      <div class="concept-card">
-        <h4 style="color:#8b7fb8;">Autocompletado</h4>
-        <p style="font-size:0.85rem;">Bajar hasta el nodo de un prefijo y explorar todo lo que cuelga de ahí.</p>
-      </div>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>¿Cómo se busca en un trie?</strong></p>
-      <ul style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li>Empiezas en la raíz y avanzas letra por letra, siguiendo el camino que coincide con lo que
-          buscas.</li>
-        <li>Si en algún punto no existe un nodo para la siguiente letra, la palabra no está en el trie, y la
-          búsqueda termina de inmediato ahí mismo.</li>
-        <li>Si llegas al final de la palabra y ese nodo tiene la marca de "fin de palabra", la encontraste.</li>
-        <li>Ese mismo mecanismo, aplicado solo a las primeras letras escritas, es lo que permite el
-          autocompletado: bajas hasta donde llega el prefijo, y desde ahí "cuelgan" todas las palabras
-          posibles.</li>
-      </ul>
-    </div>
-
-    <div class="tree-demo">
-    <svg viewBox="0 -25 900 480" xmlns="http://www.w3.org/2000/svg" style="max-width:700px; width:100%; height:auto; display:block; margin:1rem auto 0;">
-      <line x1="450" y1="50" x2="250" y2="170" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="450" y1="50" x2="650" y2="170" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <line x1="250" y1="170" x2="250" y2="290" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="650" y1="170" x2="650" y2="290" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <line x1="250" y1="290" x2="130" y2="410" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="250" y1="290" x2="370" y2="410" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <line x1="650" y1="290" x2="530" y2="410" stroke="var(--text-dim)" stroke-width="2"/>
-      <line x1="650" y1="290" x2="770" y2="410" stroke="var(--text-dim)" stroke-width="2"/>
-
-      <text x="450" y="10" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="var(--accent)" font-weight="700">raíz</text>
-      <g data-nodo="raiz" data-nombre="raíz (vacío)" class="tree-nodo">
-        <circle cx="450" cy="50" r="35" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-        <text x="450" y="55" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="var(--text)">&nbsp;</text>
-      </g>
-
-      <g data-nodo="m" data-nombre="M" class="tree-nodo">
-        <circle cx="250" cy="170" r="32" fill="none" stroke="#7fa5a3" stroke-width="2.5"/>
-        <text x="250" y="176" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="var(--text)">M</text>
-      </g>
-
-      <g data-nodo="l" data-nombre="L" class="tree-nodo">
-        <circle cx="650" cy="170" r="32" fill="none" stroke="#7fa5a3" stroke-width="2.5"/>
-        <text x="650" y="176" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="var(--text)">L</text>
-      </g>
-
-      <g data-nodo="mi" data-nombre="Mi" class="tree-nodo">
-        <circle cx="250" cy="290" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="250" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="var(--text)">i</text>
-      </g>
-
-      <g data-nodo="la" data-nombre="La" class="tree-nodo">
-        <circle cx="650" cy="290" r="32" fill="none" stroke="#c99a4e" stroke-width="2.5"/>
-        <text x="650" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="var(--text)">a</text>
-      </g>
-
-      <text x="130" y="360" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#c44444" font-weight="700">fin de palabra</text>
-      <g data-nodo="mitierra" data-nombre="Mi Tierra" class="tree-nodo">
-        <circle cx="130" cy="410" r="42" fill="none" stroke="#c44444" stroke-width="2.5"/>
-        <text x="130" y="407" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="var(--text)">
-          <tspan x="130" dy="0">Mi</tspan>
-          <tspan x="130" dy="14">Tierra</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="mibuenamor" data-nombre="Mi Buen Amor" class="tree-nodo">
-        <circle cx="370" cy="410" r="42" fill="none" stroke="#c44444" stroke-width="2.5"/>
-        <text x="370" y="407" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="var(--text)">
-          <tspan x="370" dy="0">Mi Buen</tspan>
-          <tspan x="370" dy="14">Amor</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="lavida" data-nombre="La Vida Es un Carnaval" class="tree-nodo">
-        <circle cx="530" cy="410" r="42" fill="none" stroke="#c44444" stroke-width="2.5"/>
-        <text x="530" y="407" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">
-          <tspan x="530" dy="0">La Vida Es</tspan>
-          <tspan x="530" dy="13">un Carnaval</tspan>
-        </text>
-      </g>
-
-      <g data-nodo="lanegra" data-nombre="La Negra Tiene Tumbao" class="tree-nodo">
-        <circle cx="770" cy="410" r="42" fill="none" stroke="#c44444" stroke-width="2.5"/>
-        <text x="770" y="407" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="var(--text)">
-          <tspan x="770" dy="0">La Negra</tspan>
-          <tspan x="770" dy="13">Tiene Tumbao</tspan>
-        </text>
-      </g>
-    </svg>
-    <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
-      "Mi Tierra" y "Mi Buen Amor" comparten el camino "M" &rarr; "i"; "La Vida Es un Carnaval" y "La Negra
-      Tiene Tumbao" comparten el camino "L" &rarr; "a". Para no saturar el diagrama, el resto de cada
-      palabra queda comprimido en el nodo final (a esta variante se le llama <strong>trie compacto</strong>
-      o <em>radix tree</em>).
-    </p>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Simulador: mira la búsqueda en tiempo real</strong></p>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="raiz,m,mi,mitierra">Buscar "Mi Tierra"</button>
-        <button type="button" class="btn btn-secondary tree-traversal-btn" data-orden="raiz,l,la,lanegra">Buscar "La Negra Tiene Tumbao"</button>
-      </div>
-      <p class="tree-demo-status" style="margin:0; font-family:Consolas, monospace; font-size:0.85rem; color:var(--accent); min-height:1.4em;">
-        Elige una búsqueda para ver, letra por letra, el camino que sigue el trie.
-      </p>
-    </div>
-    </div>
-
-    <div class="content-box" style="margin-top:1rem;">
-      <p style="margin:0;">
-        <strong>Aplicado a SoundFlow:</strong> la barra de búsqueda usa exactamente esto. Mientras escribes
-        "mi", el trie ya bajó hasta el nodo del prefijo "Mi" y puede sugerir "Mi Tierra" y "Mi Buen Amor" al
-        instante, sin revisar canción por canción como haría una búsqueda lineal sobre el catálogo completo.
-      </p>
-    </div>
-
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Ejemplo en código: autocompletado de canciones</strong></p>
-      <div class="code-block" style="margin-top:0.6rem;">
-        <div class="code-block-header">
-          <span class="code-dot" style="background:#ff5f56"></span>
-          <span class="code-dot" style="background:#ffbd2e"></span>
-          <span class="code-dot" style="background:#27c93f"></span>
-          <span class="code-filename">trie_autocompletado.js</span>
-          <button class="code-copy-btn" type="button">Copiar</button>
-        </div>
-        <pre><code><span class="code-kw">class</span> <span class="code-fn">NodoTrie</span> {
-  <span class="code-kw">constructor</span>() {
-    <span class="code-kw">this</span>.hijos = {};          <span class="code-com">// cada clave es una letra; su valor, el siguiente NodoTrie</span>
-    <span class="code-kw">this</span>.finDePalabra = <span class="code-kw">false</span>; <span class="code-com">// true si aquí termina una canción válida</span>
-  }
-}
-
-<span class="code-kw">class</span> <span class="code-fn">Trie</span> {
-  <span class="code-kw">constructor</span>() {
-    <span class="code-kw">this</span>.raiz = <span class="code-kw">new</span> <span class="code-fn">NodoTrie</span>();
-  }
-
-  <span class="code-fn">insertar</span>(palabra) {
-    <span class="code-kw">let</span> actual = <span class="code-kw">this</span>.raiz;
-    <span class="code-kw">for</span> (<span class="code-kw">const</span> letra <span class="code-kw">of</span> palabra) {
-      <span class="code-kw">if</span> (!actual.hijos[letra]) {
-        actual.hijos[letra] = <span class="code-kw">new</span> <span class="code-fn">NodoTrie</span>(); <span class="code-com">// crea el nodo si la letra no existía</span>
-      }
-      actual = actual.hijos[letra]; <span class="code-com">// avanza al siguiente nodo</span>
-    }
-    actual.finDePalabra = <span class="code-kw">true</span>; <span class="code-com">// marca el final de la canción insertada</span>
-  }
-}
-
-<span class="code-kw">const</span> trie = <span class="code-kw">new</span> <span class="code-fn">Trie</span>();
-trie.<span class="code-fn">insertar</span>(<span class="code-str">"Mi Tierra"</span>);
-trie.<span class="code-fn">insertar</span>(<span class="code-str">"Mi Buen Amor"</span>); <span class="code-com">// comparte los nodos "M" e "i" con "Mi Tierra"</span></code></pre>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===================== 9. CUÁNDO USAR CADA UNA ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>9. ¿Cuándo usar cada estructura?</h3>
-    </div>
-    <div style="overflow-x:auto; margin-top:0.6rem;">
-      <table style="border-collapse:collapse; width:100%; font-size:0.82rem;">
-        <thead>
-          <tr style="background:#232830;">
-            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Estructura</th>
-            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Resuelve</th>
-            <th style="padding:0.5rem 0.7rem; text-align:left; border-bottom:2px solid var(--border); color:#fff;">Ejemplo en SoundFlow</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Grafo</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Relaciones muchos a muchos</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">tbl_reproducciones (usuarios y canciones)</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Árbol</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Relaciones jerárquicas, sin ciclos</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Catálogo por géneros: SoundFlow &rarr; Rock &rarr; canciones</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Trie</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Búsqueda por prefijo, letra por letra</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Autocompletado de la barra de búsqueda</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Arreglo</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Acceso rápido por posición</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Canciones de un álbum, en orden</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Lista enlazada</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Inserciones y eliminaciones baratas</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Historial de reproducción, se arma sobre la marcha</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);"><strong>Pila</strong></td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">LIFO: lo último que entró, sale primero</td><td style="padding:0.4rem 0.7rem; border-bottom:1px solid var(--border);">Botón "canción anterior"</td></tr>
-          <tr><td style="padding:0.4rem 0.7rem;"><strong>Cola</strong></td><td style="padding:0.4rem 0.7rem;">FIFO: lo primero que entró, sale primero</td><td style="padding:0.4rem 0.7rem;">Playlist "reproducir después"</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
   <!-- ===================== QUIZ ===================== -->
   <div class="activity-section">

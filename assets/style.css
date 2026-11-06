@@ -1740,3 +1740,61 @@ footer {
   color: #6cb6ff;
   font-weight: 600;
 }
+
+
+/* ---------- Botón "Descarga tu clase en PDF" y estilos de impresión ---------- */
+.pdf-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 0.8rem;
+}
+
+.btn-pdf {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+}
+
+.btn-pdf:hover {
+  filter: brightness(1.1);
+}
+
+@media print {
+  @page { margin: 14mm; }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .site-nav,
+  .breadcrumb,
+  .pdf-bar,
+  .class-tabs,
+  .actions,
+  .week-nav,
+  .embed-wrap,
+  footer,
+  .code-copy-btn {
+    display: none !important;
+  }
+
+  body { background: #fff; }
+  .week-detail { border: none; box-shadow: none; padding: 0; }
+
+  .code-block,
+  .content-box,
+  .quiz-question,
+  table,
+  svg {
+    break-inside: avoid;
+  }
+
+  h2, h3, h4 { break-after: avoid; }
+}
