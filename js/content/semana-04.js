@@ -94,30 +94,30 @@ window.WEEK_CONTENT_4_1 = `
       </p>
       <p style="margin:0.8rem 0 0;">
         Se arma con dos ideas nada más: pares de <strong>llave y valor</strong>, como en un diccionario, la
-        llave <code>"nombre"</code> apunta al valor <code>"Karol G"</code>, y agrupaciones, un objeto entre
+        <span style="color:#a83a3a; font-weight:700;">llave</span> <code>nombre</code> apunta al <span style="color:#a83a3a; font-weight:700;">valor</span> <code>"Romeo Santos"</code>, y agrupaciones, un objeto entre
         llaves <code>{ }</code> junta varios pares, y una lista entre corchetes <code>[ ]</code> junta
         varios valores.
       </p>
     </div>
 
-    <div style="max-width:300px; margin:0.8rem auto 0;">
-      <svg viewBox="0 0 285 175" xmlns="http://www.w3.org/2000/svg" style="max-width:300px; width:100%; height:auto; display:block; margin:0 auto;">
+    <div style="max-width:345px; margin:0.8rem auto 0;">
+      <svg viewBox="0 0 330 175" xmlns="http://www.w3.org/2000/svg" style="max-width:345px; width:100%; height:auto; display:block; margin:0 auto;">
         <text x="30" y="45" font-family="Consolas, monospace" font-size="17" fill="var(--text)">{</text>
-        <text x="48" y="45" font-family="Consolas, monospace" font-size="17" fill="#0f6b5c" font-weight="700">"nombre"</text>
-        <text x="140" y="45" font-family="Consolas, monospace" font-size="17" fill="var(--text)">:</text>
-        <text x="155" y="45" font-family="Consolas, monospace" font-size="17" fill="#a2270f" font-weight="700">"Karol G"</text>
-        <text x="255" y="45" font-family="Consolas, monospace" font-size="17" fill="var(--text)">}</text>
+        <text x="48" y="45" font-family="Consolas, monospace" font-size="17" fill="#0f6b5c" font-weight="700">nombre</text>
+        <text x="112" y="45" font-family="Consolas, monospace" font-size="17" fill="var(--text)">:</text>
+        <text x="127" y="45" font-family="Consolas, monospace" font-size="17" fill="#a2270f" font-weight="700">"Romeo Santos"</text>
+        <text x="283" y="45" font-family="Consolas, monospace" font-size="17" fill="var(--text)">}</text>
 
-        <line x1="88" y1="55" x2="88" y2="85" stroke="#0f6b5c" stroke-width="1.3"/>
-        <text x="88" y="101" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11.5" fill="#0f6b5c">llave (key)</text>
+        <line x1="79" y1="55" x2="79" y2="85" stroke="#0f6b5c" stroke-width="1.3"/>
+        <text x="79" y="101" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11.5" fill="#0f6b5c">llave (key)</text>
 
         <line x1="198" y1="55" x2="198" y2="85" stroke="#a2270f" stroke-width="1.3"/>
         <text x="198" y="101" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11.5" fill="#a2270f">valor (value)</text>
 
         <line x1="30" y1="55" x2="30" y2="130" stroke="var(--text-dim)" stroke-width="1.3"/>
-        <line x1="255" y1="55" x2="255" y2="130" stroke="var(--text-dim)" stroke-width="1.3"/>
-        <line x1="30" y1="130" x2="255" y2="130" stroke="var(--text-dim)" stroke-width="1.3" stroke-dasharray="3 3"/>
-        <text x="142" y="150" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11.5" fill="var(--text-dim)">llaves { } agrupan los pares de un objeto</text>
+        <line x1="283" y1="55" x2="283" y2="130" stroke="var(--text-dim)" stroke-width="1.3"/>
+        <line x1="30" y1="130" x2="283" y2="130" stroke="var(--text-dim)" stroke-width="1.3" stroke-dasharray="3 3"/>
+        <text x="156" y="150" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11.5" fill="var(--text-dim)">llaves { } agrupan los pares de un objeto</text>
       </svg>
       <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">
         Un objeto puede tener varios pares, separados por comas, y un valor puede ser otro objeto o una
@@ -148,15 +148,15 @@ window.WEEK_CONTENT_4_1 = `
 
         <rect x="25" y="172" width="170" height="96" rx="8" fill="#f7faf8" stroke="#6f9d7c" stroke-width="1.3"/>
         <text x="40" y="190" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">{</text>
-        <text x="52" y="204" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"titulo"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Tusa"</tspan></text>
-        <text x="52" y="218" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"artista"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Karol G"</tspan></text>
+        <text x="52" y="204" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"titulo"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Propuesta Indecente"</tspan></text>
+        <text x="52" y="218" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"artista"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Romeo Santos"</tspan></text>
         <text x="52" y="232" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"reproducciones"</tspan><tspan fill="var(--text)">:</tspan></text>
         <text x="52" y="246" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0b5fa5">950000</tspan></text>
         <text x="40" y="260" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">}</text>
 
         <rect x="225" y="172" width="170" height="96" rx="8" fill="#f7faf8" stroke="#6f9d7c" stroke-width="1.3"/>
         <text x="240" y="190" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">{</text>
-        <text x="252" y="204" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"titulo"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Provenza"</tspan></text>
+        <text x="252" y="204" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"titulo"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Eres Mía"</tspan></text>
         <text x="252" y="218" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"duracion_seg"</tspan><tspan fill="var(--text)">:</tspan></text>
         <text x="252" y="232" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0b5fa5">195</tspan></text>
         <text x="240" y="248" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">}</text>
@@ -164,8 +164,8 @@ window.WEEK_CONTENT_4_1 = `
 
         <rect x="425" y="172" width="170" height="96" rx="8" fill="#f7faf8" stroke="#6f9d7c" stroke-width="1.3"/>
         <text x="440" y="190" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">{</text>
-        <text x="452" y="204" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"titulo"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Ojitos Lindos"</tspan></text>
-        <text x="452" y="218" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"artista"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Bad Bunny"</tspan></text>
+        <text x="452" y="204" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"titulo"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Darte un Beso"</tspan></text>
+        <text x="452" y="218" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"artista"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#a2270f">"Prince Royce"</tspan></text>
         <text x="452" y="232" font-family="Consolas, monospace" font-size="9.2"><tspan fill="#0f6b5c">"destacada"</tspan><tspan fill="var(--text)">: </tspan><tspan fill="#7c3aed">true</tspan></text>
         <text x="440" y="246" font-family="Consolas, monospace" font-size="10.5" fill="var(--text)">}</text>
       </svg>
@@ -177,17 +177,17 @@ window.WEEK_CONTENT_4_1 = `
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">ejemplo.json</span>
+        <span class="code-filename">ejemplo.js · solo de ejemplo, no se ejecuta</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code>{
-  <span class="code-key">"nombre"</span>: <span class="code-str">"Karol G"</span>,
-  <span class="code-key">"genero_principal"</span>: <span class="code-str">"Reggaeton"</span>,
-  <span class="code-key">"redes_sociales"</span>: {
-    <span class="code-key">"instagram"</span>: <span class="code-str">"@karolg"</span>,
-    <span class="code-key">"tiktok"</span>: <span class="code-str">"@karolg"</span>
+  <span class="code-key">nombre</span>: <span class="code-str">"Romeo Santos"</span>,
+  <span class="code-key">genero_principal</span>: <span class="code-str">"Bachata"</span>,
+  <span class="code-key">redes_sociales</span>: {
+    <span class="code-key">instagram</span>: <span class="code-str">"@romeosantos"</span>,
+    <span class="code-key">tiktok</span>: <span class="code-str">"@romeosantos"</span>
   },
-  <span class="code-key">"premios"</span>: [<span class="code-str">"Grammy Latino 2023"</span>, <span class="code-str">"Billboard Music Award"</span>]
+  <span class="code-key">premios</span>: [<span class="code-str">"Grammy Latino 2023"</span>, <span class="code-str">"Billboard Music Award"</span>]
 }</code></pre>
     </div>
 
@@ -239,45 +239,45 @@ window.WEEK_CONTENT_4_1 = `
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
-        <strong>Documentos</strong>, <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">MongoDB</span>, <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">CouchDB</span>: cada registro es un documento JSON/BSON, con su
+        <strong>Documentos</strong>, <span style="color:#e24b4a; font-weight:700;">MongoDB</span>, <span style="color:#e24b4a; font-weight:700;">CouchDB</span>: cada registro es un documento JSON/BSON, con su
         propia forma.
-        <br><br>
+        <br>
         <em style="color:#4a7c9e; font-style:normal; font-weight:700;">Se usa cuando:</em> los registros tienen forma variable o cambian con el tiempo,
         y necesitas consultar por cualquier campo interno, perfiles de usuario, catálogos de productos.
-        <br><br>
+        <br>
         <em style="color:#c99a4e; font-style:normal; font-weight:700;">Quién la usa:</em> eBay y Forbes, entre otros, para catálogos de contenido con atributos
         variables.
       </p>
       <p style="margin:0.8rem 0 0;">
-        <strong>Grafos</strong>, <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">Neo4j</span>: los datos se guardan como <strong>nodos</strong>,
+        <strong>Grafos</strong>, <span style="color:#e24b4a; font-weight:700;">Neo4j</span>: los datos se guardan como <strong>nodos</strong>,
         entidades, por ejemplo "usuario" o "canción", conectados por <strong>arcos</strong>, las
         relaciones entre ellos, por ejemplo "sigue a" o "reprodujo", ideal para redes muy conectadas.
-        <br><br>
+        <br>
         <em style="color:#4a7c9e; font-style:normal; font-weight:700;">Se usa cuando:</em> lo importante son las conexiones entre los datos, redes sociales,
         recomendaciones, detección de comunidades.
-        <br><br>
+        <br>
         <em style="color:#c99a4e; font-style:normal; font-weight:700;">Quién la usa:</em> es el mismo tipo de idea detrás del grafo social de Facebook y LinkedIn,
         quién sigue a quién, amigos en común, recomendaciones de conexiones.
       </p>
       <p style="margin:0.8rem 0 0;">
-        <strong>Clave-valor</strong>, <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">Redis</span>: cada dato se guarda y se busca por una llave única, como un
+        <strong>Clave-valor</strong>, <span style="color:#e24b4a; font-weight:700;">Redis</span>: cada dato se guarda y se busca por una llave única, como un
         diccionario gigante, pensado para lecturas ultra rápidas.
-        <br><br>
+        <br>
         <em style="color:#4a7c9e; font-style:normal; font-weight:700;">Se usa cuando:</em> necesitas leer o
         escribir muchísimas veces por segundo, sin relaciones complejas, caché, sesiones, contadores en
         tiempo real, rankings.
-        <br><br>
+        <br>
         <em style="color:#c99a4e; font-style:normal; font-weight:700;">Quién la usa:</em> Twitter, GitHub y Pinterest, entre otros, para caché y datos de acceso
         ultra frecuente.
       </p>
       <p style="margin:0.8rem 0 0;">
-        <strong>Columnas</strong>, <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">Cassandra</span>:
+        <strong>Columnas</strong>, <span style="color:#e24b4a; font-weight:700;">Cassandra</span>:
         agrupa los datos por columnas en vez de por filas, pensado para escribir y leer volúmenes enormes
         de datos distribuidos en muchos servidores.
-        <br><br>
+        <br>
         <em style="color:#4a7c9e; font-style:normal; font-weight:700;">Se usa cuando:</em> el volumen de escritura es
         masivo y distribuido, métricas de series de tiempo, telemetría de sensores, logs a gran escala.
-        <br><br>
+        <br>
         <em style="color:#c99a4e; font-style:normal; font-weight:700;">Quién la usa:</em> Netflix e Instagram, entre otros, para volúmenes de datos a escala masiva.
       </p>
     </div>
@@ -310,9 +310,9 @@ window.WEEK_CONTENT_4_1 = `
         <line x1="20" y1="98" x2="280" y2="98" stroke="#4a7c9e" stroke-width="0.7" opacity="0.5"/>
         <line x1="20" y1="130" x2="280" y2="130" stroke="#4a7c9e" stroke-width="0.7" opacity="0.5"/>
         <line x1="20" y1="162" x2="280" y2="162" stroke="#4a7c9e" stroke-width="0.7" opacity="0.5"/>
-        <text x="65" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#33404f">Karol G</text>
-        <text x="150" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#33404f">Reggaeton</text>
-        <text x="235" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#33404f">Colombia</text>
+        <text x="65" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#33404f">Romeo Santos</text>
+        <text x="150" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#33404f">Bachata</text>
+        <text x="235" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#33404f">Estados Unidos</text>
         <text x="65" y="116" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#33404f">Shakira</text>
         <text x="150" y="116" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#33404f">Pop</text>
         <text x="235" y="116" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#a83a3a">NULL</text>
@@ -322,8 +322,8 @@ window.WEEK_CONTENT_4_1 = `
 
         <text x="500" y="24" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14.5" font-weight="700" fill="var(--text)">MongoDB: colección</text>
         <rect x="380" y="40" width="130" height="150" rx="8" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
-        <text x="445" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">{ nombre: "Karol G",</text>
-        <text x="445" y="72" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">genero: "Reggaeton",</text>
+        <text x="445" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="8.5" fill="#33404f">{ nombre: "Romeo Santos",</text>
+        <text x="445" y="72" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">genero: "Bachata",</text>
         <text x="445" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">redes: {...},</text>
         <text x="445" y="96" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">premios: [...] }</text>
 
@@ -339,7 +339,7 @@ window.WEEK_CONTENT_4_1 = `
         Diferencia: en MySQL, si Shakira no tiene "país" registrado, esa celda queda en
         <code>NULL</code>, pero la columna <code>pais</code> existe igual para todas las filas. En
         MongoDB, si un documento no necesita un campo, <strong>simplemente no lo tiene</strong>: el
-        documento de Karol G puede traer <code>redes_sociales</code> y <code>premios</code>, mientras que
+        documento de Romeo Santos puede traer <code>redes_sociales</code> y <code>premios</code>, mientras que
         el de Shakira solo trae <code>biografia</code>, sin que eso rompa nada. Esto se llama un esquema
         <strong>flexible</strong>, o polimórfico, y lo vas a practicar más adelante en esta clase.
       </p>
@@ -380,39 +380,50 @@ window.WEEK_CONTENT_4_1 = `
       </svg>
     </div>
 
-    <p style="margin-top:1rem;">Sigue estos pasos, en orden, para dejar tu entorno listo:</p>
-    <div style="margin-top:0.6rem; display:flex; flex-direction:column; gap:0.6rem;">
-      <div class="content-box" style="border-left:4px solid #4a7c9e; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
-        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#4a7c9e; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">1</span>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex:none;">
-          <path d="M12 3v10m0 0l-4-4m4 4l4-4" stroke="#4a7c9e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#4a7c9e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <p style="margin:0;">Descarga el instalador desde
+    <p style="margin-top:1rem;">Elige los pasos de tu sistema operativo. Cuando termines, sigue en <strong>"Para Windows y Mac"</strong>:</p>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #4a7c9e;">
+      <p style="margin:0 0 0.5rem;"><strong>Si usas Windows:</strong></p>
+      <ol style="margin:0; padding-left:1.2rem; font-size:0.92rem;">
+        <li style="margin-bottom:0.5rem;">Descarga el instalador desde
           <a href="https://www.mongodb.com/try/download/community" target="_blank" rel="noopener">mongodb.com/try/download/community</a>,
-          eligiendo tu sistema operativo. No necesitas cuenta para descargarlo.</p>
+          eligiendo <strong>Windows</strong>. No necesitas cuenta para descargarlo.</li>
+        <li style="margin-bottom:0.5rem;">Ejecuta el instalador y elige <strong>"Complete"</strong> como tipo de instalación.</li>
+        <li>Deja marcada la opción de instalar MongoDB como <strong>"Service" de Windows</strong>, así arranca solo en segundo plano cada vez que enciendes tu equipo. Marca también la casilla para instalar <strong>MongoDB Compass</strong> junto con el servidor.</li>
+      </ol>
+    </div>
+
+    <div class="content-box" style="margin-top:1rem; border-left:4px solid #6f9d7c;">
+      <p style="margin:0 0 0.5rem;"><strong>Si usas Mac:</strong></p>
+      <ol style="margin:0; padding-left:1.2rem; font-size:0.92rem;">
+        <li style="margin-bottom:0.5rem;">Abre la <strong>Terminal</strong> (<code>Cmd + Espacio</code>, escribe "Terminal"). Comprueba que tienes Homebrew escribiendo <code>brew --version</code>. Si no lo tienes, instálalo desde <a href="https://brew.sh" target="_blank" rel="noopener">brew.sh</a>.</li>
+        <li style="margin-bottom:0.5rem;">Instala MongoDB con estos comandos, <strong>uno a la vez</strong>:</li>
+      </ol>
+      <div class="code-block" style="margin:0.5rem 0 0.6rem;">
+        <div class="code-block-header">
+          <span class="code-dot" style="background:#ff5f56"></span>
+          <span class="code-dot" style="background:#ffbd2e"></span>
+          <span class="code-dot" style="background:#27c93f"></span>
+          <span class="code-filename">Terminal (Mac)</span>
+          <button class="code-copy-btn" type="button">Copiar</button>
+        </div>
+        <pre><code>brew tap mongodb/brew
+brew update
+brew install mongodb-community
+brew services start mongodb-community</code></pre>
       </div>
-      <div class="content-box" style="border-left:4px solid #4a7c9e; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
-        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#4a7c9e; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">2</span>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex:none;">
-          <rect x="4" y="4" width="16" height="16" rx="3" stroke="#4a7c9e" stroke-width="1.8"/>
-          <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#4a7c9e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <p style="margin:0;">Ejecuta el instalador y elige <strong>"Complete"</strong> como tipo de
-          instalación.</p>
-      </div>
-      <div class="content-box" style="border-left:4px solid #4a7c9e; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
-        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#4a7c9e; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">3</span>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex:none;">
-          <rect x="3" y="9" width="18" height="6" rx="3" stroke="#4a7c9e" stroke-width="1.8"/>
-          <circle cx="16" cy="12" r="2" fill="#4a7c9e"/>
-        </svg>
-        <p style="margin:0;">Deja marcada la opción de instalar MongoDB como <strong>"Service" de
-          Windows</strong>, así arranca solo en segundo plano cada vez que enciendes tu equipo. Marca
-          también la casilla para instalar <strong>MongoDB Compass</strong> junto con el servidor.</p>
-      </div>
+      <ol start="3" style="margin:0; padding-left:1.2rem; font-size:0.92rem;">
+        <li style="margin-bottom:0.5rem;">El último comando deja MongoDB corriendo <strong>en segundo plano</strong> y lo arranca cada vez que inicias sesión, igual que el "Service" de Windows. Comprueba con <code>brew services list</code>: debe aparecer <code>mongodb-community</code> como <code>started</code>. Para detenerlo: <code>brew services stop mongodb-community</code>.</li>
+        <li style="margin-bottom:0.5rem;"><strong>Compass no viene incluido</strong> en Mac: descárgalo desde <a href="https://www.mongodb.com/try/download/compass" target="_blank" rel="noopener">mongodb.com/try/download/compass</a>. Elige la versión de tu chip, <strong>Apple Silicon</strong> (M1, M2, M3...) o <strong>Intel</strong>; lo ves en el menú Apple &rarr; <strong>"Acerca de esta Mac"</strong>. Abre el <code>.dmg</code> y arrastra Compass a <strong>Aplicaciones</strong>.</li>
+        <li>Si macOS no deja abrir Compass por seguridad, ve a <strong>Ajustes del Sistema</strong> &rarr; <strong>Privacidad y seguridad</strong> y pulsa <strong>"Abrir de todos modos"</strong>.</li>
+      </ol>
+      <p style="margin:0.6rem 0 0; font-size:0.85rem; color:var(--text-dim);">Si Homebrew te pide una versión concreta de MongoDB, usa la que indique la
+      <a href="https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/" target="_blank" rel="noopener">guía oficial para macOS</a>, que también lista las versiones de macOS compatibles.</p>
+    </div>
+
+    <p style="margin-top:1.2rem;"><strong>Para Windows y Mac: conecta Compass</strong></p>
+    <div style="margin-top:0.6rem; display:flex; flex-direction:column; gap:0.6rem;">
       <div class="content-box" style="border-left:4px solid #6f9d7c; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
-        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#6f9d7c; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">4</span>
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#6f9d7c; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">1</span>
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex:none;">
           <circle cx="12" cy="12" r="9" stroke="#6f9d7c" stroke-width="1.8"/>
           <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#6f9d7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -421,7 +432,7 @@ window.WEEK_CONTENT_4_1 = `
           servidor ya está corriendo.</p>
       </div>
       <div class="content-box" style="border-left:4px solid #6f9d7c; margin:0; display:flex; gap:0.7rem; align-items:flex-start;">
-        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#6f9d7c; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">5</span>
+        <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#6f9d7c; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;">2</span>
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex:none;">
           <path d="M9 7V4M15 7V4M7 9h10v3a5 5 0 0 1-10 0V9z" stroke="#6f9d7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M12 17v3" stroke="#6f9d7c" stroke-width="1.8" stroke-linecap="round"/>
@@ -489,14 +500,14 @@ window.WEEK_CONTENT_4_1 = `
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">documento_ejemplo.json</span>
+        <span class="code-filename">documento_ejemplo.js · Compass (Insert Document)</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code>{
-  <span class="code-key">"evento"</span>: <span class="code-str">"inicio_sesion"</span>,
-  <span class="code-key">"usuario_id"</span>: <span class="code-num">101</span>,
-  <span class="code-key">"plataforma"</span>: <span class="code-str">"Android"</span>,
-  <span class="code-key">"exitoso"</span>: <span class="code-bool">true</span>
+  <span class="code-key">evento</span>: <span class="code-str">"inicio_sesion"</span>,
+  <span class="code-key">usuario_id</span>: <span class="code-num">101</span>,
+  <span class="code-key">plataforma</span>: <span class="code-str">"Android"</span>,
+  <span class="code-key">exitoso</span>: <span class="code-bool">true</span>
 }</code></pre>
     </div>
   </div>
@@ -507,44 +518,16 @@ window.WEEK_CONTENT_4_1 = `
       <h3>3. Colecciones y documentos</h3>
     </div>
     <p>
-      Un <strong>documento</strong> es la unidad básica de datos en MongoDB: un objeto con pares
-      <strong>llave: valor</strong>, escrito en JSON, guardado internamente como BSON. Una
-      <strong>colección</strong> es un grupo de documentos, más o menos similares entre sí, guardados
-      juntos, el equivalente conceptual a una tabla.
+      En MongoDB los datos se organizan en tres niveles: una <strong>base de datos</strong> tiene varias
+      <strong>colecciones</strong>, y cada colección guarda muchos <strong>documentos</strong>. Esta sección va de lo más
+      pequeño a lo más grande: primero el documento, luego la colección, y al final los tipos de datos.
     </p>
 
-    <p style="margin-top:0.8rem;">MongoDB acepta varios tipos de datos dentro de un documento:</p>
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>String</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Texto: <code>"Karol G"</code></p>
-      </div>
-      <div class="concept-card">
-        <h4>Number</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Enteros o decimales: <code>101</code>, <code>4.5</code></p>
-      </div>
-      <div class="concept-card">
-        <h4>Boolean</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);"><code>true</code> / <code>false</code></p>
-      </div>
-      <div class="concept-card">
-        <h4>Date</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);"><code>new Date()</code></p>
-      </div>
-      <div class="concept-card">
-        <h4>Array</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Lista de valores: <code>["Voz", "Guitarra"]</code></p>
-      </div>
-      <div class="concept-card">
-        <h4>Objeto anidado</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Un documento dentro de otro: <code>{ instagram: "..." }</code></p>
-      </div>
-    </div>
-
-    <p style="margin-top:1rem;">
-      Un solo documento puede combinar todos estos tipos de datos a la vez. Este ejemplo trae los seis
-      tipos juntos, listo para pegarlo con <strong>"ADD DATA"</strong> &rarr; <strong>"Insert
-      Document"</strong> en Compass:
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.6rem 0 0.4rem;">1. Documento: la unidad básica de datos</h4>
+    <p style="margin-top:0.4rem;">
+      Un <strong>documento</strong> es un objeto con pares <strong>llave: valor</strong>, escrito en JSON y guardado
+      internamente como BSON. Es el equivalente a una fila de una tabla, pero con más libertad: puede traer listas y
+      hasta otros documentos adentro. Así se ve el documento de una canción de SoundFlow:
     </p>
     <div class="code-block nosql" style="margin-top:0.6rem;">
       <div class="code-block-header">
@@ -552,32 +535,192 @@ window.WEEK_CONTENT_4_1 = `
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">ejemplo_completo.json</span>
+        <span class="code-filename">cancion.js · solo de ejemplo, no se ejecuta</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code>{
-  <span class="code-key">"nombre"</span>: <span class="code-str">"Shakira"</span>,
-  <span class="code-key">"genero_principal"</span>: <span class="code-str">"Pop"</span>,
-  <span class="code-key">"activo"</span>: <span class="code-bool">true</span>,
-  <span class="code-key">"reproducciones_totales"</span>: <span class="code-num">3100000</span>,
-  <span class="code-key">"fecha_registro"</span>: <span class="code-str">"2023-11-02"</span>,
-  <span class="code-key">"premios"</span>: [<span class="code-str">"Grammy 2006"</span>, <span class="code-str">"Grammy Latino 2022"</span>],
-  <span class="code-key">"redes_sociales"</span>: {
-    <span class="code-key">"instagram"</span>: <span class="code-str">"@shakira"</span>,
-    <span class="code-key">"tiktok"</span>: <span class="code-str">"@shakira"</span>
+  <span class="code-key">_id</span>: ObjectId(<span class="code-str">"65f1a2b3c4d5e6f7a8b9c0d1"</span>),   <span class="code-com">// identificador único, lo crea MongoDB</span>
+  <span class="code-key">titulo</span>: <span class="code-str">"Eres Mía"</span>,                          <span class="code-com">// String</span>
+  <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span>,                          <span class="code-com">// String</span>
+  <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>,                         <span class="code-com">// String</span>
+  <span class="code-key">duracion_seg</span>: <span class="code-num">195</span>,                           <span class="code-com">// Number</span>
+  <span class="code-key">reproducciones</span>: <span class="code-num">780000</span>,                      <span class="code-com">// Number</span>
+  <span class="code-key">explicita</span>: <span class="code-bool">false</span>,                            <span class="code-com">// Boolean</span>
+  <span class="code-key">lanzamiento</span>: ISODate(<span class="code-str">"2022-04-21"</span>),          <span class="code-com">// Date</span>
+  <span class="code-key">etiquetas</span>: [<span class="code-str">"verano"</span>, <span class="code-str">"fiesta"</span>, <span class="code-str">"latino"</span>],   <span class="code-com">// Array</span>
+  <span class="code-key">album</span>: { <span class="code-key">titulo</span>: <span class="code-str">"Colección Verano"</span>, <span class="code-key">anio</span>: <span class="code-num">2022</span> }   <span class="code-com">// objeto anidado</span>
+}</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.9rem;">
+      <p style="margin:0;">Cada línea es un <strong>campo</strong>: el nombre a la izquierda (<code>titulo</code>) y su valor a la derecha (<code>"Eres Mía"</code>). El campo <code>_id</code> es especial: <strong>MongoDB lo crea solo</strong> en cada documento, es único, y no tienes que inventarlo.</p>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.6rem 0 0.4rem;">2. Colección: un grupo de documentos</h4>
+    <p style="margin-top:0.4rem;">
+      Una <strong>colección</strong> es un grupo de documentos guardados juntos, el equivalente conceptual a una tabla. La diferencia
+      clave: <strong>los documentos de una misma colección no tienen que tener los mismos campos</strong>. Mira la colección
+      <code>artistas</code>: Romeo Santos tiene redes sociales y premios, Shakira tiene instrumentos, y Prince Royce solo lo básico, y todos
+      conviven sin problema.
+    </p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">coleccion_artistas.js · solo de ejemplo, no se ejecuta</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Colección "artistas": tres documentos, cada uno con su propia forma</span>
+{
+  <span class="code-key">_id</span>: ObjectId(<span class="code-str">"65f1a2b3c4d5e6f7a8b9c0e1"</span>),
+  <span class="code-key">nombre</span>: <span class="code-str">"Romeo Santos"</span>,
+  <span class="code-key">genero_principal</span>: <span class="code-str">"Bachata"</span>,
+  <span class="code-key">pais</span>: <span class="code-str">"Estados Unidos"</span>,
+  <span class="code-key">premios</span>: [<span class="code-str">"Grammy Latino 2023"</span>, <span class="code-str">"Billboard Music Award"</span>],
+  <span class="code-key">redes_sociales</span>: { <span class="code-key">instagram</span>: <span class="code-str">"@romeosantos"</span>, <span class="code-key">tiktok</span>: <span class="code-str">"@romeosantos"</span>, <span class="code-key">youtube</span>: <span class="code-str">"RomeoSantosVEVO"</span> }
+}
+{
+  <span class="code-key">_id</span>: ObjectId(<span class="code-str">"65f1a2b3c4d5e6f7a8b9c0e2"</span>),
+  <span class="code-key">nombre</span>: <span class="code-str">"Shakira"</span>,
+  <span class="code-key">genero_principal</span>: <span class="code-str">"Pop"</span>,
+  <span class="code-key">pais</span>: <span class="code-str">"Colombia"</span>,
+  <span class="code-key">instrumentos_favoritos</span>: [<span class="code-str">"Voz"</span>, <span class="code-str">"Guitarra"</span>],
+  <span class="code-key">activo</span>: <span class="code-bool">true</span>
+}
+{
+  <span class="code-key">_id</span>: ObjectId(<span class="code-str">"65f1a2b3c4d5e6f7a8b9c0e3"</span>),
+  <span class="code-key">nombre</span>: <span class="code-str">"Prince Royce"</span>,
+  <span class="code-key">genero_principal</span>: <span class="code-str">"Bachata"</span>,
+  <span class="code-key">pais</span>: <span class="code-str">"Estados Unidos"</span>
+}</code></pre>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.6rem 0 0.4rem;">3. Base de datos, colecciones y documentos juntos</h4>
+    <p style="margin-top:0.4rem;">En esta clase vas a trabajar con una base de datos y tres colecciones:</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">estructura.txt · solo de ejemplo, no se ejecuta</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>soundflow_nosql            <span class="code-com">// base de datos</span>
+├── artistas               <span class="code-com">// colección: documentos de artistas</span>
+├── canciones              <span class="code-com">// colección: documentos de canciones</span>
+└── logs                   <span class="code-com">// colección: eventos de la aplicación</span></code></pre>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.6rem 0 0.4rem;">4. Equivalencias con MySQL</h4>
+    <div style="overflow-x:auto; margin-top:0.6rem;">
+      <table style="border-collapse:collapse; width:100%; font-size:0.85rem;">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding:0.4rem 0.7rem; background:#33404f; color:#fff; border:1px solid var(--border);">Concepto</th>
+            <th style="text-align:left; padding:0.4rem 0.7rem; background:#6f9d7c; color:#fff; border:1px solid var(--border);">MySQL</th>
+            <th style="text-align:left; padding:0.4rem 0.7rem; background:#4a7c9e; color:#fff; border:1px solid var(--border);">MongoDB</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Contenedor principal</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Base de datos</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Base de datos: <code>soundflow_nosql</code></td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Agrupación de datos</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Tabla: <code>tbl_canciones</code></td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Colección: <code>canciones</code></td></tr>
+          <tr><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Un registro</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Fila</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Documento</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Un dato del registro</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Columna (<code>titulo</code>)</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Campo (<code>titulo</code>)</td></tr>
+          <tr><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Estructura</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Fija: todas las filas tienen las mismas columnas</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Flexible: cada documento puede tener campos distintos</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;">Identificador</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;"><code>id_cancion</code>, que defines tú</td><td style="padding:0.4rem 0.7rem; border:1px solid var(--border); vertical-align:top;"><code>_id</code>, que MongoDB crea solo</td></tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.6rem 0 0.4rem;">5. Tipos de datos</h4>
+    <p style="margin-top:0.4rem;">MongoDB acepta varios tipos de datos dentro de un documento. Estos son los que ya viste en el documento de la canción:</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:0.9rem; margin:0.8rem 0;">
+      <div style="background:#fff; border:1px solid var(--border); border-top:4px solid #2e9e5b; border-radius:10px; padding:0.8rem 0.9rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <span style="display:inline-block; background:#e8f6ee; color:#2e9e5b; font-weight:700; font-size:0.82rem; padding:0.15rem 0.65rem; border-radius:999px; letter-spacing:0.02em;">String</span>
+        <p style="margin:0.5rem 0 0.55rem; font-size:0.85rem; color:var(--text-dim);">Texto entre comillas</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; font-family:Consolas,Menlo,monospace; font-size:0.8rem; line-height:1.5; overflow:visible; white-space:pre-wrap; word-break:break-word;">
+          <span style="color:#c9d1d9;">nombre:</span> <span style="color:#7ee0a1;">"Romeo Santos"</span>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-top:4px solid #2f6fd6; border-radius:10px; padding:0.8rem 0.9rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <span style="display:inline-block; background:#e8f0fc; color:#2f6fd6; font-weight:700; font-size:0.82rem; padding:0.15rem 0.65rem; border-radius:999px; letter-spacing:0.02em;">Number</span>
+        <p style="margin:0.5rem 0 0.55rem; font-size:0.85rem; color:var(--text-dim);">Enteros o decimales</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; font-family:Consolas,Menlo,monospace; font-size:0.8rem; line-height:1.5; overflow:visible; white-space:pre-wrap; word-break:break-word;">
+          <span style="color:#c9d1d9;">duracion_seg:</span> <span style="color:#7fb2ff;">195</span>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-top:4px solid #d9822b; border-radius:10px; padding:0.8rem 0.9rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <span style="display:inline-block; background:#fdf1e3; color:#d9822b; font-weight:700; font-size:0.82rem; padding:0.15rem 0.65rem; border-radius:999px; letter-spacing:0.02em;">Boolean</span>
+        <p style="margin:0.5rem 0 0.55rem; font-size:0.85rem; color:var(--text-dim);">Verdadero o falso</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; font-family:Consolas,Menlo,monospace; font-size:0.8rem; line-height:1.5; overflow:visible; white-space:pre-wrap; word-break:break-word;">
+          <span style="color:#c9d1d9;">activo:</span> <span style="color:#ffb86b;">true</span>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-top:4px solid #8a4fd0; border-radius:10px; padding:0.8rem 0.9rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <span style="display:inline-block; background:#f2ebfb; color:#8a4fd0; font-weight:700; font-size:0.82rem; padding:0.15rem 0.65rem; border-radius:999px; letter-spacing:0.02em;">Date</span>
+        <p style="margin:0.5rem 0 0.55rem; font-size:0.85rem; color:var(--text-dim);">Una fecha y hora</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; font-family:Consolas,Menlo,monospace; font-size:0.8rem; line-height:1.5; overflow:visible; white-space:pre-wrap; word-break:break-word;">
+          <span style="color:#c9d1d9;">lanzamiento:</span> <span style="color:#c9a0ff;">ISODate("2022-04-21")</span>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-top:4px solid #d6457a; border-radius:10px; padding:0.8rem 0.9rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <span style="display:inline-block; background:#fcebf2; color:#d6457a; font-weight:700; font-size:0.82rem; padding:0.15rem 0.65rem; border-radius:999px; letter-spacing:0.02em;">Array</span>
+        <p style="margin:0.5rem 0 0.55rem; font-size:0.85rem; color:var(--text-dim);">Lista de valores</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; font-family:Consolas,Menlo,monospace; font-size:0.8rem; line-height:1.5; overflow:visible; white-space:pre-wrap; word-break:break-word;">
+          <span style="color:#c9d1d9;">etiquetas:</span> <span style="color:#ff8fb8;">["verano", "fiesta", "latino"]</span>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-top:4px solid #1a9aa8; border-radius:10px; padding:0.8rem 0.9rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <span style="display:inline-block; background:#e6f6f8; color:#1a9aa8; font-weight:700; font-size:0.82rem; padding:0.15rem 0.65rem; border-radius:999px; letter-spacing:0.02em;">Objeto anidado</span>
+        <p style="margin:0.5rem 0 0.55rem; font-size:0.85rem; color:var(--text-dim);">Un documento dentro de otro</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; font-family:Consolas,Menlo,monospace; font-size:0.8rem; line-height:1.5; overflow:visible; white-space:pre-wrap; word-break:break-word;">
+          <span style="color:#c9d1d9;">coleccion:</span> <span style="color:#6fdce8;">{ titulo: "Colección Verano", anio: 2022 }</span>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-top:4px solid #6b7280; border-radius:10px; padding:0.8rem 0.9rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <span style="display:inline-block; background:#eef0f3; color:#6b7280; font-weight:700; font-size:0.82rem; padding:0.15rem 0.65rem; border-radius:999px; letter-spacing:0.02em;">ObjectId</span>
+        <p style="margin:0.5rem 0 0.55rem; font-size:0.85rem; color:var(--text-dim);">Identificador único creado por MongoDB</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; font-family:Consolas,Menlo,monospace; font-size:0.8rem; line-height:1.5; overflow:visible; white-space:pre-wrap; word-break:break-word;">
+          <span style="color:#c9d1d9;">_id:</span> <span style="color:#aab2bd;">ObjectId("665f1a2b3c4d5e6f7a8b9c0d")</span>
+        </div>
+      </div>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.6rem 0 0.4rem;">6. Pruébalo: inserta un documento completo en Compass</h4>
+    <p style="margin-top:0.4rem;">
+      Un solo documento puede combinar todos los tipos a la vez. Este trae String, Number, Boolean, Array y objeto anidado, listo para pegarlo con
+      <strong>"ADD DATA"</strong> &rarr; <strong>"Insert Document"</strong> en Compass:
+    </p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">ejemplo_completo.js · Compass (Insert Document)</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>{
+  <span class="code-key">nombre</span>: <span class="code-str">"Shakira"</span>,
+  <span class="code-key">genero_principal</span>: <span class="code-str">"Pop"</span>,
+  <span class="code-key">pais</span>: <span class="code-str">"Colombia"</span>,
+  <span class="code-key">activo</span>: <span class="code-bool">true</span>,
+  <span class="code-key">reproducciones_totales</span>: <span class="code-num">3100000</span>,
+  <span class="code-key">fecha_registro</span>: ISODate(<span class="code-str">"2023-11-02"</span>),
+  <span class="code-key">instrumentos_favoritos</span>: [<span class="code-str">"Voz"</span>, <span class="code-str">"Guitarra"</span>, <span class="code-str">"Armónica"</span>],
+  <span class="code-key">premios</span>: [<span class="code-str">"Grammy 2006"</span>, <span class="code-str">"Grammy Latino 2022"</span>],
+  <span class="code-key">redes_sociales</span>: {
+    <span class="code-key">instagram</span>: <span class="code-str">"@shakira"</span>,
+    <span class="code-key">tiktok</span>: <span class="code-str">"@shakira"</span>,
+    <span class="code-key">youtube</span>: <span class="code-str">"ShakiraVEVO"</span>
   }
 }</code></pre>
     </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        <code>"nombre"</code> y <code>"genero_principal"</code> son <strong>String</strong>,
-        <code>"activo"</code> es <strong>Boolean</strong>, <code>"reproducciones_totales"</code> es
-        <strong>Number</strong>, <code>"premios"</code> es un <strong>Array</strong>, y
-        <code>"redes_sociales"</code> es un <strong>objeto anidado</strong>. Para
-        <code>"fecha_registro"</code>, Compass te deja escribir el texto y luego cambiar su tipo a
-        <strong>Date</strong> con el menú desplegable que aparece junto a cada campo en el editor de
-        "Insert Document".
-      </p>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.9rem;">
+      <p style="margin:0;"><code>nombre</code>, <code>genero_principal</code> y <code>pais</code> son <strong>String</strong>; <code>activo</code> es <strong>Boolean</strong>; <code>reproducciones_totales</code> es <strong>Number</strong>; <code>fecha_registro</code> es <strong>Date</strong> (se escribe con <code>ISODate("2023-11-02")</code>); <code>instrumentos_favoritos</code> y <code>premios</code> son <strong>Array</strong>; y <code>redes_sociales</code> es un <strong>objeto anidado</strong>. Los nombres de los campos van <strong>sin comillas</strong>, como en el shell de MongoDB, y por eso el editor debe estar en <strong>"Shell Syntax"</strong> (si lo tienes en JSON y marca error, cámbialo ahí). No escribas el <code>_id</code>: MongoDB lo agrega solo.</p>
     </div>
   </div>
 
@@ -635,15 +778,15 @@ window.WEEK_CONTENT_4_1 = `
     </div>
   </div>
 
-  <!-- ===================== 5. OPERADORES DE COMPARACIÓN Y AGREGACIÓN ===================== -->
+  <!-- ===================== 5. OPERADORES DE COMPARACIÓN ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>5. Operadores de comparación y agregación</h3>
+      <h3>5. Operadores de comparación</h3>
     </div>
     <p>
-      Antes de armar filtros y actualizaciones más específicas, conviene conocer los operadores de
-      comparación de MongoDB. Se escriben con un signo <code>$</code> al inicio y reemplazan el valor
-      exacto dentro de un filtro, para pedir mayor que, menor que, igual o distinto.
+      Antes de entrar al CRUD, conviene aprender a <strong>filtrar con precisión</strong>: casi todas las operaciones (leer, actualizar y eliminar) usan un filtro para decidir sobre qué documentos actuar. Los operadores de
+      comparación de MongoDB se escriben con un signo <code>$</code> al inicio y reemplazan el valor exacto dentro de un
+      filtro, para pedir mayor que, menor que, igual o distinto. Aquí solo ves cómo se escriben; en las dos secciones siguientes los usarás de verdad.
     </p>
 
     <p style="margin-top:1.2rem;">Tabla comparativa: el mismo operador, en MongoDB y en MySQL.</p>
@@ -702,7 +845,7 @@ window.WEEK_CONTENT_4_1 = `
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">01_operadores_comparacion.js</span>
+        <span class="code-filename">01_operadores_comparacion.js · Compass (barra Filter)</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code><span class="code-com">// Canciones con más de 900.000 reproducciones</span>
@@ -711,30 +854,586 @@ window.WEEK_CONTENT_4_1 = `
 <span class="code-com">// Canciones con menos de 500.000 reproducciones</span>
 { <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">500000</span> } }
 
-<span class="code-com">// Canciones que NO son de Reggaeton</span>
-{ <span class="code-key">genero</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$ne</span>: <span class="code-str">"Reggaeton"</span> } }</code></pre>
+<span class="code-com">// Canciones que NO son de Bachata</span>
+{ <span class="code-key">genero</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$ne</span>: <span class="code-str">"Bachata"</span> } }</code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== 6. CRUD EN COMPASS ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>6. CRUD en Compass: crear, leer, actualizar y eliminar</h3>
+    </div>
+    <p>
+      Las cuatro operaciones básicas de cualquier base de datos se conocen como <strong>CRUD</strong>:
+      Crear, Leer, Actualizar y Eliminar. Primero vemos cómo correr cada una <strong>con el diseño de Compass</strong> (botones y formularios, sin escribir
+      código), con los pasos exactos; en la siguiente sección se ven las mismas cuatro <strong>con código en mongosh</strong>. Todas se hacen sobre la colección <code>canciones</code> de la base <code>soundflow_nosql</code>: ábrela primero en el panel izquierdo de Compass.
+    </p>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Crear: <code>insertOne</code> / <code>insertMany</code></h4>
+    <div class="content-box" style="margin-top:0.4rem;">
+      <p style="margin:0;">
+        El botón <strong>"Insert Document"</strong> es el equivalente visual de
+        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">insertOne</span></code>: abre un editor para escribir un solo documento nuevo. <strong>"Import
+        File"</strong>, subiendo un archivo JSON con un array de documentos, es el equivalente de
+        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">insertMany</span></code>.
+      </p>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.4rem; font-weight:700; color:#2e9e5b;">Cómo se corre en Compass: insertOne</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Abre la colección <code>canciones</code> y haz clic en <strong>ADD DATA</strong> &rarr; <strong>Insert Document</strong>.</li>
+        <li>Borra lo que trae el editor y pega el documento de abajo (el editor debe estar en <strong>Shell Syntax</strong>, sin escribir el <code>_id</code>).</li>
+        <li>Clic en <strong>Insert</strong>. El documento aparece de primero en la pestaña <strong>Documents</strong>.</li>
+      </ol>
+    </div>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">Compass (Insert Document)</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>{
+  <span class="code-key">titulo</span>: <span class="code-str">"Propuesta Indecente"</span>,
+  <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span>,
+  <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>,
+  <span class="code-key">duracion_seg</span>: <span class="code-num">200</span>,
+  <span class="code-key">reproducciones</span>: <span class="code-num">950000</span>
+}</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.4rem; font-weight:700; color:#2e9e5b;">Cómo se corre en Compass: insertMany</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Guarda tus documentos en un archivo <code>.json</code> con la forma <code>[ { ... }, { ... } ]</code>. <strong>Ojo:</strong> en un archivo, JSON sí exige las llaves entre comillas.</li>
+        <li>Clic en <strong>ADD DATA</strong> &rarr; <strong>Import JSON or CSV file</strong> y elige el archivo.</li>
+        <li>Revisa que el tipo sea <strong>JSON</strong> y clic en <strong>Import</strong>. Compass indica cuántos documentos entraron.</li>
+      </ol>
     </div>
 
-    <h4 style="color:#6f9d7c; font-size:1rem; margin:2.2rem 0 0.4rem;">Framework de agregación</h4>
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Leer: <code>find</code> / <code>findOne</code></h4>
+    <div class="content-box" style="margin-top:0.4rem;">
+      <p style="margin:0;">
+        La barra <strong>"Filter"</strong> en la vista de "Documents" hace lo mismo que
+        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">find</span></code>: escribes el objeto de filtro, por ejemplo
+        <code>{ genero: "Bachata" }</code>, y Compass muestra todos los documentos que coinciden. Darle
+        clic a uno solo para expandirlo y verlo por separado es la idea de <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">findOne</span></code>.
+      </p>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.4rem; font-weight:700; color:#2e9e5b;">Cómo se corre en Compass: find / findOne</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Abre la colección y entra a la pestaña <strong>Documents</strong>.</li>
+        <li>En la barra <strong>Filter</strong> escribe <code>{ genero: "Bachata" }</code> y haz clic en <strong>Find</strong>. Salen los documentos que coinciden: eso es <code>find</code>.</li>
+        <li>Para <code>findOne</code>, abre <strong>Options</strong>, escribe <code>1</code> en <strong>Limit</strong> y vuelve a pulsar <strong>Find</strong>: sale solo un documento.</li>
+        <li>Clic en <strong>Reset</strong> para limpiar el filtro y volver a ver todo.</li>
+      </ol>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Actualizar: <code>updateOne</code> / <code>updateMany</code></h4>
+    <div class="content-box" style="margin-top:0.4rem;">
+      <p style="margin:0;">
+        Editar un documento con el ícono de lápiz y guardar los cambios es el equivalente de
+        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateOne</span></code>. Para actualizar varios a la vez, primero filtras con la barra "Filter" y
+        luego aplicas la actualización masiva con el botón <strong>BULK</strong> &rarr; <strong>Update Documents</strong> sobre los documentos filtrados, el
+        equivalente de <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateMany</span></code>.
+      </p>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.4rem; font-weight:700; color:#2e9e5b;">Cómo se corre en Compass: updateOne</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Con la pestaña <strong>Documents</strong> abierta, pasa el mouse sobre el documento de "Propuesta Indecente" y haz clic en el <strong>lápiz</strong> (Edit).</li>
+        <li>Cambia el valor, por ejemplo <code>reproducciones</code> a <code>960000</code>, y pulsa <strong>Update</strong> dentro del documento.</li>
+      </ol>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.4rem; font-weight:700; color:#2e9e5b;">Cómo se corre en Compass: updateMany</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>En <strong>Filter</strong> escribe <code>{ genero: "Bachata" }</code> y pulsa <strong>Find</strong> para ver cuáles se van a cambiar.</li>
+        <li>Pulsa el botón <strong>BULK</strong> (arriba de la lista de documentos, junto a ADD DATA) y elige <strong>Update Documents</strong>: se abre una ventana con dos cajas, <strong>Filter</strong> y <strong>Update</strong> (las del ejemplo de abajo).</li>
+        <li>En <strong>Update</strong> escribe <code>{ $set: { destacada: true } }</code> y confirma con <strong>Update N documents</strong>.</li>
+      </ol>
+    </div>
+
+    <p style="margin-top:1rem;">Así queda repartido en las dos cajas de <strong>BULK</strong> &rarr; <strong>Update Documents</strong> de Compass:</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">Compass (BULK → Update Documents)</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Filter</span>
+{ <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span> }
+
+<span class="code-com">// Update</span>
+{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span>: { <span class="code-key">destacada</span>: <span class="code-bool">true</span> } }</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem;">
+      <p style="margin:0;">
+        Son las mismas dos partes que en <code>updateOne</code>/<code>updateMany</code>, solo que separadas en dos
+        cuadros distintos: el filtro va en <strong>Filter</strong>, y el <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span></code> va solo, sin el filtro adentro, en <strong>Update</strong>.
+      </p>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Eliminar: <code>deleteOne</code> / <code>deleteMany</code></h4>
+    <div class="content-box" style="margin-top:0.4rem;">
+      <p style="margin:0;">
+        El ícono de basura junto a un documento es el equivalente de <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">deleteOne</span></code>.
+        Filtrar primero y luego eliminar todos los documentos visibles en ese resultado es el equivalente
+        de <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">deleteMany</span></code>. No hay forma de deshacerlo: una vez eliminado, el documento
+        desaparece.
+      </p>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.4rem; font-weight:700; color:#2e9e5b;">Cómo se corre en Compass: deleteOne</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>Pasa el mouse sobre el documento de "Tacones Rojos" y haz clic en el <strong>ícono de basura</strong>.</li>
+        <li>Compass pide confirmación: pulsa <strong>Delete</strong>.</li>
+      </ol>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.4rem; font-weight:700; color:#2e9e5b;">Cómo se corre en Compass: deleteMany</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>En <strong>Filter</strong> escribe <code>{ reproducciones: { $lt: 100000 } }</code> y pulsa <strong>Find</strong>. Revisa que sean los documentos que quieres borrar.</li>
+        <li>Pulsa el botón <strong>BULK</strong> y elige <strong>Delete Documents</strong>, que muestra cuántos documentos se eliminarán, y confirma con <strong>Delete N documents</strong>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===================== 7. CRUD EN MONGOSH ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>7. CRUD en mongosh: crear, leer, actualizar y eliminar</h3>
+    </div>
+    <p>
+      Las mismas cuatro operaciones, ahora como código en el shell integrado de Compass
+      (<code>db.canciones....</code>). Cada una tiene una versión para un solo documento y otra para
+      varios a la vez.
+    </p>
+    <div class="content-box" style="margin-top:0.6rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.4rem; font-weight:700; color:#2e9e5b;">Cómo se corre en mongosh</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li>En Compass, con la colección abierta, haz clic en el botón <strong>"&gt;_ Open MongoDB shell"</strong>, arriba a la derecha (recuadro naranja de la imagen). Se abre una pestaña nueva llamada <strong>mongosh</strong>. También puedes abrir mongosh desde la terminal escribiendo <code>mongosh</code>.</li>
+        <li>Elige la base de datos con <code>use soundflow_nosql</code>. (En el shell de Compass ya queda en la base que tienes abierta, pero no sobra escribirlo.)</li>
+        <li>Pega el código y pulsa <strong>Enter</strong>. mongosh ejecuta cada comando y responde con el resultado justo debajo.</li>
+        <li>Para ver el efecto, vuelve a la pestaña <strong>Documents</strong> y pulsa el botón de refrescar, o corre <code>db.canciones.find()</code>.</li>
+      </ol>
+    </div>
+    <div style="margin:0.8rem 0;">
+      <img src="assets/img/compass-open-mongosh.png" alt="Botón Open MongoDB shell en la parte superior derecha de Compass" style="width:100%; max-width:900px; border:1px solid var(--border); border-radius:8px; display:block; margin:0 auto;">
+      <p style="font-size:0.78rem; color:var(--text-dim); text-align:center; margin-top:0.4rem;">El botón <strong>Open MongoDB shell</strong> está arriba a la derecha de la colección.</p>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Crear</h4>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>insertOne</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Agrega un solo documento a la
+          colección.</p>
+      </div>
+      <div class="concept-card">
+        <h4>insertMany</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Agrega varios documentos de una
+          sola vez, con un array.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;">Insertar un documento:</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">06_insertOne.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>db.canciones.insertOne({
+  <span class="code-key">titulo</span>: <span class="code-str">"Propuesta Indecente"</span>,
+  <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span>,
+  <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>,
+  <span class="code-key">duracion_seg</span>: <span class="code-num">200</span>,
+  <span class="code-key">reproducciones</span>: <span class="code-num">950000</span>
+})</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; font-size:0.88rem;">
+      <p style="margin:0;"><strong>Qué responde mongosh:</strong> <code>{ acknowledged: true, insertedId: ObjectId("...") }</code>. El <code>insertedId</code> es el <code>_id</code> que MongoDB creó solo.</p>
+    </div>
+
+    <p style="margin-top:1rem;">Insertar varios documentos de una vez:</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">07_insertMany.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>db.canciones.insertMany([
+  { <span class="code-key">titulo</span>: <span class="code-str">"Eres Mía"</span>, <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">195</span>, <span class="code-key">reproducciones</span>: <span class="code-num">780000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Tacones Rojos"</span>, <span class="code-key">artista</span>: <span class="code-str">"Sebastián Yatra"</span>, <span class="code-key">genero</span>: <span class="code-str">"Pop"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">210</span>, <span class="code-key">reproducciones</span>: <span class="code-num">620000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Darte un Beso"</span>, <span class="code-key">artista</span>: <span class="code-str">"Prince Royce"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">254</span>, <span class="code-key">reproducciones</span>: <span class="code-num">1100000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Obsesión"</span>, <span class="code-key">artista</span>: <span class="code-str">"Aventura"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">220</span>, <span class="code-key">reproducciones</span>: <span class="code-num">890000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Hasta el Fin"</span>, <span class="code-key">artista</span>: <span class="code-str">"Monchy y Alexandra"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">200</span>, <span class="code-key">reproducciones</span>: <span class="code-num">1050000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Imitadora"</span>, <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">184</span>, <span class="code-key">reproducciones</span>: <span class="code-num">980000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Stand By Me"</span>, <span class="code-key">artista</span>: <span class="code-str">"Prince Royce"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">243</span>, <span class="code-key">reproducciones</span>: <span class="code-num">1200000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Bachata Rosa"</span>, <span class="code-key">artista</span>: <span class="code-str">"Juan Luis Guerra"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">171</span>, <span class="code-key">reproducciones</span>: <span class="code-num">1150000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Te Extraño"</span>, <span class="code-key">artista</span>: <span class="code-str">"Xtreme"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">287</span>, <span class="code-key">reproducciones</span>: <span class="code-num">1020000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Antología"</span>, <span class="code-key">artista</span>: <span class="code-str">"Shakira"</span>, <span class="code-key">genero</span>: <span class="code-str">"Pop"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">203</span>, <span class="code-key">reproducciones</span>: <span class="code-num">480000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Quimbara"</span>, <span class="code-key">artista</span>: <span class="code-str">"Celia Cruz"</span>, <span class="code-key">genero</span>: <span class="code-str">"Salsa"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">215</span>, <span class="code-key">reproducciones</span>: <span class="code-num">350000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Livin' la Vida Loca"</span>, <span class="code-key">artista</span>: <span class="code-str">"Ricky Martin"</span>, <span class="code-key">genero</span>: <span class="code-str">"Pop"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">243</span>, <span class="code-key">reproducciones</span>: <span class="code-num">660000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"De Música Ligera"</span>, <span class="code-key">artista</span>: <span class="code-str">"Soda Stereo"</span>, <span class="code-key">genero</span>: <span class="code-str">"Rock"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">212</span>, <span class="code-key">reproducciones</span>: <span class="code-num">840000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Lamento Boliviano"</span>, <span class="code-key">artista</span>: <span class="code-str">"Los Enanitos Verdes"</span>, <span class="code-key">genero</span>: <span class="code-str">"Rock"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">222</span>, <span class="code-key">reproducciones</span>: <span class="code-num">710000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Rayando el Sol"</span>, <span class="code-key">artista</span>: <span class="code-str">"Maná"</span>, <span class="code-key">genero</span>: <span class="code-str">"Rock"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">262</span>, <span class="code-key">reproducciones</span>: <span class="code-num">760000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Pedro Navaja"</span>, <span class="code-key">artista</span>: <span class="code-str">"Rubén Blades"</span>, <span class="code-key">genero</span>: <span class="code-str">"Salsa"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">440</span>, <span class="code-key">reproducciones</span>: <span class="code-num">650000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"La Rebelión"</span>, <span class="code-key">artista</span>: <span class="code-str">"Joe Arroyo"</span>, <span class="code-key">genero</span>: <span class="code-str">"Salsa"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">330</span>, <span class="code-key">reproducciones</span>: <span class="code-num">870000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"El Merengue"</span>, <span class="code-key">artista</span>: <span class="code-str">"Wilfrido Vargas"</span>, <span class="code-key">genero</span>: <span class="code-str">"Merengue"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">240</span>, <span class="code-key">reproducciones</span>: <span class="code-num">500000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Suavemente"</span>, <span class="code-key">artista</span>: <span class="code-str">"Elvis Crespo"</span>, <span class="code-key">genero</span>: <span class="code-str">"Merengue"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">235</span>, <span class="code-key">reproducciones</span>: <span class="code-num">720000</span> }
+])</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0;">Con el <code>insertOne</code> de "Propuesta Indecente" y este <code>insertMany</code> ya tienes <strong>20 canciones</strong> en la colección
+      <code>canciones</code> (9 de Bachata, 3 de Pop, 3 de Rock, 3 de Salsa y 2 de Merengue). Son las que usarás en las siguientes secciones.</p>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Leer</h4>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>find</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve todos los documentos que
+          cumplen el filtro.</p>
+      </div>
+      <div class="concept-card">
+        <h4>findOne</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve solo el primer documento
+          que cumple el filtro.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;">Ejemplos:</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">08_find.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Todas las canciones de Bachata</span>
+db.canciones.find({ <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span> })
+
+<span class="code-com">// Devuelve varios documentos, uno por cada canción que coincide:</span>
+[
+  { <span class="code-key">titulo</span>: <span class="code-str">"Propuesta Indecente"</span>, <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">reproducciones</span>: <span class="code-num">950000</span> },
+  { <span class="code-key">titulo</span>: <span class="code-str">"Eres Mía"</span>, <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">reproducciones</span>: <span class="code-num">780000</span> }
+  <span class="code-com">// ...y 7 documentos más: son 9 canciones de Bachata en total</span>
+]
+
+<span class="code-com">// Solo una canción de Romeo Santos</span>
+db.canciones.findOne({ <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span> })
+
+<span class="code-com">// Devuelve un único documento, el primero que coincide:</span>
+{ <span class="code-key">titulo</span>: <span class="code-str">"Propuesta Indecente"</span>, <span class="code-key">artista</span>: <span class="code-str">"Romeo Santos"</span>, <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span>, <span class="code-key">reproducciones</span>: <span class="code-num">950000</span> }</code></pre>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Actualizar</h4>
+    <p>
+      Actualizar necesita dos partes: un <strong>filtro</strong>, para decidir qué documentos cambiar, y
+      un <strong>operador de actualización</strong>, casi siempre <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span></code>, para decir qué campos
+      cambiar y con qué valor. <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateOne</span></code> cambia solo el primer documento que coincide;
+      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateMany</span></code> cambia todos los que coinciden.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>updateOne</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Modifica el primer documento que
+          cumple el filtro.</p>
+      </div>
+      <div class="concept-card">
+        <h4>updateMany</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Modifica todos los documentos que
+          cumplen el filtro.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;">Ejemplos:</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">09_update.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Actualizar las reproducciones de una sola canción</span>
+db.canciones.updateOne(
+  { <span class="code-key">titulo</span>: <span class="code-str">"Propuesta Indecente"</span> },
+  { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span>: { <span class="code-key">reproducciones</span>: <span class="code-num">960000</span> } }
+)
+
+<span class="code-com">// Marcar como destacadas todas las canciones de Bachata</span>
+db.canciones.updateMany(
+  { <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span> },
+  { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span>: { <span class="code-key">destacada</span>: <span class="code-bool">true</span> } }
+)
+
+<span class="code-com">// Sumar 1 a las reproducciones de una canción, sin leer antes su valor</span>
+db.canciones.updateOne(
+  { <span class="code-key">titulo</span>: <span class="code-str">"Eres Mía"</span> },
+  { <span style="color:#e24b4a; font-weight:700;">$inc</span>: { <span class="code-key">reproducciones</span>: <span class="code-num">1</span> } }
+)</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; font-size:0.88rem;">
+      <p style="margin:0;"><strong>Qué responde mongosh:</strong> <code>matchedCount</code> son los documentos que cumplieron el filtro y <code>modifiedCount</code> los que realmente cambiaron. Con <code>updateOne</code> nunca pasan de 1.</p>
+    </div>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Eliminar</h4>
+    <p>
+      Igual que con las actualizaciones, eliminar también necesita un filtro para decidir qué borrar.
+      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">deleteOne</span></code> borra solo el primer documento que coincide; <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">deleteMany</span></code> borra
+      todos los que coinciden. No hay forma de deshacerlo: una vez eliminado, el documento desaparece.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>deleteOne</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Elimina el primer documento que
+          cumple el filtro.</p>
+      </div>
+      <div class="concept-card">
+        <h4>deleteMany</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Elimina todos los documentos que
+          cumplen el filtro.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;">Ejemplos:</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">10_delete.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Eliminar una sola canción</span>
+db.canciones.deleteOne({ <span class="code-key">titulo</span>: <span class="code-str">"Tacones Rojos"</span> })
+
+<span class="code-com">// Eliminar todas las canciones con menos de 100.000 reproducciones</span>
+db.canciones.deleteMany({ <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">100000</span> } })</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.6rem; font-size:0.88rem;">
+      <p style="margin:0;"><strong>Qué responde mongosh:</strong> <code>{ acknowledged: true, deletedCount: 1 }</code>. Si <code>deletedCount</code> sale en 0, el filtro no encontró nada.</p>
+    </div>
+  </div>
+
+  <!-- ===================== 8. CONSULTAS AVANZADAS ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>8. Consultas avanzadas</h3>
+    </div>
+    <p>
+      Con el filtro y los operadores de comparación ya cubiertos, faltan tres herramientas que se usan todo el tiempo en consultas reales: combinar condiciones con lógica, buscar dentro de arrays, y contar documentos o revisar si un campo existe.
+    </p>
+
+    <p style="margin-top:1rem;"><strong>Operadores lógicos: <code>$and</code>, <code>$or</code>, <code>$not</code></strong></p>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>$and</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Todas las condiciones deben
+          cumplirse a la vez.</p>
+      </div>
+      <div class="concept-card">
+        <h4>$or</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Basta con que se cumpla al menos
+          una condición.</p>
+      </div>
+      <div class="concept-card">
+        <h4>$not</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Invierte el resultado de una
+          condición.</p>
+      </div>
+    </div>
+    <p style="margin-top:0.8rem;"><strong>Con el diseño de Compass:</strong> pega solo el filtro en la barra <strong>Filter</strong> y pulsa <strong>Find</strong>. Hazlo de a uno, copiando únicamente la línea con las llaves (sin la línea de comentario <code>//</code>).</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">11_logicos.js · Compass (barra Filter)</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Bachata O Pop</span>
+{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$or</span>: [ { <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span> }, { <span class="code-key">genero</span>: <span class="code-str">"Pop"</span> } ] }
+
+<span class="code-com">// Más de 500.000 reproducciones Y menos de 240 segundos</span>
+{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$and</span>: [ { <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$gt</span>: <span class="code-num">500000</span> } }, { <span class="code-key">duracion_seg</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">240</span> } } ] }
+
+<span class="code-com">// Reproducciones que NO son menores a 100.000</span>
+{ <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$not</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">100000</span> } } }</code></pre>
+    </div>
+    <p style="margin-top:1rem;"><strong>Con mongosh:</strong> se escribe el comando completo, con <code>db.canciones.find( ... )</code> alrededor del filtro. Pégalo en la pestaña de mongosh y pulsa Enter.</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">11_logicos.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Bachata O Pop</span>
+db.canciones.find({ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$or</span>: [ { <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span> }, { <span class="code-key">genero</span>: <span class="code-str">"Pop"</span> } ] })
+
+<span class="code-com">// Más de 500.000 reproducciones Y menos de 240 segundos</span>
+db.canciones.find({ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$and</span>: [ { <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$gt</span>: <span class="code-num">500000</span> } }, { <span class="code-key">duracion_seg</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">240</span> } } ] })
+
+<span class="code-com">// Reproducciones que NO son menores a 100.000</span>
+db.canciones.find({ <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$not</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">100000</span> } } })</code></pre>
+    </div>
+
+    <p style="margin-top:1.4rem;"><strong>Consultas con arrays: <code>$in</code>, <code>$all</code>, <code>$elemMatch</code></strong></p>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>$in</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">El valor del campo está dentro de
+          una lista dada.</p>
+      </div>
+      <div class="concept-card">
+        <h4>$all</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">El array del documento contiene
+          todos los valores indicados.</p>
+      </div>
+      <div class="concept-card">
+        <h4>$elemMatch</h4>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Al menos un elemento del array
+          cumple varias condiciones a la vez.</p>
+      </div>
+    </div>
+    <p style="margin-top:0.8rem;"><strong>Con el diseño de Compass:</strong> abre la colección indicada en cada comentario (<code>artistas</code> o <code>canciones</code>), pega solo el filtro en la barra <strong>Filter</strong> y pulsa <strong>Find</strong>. Hazlo de a uno, copiando únicamente la línea con las llaves (sin la línea de comentario <code>//</code>).</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">14_arrays.js · Compass (barra Filter)</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Artistas cuyo género es Bachata o Pop</span>
+{ <span class="code-key">genero_principal</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$in</span>: [<span class="code-str">"Bachata"</span>, <span class="code-str">"Pop"</span>] } }
+
+<span class="code-com">// Artistas que tocan TANTO Voz COMO Guitarra</span>
+{ <span class="code-key">instrumentos_favoritos</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$all</span>: [<span class="code-str">"Voz"</span>, <span class="code-str">"Guitarra"</span>] } }
+
+<span class="code-com">// Artistas con algún premio cuyo texto contiene "Grammy"</span>
+<span class="code-com">// ($regex busca texto dentro del valor; $elemMatch lo aplica a cada elemento del array premios)</span>
+{ <span class="code-key">premios</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$elemMatch</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$regex</span>: <span class="code-str">"Grammy"</span> } } }</code></pre>
+    </div>
+    <p style="margin-top:1rem;"><strong>Con mongosh:</strong> se escribe el comando completo, con <code>db.coleccion.find( ... )</code> alrededor del filtro. Pégalo en la pestaña de mongosh y pulsa Enter.</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">14_arrays.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Artistas cuyo género es Bachata o Pop</span>
+db.artistas.find({ <span class="code-key">genero_principal</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$in</span>: [<span class="code-str">"Bachata"</span>, <span class="code-str">"Pop"</span>] } })
+
+<span class="code-com">// Artistas que tocan TANTO Voz COMO Guitarra</span>
+db.artistas.find({ <span class="code-key">instrumentos_favoritos</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$all</span>: [<span class="code-str">"Voz"</span>, <span class="code-str">"Guitarra"</span>] } })
+
+<span class="code-com">// Artistas con algún premio cuyo texto contiene "Grammy"</span>
+<span class="code-com">// ($regex busca texto dentro del valor; $elemMatch lo aplica a cada elemento del array premios)</span>
+db.artistas.find({ <span class="code-key">premios</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$elemMatch</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$regex</span>: <span class="code-str">"Grammy"</span> } } })</code></pre>
+    </div>
+
+    <p style="margin-top:1.4rem;"><strong>Contar documentos y revisar si un campo existe: <code>countDocuments</code>, <code>$exists</code></strong></p>
+    <p style="margin-top:0.4rem;">Como los documentos de una colección pueden tener campos distintos, a veces conviene preguntar si un campo está o no, y contar cuántos documentos cumplen una condición.</p>
+    <p style="margin-top:0.8rem;"><strong>Con mongosh:</strong> aquí sí se escribe el comando completo, con <code>countDocuments</code> y <code>db.coleccion.find( ... )</code>. Pégalo en la pestaña de mongosh y pulsa Enter.</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">13_contar_exists.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Cuántas canciones de Bachata hay</span>
+db.canciones.countDocuments({ <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span> })   <span class="code-com">// 9</span>
+
+<span class="code-com">// Cuántas canciones ya tienen el campo "destacada"</span>
+db.canciones.countDocuments({ <span class="code-key">destacada</span>: { <span style="color:#e24b4a; font-weight:700;">$exists</span>: <span class="code-bool">true</span> } })
+
+<span class="code-com">// Artistas que NO tienen el campo "premios"</span>
+db.artistas.find({ <span class="code-key">premios</span>: { <span style="color:#e24b4a; font-weight:700;">$exists</span>: <span class="code-bool">false</span> } })</code></pre>
+    </div>
+    <p style="margin-top:1rem;"><strong>Con el diseño de Compass:</strong> <code>countDocuments</code> no se escribe en la barra Filter: para contar, filtra con <strong>Find</strong> y lee el contador de arriba a la derecha (por ejemplo <strong>1 - 9 of 9</strong>). <code>$exists</code> sí va en el filtro. Pega solo la línea con las llaves, de a una (sin el comentario <code>//</code>), en la colección que indica cada comentario.</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">13_contar_exists.js · Compass (barra Filter)</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code><span class="code-com">// Cuántas canciones de Bachata hay: filtra y mira el contador de arriba a la derecha ("1 - 9 of 9")</span>
+{ <span class="code-key">genero</span>: <span class="code-str">"Bachata"</span> }
+
+<span class="code-com">// Canciones que ya tienen el campo "destacada"</span>
+{ <span class="code-key">destacada</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$exists</span>: <span class="code-bool">true</span> } }
+
+<span class="code-com">// Artistas que NO tienen el campo "premios" (en la colección artistas)</span>
+{ <span class="code-key">premios</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$exists</span>: <span class="code-bool">false</span> } }</code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== 9. FRAMEWORK DE AGREGACIÓN ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>9. Framework de agregación</h3>
+    </div>
     <p style="margin-top:0;">
       Cuando ya no basta con filtrar documentos, sino que hay que <strong>transformar</strong> los datos,
       agrupar, resumir, calcular totales o promedios, MongoDB usa el <strong>framework de agregación</strong>:
-      una tubería, <em>pipeline</em>, de etapas que se aplican una tras otra sobre los documentos.
+      una tubería, <em><span style="color:#7c4dcc; font-weight:700;">pipeline</span></em>, de etapas que se aplican una tras otra sobre los documentos.
     </p>
+    <div class="content-box" style="margin-top:0.8rem; font-size:0.88rem;">
+      <p style="margin:0;"><strong>Sobre los datos:</strong> los ejemplos usan las <strong>20 canciones</strong> que insertaste en la
+      sección 7 (<code>insertOne</code> más <code>insertMany</code>). Si ya ejecutaste los ejemplos de actualizar y eliminar,
+      tus totales pueden variar un poco: es normal, compáralos con tu propia colección.</p>
+    </div>
 
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">¿Qué es un pipeline?</h4>
+
+    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">¿Qué es un <span style="color:#7c4dcc; font-weight:700;">pipeline</span>?</h4>
     <div class="content-box" style="margin-top:0.4rem;">
       <p style="margin:0;">
         Literalmente, una tubería: los documentos entran por un extremo y salen transformados por el otro,
         pasando por una fila de etapas en un orden fijo. Cada etapa recibe exactamente lo que dejó la etapa
         anterior, lo transforma a su manera, y se lo entrega a la siguiente, como una línea de producción en
         una fábrica. No hay saltos ni retrocesos: si una etapa reduce los documentos de 8 a 4, la siguiente
-        etapa arranca ya con esos 4, nunca con los 8 originales. En un pipeline, las etapas van encadenadas
+        etapa arranca ya con esos 4, nunca con los 8 originales. En un <span style="color:#7c4dcc; font-weight:700;">pipeline</span>, las etapas van encadenadas
         una después de la otra, no una dentro de otra.
       </p>
     </div>
 
-    <p style="margin-top:1.2rem;">Tabla comparativa: cada etapa del pipeline, y su equivalente en SQL.</p>
+    <p style="margin-top:1.2rem;">Tabla comparativa: cada etapa del <span style="color:#7c4dcc; font-weight:700;">pipeline</span>, y su equivalente en SQL.</p>
     <table style="width:100%; max-width:640px; border-collapse:collapse; font-size:0.85rem; margin:0.6rem auto 0;">
       <thead>
         <tr>
@@ -776,16 +1475,22 @@ window.WEEK_CONTENT_4_1 = `
         <h4>$sum</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Suma los valores de un campo dentro
           de cada grupo.</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; margin-top:0.6rem; font-family:Consolas,Menlo,monospace; font-size:0.78rem; line-height:1.55; white-space:pre-wrap; word-break:break-word;"><span style="color:#c9d1d9;">total: { $sum: "$reproducciones" }</span>
+<span style="color:#8b98a8;">// Bachata: 9120000 (suma de las 9 canciones)</span></div>
       </div>
       <div class="concept-card">
         <h4>$avg</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Calcula el promedio de un campo
           dentro de cada grupo.</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; margin-top:0.6rem; font-family:Consolas,Menlo,monospace; font-size:0.78rem; line-height:1.55; white-space:pre-wrap; word-break:break-word;"><span style="color:#c9d1d9;">promedio: { $avg: "$duracion_seg" }</span>
+<span style="color:#8b98a8;">// Bachata: 217.1 (promedio en segundos)</span></div>
       </div>
       <div class="concept-card">
         <h4>$push</h4>
         <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Junta los valores de un campo en un
           array, sin eliminar duplicados.</p>
+        <div style="background:#1e2530; border-radius:7px; padding:0.5rem 0.7rem; margin-top:0.6rem; font-family:Consolas,Menlo,monospace; font-size:0.78rem; line-height:1.55; white-space:pre-wrap; word-break:break-word;"><span style="color:#c9d1d9;">titulos: { $push: "$titulo" }</span>
+<span style="color:#8b98a8;">// Pop: ["Tacones Rojos", "Antología", "Livin' la Vida Loca"]</span></div>
       </div>
     </div>
 
@@ -797,27 +1502,27 @@ window.WEEK_CONTENT_4_1 = `
     </div>
 
     <p style="margin-top:1rem;">
-      <strong>Ejemplo:</strong> recorrer un pipeline sobre <code>canciones</code>, donde queremos el total
-      de reproducciones de las canciones de <strong>Reggaeton</strong>, agrupadas por género y ordenadas de
+      <strong>Ejemplo:</strong> recorrer un <span style="color:#7c4dcc; font-weight:700;">pipeline</span> sobre <code>canciones</code>, donde queremos el total
+      de reproducciones de las canciones de <strong>Bachata y Merengue</strong>, agrupadas por género y ordenadas de
       mayor a menor, mostrando solo el género y ese total.
     </p>
 
     <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0 0 0.6rem;"><strong>Así se recorre el pipeline, paso a paso:</strong></p>
+      <p style="margin:0 0 0.6rem;"><strong>Así se recorre el <span style="color:#7c4dcc; font-weight:700;">pipeline</span>, paso a paso:</strong></p>
       <ol style="margin:0; padding-left:1.2rem; font-size:0.9rem;">
         <li style="margin-bottom:0.4rem;">
-          Entran las <strong>12 canciones</strong> de la colección <code>canciones</code>.
+          Entran las <strong>20 canciones</strong> de la colección <code>canciones</code>.
           <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$match</span></code>
-          filtra y deja pasar solo las <strong>9</strong> que son de Reggaeton.
+          filtra y deja pasar solo las <strong>11</strong> que son de Bachata o de Merengue.
         </li>
         <li style="margin-bottom:0.4rem;">
-          Esas 9 canciones llegan a <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$group</span></code>,
-          que las junta en <strong>1 solo documento</strong> por género y suma sus reproducciones:
-          <code>total_reproducciones: 9120000</code>.
+          Esas 11 canciones llegan a <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$group</span></code>,
+          que las junta en <strong>2 documentos</strong>, uno por género, y suma sus reproducciones:
+          Bachata <code>9120000</code> y Merengue <code>1220000</code>.
         </li>
         <li style="margin-bottom:0.4rem;">
-          Ese documento pasa por <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$sort</span></code>,
-          que ordena de mayor a menor.
+          Esos 2 documentos pasan por <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$sort</span></code>,
+          que los ordena de mayor a menor.
         </li>
         <li>
           Por último, <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$project</span></code>
@@ -825,8 +1530,8 @@ window.WEEK_CONTENT_4_1 = `
         </li>
       </ol>
       <p style="margin:0.6rem 0 0;">
-        <strong>Resultado final:</strong> <code>{ genero: "Reggaeton", total_reproducciones: 9120000 }</code>.
-        Ahora veamos, etapa por etapa, el código de cada una.
+        <strong>Resultado final:</strong> <code>{ genero: "Bachata", total_reproducciones: 9120000 }</code> y <code>{ genero: "Merengue", total_reproducciones: 1220000 }</code>.
+        Ahora veamos, etapa por etapa, el código de cada una. En Compass, en cada etapa eliges el operador en el menú y escribes <strong>solo lo que va dentro</strong>, sin las llaves de afuera con el nombre del operador (por ejemplo, sin <code>{ $match: ... }</code>).
       </p>
     </div>
 
@@ -837,16 +1542,16 @@ window.WEEK_CONTENT_4_1 = `
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">02a_match.js</span>
+        <span class="code-filename">02a_match.js · Compass (pestaña Aggregations)</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$match</span>: { <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span> } }</code></pre>
+      <pre><code>{ <span class="code-key">genero</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$in</span>: [<span class="code-str">"Bachata"</span>, <span class="code-str">"Merengue"</span>] } }</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.6rem;">
       <p style="margin:0;">
-        <strong>Cómo se lee:</strong> esta es la primera etapa del pipeline, con el operador
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$match</span></code> y el filtro <code>{ genero: "Reggaeton" }</code>. Deja pasar a la
-        siguiente etapa solo los documentos donde <code>genero</code> sea exactamente <code>"Reggaeton"</code>.
+        <strong>Cómo se lee:</strong> esta es la primera etapa del <span style="color:#7c4dcc; font-weight:700;">pipeline</span>: eliges el operador
+        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$match</span></code> en el menú de la etapa y en la caja escribes el filtro <code>{ genero: { $in: ["Bachata", "Merengue"] } }</code>. Con <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$in</span></code>, deja pasar a la
+        siguiente etapa solo los documentos donde <code>genero</code> sea <code>"Bachata"</code> <strong>o</strong> <code>"Merengue"</code>.
       </p>
     </div>
 
@@ -857,13 +1562,13 @@ window.WEEK_CONTENT_4_1 = `
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">02b_group.js</span>
+        <span class="code-filename">02b_group.js · Compass (pestaña Aggregations)</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$group</span>: {
-    _id: <span class="code-str">"$genero"</span>,
-    total_reproducciones: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$sum</span>: <span class="code-str">"$reproducciones"</span> }
-} }</code></pre>
+      <pre><code>{
+  _id: <span class="code-str">"$genero"</span>,
+  total_reproducciones: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$sum</span>: <span class="code-str">"$reproducciones"</span> }
+}</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.6rem;">
       <p style="margin:0;">
@@ -882,10 +1587,10 @@ window.WEEK_CONTENT_4_1 = `
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">02c_sort.js</span>
+        <span class="code-filename">02c_sort.js · Compass (pestaña Aggregations)</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$sort</span>: { total_reproducciones: <span class="code-num">-1</span> } }</code></pre>
+      <pre><code>{ total_reproducciones: <span class="code-num">-1</span> }</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.6rem;">
       <p style="margin:0;">
@@ -902,10 +1607,10 @@ window.WEEK_CONTENT_4_1 = `
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">02d_project.js</span>
+        <span class="code-filename">02d_project.js · Compass (pestaña Aggregations)</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$project</span>: { _id: <span class="code-num">0</span>, genero: <span class="code-str">"$_id"</span>, total_reproducciones: <span class="code-num">1</span> } }</code></pre>
+      <pre><code>{ _id: <span class="code-num">0</span>, genero: <span class="code-str">"$_id"</span>, total_reproducciones: <span class="code-num">1</span> }</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.6rem;">
       <p style="margin:0 0 0.6rem;">
@@ -925,405 +1630,51 @@ window.WEEK_CONTENT_4_1 = `
       </ul>
     </div>
 
-    <p style="margin-top:1.2rem;">Así funciona un pipeline: encadenando las cuatro etapas, una detrás de otra, el resultado final es:</p>
+    <p style="margin-top:1.2rem;">Así funciona un <span style="color:#7c4dcc; font-weight:700;">pipeline</span>: encadenando las cuatro etapas, una detrás de otra, el resultado final es:</p>
     <div class="code-block nosql" style="margin-top:0.6rem;">
       <div class="code-block-header">
         <span class="code-badge">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">02e_resultado.js</span>
+        <span class="code-filename">02e_resultado.js · resultado que devuelve el pipeline</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
-      <pre><code>{ genero: <span class="code-str">"Reggaeton"</span>, total_reproducciones: <span class="code-num">9120000</span> }</code></pre>
+      <pre><code>{ genero: "Bachata", total_reproducciones: 9120000 }
+{ genero: "Merengue", total_reproducciones: 1220000 }</code></pre>
+    </div>
+    <p style="margin-top:1rem;">Ese mismo <span style="color:#7c4dcc; font-weight:700;">pipeline</span> también se puede correr por <strong>mongosh</strong>: las cuatro etapas van juntas, en el mismo orden, dentro de <code>db.canciones.aggregate([ ... ])</code> y separadas por comas, en lugar de agregarlas una por una con <strong>Add Stage</strong>. Devuelve el mismo resultado de arriba.</p>
+    <div class="code-block nosql" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
+          MongoDB
+        </span>
+        <span class="code-filename">04_pipeline_completo.js · mongosh</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre><code>db.canciones.aggregate([
+  { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$match</span>: { <span class="code-key">genero</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$in</span>: [<span class="code-str">"Bachata"</span>, <span class="code-str">"Merengue"</span>] } } },
+  { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$group</span>: {
+      <span class="code-key">_id</span>: <span class="code-str">"$genero"</span>,
+      <span class="code-key">total_reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$sum</span>: <span class="code-str">"$reproducciones"</span> }
+  } },
+  { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$sort</span>: { <span class="code-key">total_reproducciones</span>: -<span class="code-num">1</span> } },
+  { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$project</span>: { <span class="code-key">_id</span>: <span class="code-num">0</span>, <span class="code-key">genero</span>: <span class="code-str">"$_id"</span>, <span class="code-key">total_reproducciones</span>: <span class="code-num">1</span> } }
+])</code></pre>
     </div>
 
     <p style="margin-top:1rem;">
       Dentro del mismo <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$group</span></code> se pueden agregar más acumuladores, uno por cada campo que se
-      quiera resumir:
+      quiera resumir, como <code>$avg</code> para el promedio o <code>$push</code> para juntar valores en un array.
     </p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">03_agregacion_extra.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com">// Etapa 1: filtra por género</span>
-{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$match</span>: { <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span> } }
-
-<span class="code-com">// Etapa 2: agrupa y calcula los acumuladores</span>
-{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$group</span>: {
-    _id: <span class="code-str">"$genero"</span>,
-    <span class="code-com">// Promedio de duración por género</span>
-    duracion_promedio: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$avg</span>: <span class="code-str">"$duracion_seg"</span> },
-    <span class="code-com">// Lista de títulos de cada género, juntados en un array</span>
-    titulos: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$push</span>: <span class="code-str">"$titulo"</span> }
-} }</code></pre>
-    </div>
 
   </div>
 
-  <!-- ===================== 6. CRUD EN COMPASS ===================== -->
+  <!-- ===================== 10. ÍNDICES EN MONGODB ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>6. CRUD en Compass: crear, leer, actualizar y eliminar</h3>
-    </div>
-    <p>
-      Las cuatro operaciones básicas de cualquier base de datos se conocen como <strong>CRUD</strong>:
-      Crear, Leer, Actualizar y Eliminar. Primero vemos cómo hacer cada una desde Compass, sin escribir
-      código; en la siguiente sección se ven las mismas cuatro, esta vez con código en mongosh.
-    </p>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Crear: <code>insertOne</code> / <code>insertMany</code></h4>
-    <div class="content-box" style="margin-top:0.4rem;">
-      <p style="margin:0;">
-        El botón <strong>"Insert Document"</strong> es el equivalente visual de
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">insertOne</span></code>: abre un editor para escribir un solo documento nuevo. <strong>"Import
-        File"</strong>, subiendo un archivo JSON con un array de documentos, es el equivalente de
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">insertMany</span></code>.
-      </p>
-    </div>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Leer: <code>find</code> / <code>findOne</code></h4>
-    <div class="content-box" style="margin-top:0.4rem;">
-      <p style="margin:0;">
-        La barra <strong>"Filter"</strong> en la vista de "Documents" hace lo mismo que
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">find</span></code>: escribes el objeto de filtro, por ejemplo
-        <code>{ genero: "Reggaeton" }</code>, y Compass muestra todos los documentos que coinciden. Darle
-        clic a uno solo para expandirlo y verlo por separado es la idea de <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">findOne</span></code>.
-      </p>
-    </div>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Actualizar: <code>updateOne</code> / <code>updateMany</code></h4>
-    <div class="content-box" style="margin-top:0.4rem;">
-      <p style="margin:0;">
-        Editar un documento con el ícono de lápiz y guardar los cambios es el equivalente de
-        <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateOne</span></code>. Para actualizar varios a la vez, primero filtras con la barra "Filter" y
-        luego aplicas la actualización masiva con el botón "Update" sobre los documentos filtrados, el
-        equivalente de <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateMany</span></code>.
-      </p>
-    </div>
-
-    <p style="margin-top:1rem;">Así queda repartido en las dos cajas del botón "Update" de Compass:</p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">Compass: Update</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com">// Filter</span>
-{ <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span> }
-
-<span class="code-com">// Update</span>
-{ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span>: { <span class="code-key">destacada</span>: <span class="code-bool">true</span> } }</code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.6rem;">
-      <p style="margin:0;">
-        Son las mismas dos partes que en <code>updateOne</code>/<code>updateMany</code>, solo que separadas en dos
-        cuadros distintos: el filtro va en <strong>Filter</strong>, y el <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span></code> va solo, sin el filtro adentro, en <strong>Update</strong>.
-      </p>
-    </div>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Eliminar: <code>deleteOne</code> / <code>deleteMany</code></h4>
-    <div class="content-box" style="margin-top:0.4rem;">
-      <p style="margin:0;">
-        El ícono de basura junto a un documento es el equivalente de <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">deleteOne</span></code>.
-        Filtrar primero y luego eliminar todos los documentos visibles en ese resultado es el equivalente
-        de <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">deleteMany</span></code>. No hay forma de deshacerlo: una vez eliminado, el documento
-        desaparece.
-      </p>
-    </div>
-  </div>
-
-  <!-- ===================== 7. CRUD EN MONGOSH ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>7. CRUD en mongosh: crear, leer, actualizar y eliminar</h3>
-    </div>
-    <p>
-      Las mismas cuatro operaciones, ahora como código en el shell integrado de Compass
-      (<code>db.canciones....</code>). Cada una tiene una versión para un solo documento y otra para
-      varios a la vez.
-    </p>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Crear</h4>
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>insertOne</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Agrega un solo documento a la
-          colección.</p>
-      </div>
-      <div class="concept-card">
-        <h4>insertMany</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Agrega varios documentos de una
-          sola vez, con un array.</p>
-      </div>
-    </div>
-
-    <p style="margin-top:1rem;">Insertar un documento:</p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">06_insertOne.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>db.canciones.insertOne({
-  <span class="code-key">titulo</span>: <span class="code-str">"Despacito"</span>,
-  <span class="code-key">artista</span>: <span class="code-str">"Luis Fonsi"</span>,
-  <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span>,
-  <span class="code-key">duracion_seg</span>: <span class="code-num">228</span>,
-  <span class="code-key">reproducciones</span>: <span class="code-num">700000</span>
-})</code></pre>
-    </div>
-
-    <p style="margin-top:1rem;">Insertar varios documentos de una vez:</p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">07_insertMany.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>db.canciones.insertMany([
-  { <span class="code-key">titulo</span>: <span class="code-str">"Provenza"</span>, <span class="code-key">artista</span>: <span class="code-str">"Karol G"</span>, <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">195</span>, <span class="code-key">reproducciones</span>: <span class="code-num">780000</span> },
-  { <span class="code-key">titulo</span>: <span class="code-str">"Tacones Rojos"</span>, <span class="code-key">artista</span>: <span class="code-str">"Sebastián Yatra"</span>, <span class="code-key">genero</span>: <span class="code-str">"Pop"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">210</span>, <span class="code-key">reproducciones</span>: <span class="code-num">620000</span> },
-  { <span class="code-key">titulo</span>: <span class="code-str">"Ojitos Lindos"</span>, <span class="code-key">artista</span>: <span class="code-str">"Bad Bunny"</span>, <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">254</span>, <span class="code-key">reproducciones</span>: <span class="code-num">1100000</span> },
-  { <span class="code-key">titulo</span>: <span class="code-str">"Feliz Cumpleaños Ferxxo"</span>, <span class="code-key">artista</span>: <span class="code-str">"Feid"</span>, <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">220</span>, <span class="code-key">reproducciones</span>: <span class="code-num">890000</span> },
-  { <span class="code-key">titulo</span>: <span class="code-str">"La Jumpa"</span>, <span class="code-key">artista</span>: <span class="code-str">"Arcángel"</span>, <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span>, <span class="code-key">duracion_seg</span>: <span class="code-num">200</span>, <span class="code-key">reproducciones</span>: <span class="code-num">1050000</span> }
-])</code></pre>
-    </div>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Leer</h4>
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>find</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve todos los documentos que
-          cumplen el filtro.</p>
-      </div>
-      <div class="concept-card">
-        <h4>findOne</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Devuelve solo el primer documento
-          que cumple el filtro.</p>
-      </div>
-    </div>
-
-    <p style="margin-top:1rem;">Ejemplos:</p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">08_find.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com">// Todas las canciones de Reggaeton</span>
-db.canciones.find({ <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span> })
-
-<span class="code-com">// Devuelve varios documentos, uno por cada canción que coincide:</span>
-[
-  { <span class="code-key">titulo</span>: <span class="code-str">"Tusa"</span>, <span class="code-key">artista</span>: <span class="code-str">"Karol G"</span>, <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span>, <span class="code-key">reproducciones</span>: <span class="code-num">950000</span> },
-  { <span class="code-key">titulo</span>: <span class="code-str">"Provenza"</span>, <span class="code-key">artista</span>: <span class="code-str">"Karol G"</span>, <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span>, <span class="code-key">reproducciones</span>: <span class="code-num">780000</span> }
-]
-
-<span class="code-com">// Solo una canción de Karol G</span>
-db.canciones.findOne({ <span class="code-key">artista</span>: <span class="code-str">"Karol G"</span> })
-
-<span class="code-com">// Devuelve un único documento, el primero que coincide:</span>
-{ <span class="code-key">titulo</span>: <span class="code-str">"Tusa"</span>, <span class="code-key">artista</span>: <span class="code-str">"Karol G"</span>, <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span>, <span class="code-key">reproducciones</span>: <span class="code-num">950000</span> }</code></pre>
-    </div>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Actualizar</h4>
-    <p>
-      Actualizar necesita dos partes: un <strong>filtro</strong>, para decidir qué documentos cambiar, y
-      un <strong>operador de actualización</strong>, casi siempre <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span></code>, para decir qué campos
-      cambiar y con qué valor. <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateOne</span></code> cambia solo el primer documento que coincide;
-      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">updateMany</span></code> cambia todos los que coinciden.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>updateOne</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Modifica el primer documento que
-          cumple el filtro.</p>
-      </div>
-      <div class="concept-card">
-        <h4>updateMany</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Modifica todos los documentos que
-          cumplen el filtro.</p>
-      </div>
-    </div>
-
-    <p style="margin-top:1rem;">Ejemplos:</p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">09_update.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com">// Actualizar las reproducciones de una sola canción</span>
-db.canciones.updateOne(
-  { <span class="code-key">titulo</span>: <span class="code-str">"Tusa"</span> },
-  { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span>: { <span class="code-key">reproducciones</span>: <span class="code-num">960000</span> } }
-)
-
-<span class="code-com">// Marcar como destacadas todas las canciones de Reggaeton</span>
-db.canciones.updateMany(
-  { <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span> },
-  { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$set</span>: { <span class="code-key">destacada</span>: <span class="code-bool">true</span> } }
-)</code></pre>
-    </div>
-
-    <h4 style="color:var(--accent); font-size:1rem; margin:1.4rem 0 0.4rem;">Eliminar</h4>
-    <p>
-      Igual que con las actualizaciones, eliminar también necesita un filtro para decidir qué borrar.
-      <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">deleteOne</span></code> borra solo el primer documento que coincide; <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">deleteMany</span></code> borra
-      todos los que coinciden. No hay forma de deshacerlo: una vez eliminado, el documento desaparece.
-    </p>
-
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>deleteOne</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Elimina el primer documento que
-          cumple el filtro.</p>
-      </div>
-      <div class="concept-card">
-        <h4>deleteMany</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Elimina todos los documentos que
-          cumplen el filtro.</p>
-      </div>
-    </div>
-
-    <p style="margin-top:1rem;">Ejemplos:</p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">10_delete.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com">// Eliminar una sola canción</span>
-db.canciones.deleteOne({ <span class="code-key">titulo</span>: <span class="code-str">"Tacones Rojos"</span> })
-
-<span class="code-com">// Eliminar todas las canciones con menos de 100.000 reproducciones</span>
-db.canciones.deleteMany({ <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">100000</span> } })</code></pre>
-    </div>
-  </div>
-
-  <!-- ===================== 10. CONSULTAS AVANZADAS ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>8. Consultas avanzadas</h3>
-    </div>
-    <p>
-      Con el filtro y los operadores de comparación ya cubiertos, faltan cuatro herramientas que se usan
-      todo el tiempo en consultas reales: combinar condiciones con lógica, mostrar solo algunos campos,
-      ordenar y paginar resultados, y buscar dentro de arrays.
-    </p>
-
-    <p style="margin-top:1rem;"><strong>Operadores lógicos: <code>$and</code>, <code>$or</code>, <code>$not</code></strong></p>
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>$and</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Todas las condiciones deben
-          cumplirse a la vez.</p>
-      </div>
-      <div class="concept-card">
-        <h4>$or</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Basta con que se cumpla al menos
-          una condición.</p>
-      </div>
-      <div class="concept-card">
-        <h4>$not</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Invierte el resultado de una
-          condición.</p>
-      </div>
-    </div>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">11_logicos.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com">// Reggaeton O Pop</span>
-canciones.find({ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$or</span>: [ { <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span> }, { <span class="code-key">genero</span>: <span class="code-str">"Pop"</span> } ] })
-
-<span class="code-com">// Más de 500.000 reproducciones Y menos de 240 segundos</span>
-canciones.find({ <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$and</span>: [ { <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$gt</span>: <span class="code-num">500000</span> } }, { <span class="code-key">duracion_seg</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">240</span> } } ] })
-
-<span class="code-com">// Reproducciones que NO son menores a 100.000</span>
-canciones.find({ <span class="code-key">reproducciones</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$not</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$lt</span>: <span class="code-num">100000</span> } } })</code></pre>
-    </div>
-
-    <p style="margin-top:1.4rem;"><strong>Consultas con arrays: <code>$in</code>, <code>$all</code>, <code>$elemMatch</code></strong></p>
-    <div class="concept-grid">
-      <div class="concept-card">
-        <h4>$in</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">El valor del campo está dentro de
-          una lista dada.</p>
-      </div>
-      <div class="concept-card">
-        <h4>$all</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">El array del documento contiene
-          todos los valores indicados.</p>
-      </div>
-      <div class="concept-card">
-        <h4>$elemMatch</h4>
-        <p style="margin:0; font-size:0.85rem; color:var(--text-dim);">Al menos un elemento del array
-          cumple varias condiciones a la vez.</p>
-      </div>
-    </div>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">14_arrays.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code><span class="code-com">// Artistas cuyo género es Reggaeton o Pop</span>
-artistas.find({ <span class="code-key">genero</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$in</span>: [<span class="code-str">"Reggaeton"</span>, <span class="code-str">"Pop"</span>] } })
-
-<span class="code-com">// Artistas que tocan TANTO Voz COMO Guitarra</span>
-artistas.find({ <span class="code-key">instrumentos_favoritos</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$all</span>: [<span class="code-str">"Voz"</span>, <span class="code-str">"Guitarra"</span>] } })
-
-<span class="code-com">// Suponiendo un array "historial" con { anio, reproducciones } por año:</span>
-<span class="code-com">// canciones cuyo historial tiene un año con más de 900.000 reproducciones</span>
-canciones.find({ <span class="code-key">historial</span>: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$elemMatch</span>: { anio: <span class="code-num">2024</span>, reproducciones: { <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$gt</span>: <span class="code-num">900000</span> } } } })</code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        La diferencia clave: sin <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$elemMatch</span></code>, MongoDB permite que las condiciones se cumplan repartidas
-        entre <em>distintos</em> elementos del array. Con <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">$elemMatch</span></code>, exige que sea el <em>mismo</em>
-        elemento el que cumpla todas las condiciones a la vez.
-      </p>
-    </div>
-  </div>
-
-  <!-- ===================== 11. ÍNDICES EN MONGODB ===================== -->
-  <div class="activity-section">
-    <div class="activity-section-header">
-      <h3>9. Índices en MongoDB</h3>
+      <h3>10. Índices en MongoDB</h3>
     </div>
     <p>
       Sin un índice, MongoDB responde a una consulta revisando documento por documento, un
@@ -1333,27 +1684,22 @@ canciones.find({ <span class="code-key">historial</span>: { <span style="color:#
       le permite a MongoDB saltar directo a los documentos que buscas, sin recorrer toda la colección.
     </p>
 
-    <p style="margin-top:1rem;"><strong>Crear índices simples y compuestos</strong></p>
+    <p style="margin-top:1rem;"><strong>Crear índices</strong></p>
     <div class="code-block nosql" style="margin-top:0.6rem;">
       <div class="code-block-header">
         <span class="code-badge">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">15_indices_crear.js</span>
+        <span class="code-filename">15_indices_crear.js · mongosh</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code><span class="code-com">// Índice simple: un solo campo, ascendente</span>
-db.canciones.createIndex({ <span class="code-key">genero</span>: <span class="code-num">1</span> })
-
-<span class="code-com">// Índice compuesto: varios campos, cada uno con su propio orden</span>
-db.canciones.createIndex({ <span class="code-key">genero</span>: <span class="code-num">1</span>, <span class="code-key">reproducciones</span>: <span class="code-num">-1</span> })</code></pre>
+db.canciones.createIndex({ <span class="code-key">genero</span>: <span class="code-num">1</span> })</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
-        <code>1</code> indexa en orden ascendente, <code>-1</code> en orden descendente. Un índice
-        compuesto es más útil cuanto más coincide con los campos que realmente se usan juntos en los
-        filtros y en el <code>sort</code> de las consultas frecuentes.
+        <code>1</code> indexa en orden ascendente, <code>-1</code> en orden descendente.
       </p>
     </div>
 
@@ -1365,7 +1711,7 @@ db.canciones.createIndex({ <span class="code-key">genero</span>: <span class="co
       </p>
       <ul style="margin:0.6rem 0 0; padding-left:1.2rem;">
         <li style="margin-bottom:0.4rem;">
-          En la barra <strong>"Filter"</strong> escribes: <code>{ genero: "Reggaeton" }</code>
+          En la barra <strong>"Filter"</strong> escribes: <code>{ genero: "Bachata" }</code>
         </li>
         <li>
           Y en la barra <strong>"Sort"</strong> (que está al lado, o dentro de "Options" según la versión)
@@ -1374,29 +1720,6 @@ db.canciones.createIndex({ <span class="code-key">genero</span>: <span class="co
       </ul>
     </div>
 
-    <p style="margin-top:1.4rem;"><strong>Rendimiento: <code>explain()</code></strong></p>
-    <div class="code-block nosql" style="margin-top:0.6rem;">
-      <div class="code-block-header">
-        <span class="code-badge">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
-          MongoDB
-        </span>
-        <span class="code-filename">16_explain.js</span>
-        <button class="code-copy-btn" type="button">Copiar</button>
-      </div>
-      <pre><code>canciones.find({ <span class="code-key">genero</span>: <span class="code-str">"Reggaeton"</span> }).explain(<span class="code-str">"executionStats"</span>)
-
-<span class="code-com">// En el resultado interesa sobre todo:</span>
-<span class="code-com">// - stage: "COLLSCAN" (revisó todo) o "IXSCAN" (usó un índice)</span>
-<span class="code-com">// - totalDocsExamined: cuántos documentos tuvo que revisar</span>
-<span class="code-com">// - nReturned: cuántos documentos realmente cumplían el filtro</span></code></pre>
-    </div>
-    <div class="content-box" style="margin-top:0.8rem;">
-      <p style="margin:0;">
-        Si <code>totalDocsExamined</code> es mucho más grande que <code>nReturned</code>, la consulta está
-        revisando muchos documentos de más: suele ser una señal de que falta un índice adecuado.
-      </p>
-    </div>
 
     <p style="margin-top:1.4rem;"><strong>Eliminar y gestionar índices</strong></p>
     <div class="code-block nosql" style="margin-top:0.6rem;">
@@ -1405,17 +1728,17 @@ db.canciones.createIndex({ <span class="code-key">genero</span>: <span class="co
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">17_indices_gestionar.js</span>
+        <span class="code-filename">17_indices_gestionar.js · mongosh</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code><span class="code-com">// Listar todos los índices de la colección</span>
-canciones.getIndexes()
+db.canciones.getIndexes()
 
 <span class="code-com">// Eliminar un índice puntual</span>
-canciones.dropIndex({ <span class="code-key">genero</span>: <span class="code-num">1</span> })
+db.canciones.dropIndex({ <span class="code-key">genero</span>: <span class="code-num">1</span> })
 
 <span class="code-com">// Eliminar todos los índices, excepto el de _id</span>
-canciones.dropIndexes()</code></pre>
+db.canciones.dropIndexes()</code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -1427,10 +1750,10 @@ canciones.dropIndexes()</code></pre>
     </div>
   </div>
 
-  <!-- ===================== 12. PRÁCTICA: PERFIL ARTÍSTICO POLIMÓRFICO ===================== -->
+  <!-- ===================== 11. PRÁCTICA: PERFIL ARTÍSTICO POLIMÓRFICO ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>10. Práctica: el perfil artístico polimórfico - camino a la estación</h3>
+      <h3>11. Práctica: el perfil artístico polimórfico - camino a la estación</h3>
     </div>
     <p style="margin-top:0.8rem;">
       Para <code>soundflow_nosql</code>, la colección <code>artistas</code> va a tener:
@@ -1451,27 +1774,27 @@ canciones.dropIndexes()</code></pre>
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">02_artistas.js</span>
+        <span class="code-filename">02_artistas.js · mongosh</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code>db.artistas.insertOne({
-  <span class="code-key">nombre</span>: <span class="code-str">"Karol G"</span>,
-  <span class="code-key">genero_principal</span>: <span class="code-str">"Reggaeton"</span>,
+  <span class="code-key">nombre</span>: <span class="code-str">"Romeo Santos"</span>,
+  <span class="code-key">genero_principal</span>: <span class="code-str">"Bachata"</span>,
   <span class="code-key">redes_sociales</span>: {
-    <span class="code-key">instagram</span>: <span class="code-str">"@karolg"</span>,
-    <span class="code-key">tiktok</span>: <span class="code-str">"@karolg"</span>,
-    <span class="code-key">youtube</span>: <span class="code-str">"KarolGTV"</span>
+    <span class="code-key">instagram</span>: <span class="code-str">"@romeosantos"</span>,
+    <span class="code-key">tiktok</span>: <span class="code-str">"@romeosantos"</span>,
+    <span class="code-key">youtube</span>: <span class="code-str">"RomeoSantosVEVO"</span>
   },
   <span class="code-key">premios</span>: [<span class="code-str">"Grammy Latino 2023"</span>, <span class="code-str">"Billboard Music Award"</span>],
   <span class="code-key">instrumentos_favoritos</span>: [<span class="code-str">"Voz"</span>, <span class="code-str">"Guitarra"</span>],
-  <span class="code-key">biografia</span>: <span class="code-str">"Cantante y compositora colombiana..."</span>
+  <span class="code-key">biografia</span>: <span class="code-str">"Cantautor estadounidense de origen dominicano..."</span>
 })</code></pre>
     </div>
 
     <div style="max-width:660px; margin:0.8rem auto 0;">
       <svg viewBox="0 0 660 190" xmlns="http://www.w3.org/2000/svg" style="max-width:660px; width:100%; height:auto; display:block; margin:0 auto;">
         <rect x="10" y="10" width="200" height="170" rx="10" fill="#ffffff" stroke="#6f9d7c" stroke-width="1.5"/>
-        <text x="110" y="30" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-weight="700" fill="#33404f">Karol G</text>
+        <text x="110" y="30" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-weight="700" fill="#33404f">Romeo Santos</text>
         <text x="110" y="48" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">genero_principal</text>
         <text x="110" y="66" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">redes_sociales {3}</text>
         <text x="110" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">premios [2]</text>
@@ -1480,7 +1803,7 @@ canciones.dropIndexes()</code></pre>
         <text x="110" y="160" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10.5" fill="var(--text-dim)">6 campos</text>
 
         <rect x="230" y="10" width="200" height="170" rx="10" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.5"/>
-        <text x="330" y="30" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-weight="700" fill="#33404f">Bad Bunny</text>
+        <text x="330" y="30" text-anchor="middle" font-family="Consolas, monospace" font-size="10.5" font-weight="700" fill="#33404f">Prince Royce</text>
         <text x="330" y="48" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">genero_principal</text>
         <text x="330" y="66" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">redes_sociales {2}</text>
         <text x="330" y="84" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#33404f">premios [5]</text>
@@ -1514,7 +1837,7 @@ canciones.dropIndexes()</code></pre>
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">03_artistas_insertMany.js</span>
+        <span class="code-filename">03_artistas_insertMany.js · mongosh</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code>db.artistas.insertMany([
@@ -1525,14 +1848,14 @@ canciones.dropIndexes()</code></pre>
     <span class="code-key">premios</span>: [<span class="code-str">"Grammy 2006"</span>, <span class="code-str">"Grammy Latino 2022"</span>]
   },
   {
-    <span class="code-key">nombre</span>: <span class="code-str">"Feid"</span>,
-    <span class="code-key">genero_principal</span>: <span class="code-str">"Reggaeton"</span>,
-    <span class="code-key">redes_sociales</span>: { <span class="code-key">instagram</span>: <span class="code-str">"@feid"</span>, <span class="code-key">tiktok</span>: <span class="code-str">"@feid"</span> },
+    <span class="code-key">nombre</span>: <span class="code-str">"Aventura"</span>,
+    <span class="code-key">genero_principal</span>: <span class="code-str">"Bachata"</span>,
+    <span class="code-key">redes_sociales</span>: { <span class="code-key">instagram</span>: <span class="code-str">"@aventura"</span>, <span class="code-key">tiktok</span>: <span class="code-str">"@aventura"</span> },
     <span class="code-key">instrumentos_favoritos</span>: [<span class="code-str">"Voz"</span>]
   },
   {
-    <span class="code-key">nombre</span>: <span class="code-str">"J Balvin"</span>,
-    <span class="code-key">genero_principal</span>: <span class="code-str">"Reggaeton"</span>,
+    <span class="code-key">nombre</span>: <span class="code-str">"Juan Luis Guerra"</span>,
+    <span class="code-key">genero_principal</span>: <span class="code-str">"Bachata"</span>,
     <span class="code-key">premios</span>: [<span class="code-str">"Latin Grammy 2020"</span>]
   }
   <span class="code-com">// ... hasta completar los 12 artistas</span>
@@ -1540,10 +1863,10 @@ canciones.dropIndexes()</code></pre>
     </div>
   </div>
 
-  <!-- ===================== 13. PRÁCTICA: LOGS DE TRÁFICO ===================== -->
+  <!-- ===================== 12. PRÁCTICA: LOGS DE TRÁFICO ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
-      <h3>11. Práctica: el sistema de logs de tráfico - camino a la estación</h3>
+      <h3>12. Práctica: el sistema de logs de tráfico - camino a la estación</h3>
     </div>
     <p>
       SoundFlow genera eventos todo el tiempo: cada vez que alguien reproduce una canción, cada vez que
@@ -1565,7 +1888,7 @@ canciones.dropIndexes()</code></pre>
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">04_log_play.js</span>
+        <span class="code-filename">04_log_play.js · mongosh</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code>db.logs.insertOne({
@@ -1585,7 +1908,7 @@ canciones.dropIndexes()</code></pre>
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z" fill="#6f9d7c"/></svg>
           MongoDB
         </span>
-        <span class="code-filename">05_log_error.js</span>
+        <span class="code-filename">05_log_error.js · mongosh</span>
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code>db.logs.insertOne({
@@ -1732,6 +2055,57 @@ canciones.dropIndexes()</code></pre>
         </div>
         <p class="quiz-feedback"></p>
       </div>
+
+      <div class="quiz-question">
+        <p>11. ¿Qué devuelve <code>db.canciones.find({ reproducciones: { $gt: 900000 } })</code>?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Las canciones con exactamente 900000 reproducciones</button>
+          <button type="button" class="quiz-option" data-correct="true">Las canciones con más de 900000 reproducciones</button>
+          <button type="button" class="quiz-option" data-correct="false">Las canciones con menos de 900000 reproducciones</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>12. ¿Cuál es la diferencia entre <code>$and</code> y <code>$or</code>?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="true"><code>$and</code> exige que se cumplan todas las condiciones; <code>$or</code> con que se cumpla una basta</button>
+          <button type="button" class="quiz-option" data-correct="false"><code>$and</code> basta con una condición; <code>$or</code> exige todas</button>
+          <button type="button" class="quiz-option" data-correct="false">Ninguna, hacen exactamente lo mismo</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>13. ¿Qué pasa si ejecutas <code>db.canciones.deleteMany({})</code>?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Da error porque el filtro está vacío</button>
+          <button type="button" class="quiz-option" data-correct="true">Elimina todos los documentos de la colección, pero la colección sigue existiendo</button>
+          <button type="button" class="quiz-option" data-correct="false">Elimina solo el primer documento</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>14. En un pipeline de agregación, ¿qué recibe cada etapa?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Siempre la colección original completa</button>
+          <button type="button" class="quiz-option" data-correct="true">Lo que dejó la etapa anterior</button>
+          <button type="button" class="quiz-option" data-correct="false">Nada: todas las etapas corren al mismo tiempo sobre la colección</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
+      <div class="quiz-question">
+        <p>15. ¿Qué hace <code>{ $group: { _id: "$genero", total: { $sum: "$reproducciones" } } }</code>?</p>
+        <div class="quiz-options">
+          <button type="button" class="quiz-option" data-correct="false">Ordena las canciones por género</button>
+          <button type="button" class="quiz-option" data-correct="true">Junta las canciones por género y suma las reproducciones de cada grupo</button>
+          <button type="button" class="quiz-option" data-correct="false">Elimina las canciones repetidas</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+
     </div>
   </div>
 
@@ -1742,22 +2116,46 @@ canciones.dropIndexes()</code></pre>
     </div>
     <p>
       Con MongoDB Community Server instalado y Compass ya conectado, resuelve estos casos sobre
-      <code>soundflow_nosql</code>.
+      <code>soundflow_nosql</code>. Parte de las canciones que insertaste con <code><span style="color:#e24b4a; font-weight:700;">insertMany</span></code>; si te faltan datos para
+      un ejercicio, inserta los que necesites.
     </p>
+
+    <div class="content-box" style="border-left:4px solid #6f9d7c; margin-top:1rem;">
+      <h4 style="margin:0 0 0.5rem; color:#6f9d7c;">Fáciles</h4>
+      <ol style="margin:0; padding-left:1.2rem; color:var(--text);">
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">insertOne</span></code>, agrega a <code>canciones</code> el tema <strong>"Corazón Sin Cara"</strong> de Prince Royce: género <code>"Bachata"</code>, <code>duracion_seg</code> 228 y <code>reproducciones</code> 700000.</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">find</span></code>, muestra todas las canciones de género <code>"Pop"</code>.</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">findOne</span></code>, trae una sola canción de Bachata. ¿Cuál devolvió? ¿Qué diferencia hay con <code><span style="color:#e24b4a; font-weight:700;">find</span></code>?</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">updateOne</span></code> y <code><span style="color:#e24b4a; font-weight:700;">$set</span></code>, cambia las <code>reproducciones</code> de "Eres Mía" a 800000, y comprueba el cambio con <code><span style="color:#e24b4a; font-weight:700;">findOne</span></code>.</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">deleteOne</span></code>, elimina la canción <strong>"Hasta el Fin"</strong>. Luego usa <code><span style="color:#e24b4a; font-weight:700;">find</span></code> para verificar cuántas canciones quedan.</li>
+        <li>Escribe en JSON el documento de un usuario de SoundFlow que tenga un <strong>string</strong>, un <strong>number</strong>, un <strong>boolean</strong>, una <strong>fecha</strong>, un <strong>array</strong> y un <strong>objeto anidado</strong>.</li>
+      </ol>
+    </div>
 
     <div class="content-box" style="border-left:4px solid #c99a4e; margin-top:1rem;">
       <h4 style="margin:0 0 0.5rem; color:#c99a4e;">Mediana complejidad</h4>
-      <ol style="margin:0; padding-left:1.2rem; color:var(--text);">
-        <li>Usa <code><span style="color:#e24b4a; font-size:1.15em; font-weight:700;">insertMany</span></code> para completar los <strong>12 artistas</strong> de la colección
-          <code>artistas</code>, variando qué campos incluye cada uno, no todos necesitan
-          <code>redes_sociales</code>, <code>premios</code> ni <code>instrumentos_favoritos</code>.</li>
-        <li>Inserta <strong>3 eventos de tipo "play"</strong> y <strong>3 eventos de tipo "error"</strong>
-          en la colección <code>logs</code>, con la estructura de cada tipo mostrada en esta clase.</li>
-        <li>En Compass, filtra la colección <code>logs</code> para ver solo los documentos donde
-          <code>tipo_evento</code> sea <code>"error_sistema"</code>.</li>
-        <li>Explica con tus palabras qué pasaría si intentaras guardar esos mismos 12 artistas y 6 logs en
-          tablas de MySQL: ¿cuántas tablas necesitarías, y qué columnas quedarían en <code>NULL</code> la
-          mayoría del tiempo?</li>
+      <ol start="7" style="margin:0; padding-left:1.2rem; color:var(--text);">
+        <li>Usa <code><span style="color:#e24b4a; font-weight:700;">insertMany</span></code> para completar los <strong>12 artistas</strong> de la colección <code>artistas</code>, variando qué campos incluye cada uno, no todos necesitan <code>redes_sociales</code>, <code>premios</code> ni <code>instrumentos_favoritos</code>.</li>
+        <li>Inserta <strong>3 eventos de tipo "play"</strong> y <strong>3 eventos de tipo "error"</strong> en la colección <code>logs</code>, con la estructura de cada tipo mostrada en esta clase.</li>
+        <li>En Compass, filtra la colección <code>logs</code> para ver solo los documentos donde <code>tipo_evento</code> sea <code>"error_sistema"</code>.</li>
+        <li>Explica con tus palabras qué pasaría si intentaras guardar esos mismos 12 artistas y 6 logs en tablas de MySQL: ¿cuántas tablas necesitarías, y qué columnas quedarían en <code>NULL</code> la mayoría del tiempo?</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">$gt</span></code> y <code><span style="color:#e24b4a; font-weight:700;">$lt</span></code>, busca en <code>canciones</code> las que tengan <strong>más de 800000 reproducciones</strong> y, aparte, las que duren <strong>menos de 210 segundos</strong>.</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">$ne</span></code>, busca las canciones cuyo género <strong>no</strong> sea Bachata. Luego, con <code><span style="color:#e24b4a; font-weight:700;">$in</span></code>, busca las de género Pop o Bachata.</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">$and</span></code>, busca las canciones de Bachata con más de 1000000 reproducciones. Luego, con <code><span style="color:#e24b4a; font-weight:700;">$or</span></code>, las que sean de Pop <strong>o</strong> tengan más de 1000000 reproducciones.</li>
+        <li>En <code>artistas</code>, busca con <code><span style="color:#e24b4a; font-weight:700;">$all</span></code> los que tocan <strong>Voz y Guitarra</strong> a la vez, y con <code><span style="color:#e24b4a; font-weight:700;">$in</span></code> los que tocan Voz <strong>o</strong> Piano.</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">updateMany</span></code>, marca <code>destacada: true</code> en todas las canciones con más de 900000 reproducciones, y verifica con <code><span style="color:#e24b4a; font-weight:700;">find</span></code>({ destacada: true }).</li>
+      </ol>
+    </div>
+
+    <div class="content-box" style="border-left:4px solid #a83a3a; margin-top:1rem;">
+      <h4 style="margin:0 0 0.5rem; color:#a83a3a;">Difíciles</h4>
+      <ol start="16" style="margin:0; padding-left:1.2rem; color:var(--text);">
+        <li>Con un pipeline, calcula el <strong>total de reproducciones por género</strong>, ordenado de mayor a menor, mostrando solo el género y ese total. Etapas: <code><span style="color:#e24b4a; font-weight:700;">$group</span></code> (<code><span style="color:#e24b4a; font-weight:700;">$sum</span></code>), <code><span style="color:#e24b4a; font-weight:700;">$sort</span></code> y <code><span style="color:#e24b4a; font-weight:700;">$project</span></code>.</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">$group</span></code> y <code><span style="color:#e24b4a; font-weight:700;">$avg</span></code>, calcula la <strong>duración promedio</strong> (<code>duracion_seg</code>) de las canciones de cada género.</li>
+        <li>Con <code><span style="color:#e24b4a; font-weight:700;">$group</span></code> y <code><span style="color:#e24b4a; font-weight:700;">$push</span></code>, arma por cada género un array con los <strong>títulos</strong> de sus canciones.</li>
+        <li>Crea un índice sobre el campo <code>genero</code>, <code>{ genero: 1 }</code>, en <code>canciones</code>. Ejecuta <code><span style="color:#e24b4a; font-weight:700;">explain</span></code>("executionStats") en <code>find</code>({ genero: "Bachata" }) <strong>antes y después</strong> de crearlo y compara <code>stage</code> (COLLSCAN o IXSCAN) y <code>totalDocsExamined</code>. Con muy pocos documentos el resultado puede no cambiar: inserta más canciones para notar la diferencia.</li>
+        <li>Cuenta cuántos eventos de <code>logs</code> son de tipo <code>"error_sistema"</code> y tienen prioridad <code>"alta"</code>, con un pipeline de <code><span style="color:#e24b4a; font-weight:700;">$match</span></code> y <code><span style="color:#e24b4a; font-weight:700;">$group</span></code> usando <code>{ $sum: 1 }</code>.</li>
+        <li>Reto de diseño: SoundFlow quiere guardar las <strong>preferencias de cada usuario</strong> (temas, idiomas, listas favoritas, dispositivos), que cambian mucho de persona a persona. Escribe 3 documentos de ejemplo con formas distintas y decide qué parte de los datos del usuario dejarías en MySQL y cuál en MongoDB. Justifica.</li>
       </ol>
     </div>
   </div>
@@ -1874,14 +2272,14 @@ window.WEEK_CONTENT_4_2 = `
       <svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg" style="max-width:640px; width:100%; height:auto; display:block; margin:0 auto;">
         <rect x="10" y="15" width="290" height="130" rx="10" fill="#ffffff" stroke="#4a7c9e" stroke-width="1.5"/>
         <text x="155" y="38" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700" fill="#33404f">MongoDB (documentos)</text>
-        <text x="155" y="62" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#4a7c9e">{ titulo: "Tusa", artista: ... }</text>
+        <text x="155" y="62" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#4a7c9e">{ titulo: "Propuesta Indecente", artista: ... }</text>
         <text x="155" y="82" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Vive en disco</text>
         <text x="155" y="98" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Consultas por cualquier campo</text>
         <text x="155" y="114" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Base de datos principal</text>
 
         <rect x="340" y="15" width="290" height="130" rx="10" fill="#ffffff" stroke="#b33a2e" stroke-width="1.5"/>
         <text x="485" y="38" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="700" fill="#33404f">Redis (clave-valor)</text>
-        <text x="485" y="62" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#b33a2e">cancion:205 &rarr; "Tusa"</text>
+        <text x="485" y="62" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#b33a2e">cancion:205 &rarr; "Propuesta Indecente"</text>
         <text x="485" y="82" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Vive en memoria RAM</text>
         <text x="485" y="98" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Solo se busca por la llave</text>
         <text x="485" y="114" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="var(--text-dim)">Caché, contadores, rankings</text>
@@ -2447,7 +2845,7 @@ window.WEEK_CONTENT_4_2 = `
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code><span class="code-com"># Crear una llave simple</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Tusa"</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Propuesta Indecente"</span>
 
 <span class="code-com"># Verificar si una llave existe (1 = sí, 0 = no)</span>
 <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">EXISTS</span> cancion:205:titulo
@@ -2502,10 +2900,10 @@ window.WEEK_CONTENT_4_2 = `
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code><span class="code-com"># String simple</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Tusa"</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Propuesta Indecente"</span>
 
 <span class="code-com"># Hash con varios campos, como un mini documento</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> cancion:205 titulo <span class="code-str">"Tusa"</span> artista <span class="code-str">"Karol G"</span> genero <span class="code-str">"Reggaeton"</span> reproducciones <span class="code-num">950000</span></code></pre>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> cancion:205 titulo <span class="code-str">"Propuesta Indecente"</span> artista <span class="code-str">"Romeo Santos"</span> genero <span class="code-str">"Bachata"</span> reproducciones <span class="code-num">950000</span></code></pre>
     </div>
     <div class="content-box" style="margin-top:0.8rem;">
       <p style="margin:0;">
@@ -2572,15 +2970,15 @@ window.WEEK_CONTENT_4_2 = `
       </div>
       <pre><code><span class="code-com"># Leer un String</span>
 <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">GET</span> cancion:205:titulo
-<span class="code-com"># Devuelve: "Tusa"</span>
+<span class="code-com"># Devuelve: "Propuesta Indecente"</span>
 
 <span class="code-com"># Leer un Hash completo</span>
 <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGETALL</span> cancion:205
-<span class="code-com"># Devuelve: titulo "Tusa", artista "Karol G", genero "Reggaeton", reproducciones "950000"</span>
+<span class="code-com"># Devuelve: titulo "Propuesta Indecente", artista "Romeo Santos", genero "Bachata", reproducciones "950000"</span>
 
 <span class="code-com"># Leer un solo campo del Hash</span>
 <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HGET</span> cancion:205 artista
-<span class="code-com"># Devuelve: "Karol G"</span></code></pre>
+<span class="code-com"># Devuelve: "Romeo Santos"</span></code></pre>
     </div>
   </div>
 
@@ -2632,7 +3030,7 @@ window.WEEK_CONTENT_4_2 = `
         <button class="code-copy-btn" type="button">Copiar</button>
       </div>
       <pre><code><span class="code-com"># Sobrescribir un String completo</span>
-<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Tusa (Remix)"</span>
+<span style="color:#e24b4a; font-size:1.15em; font-weight:700;">SET</span> cancion:205:titulo <span class="code-str">"Propuesta Indecente (Remix)"</span>
 
 <span class="code-com"># Actualizar solo un campo del Hash, los demás no se tocan</span>
 <span style="color:#e24b4a; font-size:1.15em; font-weight:700;">HSET</span> cancion:205 reproducciones <span class="code-num">960000</span>
