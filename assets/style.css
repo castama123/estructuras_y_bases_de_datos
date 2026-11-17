@@ -153,7 +153,7 @@ header.site-header p {
 /* Resumen más largo (Semana 5): alineado a la izquierda en vez de centrado */
 header.site-header p.resumen-left {
   text-align: left;
-  max-width: 720px;
+  max-width: 1100px;
 }
 
 /* Resumen de la Semana 6: justificado en vez de centrado */

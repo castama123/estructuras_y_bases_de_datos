@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica autónoma · Semana 5 · Clase 2 · Estructuras y Bases de Datos</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Estructuras y Bases de Datos</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <details class="nav-dropdown">
+        <summary>Semanas</summary>
+        <div class="nav-dropdown-menu" id="navWeeksMenu"></div>
+      </details>
+      <a href="nucleo.html">Cómo funciona el núcleo</a>
+    </div>
+  </div>
+</nav>
+
+<header class="site-header">
+  <h1>Práctica autónoma · Clase 2</h1>
+  <p>Semana 5: mide el problema N+1 en Replit y compruébalo con la solución</p>
+</header>
+
+<nav class="breadcrumb"><a href="semana.html?n=5">&larr; Volver a la Semana 5</a></nav>
+
+<main>
+
+  <section class="week-detail">
+  <div class="activity-section" style="border-top:none; padding-top:0;">
+    <div class="content-box" style="border-left:4px solid #2f6fd6; background:#f2f7ff;">
+      <p style="margin:0 0 0.5rem; font-weight:700; font-size:1.05rem; color:#1d4ed8;">Mensaje de la semana: cómo proceder</p>
+      <p style="margin:0 0 0.6rem;">Esta semana el trabajo es de práctica autónoma. Sigue este orden:</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.4rem;"><strong>Lee la Clase 1</strong> (árboles, B-Tree y B+Tree) y haz su práctica con los simuladores en la nube.</li>
+        <li style="margin-bottom:0.4rem;"><strong>Lee la Clase 2</strong> (ORM y problema N+1) y haz su práctica en Replit. Cada clase tiene su propia página de práctica: <a href="practica-semana5-clase1.html" target="_blank" rel="noopener">abrir la práctica de la otra clase</a>.</li>
+        <li style="margin-bottom:0.4rem;"><strong>Arma un documento corto</strong> con la evidencia de las dos prácticas: capturas de pantalla y tus respuestas, con una sección para la Clase 1 y otra para la Clase 2.</li>
+        <li style="margin-bottom:0.4rem;"><strong>Súbelo esta semana al LMS.</strong> Este documento se entrega <strong>junto con la Estación 2</strong>, con el consolidado de las semanas anteriores:
+          <ul style="margin:0.3rem 0 0; padding-left:1.2rem;">
+            <li>Actividad 3-1: JOINs y funciones de agregación.</li>
+            <li>Actividad 4-1: Arquitectura con logs NoSQL en MongoDB.</li>
+            <li>Actividad 5: el documento de práctica de esta semana (las dos clases).</li>
+          </ul>
+        </li>
+        <li><strong>Dudas:</strong> anótalas y escríbelas en el canal del curso para resolverlas con tu docente.</li>
+      </ol>
+    </div>
+  </div>
+
+<!-- ===================== CÓMO TRABAJAR ESTA CLASE ===================== -->
+  <div class="activity-section" style="border-top:none; padding-top:0;">
+    <div class="content-box" style="border-left:4px solid #e24b4a; background:#fff6f5;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#c0392b;">Esta clase es de trabajo autónomo: léela y practica por tu cuenta</p>
+      <p style="margin:0 0 0.6rem;">
+        En esta sesión no habrá clase en vivo. El tema está escrito completo en la página de la clase, con ejemplos y simulaciones. Esta página es la
+        <strong>práctica guiada paso a paso en la nube</strong> para que veas el problema N+1 con tus propios ojos.
+        Calcula unos <strong>80 minutos de lectura</strong> y <strong>40 minutos de práctica</strong>.
+      </p>
+      <p style="margin:0 0 0.3rem; font-weight:700;">Ruta recomendada</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 1, la idea:</strong> la definición del N+1 y la analogía de los 21 viajes al supermercado. Al terminar debes poder explicar la fórmula 1 + N con tus palabras.</li>
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 2, el ORM:</strong> qué es un ORM, los modelos de SoundFlow y la carga perezosa (lazy loading). Es la causa del problema.</li>
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 3, el problema en acción:</strong> el escenario de la playlist, cómo detectarlo en los logs y el escenario de artistas similares (N+1 anidado).</li>
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 4, las soluciones:</strong> las 4 estrategias de carga y cuándo usar cada una.</li>
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 5, cierre:</strong> los otros ORM, el quiz de autoevaluación y la sección "Para tu informe".</li>
+        <li><strong>Práctica:</strong> esta página, con la práctica guiada en Replit y la sección de evidencias para tu documento.</li>
+      </ol>
+      <p style="margin:0.7rem 0 0; font-size:0.9rem; color:var(--text-dim);">
+        Consejo: cuando llegues a las secciones con botones de "cargar perfil", púlsalos y fíjate en el contador de consultas. Si algo no queda
+        claro, anótalo y escríbelo en el canal del curso para resolverlo con tu docente.
+      </p>
+    </div>
+  </div>
+
+  
+<!-- ===================== PRÁCTICA GUIADA EN REPLIT ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Práctica guiada en Replit: mide el problema N+1 y compruébalo con la solución</h3>
+    </div>
+    <p>Vas a crear en la nube un pequeño programa Python con SQLAlchemy y SQLite que <strong>cuenta las consultas</strong> que envía cada escenario de SoundFlow, para que veas el N+1 en números y verifiques cuánto lo reduce la carga anticipada. No necesitas instalar nada en tu computador.</p>
+        <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #7c3aed;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#7c3aed;">Paso a paso en Replit</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.45rem;">Entra a <strong>replit.com</strong> y crea una cuenta gratuita (puedes usar tu cuenta de Google).</li>
+        <li style="margin-bottom:0.45rem;">Crea un proyecto nuevo, elige la plantilla <strong>Python</strong> y ponle el nombre <code>soundflow-nplus1</code>.</li>
+        <li style="margin-bottom:0.45rem;">Abre la pestaña <strong>Shell</strong> y escribe <code>pip install sqlalchemy</code>. Espera a que termine.</li>
+        <li style="margin-bottom:0.45rem;">Abre el archivo <code>main.py</code>, borra lo que tenga y pega <strong>todo el código</strong> de abajo.</li>
+        <li style="margin-bottom:0.45rem;">Pulsa <strong>Run</strong> y mira los números que aparecen en la consola.</li>
+      </ol>
+    </div>
+    <p style="margin-top:1rem;"><strong>El código completo</strong></p>
+    <p style="font-size:0.9rem; color:var(--text-dim);">Usa SQLite en memoria, así que no instalas MySQL. Cada escenario se ejecuta dos veces: primero sin optimizar (el problema) y luego optimizado (la solución), y al final imprime cuántas consultas se enviaron.</p>
+    <div class="code-block" style="margin-top:0.6rem;">
+      <div class="code-block-header">
+        <span class="code-dot" style="background:#ff5f56"></span>
+        <span class="code-dot" style="background:#ffbd2e"></span>
+        <span class="code-dot" style="background:#27c93f"></span>
+        <span class="code-filename">main.py</span>
+        <button class="code-copy-btn" type="button">Copiar</button>
+      </div>
+      <pre style="overflow-x:auto;"><code style="font-size:0.78rem;">from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Table, event
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker, joinedload, selectinload
+
+# ---------- 1. Base de datos en memoria (SQLite): no hay que instalar nada ----------
+engine = create_engine("sqlite:///:memory:")
+Session = sessionmaker(bind=engine)
+Base = declarative_base()
+
+# ---------- 2. Contador de consultas ----------
+# Cada vez que SQLAlchemy envía un SQL a la base de datos, este "espía" lo cuenta.
+estado = {"consultas": 0, "mostrar_sql": False}
+
+@event.listens_for(engine, "before_cursor_execute")
+def contar_consultas(conn, cursor, statement, parameters, context, executemany):
+    estado["consultas"] += 1
+    if estado["mostrar_sql"]:
+        texto = " ".join(statement.split())
+        print("   SQL #" + str(estado["consultas"]) + ": SELECT ... " + texto[texto.find("FROM"):][:75] + "  " + str(parameters))
+
+# ---------- 3. Modelos (las mismas tablas de SoundFlow de la clase) ----------
+tbl_artistas_similares = Table(
+    "tbl_artistas_similares", Base.metadata,
+    Column("id_artista", Integer, ForeignKey("tbl_artistas.id_artista"), primary_key=True),
+    Column("id_artista_similar", Integer, ForeignKey("tbl_artistas.id_artista"), primary_key=True),
+)
+
+class Artista(Base):
+    __tablename__ = "tbl_artistas"
+    id_artista = Column(Integer, primary_key=True)
+    nombre_artista = Column(String(100))
+    albumes = relationship("Album", back_populates="artista")
+    similares = relationship(
+        "Artista", secondary=tbl_artistas_similares,
+        primaryjoin=id_artista == tbl_artistas_similares.c.id_artista,
+        secondaryjoin=id_artista == tbl_artistas_similares.c.id_artista_similar,
+    )
+
+class Album(Base):
+    __tablename__ = "tbl_albumes"
+    id_album = Column(Integer, primary_key=True)
+    titulo_album = Column(String(150))
+    id_artista = Column(Integer, ForeignKey("tbl_artistas.id_artista"))
+    artista = relationship("Artista", back_populates="albumes")
+    canciones = relationship("Cancion", back_populates="album")
+
+class Cancion(Base):
+    __tablename__ = "tbl_canciones"
+    id_cancion = Column(Integer, primary_key=True)
+    titulo = Column(String(150))
+    reproducciones = Column(Integer)
+    id_album = Column(Integer, ForeignKey("tbl_albumes.id_album"))
+    album = relationship("Album", back_populates="canciones")
+
+Base.metadata.create_all(engine)
+
+# ---------- 4. Datos de prueba ----------
+# 8 artistas, cada uno con 3 álbumes; cada álbum con 3 canciones.
+def cargar_datos():
+    s = Session()
+    artistas = [Artista(nombre_artista="Artista " + str(i)) for i in range(1, 9)]
+    s.add_all(artistas)
+    s.flush()
+    albumes = []
+    for a in artistas:
+        for j in range(1, 4):
+            albumes.append(Album(titulo_album="Álbum " + str(a.id_artista) + "." + str(j), artista=a))
+    s.add_all(albumes)
+    s.flush()
+    n = 1
+    for ronda in range(3):              # reparte las canciones álbum por álbum
+        for alb in albumes:
+            s.add(Cancion(titulo="Canción " + str(n), reproducciones=1000 * n, album=alb))
+            n += 1
+    artistas[0].similares = artistas[1:6]   # el Artista 1 tiene 5 similares (Artistas 2 a 6)
+    s.commit()
+    s.close()
+
+cargar_datos()
+
+def medir(titulo):
+    print()
+    print("=== " + titulo + " ===")
+    estado["consultas"] = 0
+
+# ---------- ESCENARIO 1: la playlist de 20 canciones y el álbum de cada una ----------
+def escenario1_problema():
+    medir("Escenario 1 SIN optimizar (carga perezosa)")
+    s = Session()
+    playlist = s.query(Cancion).order_by(Cancion.id_cancion).limit(20).all()   # 1 consulta
+    for c in playlist:
+        nombre_album = c.album.titulo_album       # 1 consulta MÁS por cada canción
+    print("Consultas ejecutadas:", estado["consultas"])
+    s.close()
+
+def escenario1_solucion():
+    medir("Escenario 1 CON joinedload")
+    s = Session()
+    playlist = (s.query(Cancion).options(joinedload(Cancion.album))
+                .order_by(Cancion.id_cancion).limit(20).all())
+    for c in playlist:
+        nombre_album = c.album.titulo_album
+    print("Consultas ejecutadas:", estado["consultas"])
+    s.close()
+
+# ---------- ESCENARIO 2: artistas similares y sus canciones (N+1 anidado) ----------
+def escenario2_problema():
+    medir("Escenario 2 SIN optimizar (N+1 anidado)")
+    s = Session()
+    principal = s.query(Artista).filter_by(nombre_artista="Artista 1").one()   # 1 consulta
+    for sim in principal.similares:                  # 1 consulta para traer los similares
+        for alb in sim.albumes:                      # 1 consulta por cada similar
+            canciones = alb.canciones                # 1 consulta por cada álbum
+    print("Consultas ejecutadas:", estado["consultas"])
+    s.close()
+
+def escenario2_solucion():
+    medir("Escenario 2 CON selectinload encadenado")
+    s = Session()
+    principal = (s.query(Artista)
+                 .options(selectinload(Artista.similares)
+                          .selectinload(Artista.albumes)
+                          .selectinload(Album.canciones))
+                 .filter_by(nombre_artista="Artista 1").one())
+    for sim in principal.similares:
+        for alb in sim.albumes:
+            canciones = alb.canciones
+    print("Consultas ejecutadas:", estado["consultas"])
+    s.close()
+
+escenario1_problema()
+escenario1_solucion()
+escenario2_problema()
+escenario2_solucion()</code></pre>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; overflow-x:auto;">
+      <p style="margin:0 0 0.5rem; font-weight:700;">Lo que debes ver en la consola</p>
+      <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+        <thead><tr style="border-bottom:2px solid var(--border);">
+          <th style="text-align:left; padding:0.4rem 0.6rem;">Escenario</th>
+          <th style="text-align:left; padding:0.4rem 0.6rem;">Consultas</th>
+          <th style="text-align:left; padding:0.4rem 0.6rem;">Por qué</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:0.4rem 0.6rem;">1 sin optimizar</td><td style="padding:0.4rem 0.6rem;"><strong>21</strong></td><td style="padding:0.4rem 0.6rem;">1 para la lista de 20 canciones + 20 para el álbum de cada una (1 + N)</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem;">1 con <code>joinedload</code></td><td style="padding:0.4rem 0.6rem;"><strong>1</strong></td><td style="padding:0.4rem 0.6rem;">Un solo JOIN trae todo junto</td></tr>
+          <tr><td style="padding:0.4rem 0.6rem;">2 sin optimizar</td><td style="padding:0.4rem 0.6rem;"><strong>22</strong></td><td style="padding:0.4rem 0.6rem;">El N+1 anidado: artistas, álbumes y canciones</td></tr>
+          <tr style="background:var(--bg);"><td style="padding:0.4rem 0.6rem;">2 con <code>selectinload</code></td><td style="padding:0.4rem 0.6rem;"><strong>4</strong></td><td style="padding:0.4rem 0.6rem;">Una consulta por nivel</td></tr>
+        </tbody>
+      </table>
+      <p style="margin:0.6rem 0 0; font-size:0.88rem; color:var(--text-dim);">Si tus números son otros, revisa que hayas pegado todo el código sin cambiarlo. Si sale <code>ModuleNotFoundError: No module named sqlalchemy</code>, repite el paso 3. Si Replit cambió algún botón de lugar, es normal: la plantilla Python y el archivo <code>main.py</code> funcionan igual.</p>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#2e9e5b;">Ejercicios: cambia una cosa y comprueba</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.45rem;">En el escenario 1 sin optimizar, cambia <code>limit(20)</code> por <code>limit(10)</code> y ejecuta. Antes de correrlo, predice con 1 + N cuántas consultas saldrán. Deberías ver <strong>11</strong>.</li>
+        <li style="margin-bottom:0.45rem;">En el escenario 1 optimizado, cambia <code>joinedload</code> por <code>selectinload</code> y ejecuta. Deberías ver <strong>2</strong> consultas, en vez de 1. Eso es porque <code>selectinload</code> hace una consulta aparte para los álbumes, en vez de un JOIN.</li>
+        <li style="margin-bottom:0.45rem;">Más similares: busca <code>artistas[1:6]</code> en el código y cámbialo por <code>artistas[1:8]</code>. Ejecuta y compara los dos números del escenario 2: el sin optimizar sube a <strong>30</strong>, y el optimizado se queda en <strong>4</strong>.</li>
+      </ol>
+    </div>
+<div class="content-box" style="margin-top:1.2rem; border-left:4px solid #c0392b;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#c0392b;">Evidencias para tu documento de la semana (sección Clase 2)</p>
+      <p style="margin:0 0 0.5rem;">Agrega esto en la sección <em>Clase 2</em> del mismo documento de evidencias que empezaste en la Clase 1 (si aún no lo tienes, créalo en Word o Google Docs):</p>
+      <ul style="margin:0; padding-left:1.3rem;">
+        <li>Encabezado con tu nombre y la fecha.</li>
+        <li>Una captura de la consola con los 4 resultados (21, 1, 22 y 4 consultas).</li>
+        <li>Tus respuestas a los 3 ejercicios: lo que predijiste, el número que salió y por qué cambió.</li>
+        <li>En 3 a 5 líneas, con tus palabras: ¿por qué el problema N+1 hace lento un programa cuando hay muchos datos?</li>
+      </ul>
+      <p style="margin:0.6rem 0 0; font-size:0.9rem; color:var(--text-dim);">Este documento sí se sube esta semana, en el LMS, junto con la Estación 2 y las Actividades 3-1 y 4-1.</p>
+    </div>
+  </div>
+
+  
+  </section>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="semana.html?n=5">Volver a la Semana 5</a>
+    <a class="btn btn-secondary" href="index.html">Ver todas las semanas</a>
+  </div>
+
+</main>
+
+<footer>
+  Núcleo problémico: Estructuras y Bases de Datos · Ingeniería de Sistemas
+</footer>
+
+<script src="js/weeks-data.js"></script>
+<script src="js/nav.js"></script>
+
+</body>
+</html>

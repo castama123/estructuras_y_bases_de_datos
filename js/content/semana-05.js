@@ -1622,6 +1622,21 @@ db.canciones.getIndexes()</code></pre>
     </div>
   </div>
 
+  <!-- ===================== PRÁCTICA AUTÓNOMA ===================== -->
+  <div class="activity-section">
+    <div class="content-box" style="text-align:center; border:2px solid #ff7a18; background:linear-gradient(135deg,#fff7ec,#ffe9e2); padding:1.6rem 1.2rem;">
+      <p style="margin:0 0 0.4rem; font-size:1.3rem; font-weight:800; color:#c2410c;">Práctica autónoma</p>
+      <p style="margin:0 0 1.1rem; color:var(--text);">
+        Después de leer esta clase, practica por tu cuenta con una guía paso a paso, simuladores en la nube y ejercicios propuestos.
+        Se abre en una ventana aparte, para que puedas tenerla al lado mientras trabajas.
+      </p>
+      <a href="practica-semana5-clase1.html" target="_blank" rel="noopener"
+         style="display:inline-block; background:linear-gradient(135deg,#ff7a18,#e24b4a); color:#fff; font-size:1.2rem; font-weight:800; text-decoration:none; padding:1rem 2.4rem; border-radius:12px; box-shadow:0 6px 16px rgba(226,75,74,0.35); letter-spacing:0.02em;">
+        Abrir la práctica autónoma &#8599;
+      </a>
+    </div>
+  </div>
+
   <!-- ===================== ACTIVIDAD ===================== -->
   <div class="activity-section">
     <div class="activity-section-header">
@@ -2479,6 +2494,21 @@ artista = (
         <p class="quiz-feedback"></p>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ===================== PRÁCTICA AUTÓNOMA ===================== -->
+  <div class="activity-section">
+    <div class="content-box" style="text-align:center; border:2px solid #ff7a18; background:linear-gradient(135deg,#fff7ec,#ffe9e2); padding:1.6rem 1.2rem;">
+      <p style="margin:0 0 0.4rem; font-size:1.3rem; font-weight:800; color:#c2410c;">Práctica autónoma</p>
+      <p style="margin:0 0 1.1rem; color:var(--text);">
+        Después de leer esta clase, practica por tu cuenta con una guía paso a paso en Replit y ejercicios propuestos.
+        Se abre en una ventana aparte, para que puedas tenerla al lado mientras trabajas.
+      </p>
+      <a href="practica-semana5-clase2.html" target="_blank" rel="noopener"
+         style="display:inline-block; background:linear-gradient(135deg,#ff7a18,#e24b4a); color:#fff; font-size:1.2rem; font-weight:800; text-decoration:none; padding:1rem 2.4rem; border-radius:12px; box-shadow:0 6px 16px rgba(226,75,74,0.35); letter-spacing:0.02em;">
+        Abrir la práctica autónoma &#8599;
+      </a>
     </div>
   </div>
 

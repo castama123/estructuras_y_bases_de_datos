@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica autónoma · Semana 5 · Clase 1 · Estructuras y Bases de Datos</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Estructuras y Bases de Datos</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <details class="nav-dropdown">
+        <summary>Semanas</summary>
+        <div class="nav-dropdown-menu" id="navWeeksMenu"></div>
+      </details>
+      <a href="nucleo.html">Cómo funciona el núcleo</a>
+    </div>
+  </div>
+</nav>
+
+<header class="site-header">
+  <h1>Práctica autónoma · Clase 1</h1>
+  <p>Semana 5: construye y recorre tus propios árboles B-Tree y B+Tree</p>
+</header>
+
+<nav class="breadcrumb"><a href="semana.html?n=5">&larr; Volver a la Semana 5</a></nav>
+
+<main>
+
+  <section class="week-detail">
+  <div class="activity-section" style="border-top:none; padding-top:0;">
+    <div class="content-box" style="border-left:4px solid #2f6fd6; background:#f2f7ff;">
+      <p style="margin:0 0 0.5rem; font-weight:700; font-size:1.05rem; color:#1d4ed8;">Mensaje de la semana: cómo proceder</p>
+      <p style="margin:0 0 0.6rem;">Esta semana el trabajo es de práctica autónoma. Sigue este orden:</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.4rem;"><strong>Lee la Clase 1</strong> (árboles, B-Tree y B+Tree) y haz su práctica con los simuladores en la nube.</li>
+        <li style="margin-bottom:0.4rem;"><strong>Lee la Clase 2</strong> (ORM y problema N+1) y haz su práctica en Replit. Cada clase tiene su propia página de práctica: <a href="practica-semana5-clase2.html" target="_blank" rel="noopener">abrir la práctica de la otra clase</a>.</li>
+        <li style="margin-bottom:0.4rem;"><strong>Arma un documento corto</strong> con la evidencia de las dos prácticas: capturas de pantalla y tus respuestas, con una sección para la Clase 1 y otra para la Clase 2.</li>
+        <li style="margin-bottom:0.4rem;"><strong>Súbelo esta semana al LMS.</strong> Este documento se entrega <strong>junto con la Estación 2</strong>, con el consolidado de las semanas anteriores:
+          <ul style="margin:0.3rem 0 0; padding-left:1.2rem;">
+            <li>Actividad 3-1: JOINs y funciones de agregación.</li>
+            <li>Actividad 4-1: Arquitectura con logs NoSQL en MongoDB.</li>
+            <li>Actividad 5: el documento de práctica de esta semana (las dos clases).</li>
+          </ul>
+        </li>
+        <li><strong>Dudas:</strong> anótalas y escríbelas en el canal del curso para resolverlas con tu docente.</li>
+      </ol>
+    </div>
+  </div>
+
+<!-- ===================== CÓMO TRABAJAR ESTA CLASE ===================== -->
+  <div class="activity-section" style="border-top:none; padding-top:0;">
+    <div class="content-box" style="border-left:4px solid #e24b4a; background:#fff6f5;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#c0392b;">Esta clase es de trabajo autónomo: léela y practica por tu cuenta</p>
+      <p style="margin:0 0 0.6rem;">
+        En esta sesión no habrá clase en vivo. El tema está escrito completo en la página de la clase, con simuladores y ejemplos. Esta página es la
+        <strong>práctica guiada paso a paso</strong> para que apliques lo que leíste. Calcula unos
+        <strong>90 minutos de lectura</strong> y <strong>40 minutos de práctica</strong>.
+      </p>
+      <p style="margin:0 0 0.3rem; font-weight:700;">Ruta recomendada</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 1, vocabulario:</strong> "¿Qué es un árbol?" y "Árbol binario". Al terminar debes poder explicar con tus palabras qué son raíz, hoja, grado y altura.</li>
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 2, el video puente:</strong> míralo antes de pasar a los árboles B y B+.</li>
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 3, B-Tree y B+Tree:</strong> usa los simuladores de cada sección y avanza paso a paso. Al terminar debes saber en qué se diferencian y por qué las hojas encadenadas importan.</li>
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 4, operaciones:</strong> buscar el #32, el recorrido por rango, e insertar, dividir, eliminar y fusionar.</li>
+        <li style="margin-bottom:0.35rem;"><strong>Bloque 5, motores reales:</strong> cómo MySQL y MongoDB usan estos árboles.</li>
+        <li><strong>Cierre:</strong> resuelve el quiz de la clase, haz la práctica guiada de esta página y arma el documento de evidencias de la semana.</li>
+      </ol>
+      <p style="margin:0.7rem 0 0; font-size:0.9rem; color:var(--text-dim);">
+        Consejo: lee con un papel al lado y dibuja los árboles mientras avanzas. Si algo no queda claro, anótalo y
+        escríbelo en el canal del curso para resolverlo con tu docente.
+      </p>
+    </div>
+  </div>
+
+  
+<!-- ===================== PRÁCTICA GUIADA ===================== -->
+  <div class="activity-section">
+    <div class="activity-section-header">
+      <h3>Práctica guiada: construye y recorre tus propios árboles</h3>
+    </div>
+    <p>Ahora aplicas lo que leíste con simuladores en la nube, sin instalar nada. Sigue los pasos en orden y ve guardando capturas y respuestas en el documento de evidencias.</p>
+        <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #7c3aed;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#7c3aed;">Antes de empezar</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.45rem;">Abre los dos simuladores en pestañas distintas: <a href="https://www.cs.usfca.edu/~galles/visualization/BTree.html" target="_blank">visualizador de B-Tree</a> y <a href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html" target="_blank">visualizador de B+Tree</a> (gratis y sin cuenta).</li>
+        <li style="margin-bottom:0.45rem;">Abre tu documento de evidencias de la semana y crea la sección <em>Clase 1</em>. Para las capturas: en Windows, <code>Windows + Shift + S</code>; en Mac, <code>Cmd + Shift + 4</code>.</li>
+        <li style="margin-bottom:0.45rem;">Usarás esta lista de IDs de canciones: <code>5, 12, 18, 20, 25, 30, 32, 40, 45, 50</code>.</li>
+      </ol>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #2e9e5b;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#2e9e5b;">Práctica 1: un B-Tree</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.45rem;">En el visualizador de B-Tree, escribe <code>5</code> y pulsa <strong>Insert</strong>. Repite con los demás IDs de la lista, uno por uno, esperando a que termine cada animación.</li>
+        <li style="margin-bottom:0.45rem;">Toma una captura del árbol final y pégala en tu documento.</li>
+        <li style="margin-bottom:0.45rem;">Responde en una o dos frases: ¿cuántos niveles tiene tu árbol?</li>
+        <li style="margin-bottom:0.45rem;">Escribe <code>32</code>, pulsa <strong>Find</strong> y mira cómo lo busca. Anota por qué nodos pasó.</li>
+      </ol>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #2f6fd6;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#2f6fd6;">Práctica 2: un B+Tree</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.45rem;">En el visualizador de B+Tree, inserta los mismos IDs, en el mismo orden, y toma una captura del árbol final.</li>
+        <li style="margin-bottom:0.45rem;">Compáralo con el B-Tree y responde en una o dos frases: ¿dónde quedaron los datos ahora, en todos los nodos o solo en las hojas de abajo?</li>
+        <li style="margin-bottom:0.45rem;">Fíjate en las flechas que unen cada hoja con la siguiente. Para buscar los IDs entre el <code>18</code> y el <code>40</code>, ¿cuáles hojas recorrerías? Anótalo, sin volver a la raíz.</li>
+      </ol>
+    </div>
+    <div class="content-box" style="margin-top:0.8rem; border-left:4px solid #d9822b;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#d9822b;">Práctica 3: el Desafío de Navegación</p>
+      <ol style="margin:0; padding-left:1.3rem;">
+        <li style="margin-bottom:0.45rem;"><strong>El dibujo:</strong> dibuja cómo quedan los 10 IDs en un B+Tree. Puedes hacerlo a mano (foto) o copiar tu captura del simulador y marcarla.</li>
+        <li style="margin-bottom:0.45rem;"><strong>El recorrido:</strong> con un color, marca el camino que haría la base de datos para encontrar la canción #32.</li>
+        <li style="margin-bottom:0.45rem;"><strong>La justificación:</strong> si SoundFlow tiene 100 millones de canciones, ¿por qué un B+Tree es mejor que un árbol binario simple? Responde en 3 a 5 líneas.</li>
+      </ol>
+    </div>
+<div class="content-box" style="margin-top:1rem;">
+      <p style="margin:0 0 0.5rem;"><strong>Evidencias de la competencia asociadas a esta actividad</strong></p>
+      <ul style="margin:0; padding-left:1.2rem; color:var(--text);">
+        <li>Esquematiza correctamente la jerarquía de un árbol balanceado, separando nodos de navegación
+          de nodos de datos.</li>
+        <li>Argumenta la eficiencia del B+Tree para consultas de rango basándose en la conexión de los
+          nodos hoja.</li>
+        <li>Calcula de forma conceptual la reducción de "saltos" (I/O de disco) que se logra al aumentar
+          el orden del árbol (abanico de salida).</li>
+      </ul>
+    </div>
+    <div class="content-box" style="margin-top:1.2rem; border-left:4px solid #c0392b;">
+      <p style="margin:0 0 0.5rem; font-weight:700; color:#c0392b;">Evidencias para tu documento de la semana (sección Clase 1)</p>
+      <p style="margin:0 0 0.5rem;">Reúne esto en la sección <em>Clase 1</em> de tu documento de evidencias:</p>
+      <ul style="margin:0; padding-left:1.3rem;">
+        <li>Encabezado con tu nombre y la fecha.</li>
+        <li>Práctica 1: tu captura del B-Tree y tus respuestas.</li>
+        <li>Práctica 2: tu captura del B+Tree y tus respuestas.</li>
+        <li>Práctica 3: tu dibujo con el recorrido del #32 y la justificación.</li>
+      </ul>
+      <p style="margin:0.6rem 0 0; font-size:0.9rem; color:var(--text-dim);">Este documento sí se sube esta semana, en el LMS, junto con la Estación 2 y las Actividades 3-1 y 4-1. No hay una única estructura de árbol "correcta" en el visualizador: lo importante es que tus capturas y tus explicaciones coincidan.</p>
+    </div>
+  </div>
+
+  
+  </section>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="semana.html?n=5">Volver a la Semana 5</a>
+    <a class="btn btn-secondary" href="index.html">Ver todas las semanas</a>
+  </div>
+
+</main>
+
+<footer>
+  Núcleo problémico: Estructuras y Bases de Datos · Ingeniería de Sistemas
+</footer>
+
+<script src="js/weeks-data.js"></script>
+<script src="js/nav.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+[
+  { "titulo": "Eres Mía", "artista": "Romeo Santos", "genero": "Bachata", "duracion_seg": 195, "reproducciones": 780000 },
+  { "titulo": "Tacones Rojos", "artista": "Sebastián Yatra", "genero": "Pop", "duracion_seg": 210, "reproducciones": 620000 },
+  { "titulo": "Darte un Beso", "artista": "Prince Royce", "genero": "Bachata", "duracion_seg": 254, "reproducciones": 1100000 },
+  { "titulo": "Obsesión", "artista": "Aventura", "genero": "Bachata", "duracion_seg": 220, "reproducciones": 890000 },
+  { "titulo": "Hasta el Fin", "artista": "Monchy y Alexandra", "genero": "Bachata", "duracion_seg": 200, "reproducciones": 1050000 },
+  { "titulo": "Imitadora", "artista": "Romeo Santos", "genero": "Bachata", "duracion_seg": 184, "reproducciones": 980000 },
+  { "titulo": "Stand By Me", "artista": "Prince Royce", "genero": "Bachata", "duracion_seg": 243, "reproducciones": 1200000 },
+  { "titulo": "Bachata Rosa", "artista": "Juan Luis Guerra", "genero": "Bachata", "duracion_seg": 171, "reproducciones": 1150000 },
+  { "titulo": "Te Extraño", "artista": "Xtreme", "genero": "Bachata", "duracion_seg": 287, "reproducciones": 1020000 },
+  { "titulo": "Antología", "artista": "Shakira", "genero": "Pop", "duracion_seg": 203, "reproducciones": 480000 },
+  { "titulo": "Quimbara", "artista": "Celia Cruz", "genero": "Salsa", "duracion_seg": 215, "reproducciones": 350000 },
+  { "titulo": "Livin' la Vida Loca", "artista": "Ricky Martin", "genero": "Pop", "duracion_seg": 243, "reproducciones": 660000 },
+  { "titulo": "De Música Ligera", "artista": "Soda Stereo", "genero": "Rock", "duracion_seg": 212, "reproducciones": 840000 },
+  { "titulo": "Lamento Boliviano", "artista": "Los Enanitos Verdes", "genero": "Rock", "duracion_seg": 222, "reproducciones": 710000 },
+  { "titulo": "Rayando el Sol", "artista": "Maná", "genero": "Rock", "duracion_seg": 262, "reproducciones": 760000 },
+  { "titulo": "Pedro Navaja", "artista": "Rubén Blades", "genero": "Salsa", "duracion_seg": 440, "reproducciones": 650000 },
+  { "titulo": "La Rebelión", "artista": "Joe Arroyo", "genero": "Salsa", "duracion_seg": 330, "reproducciones": 870000 },
+  { "titulo": "El Merengue", "artista": "Wilfrido Vargas", "genero": "Merengue", "duracion_seg": 240, "reproducciones": 500000 },
+  { "titulo": "Suavemente", "artista": "Elvis Crespo", "genero": "Merengue", "duracion_seg": 235, "reproducciones": 720000 }
+]
